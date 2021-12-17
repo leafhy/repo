@@ -17,7 +17,9 @@ done
 
 ./configure \
     --prefix=/usr \
+    --enable-optimizations \
     --enable-shared \
+    --with-lto \
     --with-system-expat \
     --with-system-ffi \
     --with-ensurepip=yes \
