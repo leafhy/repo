@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+sed 's+/usr/sbin+/usr/bin+g' Makefile > _
+mv -f _ Makefile
+
+make USERNAME=root MAILBBOX_PATH=/var/mail
+make install install-link-sendmail setcap
+
+mkdir -p /var/mail/new
