@@ -2,7 +2,7 @@
 
 make \
     prefix=/usr \
-    -f unix/Makefile generic
+    -f unix/Makefile generic_gcc
 
 make \
     prefix="$1" \
