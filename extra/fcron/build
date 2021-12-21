@@ -1,0 +1,12 @@
+#!/bin/sh -e
+  
+./configure \
+        --prefix=/usr \
+        --with-boot-install=no \
+        --with-docdir=/usr/doc \
+        --localstatedir=/var \
+        --mandir=/usr/man \
+        --sysconfdir=/etc
+        
+ make
+ make install
