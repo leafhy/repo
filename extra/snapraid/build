@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+./configure \
+      --prefix=/usr \
+    
+make
+make install
+
+
+        
+          
