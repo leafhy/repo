@@ -1,4 +1,5 @@
 inih
+libedit
 liburcu
 util-linux
 linux-headers make
