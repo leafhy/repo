@@ -5,7 +5,7 @@ sed -i 's/bash/sh/' install-sh
 ./configure \
    --prefix=/usr \
    --sbindir=/bin \
-   --disable-gettext
+   --disable-gettext \
    --enable-lto \
    --enable-editline=yes
 
