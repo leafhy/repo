@@ -9,7 +9,8 @@ sed -i 's/bash/sh/' install-sh
    --enable-lto \
    --enable-editline=yes
 
-make
+make DEBUG=-DNDEBUG
+
 make \
 DIST_ROOT="$1" \
 PKG_ROOT_SBIN_DIR=/usr/bin \
