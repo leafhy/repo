@@ -1,5 +1,4 @@
 #!/usr/bin/awk -f
-# https://github.com/Vixeliz/mue-linux/blob/master/extra/rsync/files/mkproto.awk
 
 BEGIN {
     while ((getline i < "proto.h") > 0) old_protos = old_protos ? old_protos "\n" i : i
