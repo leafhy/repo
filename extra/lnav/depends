@@ -1,3 +1,11 @@
-readline
-openssh
 bash
+bzip2
+curl
+ncurses
+openssh
+pcre
+readline
+sqlite
+zlib
+
+
