@@ -3,3 +3,5 @@ flac
 libogg
 libsndfile
 wavpack
+libid3tag
+faad2
