@@ -8,8 +8,8 @@
         --mandir=/usr/man \
         --sysconfdir=/etc
         
- make
- make install
+make
+make install
 
 for d in hourly daily weekly monthly; do
 install -vdm755 /etc/cron.$d
