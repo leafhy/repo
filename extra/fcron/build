@@ -1,5 +1,7 @@
 #!/bin/sh -e
-  
+
+# Build fails as user as chown: changing ownership of pkg/fcron/usr/sbin : Operation not permitted
+
 ./configure \
         --prefix=/usr \
         --with-boot-install=no \
@@ -16,10 +18,10 @@ install -vdm755 /etc/cron.daily
 install -vdm755 /etc/cron.week
 install -vdm755 /etc/cron.monthlly
 
-# install -m640 systab.orig /var/spool/fcron/systab.orig
-# install -m755 run-parts /usr/bin/run-parts
+install -m640 $KISSREPO/repo/extra/fcron/files/systab.orig /var/spool/fcron/systab.orig
+install -m755 $KISSREPO/repo/extra/fcron/files/run-parts /usr/bin/run-parts
 
 # Install runit services.
 mkdir -p "$1/etc/sv/fcron"
-# cp -f fcron.run "$1/etc/sv/fcron/run"
+install -m755 $KISSREPO/repo/extra/fcron/files/fcron.run "$1/etc/sv/fcron/run"
 ln -sf /etc/sv/fcron /run/runit/
