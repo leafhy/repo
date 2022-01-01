@@ -1,6 +1,6 @@
 This repo is setup for an headless server.
 
-#    NOTES
+## NOTES
 
 GCC builds everthing
 Clang requires compiler-rt for LTO
