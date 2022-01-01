@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+export CFLAGS="$CFLAGS -static"
+# export FORCE_UNSAFE_CONFIGURE=1 # required if building as root
+./configure \
+    --prefix=/usr
+
+make
+make DESTDIR="$1" install
