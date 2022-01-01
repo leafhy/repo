@@ -1,7 +1,6 @@
 This repo is setup for an headless server.
 
 ## NOTES
-
 GCC builds everthing
 Clang requires compiler-rt for LTO
 libclang-rt.builtins-x86_64.a is needed for efivar
