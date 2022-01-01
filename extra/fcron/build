@@ -15,8 +15,8 @@ for d in hourly daily weekly monthly; do
 install -vdm755 /etc/cron.$d
 done
 
-install -m640 systab.orig /var/spool/fcron
-install -m755 run-parts /usr/bin
+install -m640 systab.orig /var/spool/fcron/systab.orig
+install -m755 run-parts /usr/bin/run-parts
 
 # Install runit services.
 mkdir -p "$1/etc/sv/fcron"
