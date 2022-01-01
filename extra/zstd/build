@@ -5,7 +5,7 @@ mv -f _ programs/Makefile
 
 make \
     HAVE_LZMA=0 \
-    HAVE_ZLIB=0 \
+    HAVE_ZLIB=1 \
     HAVE_LZ4=0
 
 make \
