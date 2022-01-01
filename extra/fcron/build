@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-# Build fails as user as chown: changing ownership of pkg/fcron/usr/sbin : Operation not permitted
+# Build fails as user chown: changing ownership of pkg/fcron/usr/sbin : Operation not permitted
 
 ./configure \
         --prefix=/usr \
