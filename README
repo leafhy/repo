@@ -1,7 +1,7 @@
 This repo is setup for an headless server.
 
 ## NOTES
-GCC builds everthing
+GCC builds everything
 Clang requires compiler-rt for LTO
 libclang-rt.builtins-x86_64.a is needed for efivar
 -march=native is required to build libffi on Intel Celeron G1840
