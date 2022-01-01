@@ -11,6 +11,8 @@
  make
  make install
 
+install -vdm755 /etc/cron.{hourly,daily,weekly,monthly}
+
 # Install runit services.
 mkdir -p "$1/etc/sv/fcron"
 cp -f fcron.run "$1/etc/sv/fcron/run"
