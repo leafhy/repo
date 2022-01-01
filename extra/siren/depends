@@ -1,6 +1,6 @@
 ffmpeg
 flac
-libogg
+libvorbis
 libsndfile
 wavpack
 libid3tag
