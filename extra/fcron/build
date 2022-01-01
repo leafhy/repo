@@ -14,6 +14,7 @@
 install -vdm755 /etc/cron.{hourly,daily,weekly,monthly}
 install -m640 files/systab.orig /var/spool/fcron/
 install -m755 files/run-parts /usr/bin
+chmod +x /usr/bin/run-parts
 
 # Install runit services.
 mkdir -p "$1/etc/sv/fcron"
