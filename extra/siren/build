@@ -1,11 +1,11 @@
 #!/bin/sh -e
 
-./configure 
-    --prefix=/usr \
-    --bindir=/bin \
-    --mandir=/share/man \
-    --plugindir=/lib/siren \
-    --debug=no \
+./configure \
+      prefix=/usr \
+      bindir=/bin \
+      mandir=/share/man \
+      plugindir=/lib/siren \
+      debug=no \
       aac=yes \
       mad=no \
       sndio=yes \
