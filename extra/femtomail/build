@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+[ -f /usr/bin/sendmail ] && unlink /usr/bin/sendmail
+
 sed 's+/usr/sbin+/usr/bin+g' Makefile > _
 mv -f _ Makefile
 
