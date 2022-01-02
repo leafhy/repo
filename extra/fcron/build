@@ -24,4 +24,4 @@ install -m755 $KISSREPO/repo/extra/fcron/files/run-parts /usr/bin/run-parts
 # Install runit services.
 mkdir -p "$1/etc/sv/fcron"
 install -m755 $KISSREPO/repo/extra/fcron/files/fcron.run "$1/etc/sv/fcron/run"
-ln -sf /etc/sv/fcron /run/runit/
+ln -sf /etc/sv/fcron /var/service/
