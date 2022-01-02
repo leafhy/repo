@@ -1,4 +1,5 @@
 readline
+gnutls
 expat
 openssl
 zlib
