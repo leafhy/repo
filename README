@@ -1,13 +1,14 @@
 This repo is setup for an headless server.
 
 ## NOTES
+find $KISSREPO -name build -exec chmod +x {} +
 GCC builds everything
 Clang requires compiler-rt for LTO
 libclang-rt.builtins-x86_64.a is needed for efivar
 -march=native is required to build libffi on Intel Celeron G1840
 rust fails to build with clang
 fcron, femtomail, openssh, mergerfs need extra root permissions to install
-Using aria2 with "kiss" at least with wget will include the path in the filename which causes checksum to fail
+Using aria2 as the downloader for "kiss" can include the path in the filename which causes checksum to fail
 
 
 
