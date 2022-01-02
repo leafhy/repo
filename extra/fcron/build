@@ -16,7 +16,7 @@ make DESTDIR="$1" install
 install -vdm755 /etc/cron.hourly
 install -vdm755 /etc/cron.daily
 install -vdm755 /etc/cron.week
-install -vdm755 /etc/cron.monthlly
+install -vdm755 /etc/cron.monthly
 
 install -m640 $KISSREPO/repo/extra/fcron/files/systab.orig /var/spool/fcron/systab.orig
 install -m755 $KISSREPO/repo/extra/fcron/files/run-parts /usr/bin/run-parts
