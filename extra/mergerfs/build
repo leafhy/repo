@@ -1,4 +1,4 @@
 #!/bin/sh -e
 
-make LTO=1
-make install
+make PREFIX=/usr LTO=1
+make PREFIX=/usr install
