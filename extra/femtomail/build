@@ -2,6 +2,7 @@
 
 [ -f /usr/bin/sendmail ] && unlink /usr/bin/sendmail
 
+# Change install location from /usr/sbin to /usr/bin
 sed 's+/usr/sbin+/usr/bin+g' Makefile > _
 mv -f _ Makefile
 
