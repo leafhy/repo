@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+./autogen.sh
+
+./configure \
+    --prefix=/usr \
+    --datadir=/usr/share/hwdata \
+    --disable-zlib
+
+make
+make DESTDIR="$1" install
