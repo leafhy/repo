@@ -1,0 +1,33 @@
+#!/bin/sh -e
+
+# remove groups as its provided by coreutils 
+sed 's/groups$(EXEEXT) //' src/Makefile.in > _
+mv -f _ src/Makefile.in
+
+# remove manpages
+for f in $(find man -name Makefile.in); do
+		sed -e 's/groups\.1 / /' -e 's/passwd\.5 / /' $f > _
+    mv -f _ Makefile.in
+done
+
+./configure \
+    --prefix=/usr \
+    --bindir=/usr/bin \
+    --sbindir=/usr/bin \
+    --libdir=/usr/lib \
+    --mandir=/usr/share/man \
+    --sysconfdir=/etc \
+    --disable-man \
+    --disable-account-tools-setuid \
+    --with-group-name-max-length=32 \
+    --without-audit \
+    --without-selinux \
+    --without-libpam
+
+make
+make DESTDIR="$1" install
+
+# Fix broken --sbindir.
+mv -f "$1/usr/sbin/"* "$1/usr/bin"
+rmdir "$1/usr/sbin"
+
