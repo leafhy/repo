@@ -1,11 +1,11 @@
 #!/bin/sh -e
 
 # fix permissions and owners
-	chown fcron:fcron /usr/bin/{fcrontab,fcrondyn}
+	chown fcron:fcron /usr/bin/fcrontab /usr/bin/fcrondyn
 	chown root:fcron /usr/bin/fcronsighup
 	chmod  110 /usr/bin/fcron
 	chmod 4110 /usr/bin/fcronsighup
-	chmod 6111 /usr/bin/{fcrontab,fcrondyn}
+	chmod 6111 /usr/bin/fcrontab /usr/bin/fcrondyn
 
-	chown root:fcron /etc/{fcron.conf,fcron.allow,fcron.deny}
-	chmod  640 /etc/{fcron.conf,fcron.allow,fcron.deny}
+	chown root:fcron /etc/fcron.conf /etc/fcron.allow /etc/fcron.deny
+	chmod  640 /etc/fcron.conf /etc/fcron.allow /etc/fcron.deny
