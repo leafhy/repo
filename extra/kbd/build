@@ -2,6 +2,13 @@
 #
 # build failed with pigz -> gzip
 
+# Remove obsolete program
+sed '/RESIZECONS_PROGS=/s/yes/no/' configure > _
+mv -f _ configure
+
+sed 's/resizecons.8 //' docs/man/man8/Makefile.in > _
+mv -f _ docs/man/man8/Makefile.in
+
 ./configure \
       --prefix=/usr \
       --disable-vlock
