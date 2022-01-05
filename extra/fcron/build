@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
-# Build fails as user chown: changing ownership of pkg/fcron/usr/sbin : Operation not permitted
+# Build fails as USER chown: changing ownership of pkg/fcron/usr/sbin : Operation not permitted
 
-addgroup -S -g 997 fcron
+getent group fcron || addgroup -S -g 997 fcron
 adduser -H -h /var/spool/fcron -s /bin/sh -D -S -G fcron -u 997 -G "Unprivileged User" fcron
 
 ./configure \
