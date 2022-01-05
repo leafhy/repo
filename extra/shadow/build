@@ -1,9 +1,5 @@
 #!/bin/sh -e
 
-# remove groups as its provided by coreutils 
-sed 's/groups$(EXEEXT) //' src/Makefile.in > _
-mv -f _ src/Makefile.in
-
 ./configure \
     --prefix=/usr \
     --bindir=/usr/bin \
