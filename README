@@ -1,6 +1,7 @@
 This repo is setup for an headless server focused towards minimalism and reduced complexity.
 
 ## NOTES
+kiss-chroot can override CXXFLAGS in .profile
 find $KISSREPO -name build -exec chmod +x {} +
 GCC builds everything in this *repo*
 Clang requires compiler-rt for LTO
