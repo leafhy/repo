@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+install -Dm755 intel-ucode /lib/firmware/intel-ucode 
+
+echo 1 > /sys/devices/system/cpu/microcode/reload
