@@ -1,5 +1,5 @@
 cmake  make
 llvm
-python make
+python3 make
 xz
 zlib
