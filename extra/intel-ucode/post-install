@@ -1,4 +1,4 @@
 #!/bin/sh
 
-echo "Update microcode"
-echo "echo 1 > /sys/devices/system/cpu/microcode/reload"
+echo "Updating microcode"
+echo 1 > /sys/devices/system/cpu/microcode/reload
