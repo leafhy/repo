@@ -1,8 +1,8 @@
-This repo is setup for an headless server.
+This repo is setup for an headless server focused towards minimalism and reduced complexity.
 
 ## NOTES
 find $KISSREPO -name build -exec chmod +x {} +
-GCC builds everything
+GCC builds everything in this *repo*
 Clang requires compiler-rt for LTO
 libclang-rt.builtins-x86_64.a is needed for efivar
 -march=native is required to build libffi on Intel Celeron G1840
