@@ -1,7 +1,7 @@
 #!/bin/sh -e
+# If ~/.config does not exist ~/.lnav is created
 
-./configure --prefix=/usr
-        
+./configure --prefix=/usr        
        
 make
 make install
