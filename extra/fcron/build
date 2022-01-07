@@ -21,10 +21,10 @@ install -vdm755 /etc/cron.daily
 install -vdm755 /etc/cron.week
 install -vdm755 /etc/cron.monthly
 
-install -m640 $KISSREPO/repo/extra/fcron/files/systab.orig /var/spool/fcron/systab.orig
-install -m755 $KISSREPO/repo/extra/fcron/files/run-parts /usr/bin/run-parts
+install -m640 $KISSREPO/repo/extra/fcron/files/systab.orig $1/var/spool/fcron/systab.orig
+install -m755 $KISSREPO/repo/extra/fcron/files/run-parts $1/usr/bin/run-parts
 
 # Install runit services.
-mkdir -p "$1/etc/sv/fcron"
+install -dm755 "$1/etc/sv/fcron"
 install -m755 $KISSREPO/repo/extra/fcron/files/fcron.run "$1/etc/sv/fcron/run"
 ln -sf /etc/sv/fcron /var/service/
