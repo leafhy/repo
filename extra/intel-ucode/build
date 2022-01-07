@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-install -dm755 /lib/firmware/intel-ucode
+install -dm755 $1/lib/firmware/intel-ucode
 
 for f in intel-ucode/* ; do
-install -t /lib/firmware/intel-ucode $f; done 
+install -t $1/lib/firmware/intel-ucode $f; done 
