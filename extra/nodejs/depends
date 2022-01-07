@@ -1,5 +1,5 @@
 linux-headers make
 openssl
-python        make
+python3        make
 samurai       make
 zlib
