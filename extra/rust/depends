@@ -3,6 +3,6 @@ curl    make
 llvm
 openssl
 pkgconf make
-python  make
+python3  make
 xz
 zlib
