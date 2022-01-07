@@ -1,4 +1,4 @@
 #!/bin/sh -e
 
-mkdir -p /usr/share/fonts
-install -t /usr/share/fonts "*psf.gz"
+for f in *psf.gz; do
+install -t /usr/share/consolefonts $f; done
