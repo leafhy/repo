@@ -8,9 +8,9 @@ getent passwd fcron || adduser -H -h /var/spool/fcron -s /bin/sh -D -S -G fcron 
 ./configure \
         --prefix=/usr \
         --with-boot-install=no \
-        --with-docdir=/usr/doc \
+        --with-docdir=/usr/share/doc \
         --localstatedir=/var \
-        --mandir=/usr/man \
+        --mandir=/usr/share/man \
         --sysconfdir=/etc
         
 make
