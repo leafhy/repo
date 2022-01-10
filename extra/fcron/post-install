@@ -10,3 +10,5 @@
 	chown root:fcron /etc/fcron.conf /etc/fcron.allow /etc/fcron.deny
 	chmod  640 /etc/fcron.conf /etc/fcron.allow /etc/fcron.deny
         chown fcron:fcron /var/spool/fcron
+
+fcrontab /var/spool/systab.orig
