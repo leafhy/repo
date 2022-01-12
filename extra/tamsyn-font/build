@@ -1,3 +1,5 @@
 #!/bin/sh -e
 
-install -Dm644 *psf.gz $1/usr/share/consolefonts
+for f in *psf.gz ; do
+   install -Dm644 $f $1/usr/share/consolefonts/$f
+done
