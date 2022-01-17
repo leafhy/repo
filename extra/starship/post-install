@@ -1,3 +1,3 @@
 #!/bin/sh -e
 
-install -dm 644 files/starship.toml $1/usr/share/starship/starship.toml
+install -Dm 644 files/starship.toml $1/usr/share/starship/starship.toml
