@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+install -Dm755 ffmpeg $1/usr/bin/ffmpeg
+install -Dm755 ffprobe $1/usr/bin/ffprobe
