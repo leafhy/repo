@@ -4,3 +4,4 @@ cargo build --release
 
 install -Dm 755 target/release/starship $1/usr/bin/starship
 install -Dm 644 starship.toml.plain-text $1/usr/share/starship/starship.toml.plain-text
+
