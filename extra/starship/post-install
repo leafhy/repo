@@ -3,7 +3,7 @@
 echo ''
 echo "---- Add to $HOME/.profile ----"
 echo 'eval "$(starship init bash)"' 
-echo "export STARSHIP_CONFIG=$HOME/.config/starship"
+echo "export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml"
 echo '-------------------------------------'
 
 echo "mkdir -p $HOME/.config/starship"
