@@ -1,5 +1,5 @@
 #!/bin/sh -e
 
-echo "eval "$(starship init bash)" >> ~/.profile"
+echo 'eval "$(starship init bash)" >> ~/.profile'
 
-echo "ln -s /usr/share/starship/starship.toml.plain-text $HOME/.config/starship/starship.toml"
+echo 'ln -s /usr/share/starship/starship.toml.plain-text $HOME/.config/starship/starship.toml'
