@@ -1,5 +1,11 @@
 #!/bin/sh -e
 
-echo 'eval "$(starship init bash)" >> ~/.profile'
+cat <<EOF
+---- Add to ~/.profile ----
+eval "$(starship init bash)" 
+export STARSHIP_CONFIG=$HOME/.config/starship
+---------------------------
 
-echo 'ln -s /usr/share/starship/starship.toml.plain-text $HOME/.config/starship/starship.toml'
+mkdir -p $HOME/.config/starship
+ln -s /usr/share/starship/starship.toml.plain-text $HOME/.config/starship/starship.toml
+EOF
