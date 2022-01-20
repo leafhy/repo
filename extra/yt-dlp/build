@@ -1,7 +1,4 @@
 #!/bin/sh -e
 
-sed 's+?= /usr/local+?= /usr+' Makefile > _
-mv -f _ Makefile
-
-make
-make DESTDIR=$1 install
+install -Dm755 yt-dlp $1/usr/bin/yt-dlp
+install -Dm644 yt-dlp.1 $1/usr/share/man/man1/yt-dlp.1
