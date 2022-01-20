@@ -1,3 +1,6 @@
 #!/bin/sh -e
 
-install -Dm 755 starship $1/usr/bin/starship
+cargo build --release
+
+install -Dm 755 target/release/starship $1/usr/bin/starship
+install -Dm 644 starship.toml $1/usr/share/starship/starship.toml
