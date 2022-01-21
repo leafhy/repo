@@ -6,6 +6,8 @@
 make
 make install
 
+install -Dm644 snapraid.conf.example $1/etc/snapraid.conf
+
 
         
           
