@@ -1,0 +1,3 @@
+#!/bin/sh -e
+
+chmod +x $1/usr/share/snapraid-diff-sync.sh
