@@ -1,5 +1,10 @@
 #!/bin/sh -e
 
+install -dm755 /etc/cron.hourly
+install -dm755 /etc/cron.daily
+install -dm755 /etc/cron.weekly
+install -dm755 /etc/cron.monthly
+
 # fix permissions and owners
 	chown fcron:fcron /usr/bin/fcrontab /usr/bin/fcrondyn
 	chown root:fcron /usr/bin/fcronsighup
