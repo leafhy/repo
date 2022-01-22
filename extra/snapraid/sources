@@ -1,2 +1,3 @@
 #https://github.com/amadvance/snapraid/releases/download/vVERSION/snapraid-VERSION.tar.gz
 http://beta.snapraid.it/snapraid-VERSION.tar.gz
+git+https://github.com/leafhy/snapraid-diff-sync.git
