@@ -1,1 +1,4 @@
 http://fcron.free.fr/archives/fcron-VERSION.src.tar.gz
+files/run-parts
+files/systab.orig
+files/fcron.run
