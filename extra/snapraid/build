@@ -7,7 +7,4 @@ make
 make install
 
 install -Dm644 snapraid.conf.example $1/etc/snapraid.conf
-
-
-        
-          
+install -Dm644 snapraid-diff-sync.sh $1/usr/share/snapraid/snapraid-diff-sync.sh
