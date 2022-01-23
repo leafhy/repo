@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+CXXFLAGS="-std=gnu++98" 
+
+./configure \
+      --prefix=/usr
+
+make
+make install
