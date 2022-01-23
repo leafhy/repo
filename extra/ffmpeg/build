@@ -27,7 +27,7 @@
     --enable-version3 \
     --x86asmexe=nasm
 #   --enable-libass \
-#    --enable-libdrm \
+#   --enable-libdrm \
 
 make
 make install
