@@ -2,9 +2,9 @@
 
 ./configure \
       prefix=/usr \
-      bindir=/bin \
-      mandir=/share/man \
-      plugindir=/lib/siren \
+      bindir=/usr/bin \
+      mandir=/usr/share/man \
+      plugindir=/usr/lib/siren \
       debug=no \
       aac=yes \
       mad=no \
