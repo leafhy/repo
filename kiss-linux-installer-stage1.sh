@@ -4,13 +4,14 @@ set -e
 # Script used with systemrescue 8.05 (contains all commands) & void linux musl (some commands need installing)
 # https://www.system-rescue.org/ 
 # https://voidlinux.org/
-
+#
 chrootver=2021.7-9
 url=https://github.com/kisslinux/repo/releases/download/$chrootver
 file=kiss-chroot-$chrootver.tar.xz
 fsys=f2fs
 label=KISS_LINUX
 fsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $label"
+nameserver=192.168.1.1
 stage2=/root/kiss-linux-installer-stage2.sh
 
 wget "$url/$file" || curl -fLO "$url/$file"
@@ -70,6 +71,30 @@ LABEL=EFI         /boot/efi   vfat    defaults     0 0
 UUID=$rootuuid    /           $fsys   defaults     0 0 
 EOF
 
+echo "nameserver $nameserver" >> /mnt/etc/resolv.conf
+
+mkdir -p /mnt/etc/rc.d
+
+tee /mnt/etc/rc.d/setup.boot <<EOF
+# Set font for tty1..tty6
+for i in `seq 1 6`; do
+  setfont /usr/share/consolefonts/Tamsyn8x16r.psf.gz -C /dev/tty$i
+done
+
+# Setup network
+ip link set dev eth0 up
+ip addr add 192.168.1.XX/24 brd + dev eth0
+ip route add default via 192.168.1.1
+
+# Ethernet on server board is slow to start thus
+# sleep keeps log messages from overriding login prompt
+sleep 4
+
+dmesg >/var/log/dmesg.log
+EOF
+
+source $home/.profile
+
 tee /mnt/efiboot.sh << EOF
 #!/bin/sh
 
@@ -83,6 +108,73 @@ tee /mnt/efiboot.sh << EOF
 #efibootmgr --create --disk /dev/sda --loader '\vmlinuz-5.15.6' --label 'KISS LINUX' --unicode root=PARTUUID=$partuuid loglevel=4 Page_Poison=1
 EOF
 
+tee /mnt/kiss-linux-installer-stage2.sh <<EOF
+#!/bin/sh -e
+username=
+home=/home/$username
+#kver=linux-5.15.6
+kernel=https://cdn.kernel.org/pub/linux/kernel/v5.x/$kver.tar.xz
+lver=linux-firmware-20211027
+#linuxfirmware=https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/$lver.tar.gz
+kissrepo=/var/db/kiss
+hostname=kiss
+
+adduser $username
+
+git clone https://github.com/leafhy/repo.git $kissrepo/repo
+#git clone https://github.com/kisslinux/repo.git $kissrepo/repo
+git clone https://github.com/dylanaraps/community.git $kissrepo/community
+
+kiss search \*
+
+#cd $kissrepo/repo
+#git config merge.verifySignatures true
+
+#kiss build gnupg1$kissrepo/repo
+#gpg --keyserver keyserver.ubuntu.com --recv-key 13295DAC2CF13B5C
+#echo trusted-key 0x13295DAC2CF13B5C >> /root/.gnupg/gpg.conf
+
+#kiss update
+#cd /var/db/kiss/installed && kiss build *
+
+#kiss build baseinit libelf
+
+printf '%s\n' $hostname > /etc/hostname
+
+if [[ $kver ]]; then
+cd /opt
+curl -fLO $kernel
+tar xf $kver.tar.xz
+cd  $kver
+
+if [[ -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ]]; then
+patch -p1 < /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch
+else
+patch -p1 < /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch
+fi
+
+sed '/<stdlib.h>/a #include <linux/stddef.h>'  tools/objtool/arch/x86/decode.c > _
+mv -f _ tools/objtool/arch/x86/decode.c
+fi
+
+if [[ $linuxfirmware ]]; then 
+mkdir -p /usr/lib/firmware
+curl -fLO $linuxfirmware
+tar xf $lver.tar.xz
+# git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+cp -R linux-firmware/intel /usr/lib/firmware/
+fi
+EOF
+
+tee $home/.profile <<EOF
+export CFLAGS="-O3 -pipe -march=native"
+export CXXFLAGS="$CFLAGS"
+export MAKEFLAGS="-j$(nproc)"
+export KISSREPO="/var/db/kiss"
+export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
+EOF
+
 cp $stage2 /mnt
+chmod +x /mnt/$stage2
 
 #/mnt/bin/kiss-chroot /mnt
