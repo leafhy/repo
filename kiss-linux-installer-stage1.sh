@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/bash
+set -e
 #
 # Script used with systemrescue 8.05 (contains all commands) & void linux musl (some commands need installing)
 # https://www.system-rescue.org/ 
