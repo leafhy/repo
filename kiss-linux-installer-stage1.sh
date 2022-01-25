@@ -147,9 +147,11 @@ curl -fLO $kernel
 tar xf $kver.tar.xz
 cd  $kver
 
-if [[ -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ]]; then
+if [[ $kver && -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ]]; then
 patch -p1 < /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch
-else
+fi
+
+if [[ $kver && -f /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch ]]; then
 patch -p1 < /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch
 fi
 
