@@ -146,6 +146,9 @@ cd /opt
 curl -fLO $kernel
 tar xf $kver.tar.xz
 cd  $kver
+sed '/<stdlib.h>/a #include <linux/stddef.h>'  tools/objtool/arch/x86/decode.c > _
+mv -f _ tools/objtool/arch/x86/decode.c
+fi
 
 if [[ $kver && -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ]]; then
 patch -p1 < /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch
@@ -153,10 +156,6 @@ fi
 
 if [[ $kver && -f /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch ]]; then
 patch -p1 < /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch
-fi
-
-sed '/<stdlib.h>/a #include <linux/stddef.h>'  tools/objtool/arch/x86/decode.c > _
-mv -f _ tools/objtool/arch/x86/decode.c
 fi
 
 if [[ $linuxfirmware ]]; then 
