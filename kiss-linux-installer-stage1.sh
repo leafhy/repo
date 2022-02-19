@@ -64,7 +64,9 @@ mount ${device}2 /mnt
 rootuuid=$(blkid -s UUID -o value ${device}2)
 partuuid=$(blkid -s PARTUUID -o value ${device}2)
 else
-mkfs.$fsys $fsysopts ${device}1
+echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
+fdisk $device
+mkfs.$fsys $fsysopts ${device}1"
 mount ${device}1 /mnt
 rootuuid=$(blkid -s UUID -o value ${device}1)
 partuuid=$(blkid -s PARTUUID -o value ${device}1)
