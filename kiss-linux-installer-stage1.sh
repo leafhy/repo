@@ -12,7 +12,6 @@ fsys=f2fs
 label=KISS_LINUX
 fsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $label"
 nameserver=192.168.1.1
-stage2=/root/kiss-linux-installer-stage2.sh
 
 wget "$url/$file" || curl -fLO "$url/$file"
 wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
@@ -47,6 +46,11 @@ echo "May need to use [ wipefs --all $device ] if hardrive fails to format prope
 wipefs $device*
 echo '--------------------------------------------'
 sleep 5
+
+# Detect if we're in UEFI or legacy mode
+[[ -d /sys/firmware/efi ]] && UEFI=1
+
+if [[ $UEFI ]]; then
 sgdisk --zap-all $device
 sgdisk -n 1:2048:550M -t 1:ef00 $device
 sgdisk -n 2:0:0 -t 2:8300 $device
@@ -54,22 +58,28 @@ sgdisk --verify $device
 
 mkfs.vfat -F 32 -n EFI ${device}1
 mkfs.$fsys $fsysopts ${device}2
-
 mount ${device}2 /mnt
+rootuuid=$(blkid -s UUID -o value ${device}2)
+partuuid=$(blkid -s PARTUUID -o value ${device}2)
+else
+mkfs.$fsys $fsysopts ${device}1
+mount ${device}1 /mnt
+rootuuid=$(blkid -s UUID -o value ${device}1)
+partuuid=$(blkid -s PARTUUID -o value ${device}1)
+fi
 
 tar xvf /root/$file -C /mnt --strip-components=1
 
+if [[ $UEFI ]]; then
 mkdir /mnt/boot/efi
-
 mount ${device}1 /mnt/boot/efi
-
-rootuuid=$(blkid -s UUID -o value ${device}2)
-partuuid=$(blkid -s PARTUUID -o value ${device}2)
-
 tee --append /mnt/etc/fstab <<EOF
 LABEL=EFI         /boot/efi   vfat    defaults     0 0
-UUID=$rootuuid    /           $fsys   defaults     0 0 
+UUID=$rootuuid    /           $fsys   defaults     0 0
 EOF
+else
+echo "UUID=$rootuuid    /           $fsys   defaults     0 0" >> /mnt/etc/fstab
+fi
 
 echo "nameserver $nameserver" >> /mnt/etc/resolv.conf
 
@@ -95,6 +105,7 @@ EOF
 
 source $home/.profile
 
+if [[ $UEFI ]]; then
 tee /mnt/efiboot.sh << EOF
 #!/bin/sh
 
@@ -104,9 +115,10 @@ tee /mnt/efiboot.sh << EOF
 
 # kiss linux
 # Kernel panic will occur without unicode - unable to find root
-# need to use PARTUUID
-#efibootmgr --create --disk /dev/sda --loader '\vmlinuz-5.15.6' --label 'KISS LINUX' --unicode root=PARTUUID=$partuuid loglevel=4 Page_Poison=1
+# PARTUUID is used as UUID doesn't work
+efibootmgr --create --disk /dev/sda --loader '\vmlinuz-5.15.6' --label 'KISS LINUX' --unicode root=PARTUUID=$partuuid loglevel=4 Page_Poison=1
 EOF
+fi
 
 tee /mnt/kiss-linux-installer-stage2.sh <<EOF
 #!/bin/sh -e
@@ -114,8 +126,8 @@ username=
 home=/home/$username
 #kver=linux-5.15.6
 kernel=https://cdn.kernel.org/pub/linux/kernel/v5.x/$kver.tar.xz
-lver=linux-firmware-20211027
-#linuxfirmware=https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/$lver.tar.gz
+#lver=linux-firmware-20211027
+linuxfirmware=https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/$lver.tar.gz
 kissrepo=/var/db/kiss
 hostname=kiss
 
@@ -142,11 +154,11 @@ kiss search \*
 printf '%s\n' $hostname > /etc/hostname
 
 if [[ $kver ]]; then
-cd /opt
+cd $home
 curl -fLO $kernel
 tar xf $kver.tar.xz
 cd  $kver
-sed '/<stdlib.h>/a #include <linux/stddef.h>'  tools/objtool/arch/x86/decode.c > _
+sed '/<stdlib.h>/a #include <linux/stddef.h>' tools/objtool/arch/x86/decode.c > _
 mv -f _ tools/objtool/arch/x86/decode.c
 fi
 
@@ -158,7 +170,7 @@ if [[ $kver && -f /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch ]]; then
 patch -p1 < /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch
 fi
 
-if [[ $linuxfirmware ]]; then 
+if [[ $lver ]]; then 
 mkdir -p /usr/lib/firmware
 curl -fLO $linuxfirmware
 tar xf $lver.tar.xz
@@ -174,8 +186,5 @@ export MAKEFLAGS="-j$(nproc)"
 export KISSREPO="/var/db/kiss"
 export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
 EOF
-
-cp $stage2 /mnt
-chmod +x /mnt/$stage2
 
 #/mnt/bin/kiss-chroot /mnt
