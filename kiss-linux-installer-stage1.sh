@@ -5,6 +5,8 @@ set -e
 # https://www.system-rescue.org/ 
 # https://voidlinux.org/
 #
+# Note: ext4 on usb/sdcard has a tendancy to corrupt
+
 chrootver=2021.7-9
 url=https://github.com/kisslinux/repo/releases/download/$chrootver
 file=kiss-chroot-$chrootver.tar.xz
