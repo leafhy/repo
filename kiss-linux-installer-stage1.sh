@@ -108,8 +108,6 @@ sleep 4
 dmesg >/var/log/dmesg.log
 EOF
 
-source $home/.profile
-
 if [[ $UEFI ]]; then
 tee /mnt/efiboot.sh << EOF
 #!/bin/sh
@@ -137,6 +135,16 @@ kissrepo=/var/db/kiss
 hostname=kiss
 
 adduser $username
+
+tee $home/.profile <<EOF
+export CFLAGS="-O3 -pipe -march=native"                                                                                                                                                                           
+export CXXFLAGS="$CFLAGS"                                                                                                                                                                                         
+export MAKEFLAGS="-j$(nproc)"                                                                                                                                                                                     
+export KISSREPO="/var/db/kiss"                                                                                                                                                                                    
+export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"                                                                                                                      
+EOF     
+
+source $home/.profile
 
 git clone https://github.com/leafhy/repo.git $kissrepo/repo
 #git clone https://github.com/kisslinux/repo.git $kissrepo/repo
@@ -182,14 +190,6 @@ tar xf $lver.tar.xz
 # git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
 cp -R linux-firmware/intel /usr/lib/firmware/
 fi
-
-tee $home/.profile <<EOF
-export CFLAGS="-O3 -pipe -march=native"                                                                                                                                                                           
-export CXXFLAGS="$CFLAGS"                                                                                                                                                                                         
-export MAKEFLAGS="-j$(nproc)"                                                                                                                                                                                     
-export KISSREPO="/var/db/kiss"                                                                                                                                                                                    
-export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"                                                                                                                      
-EOF     
 
 EOF
 
