@@ -14,6 +14,7 @@ fsys=f2fs
 label=KISS_LINUX
 fsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $label"
 nameserver=192.168.1.1
+home=/mnt/root
 
 wget "$url/$file" || curl -fLO "$url/$file"
 wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
@@ -181,6 +182,8 @@ tar xf $lver.tar.xz
 # git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
 cp -R linux-firmware/intel /usr/lib/firmware/
 fi
+
+
 EOF
 
 tee $home/.profile <<EOF
