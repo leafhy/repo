@@ -183,6 +183,13 @@ tar xf $lver.tar.xz
 cp -R linux-firmware/intel /usr/lib/firmware/
 fi
 
+tee $home/.profile <<EOF
+export CFLAGS="-O3 -pipe -march=native"                                                                                                                                                                           
+export CXXFLAGS="$CFLAGS"                                                                                                                                                                                         
+export MAKEFLAGS="-j$(nproc)"                                                                                                                                                                                     
+export KISSREPO="/var/db/kiss"                                                                                                                                                                                    
+export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"                                                                                                                      
+EOF     
 
 EOF
 
