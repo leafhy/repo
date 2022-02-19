@@ -7,7 +7,7 @@ make bios installer
 # install master boot record
 # dd bs=440 count=1 if=mbr/mbr.bin of=/dev/sda
 
-# install ldlinux.c32,ldlinux.sys
+# install ldlinux.c32 & ldlinux.sys
 extlinux/extlinux --install $1/boot/extlinux
 
 install -Dm644 bios/com32/libutil/libutil.c32 $1/boot/extlinux/libutil.c32
