@@ -18,3 +18,5 @@ install -Dm644 sample/syslinux_splash.jpg $1/boot/extlinux/syslinux_splash.jpg
 install -Dm644 sample/m16-640x640-syslinux.jpg $1/boot/extlinux/m16-640x640-syslinux.jpg
 
 install -Dm644 extlinux.conf $1/boot/extlinux/extlinux.conf
+partuuid=$(blkid -s PARTUUID -o value /dev/sda1)
+echo "append root=PARTUUID=$partuuid ro" >> $1/boot/extlinux/extlinux.conf
