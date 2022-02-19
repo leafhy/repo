@@ -1,1 +1,2 @@
 git+https://github.com/starship/starship.git
+files/starship.toml.plain-text
