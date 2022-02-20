@@ -3,7 +3,7 @@
 mkdir -p $1/boot/extlinux 
 
 # fix undefined reference to major
-sed '+#include <sys/stat.h>+a #include <sys/sysmacros.h>' extlinux/main.c > _
+sed '+include <sys/stat.h>+a #include <sys/sysmacros.h>' extlinux/main.c > _
 mv -f _ extlinux/main.c
 
 make bios installer
