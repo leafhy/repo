@@ -9,6 +9,9 @@ mv -f _ extlinux/main.c
 make bios installer
 
 # install master boot record
+# Note: https://wiki.syslinux.org/wiki/index.php?title=Mbr
+#       dd is the "safe approach"
+# cat mbr.bin > /dev/sda 
 # dd bs=440 count=1 if=mbr/mbr.bin of=/dev/sda
 
 # install ldlinux.c32 & ldlinux.sys
