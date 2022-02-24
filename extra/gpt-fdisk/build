@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+sed 's#<ncursesw/ncurses.h>#<ncurses.h>#' gptcurses.cc > _
+mv -f _ gptcurses.cc
+
+make
+
+install -Dm644 $1/usr/bin/gdisk 
+install -Dm644 $1/usr/bin/cgdisk
+install -Dm644 $1/usr/bin/sgdisk
+install -Dm644 $1/usr/bin/fixparts
+
+for f in *.8 do;
+install -Dm644 $f $1/usr/man/man8/$f
+done
