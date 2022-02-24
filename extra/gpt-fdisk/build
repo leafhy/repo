@@ -5,6 +5,9 @@ mv -f _ gptcurses.cc
 
 make
 
+chmod +x *disk
+chmod +x fixparts
+
 install -Dm644 gdisk $1/usr/bin/gdisk 
 install -Dm644 gdisk c$1/usr/bin/cgdisk
 install -Dm644 sgdisk $1/usr/bin/sgdisk
