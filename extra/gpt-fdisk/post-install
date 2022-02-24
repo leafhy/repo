@@ -1,3 +1,6 @@
 #!/bin/sh -e
 
-chmod +x /usr/bin/{gdisk,sgdisk,cfdisk,fixparts}
+chmod +x /usr/bin/gdisk
+chmod +x /usr/bin/sgdisk
+chmod +x /usr/bin/cfdisk
+chmod +x /usr/bin/fixparts
