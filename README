@@ -5,7 +5,7 @@ Building everything takes ~8hrs with Celeron 2.80GHz
 ram useage starts @ 156MB and barely goes over 2GB
 bootime ~50s (server motherboard) increases with HBA & multiple hardrives
 kiss-chroot can override CXXFLAGS in .profile
-find $KISSREPO -name build -exec chmod +x {} +
+find $KISSREPO -name [build,post-install] -exec chmod +x {} +
 GCC builds everything in this *repo*
 Clang requires compiler-rt for LTO
 libclang-rt.builtins-x86_64.a is needed for efivar
