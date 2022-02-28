@@ -18,6 +18,7 @@ make bios installer
 # extlinux --install /boot/extlinux --device /dev/sda1
 extlinux/extlinux --install $1/boot/extlinux
 
+install -Dm644 bios/mbr/mbr.bin $1/boot/extlinux/mbr.bin
 install -Dm644 bios/com32/libutil/libutil.c32 $1/boot/extlinux/libutil.c32
 install -Dm644 bios/com32/lib/libcom32.c32 $1/boot/extlinux/libcom32.c32
 install -Dm644 bios/com32/menu/menu.c32 $1/boot/extlinux/menu.c32
