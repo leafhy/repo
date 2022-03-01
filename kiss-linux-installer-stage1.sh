@@ -10,9 +10,12 @@ set -e
 chrootver=2021.7-9
 url=https://github.com/kisslinux/repo/releases/download/$chrootver
 file=kiss-chroot-$chrootver.tar.xz
-fsys=f2fs
+# f2fs is not compatable with extlinux
+#fsys=f2fs
+fsys=xfs
 label=KISS_LINUX
-fsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $label"
+#fsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $label"
+fsysopts=-f -L $label
 nameserver=192.168.1.1
 home=/mnt/root
 
