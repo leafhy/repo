@@ -2,5 +2,5 @@
 
 chmod +x /usr/bin/gdisk
 chmod +x /usr/bin/sgdisk
-chmod +x /usr/bin/cfdisk
+chmod +x /usr/bin/cgdisk
 chmod +x /usr/bin/fixparts
