@@ -6,7 +6,7 @@ mv -f _ gptcurses.cc
 make
 
 install -Dm644 gdisk $1/usr/bin/gdisk 
-install -Dm644 gdisk c$1/usr/bin/cgdisk
+install -Dm644 cgdisk $1/usr/bin/cgdisk
 install -Dm644 sgdisk $1/usr/bin/sgdisk
 install -Dm644 fixparts $1/usr/bin/fixparts
 
