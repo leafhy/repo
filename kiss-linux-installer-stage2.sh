@@ -38,7 +38,7 @@ kiss search \*
 
 #cd /var/db/kiss/installed && kiss build *
 
-#kiss build baseinit libelf
+#kiss build baseinit libelf runit iproute2
 
 printf '%s\n' $hostname > /etc/hostname
 
