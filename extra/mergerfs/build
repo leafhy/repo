@@ -3,4 +3,4 @@
 make PREFIX=/usr LTO=1
 make PREFIX=/usr install
 
-ln -sf /usr/bin/mount.fuse3 $1/usr/bin/mount.fuse
+ln -sf /usr/bin/mount.fuse3 /usr/bin/mount.fuse
