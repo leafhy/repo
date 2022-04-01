@@ -16,7 +16,8 @@ Using aria2 as the downloader for "kiss" can include the path in the filename wh
 "kiss" uses busybox 'cp' - coreutils 'cp' needs '-p' to preserve permissions
 
 youtube-dl & yt-dlp + musl + openssl 3.0
-> sometimes has trouble connecting even if video formats can be listed
+> Using "ffmpeg-bin" sometimes has trouble connecting even if video formats can be listed
+> Using "ffmpeg" works
 
 youtube-dl & yt-dlp + glibc + openssl 1.0.2
 > can initially fail
