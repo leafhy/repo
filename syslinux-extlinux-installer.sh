@@ -4,7 +4,7 @@
 # 
 # Install worked with internal USB and failed with external USB however YMMV
 
-# DEPENDS
+# Dependencies
 kiss b util-linux perl nasm popt
 
 VERSION=6.04
