@@ -4,9 +4,12 @@ sed "12s/wipeup;/wipeup {remove_trailing;};/" etc/detoxrc.sample > _
 mv -f _ etc/detoxrc.sample
 
 sed "29s/safe;/safe;\n    lower;/" etc/detoxrc.sample > _
-mv -f _ etc/detoxrc.sample
+mv -f _ etc/detoxrc.sample 
 
 ./configure --prefix=/usr
 
 make
 make DESTDIR="$1" install
+
+rm "$1/usr/share/detox/safe.tbl"
+install -Dm644 files/safe.tbl "$1/usr/share/detox/safe.tbl"
