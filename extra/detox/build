@@ -12,4 +12,4 @@ make
 make DESTDIR="$1" install
 
 rm "$1/usr/share/detox/safe.tbl"
-install -Dm644 files/safe.tbl "$1/usr/share/detox/safe.tbl"
+install -Dm644 safe.tbl "$1/usr/share/detox/safe.tbl"
