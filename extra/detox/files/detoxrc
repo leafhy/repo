@@ -1,0 +1,85 @@
+#
+# config file for detox(1)
+# 
+
+#
+# Default sequence
+#
+
+sequence default {
+	utf_8;
+	safe;
+	wipeup {remove_trailing;};
+};
+
+#
+# Sequences meant primarily for detox
+#
+
+# transliterates ISO8859-1 into ASCII
+sequence "iso8859_1" {
+	iso8859_1;
+	safe;
+	wipeup;
+};
+
+# transliterates UTF-8 into ASCII
+sequence "utf_8" {
+	utf_8;
+	safe;
+  lower;
+	wipeup {remove_trailing;};
+};
+
+# decodes CGI escaped characters
+sequence "uncgi" {
+	uncgi;
+	safe;
+	wipeup;
+};
+
+# converts files to lower case
+sequence "lower" {
+	iso8859_1;
+	safe;
+	lower;
+	wipeup;
+};
+
+#
+# Sequences meant primarily for inline-detox
+#
+
+# transliterates ISO8859-1 to ASCII
+sequence "iso8859_1-only" {
+	iso8859_1;
+};
+
+# transliterates UTF-8 to ASCII
+sequence "utf_8-only" {
+	utf_8;
+};
+
+# decodes CGI escaped characters
+sequence "uncgi-only" {
+	uncgi;
+};
+
+# converts files to lower case
+sequence "lower-only" {
+	lower;
+};
+
+
+#
+# Files to ignore (detox only)
+#
+
+ignore {
+	filename ".arch-params";
+	filename ".evolution";
+	filename ".gnome";
+	filename ".mozilla";
+	filename ".themes";
+	filename "{arch}";
+};
