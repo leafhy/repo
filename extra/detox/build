@@ -3,7 +3,7 @@
 sed "12s/wipeup;/wipeup {remove_trailing;};/" etc/detoxrc.sample > _
 mv -f _ etc/detoxrc.sample
 
-sed "29s/safe;/safe;\n    lower;/" etc/detoxrc.sample > _
+sed "29s/safe;/safe;\n \ \ \ \ lower;/" etc/detoxrc.sample > _
 mv -f _ etc/detoxrc.sample 
 
 ./configure --prefix=/usr
