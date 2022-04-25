@@ -27,7 +27,7 @@ sequence "iso8859_1" {
 sequence "utf_8" {
 	utf_8;
 	safe;
-  lower;
+        lower;
 	wipeup {remove_trailing;};
 };
 
