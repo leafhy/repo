@@ -1,3 +1,5 @@
 #!/bin/sh -e
 
-install -Dm644 restic_0.13.1_linux_amd64 $1/usr/bin/restic-bin
+bzip2 -d restic_*_linux_amd64.bz2
+
+install -Dm755 restic_*_linux_amd64 $1/usr/bin/restic-bin
