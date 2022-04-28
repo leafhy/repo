@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+if [ ! -L /usr/bin/fusermount ]; then
+ln -s /usr/bin/fusermount3 /usr/bin/fusermount
+fi
