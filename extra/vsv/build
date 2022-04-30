@@ -1,3 +1,4 @@
 #!/bin/sh -e
 
-make DESTDIR="$1" PREFIX=/usr install
+install -m755 vsv $1/usr/bin/vsv
+install -m644 mam/vsv.8 $1/usr/share/man/man8
