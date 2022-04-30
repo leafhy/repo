@@ -4,11 +4,8 @@ patch -p1 < 14-Fix-g++-warning.patch
 
 cp makefile.linux_amd64_asm makefile.machine
 
-sed 's+OPTFLAGS=-O -s+OPTFLAGS=-O3 -march=native -Wno-narrowing+' makefile.machine > _
+sed 's+OPTFLAGS=-O -s+OPTFLAGS=-O3 -march=native -Wno-narrowing -s+' makefile.machine > _
 mv -f _ makefile.machine
 
-sed 's+DEST_HOME=/usr/local+DEST_HOME=/usr+' install.sh > _
-mv -f _ install.sh
-
 make all3
-make DESTDIR="$1" install
+make DEST_HOME="/usr" DESTDIR="$1" install
