@@ -8,4 +8,12 @@ sed 's+OPTFLAGS=-O -s+OPTFLAGS=-O3 -march=native -Wno-narrowing -s+' makefile.ma
 mv -f _ makefile.machine
 
 make all3
-make DEST_HOME="/usr" DESTDIR="$1" install
+make  DESTDIR="$1" install \
+DEST_HOME="/usr" \
+DEST_MAN="/usr/share/man" \
+DEST_SHARE_DOC="/usr/share/doc/p7zip"
+
+mkdir -p ${DESTDIR}/usr/share/licenses/p7zip/
+
+mv ${DESTDIR}/usr/share/doc/p7zip/DOC/copying.txt \
+${DESTDIR}/usr/share/licenses/p7zip/LICENSE
