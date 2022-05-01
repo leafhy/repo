@@ -11,5 +11,5 @@ install -Dm644 sgdisk $1/usr/bin/sgdisk
 install -Dm644 fixparts $1/usr/bin/fixparts
 
 for f in *.8; do
-install -Dm644 $f $1/usr/man/man8/$f
+install -Dm644 $f $1/usr/share/man/man8/$f
 done
