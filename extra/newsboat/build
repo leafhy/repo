@@ -3,7 +3,7 @@
 sed 's+/usr/local+/usr+' Makefile > _
 mv -f _ Makefile
 
-sed '54s+-O2+-O3+' Makefile > _
+sed '54s+-O2++' Makefile > _
 mv -f _ Makefile
 
 sed '116s+check_cmd "asciidoctor"+# check_cmd "asciidoctor"+' config.sh > _
