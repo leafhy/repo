@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-sed 's+<ncursesw/ncurses.h>+<ncurses.h>+' stfl_internals.h _
+sed 's+<ncursesw/ncurses.h>+<ncurses.h>+' stfl_internals.h > _
 mv -f _ stfl_internals.h
 
 sed 's+/usr/local+/usr+' Makefile.cfg > _
