@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+sed 's+/usr/local+/usr+' Makefile > _
+mv -f _ Makefile
+
 sed '116s+check_cmd "asciidoctor"+# check_cmd "asciidoctor"+' config.sh > _
 mv -f _ config.sh
 chmod +x config.sh
