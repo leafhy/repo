@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+sed '116s+check_cmd "asciidoctor"+# check_cmd "asciidoctor"+' config.sh > _
+mv -f _ config.sh
+
 make newsboat
 make podboat
 
