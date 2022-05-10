@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+make newsboat
+make podboat
+
+install -Dm755 newsboat $1/usr/bin/newsboat
+install -Dm755 podboat $1/usr/bin/podboat
