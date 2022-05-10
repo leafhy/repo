@@ -8,3 +8,5 @@ mv -f _ Makefile.cfg
 
 make
 make DESTDIR="$1" install
+
+ln -s libstfl.so.0.24 "$1/usr/lib/libstfl.so.0"
