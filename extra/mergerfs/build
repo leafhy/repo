@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-make PREFIX=/usr LTO=1
-make PREFIX=/usr install
+make LTO=1
+make DESTDIR="$1" PREFIX=/usr install
 
 ln -sf /usr/bin/mount.fuse3 /usr/bin/mount.fuse
