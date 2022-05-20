@@ -3,4 +3,4 @@
 make LTO=1
 make DESTDIR="$1" PREFIX=/usr install
 
-ln -sf /usr/bin/mount.fuse3 /usr/bin/mount.fuse
+ln -sf mount.fuse3 "$1/usr/bin/mount.fuse"
