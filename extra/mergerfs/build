@@ -3,6 +3,9 @@
 sed 's+/usr/local+/usr+' Makefile > _
 mv -f _ Makefile
 
+sed 's+/usr/local+/usr+' libfuse/Makefile > _
+mv -f _ libfuse/Makefile
+
 make LTO=1
 make DESTDIR="$1" install
 
