@@ -14,6 +14,9 @@ export LDFLAGS="$LDFLAGS -static"
     --disable-fsck \
     --disable-elf-shlibs
 
+sed '261s/LIBMODE=  444/LIBMODE=    755/' Makefile > _
+mv -f _ Makefile
+
 make
 
 set -- \
