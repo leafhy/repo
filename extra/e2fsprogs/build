@@ -17,7 +17,7 @@ export LDFLAGS="$LDFLAGS -static"
 make 
 
 set -- \
-    MKDIR_P="mkdir -p" \
+    MKDIR_P="mkdir -p " \
     BLKID_MAN="" \
     BLKID_PROG="" \
     FINDFS_LINK="" \
