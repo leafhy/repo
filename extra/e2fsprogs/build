@@ -14,10 +14,7 @@ export LDFLAGS="$LDFLAGS -static"
     --disable-fsck \
     --disable-elf-shlibs
 
-sed '261s/LIBMODE=  444/LIBMODE=    755/' Makefile > _
-mv -f _ Makefile
-
-make
+make 
 
 set -- \
     MKDIR_P="mkdir -p" \
@@ -39,5 +36,5 @@ for p in \
     resize \
     scrub
 do
-    make -C "$p" "$@" install
+    make DESTDIR="$1" -C "$p" "$@" install
 done
