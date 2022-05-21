@@ -50,5 +50,5 @@ do
 done
 
 for f in libcom_err.a libe2p.a libext2fs.a libss.a ; do
-find . -name "$f" -exec chmod 444 "$f" +
+find . -name "$f" -exec chmod 444 "$f" {} +
 done
