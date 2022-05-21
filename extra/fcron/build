@@ -11,7 +11,7 @@ mv -f _ doc/Makefile.in
 sed '25s/sbindir/bindir/' Makefile.in > _
 mv -f _ Makefile.in
 
-sed '735s/-O2 //' configure.in > _
+sed 's/-O2 //g' configure.in > _
 mv -f _ configure.in
 
 ./configure \
