@@ -48,7 +48,3 @@ for p in \
 do
     make -C "$p" "$@" install
 done
-
-for f in libcom_err.a libe2p.a libext2fs.a libss.a ; do
-chmod 444 ../../pkg/e2fsprogs/usr/lib/$f
-done
