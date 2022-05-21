@@ -24,10 +24,7 @@ mv -f _ Makefile.in
 make
 make DESTDIR="$1" install
 
-install -dm755 $1/etc/cron.hourly
-install -dm755 $1/etc/cron.daily
-install -dm755 $1/etc/cron.weekly
-install -dm755 $1/etc/cron.monthly
+install -dm755 $1/etc/cron.{hourly,daily,weekly,monthly}
 
 install -m640 systab.orig $1/var/spool/fcron/systab.orig
 install -m755 run-parts $1/usr/bin/run-parts
