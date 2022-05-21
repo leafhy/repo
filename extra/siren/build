@@ -1,7 +1,10 @@
 #!/bin/sh -e
 
-sed '43s/444/755/' Makefile > _
-mv -f _ Makefile
+sed '42s/555/755/' GNUmakefile > _
+mv -f _ GNUmakefile
+
+sed '43s/444/755/' GNUmakefile > _
+mv -f _ GNUmakefile
 
 ./configure \
       prefix=/usr \
