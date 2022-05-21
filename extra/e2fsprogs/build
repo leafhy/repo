@@ -48,3 +48,7 @@ for p in \
 do
     make -C "$p" "$@" install
 done
+
+for f in $1/usr/lib/{libcom_err,libe2p,libext2fs,libss}.a ; do
+chmod 444 $f
+done
