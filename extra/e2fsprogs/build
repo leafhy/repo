@@ -49,7 +49,6 @@ do
     make -C "$p" "$@" install
 done
 
-cd $1/usr/lib
 for f in libcom_err.a libe2p.a libext2fs.a libss.a ; do
-chmod 644 $f
+find . -name "$f" -exec chmod 644 {} +
 done
