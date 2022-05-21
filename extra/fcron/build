@@ -11,9 +11,6 @@ mv -f _ doc/Makefile.in
 sed '25s/sbindir/bindir/' Makefile.in > _
 mv -f _ Makefile.in
 
-sed 's/"-O2 -Wall"/"-O3 -Wall"/g' configure.in > _
-mv -f _ configure.in
-
 ./configure \
         --prefix=/usr \
         --with-boot-install=no \
