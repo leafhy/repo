@@ -8,7 +8,10 @@ getent passwd fcron || adduser -H -h /var/spool/fcron -s /bin/sh -D -S -G fcron 
 sed 's/ fr//' doc/Makefile.in > _
 mv -f _ doc/Makefile.in
 
-sed 's/sbin dir/bin dir/' configure.in > _
+sed '25s/sbindir/bindir/' Makefile.in > _
+mv -f _ Makefile.in
+
+sed '735s/-O2 //' configure.in > _
 mv -f _ configure.in
 
 ./configure \
