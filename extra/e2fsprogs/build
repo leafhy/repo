@@ -36,5 +36,5 @@ for p in \
     resize \
     scrub
 do
-    make DESTDIR="$1" -C "$p" "$@" install
+    make -C "$p" "$@" install
 done
