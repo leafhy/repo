@@ -12,6 +12,4 @@ BINGRP="$(id -g)" \
 make
 make install
 
-mkdir -p "$1/etc"
-cp -f doas.conf "$1/etc"
-chmod 600 "$1/etc/doas.conf"
+install -Dm600 doas.conf $1/etc
