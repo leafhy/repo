@@ -5,11 +5,10 @@ mv -f _ gptcurses.cc
 
 make
 
-install -Dm644 gdisk $1/usr/bin/gdisk 
-install -Dm644 cgdisk $1/usr/bin/cgdisk
-install -Dm644 sgdisk $1/usr/bin/sgdisk
-install -Dm644 fixparts $1/usr/bin/fixparts
+for f in gdisk cgdisk sgdisk fixparts; do
+install -Dm644 $f $1/usr/bin
+done
 
 for f in *.8; do
-install -Dm644 $f $1/usr/share/man/man8/$f
+install -Dm644 $f $1/usr/share/man/man8
 done
