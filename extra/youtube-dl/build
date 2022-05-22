@@ -3,4 +3,4 @@
 make lazy-extractors
 make youtube-dl
 
-install -Dm755 youtube-dl "$1/usr/bin/"
+install -Dm755 youtube-dl "$1/usr/bin"
