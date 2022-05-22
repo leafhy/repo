@@ -81,7 +81,7 @@ start
 # Chars to leave alone
 #
 
-0x23		- # '#'
+0x23	 '#'
 0x25		- # %
 0x2b		- # +
 0x2c		- # ,
