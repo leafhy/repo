@@ -6,6 +6,9 @@ set -e
 # https://voidlinux.org/
 #
 # Note: ext4 on usb/sdcard has a tendancy to corrupt
+#
+# [!] EXTLINUX [6.03+] supports: FAT12/16/32, NTFS, ext2/3/4, Btrfs, XFS, UFS/FFS [!]
+# [!] f2fs is not compatable with extlinux [!]
 
 efi-kver=5.15.6
 efi-label=KISS_LINUX
@@ -13,14 +16,13 @@ fsys-label=KISS_LINUX
 chrootver=2021.7-9
 url=https://github.com/kisslinux/repo/releases/download/$chrootver
 file=kiss-chroot-$chrootver.tar.xz
-# f2fs is not compatable with extlinux
-#fsys=f2fs
-fsys=xfs
-
-#fsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $fsys-label"
-fsysopts="-f -L $fsys-label"
 nameserver=192.168.1.1
 home=/mnt/root
+#fsys=f2fs
+#fsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $fsys-label"
+fsys=xfs
+fsysopts="-f -L $fsys-label"
+
 
 wget "$url/$file" || curl -fLO "$url/$file"
 wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
