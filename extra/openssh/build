@@ -30,4 +30,4 @@ install -Dm755 contrib/ssh-copy-id.1 "$1/usr/share/man/man1"
 install -dm755 "$1/etc/sv/sshd"
 install -Dm755 sshd.run "$1/etc/sv/sshd/run"
 
-#ln -sf /etc/sv/sshd /run/runit/
+ln -s /etc/sv/sshd /var/service/
