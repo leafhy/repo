@@ -12,6 +12,12 @@ CHECKSUM=3f6d50a57f3ed47d8234fd0ab4492634eb7c9aaf7dd902f33d3ac33564fd631d
 
 curl -fLO https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/$VERSION/syslinux-$VERSION-pre1.tar.xz
 
+if [[ $(shasum -a 256 syslinux-$VERSION-pre1.tar.xz) = "$CHECKSUM  syslinux-$VERSION-pre1.tar.xz" ]] ; then
+echo "Signature OK"
+else
+exit 1
+fi
+
 tar xf syslinux-$VERSION-pre1.tar.xz
 
 cd syslinux-$VERSION-pre1
@@ -29,13 +35,13 @@ mkdir -p /boot/extlinux
 # extlinux --install /boot/extlinux --device /dev/sda1
 bios/extlinux/extlinux --install /boot/extlinux
 
-install -Dm644 bios/mbr/mbr.bin /boot/extlinux/mbr.bin
-install -Dm644 bios/com32/libutil/libutil.c32 /boot/extlinux/libutil.c32
-install -Dm644 bios/com32/lib/libcom32.c32 /boot/extlinux/libcom32.c32
-install -Dm644 bios/com32/menu/menu.c32 /boot/extlinux/menu.c32
-install -Dm644 bios/com32/menu/vesamenu.c32 /boot/extlinux/vesamenu.c32
-install -Dm644 sample/syslinux_splash.jpg /boot/extlinux/syslinux_splash.jpg
-install -Dm644 sample/m16-640x640-syslinux.jpg /boot/extlinux/m16-640x640-syslinux.jpg
+install -Dm644 bios/mbr/mbr.bin /boot/extlinux
+install -Dm644 bios/com32/libutil/libutil.c32 /boot/extlinux
+install -Dm644 bios/com32/lib/libcom32.c32 /boot/extlinux
+install -Dm644 bios/com32/menu/menu.c32 /boot/extlinux
+install -Dm644 bios/com32/menu/vesamenu.c32 /boot/extlinux
+install -Dm644 sample/syslinux_splash.jpg /boot/extlinux
+install -Dm644 sample/m16-640x640-syslinux.jpg /boot/extlinux
 
 tee /boot/extlinux/extlinux.conf <<EOF
 ui vesamenu.c32
