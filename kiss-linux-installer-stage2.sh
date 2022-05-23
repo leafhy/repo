@@ -11,11 +11,15 @@ hostname=kiss
 adduser $username
 
 tee $home/.profile <<EOF
+export KISS_DEBUG=0
+export KISS_COMPRESS=zst
+export KISS_GET=curl
 export CFLAGS="-O3 -pipe -march=native"                                                                                                                                                                           
 export CXXFLAGS="$CFLAGS"                                                                                                                                                                                         
 export MAKEFLAGS="-j$(nproc)"                                                                                                                                                                                     
 export KISSREPO="/var/db/kiss"                                                                                                                                                                                    
-export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"                                                                                                                      
+export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
+alias ls="ls --color=auto"
 EOF     
 
 source $home/.profile
