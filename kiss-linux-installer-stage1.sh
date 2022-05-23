@@ -7,15 +7,18 @@ set -e
 #
 # Note: ext4 on usb/sdcard has a tendancy to corrupt
 
+efi-kver=5.15.6
+efi-label=KISS_LINUX
+fsys-label=KISS_LINUX
 chrootver=2021.7-9
 url=https://github.com/kisslinux/repo/releases/download/$chrootver
 file=kiss-chroot-$chrootver.tar.xz
 # f2fs is not compatable with extlinux
 #fsys=f2fs
 fsys=xfs
-label=KISS_LINUX
-#fsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $label"
-fsysopts=-f -L $label
+
+#fsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $fsys-label"
+fsysopts="-f -L $fsys-label"
 nameserver=192.168.1.1
 home=/mnt/root
 
@@ -68,6 +71,8 @@ mount ${device}2 /mnt
 rootuuid=$(blkid -s UUID -o value ${device}2)
 partuuid=$(blkid -s PARTUUID -o value ${device}2)
 else
+echo "[ ! ] EFI NOT FOUND [ ! ]
+echo ""
 echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
 fdisk $device
 mkfs.$fsys $fsysopts ${device}1"
@@ -122,7 +127,7 @@ tee /mnt/efiboot.sh << EOF
 # kiss linux
 # Kernel panic will occur without unicode - unable to find root
 # PARTUUID is used as UUID doesn't work
-efibootmgr --create --disk /dev/sda --loader '\vmlinuz-5.15.6' --label 'KISS LINUX' --unicode root=PARTUUID=$partuuid loglevel=4 Page_Poison=1
+efibootmgr --create --disk /dev/sda --loader '\vmlinuz-$efi-kver' --label '$efi-label' --unicode root=PARTUUID=$partuuid loglevel=4 Page_Poison=1
 EOF
 fi
 
