@@ -3,4 +3,4 @@
 cargo build --release
 
 install -Dm755 target/release/exa "$1/usr/bin"
-install -Dm644 contrib/man/exa.1 "$1/usr/share/man/man1"
+install -Dm644 man/exa.1.md "$1/usr/share/man/man1/exa.1"
