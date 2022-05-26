@@ -1,10 +1,14 @@
 #!/bin/sh -e
 
-./configure\
-    --prefix=/usr\
-    --sbindir=/usr/bin\
-    --enable-lib64=no\
-    --disable-gettext
-    
-make
+make \
+DEBUG=-DNDEBUG\
+LOCAL_CONFIGURE_OPTIONS="--prefix=/usr \
+                         --sbindir=/bin \
+                         --enable-lib64=no \
+                         --disable-gettext \
+                         --enable-lto"
+
 make DESTDIR="$1" install
+
+# Remove documentation
+rm -r "$1/usr/share/doc"
