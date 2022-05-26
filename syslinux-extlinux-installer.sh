@@ -1,6 +1,9 @@
 #!/bin/sh -e
 
-# kiss build failed with no error messages hence this script
+# kiss/curl+wget2 seems to interpret the filename as options
+# .../.cache/kiss/sources/syslinux/│/syslinux-6.04-pre1.tar.xz
+# Note:
+# “│” U+2502 Box Drawings Light Vertical 
 # 
 # Install worked with internal USB and failed with external USB however YMMV
 
