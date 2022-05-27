@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-# kiss/curl+wget2 seems to interpret the filename as options
+# kiss/curl+wget2 url problem - erroneous directory is created
 # .../.cache/kiss/sources/syslinux/│/syslinux-6.04-pre1.tar.xz
 # Note:
 # “│” U+2502 Box Drawings Light Vertical 
