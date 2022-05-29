@@ -2,6 +2,15 @@
 
 #patch -p1 < posix-build.patch
 
+sed 's+#!/usr/bin/env bash+#!/bin/sh+' go-current/src/make.bash > _
+mv -f _ go-current/src/make.bash
+
+sed 's+#!/usr/bin/env bash+#!/bin/sh+' go1.4-bootstrap/src/make.bash > _
+mv -f _ go1.4-bootstrap/src/make.bash
+
+sed 's+==+=+' go1.4-bootstrap/src/make.bash > _
+mv -f _ go1.4-bootstrap/src/make.bash
+
 # Disable stripping of binaries.
 # This breaks Go.
 :> nostrip
