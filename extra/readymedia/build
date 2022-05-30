@@ -2,7 +2,9 @@
 
 ./configure \
     --prefix=/usr \
-    --disable-nls
+    --disable-nls \
+    --disable-rpath \
+    --enable-lto
 
 make
 make DESTDIR="$1" install
