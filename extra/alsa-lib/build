@@ -7,8 +7,8 @@ automake --foreign --copy --add-missing
 autoconf
 
 ./configure \
-     --enable-shared=no \
-     --enable-static=yes
+     --enable-shared=yes \
+     --enable-static=no
 
 make
 make DESTDIR="$1" install
