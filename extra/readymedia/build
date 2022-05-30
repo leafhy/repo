@@ -11,8 +11,8 @@ make
 make DESTDIR="$1" install
 
 for opt in '#user=jmaggard+user=minidlna' '#db_dir=/var/cache/minidlna+#db_dir=/var/lib/minidlna' '#log_dir=/var/log+log_dir=/var/log'; do
-sed 's+$opt+' minidlna.conf >_
-mv -f minidlna.conf
+sed "s+$opt+" minidlna.conf >_
+mv -f _ minidlna.conf
 done
 
 install -Dm644 minidlnad.8 $1/share/man/man8
