@@ -2,7 +2,7 @@
 
 ./configure \
     --prefix=/usr \
-    --with-ssl=openssl 
+    --with-openssl 
 
 make
 make DESTDIR="$1" install
