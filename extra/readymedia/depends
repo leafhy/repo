@@ -4,3 +4,4 @@ libid3tag
 libvorbis
 flac
 sqlite
+ffmpeg
