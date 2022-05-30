@@ -3,6 +3,7 @@
 ./configure \
     --prefix=/usr \
     --sbindir=/usr/bin \
+    --mandir=/usr/share/man \
     --disable-nls \
     --disable-rpath \
     --enable-lto
@@ -15,6 +16,7 @@ sed "s+$opt+" minidlna.conf >_
 mv -f _ minidlna.conf
 done
 
+install -d755 $1/usr/lib/minidlna
 install -Dm644 minidlnad.8 $1/share/man/man8
 install -Dm644 minidlna.conf $1/etc/minidlna.conf
 install -Dm644 minidlna.conf.5 $1/share/man/man5
