@@ -8,7 +8,3 @@
 
 make
 make DESTDIR="$1" install
-
-if [[ -d /var/db/kiss/installed/readline ]]; then
-rm $1/usr/share/man/man3/history.3
-fi
