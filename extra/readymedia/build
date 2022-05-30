@@ -2,9 +2,19 @@
 
 ./configure \
     --prefix=/usr \
+    --sbindir=/usr/bin \
     --disable-nls \
     --disable-rpath \
     --enable-lto
 
 make
 make DESTDIR="$1" install
+
+for opt in '#user=jmaggard+user=minidlna' '#db_dir=/var/cache/minidlna+#db_dir=/var/lib/minidlna' '#log_dir=/var/log+log_dir=/var/log'; do
+sed 's+$opt+' minidlna.conf >_
+mv -f minidlna.conf
+done
+
+install -Dm644 minidlnad.8 $1/share/man/man8
+install -Dm644 minidlna.conf $1/etc/minidlna.conf
+install -Dm644 minidlna.conf.5 $1/share/man/man5
