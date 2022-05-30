@@ -1,3 +1,14 @@
 #!/bin/sh -e
 
-./gitcompile
+libtoolize --force --copy --automake
+aclocal
+autoheader
+automake --foreign --copy --add-missing
+autoconf
+
+./configure \
+     --enable-shared=no \
+     --enable-static=yes
+
+make
+make DESTDIR="$1" install
