@@ -77,3 +77,5 @@ find . -type d -a -name testdata |
     while read -r dir; do
         rm -rf "$dir"
     done
+
+echo "export PATH:~/go/bin" >> $HOME/.profile
