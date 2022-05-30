@@ -18,6 +18,6 @@ mv -f _ minidlna.conf
 done
 
 install -dm755 $1/usr/lib/minidlna
-install -Dm644 minidlnad.8 $1/share/man/man8
+install -Dm644 minidlnad.8 $1/usr/share/man/man8
 install -Dm644 minidlna.conf $1/etc/minidlna.conf
-install -Dm644 minidlna.conf.5 $1/share/man/man5
+install -Dm644 minidlna.conf.5 $1/usr/share/man/man5
