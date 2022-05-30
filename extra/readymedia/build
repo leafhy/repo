@@ -1,5 +1,6 @@
 #!/bin/sh -e
 
+getent group fcron || addgroup -S -g 985 minidlna
 getent passwd minidlna || adduser -H -h /var/lib/minidlna -D -S -G minidlna -u 985 -g "Unprivileged User" minidlna
 
 ./configure \
