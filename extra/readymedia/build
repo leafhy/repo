@@ -4,6 +4,7 @@
     --prefix=/usr \
     --sbindir=/usr/bin \
     --mandir=/usr/share/man \
+    --with-db-path=/var/db/minidlna \
     --disable-nls \
     --disable-rpath \
     --enable-lto
