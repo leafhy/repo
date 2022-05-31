@@ -1,0 +1,3 @@
+#!/bin/sh -e
+
+getent passwd sndiod || adduser -H -h "/var/run/sndiod" -D -S -u 994 -g "sndio daemon" sndiod
