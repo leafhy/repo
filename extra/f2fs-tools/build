@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+sed 's+sbin+bin+g' configure.ac >_
+mv -f _ configure.ac
+
 ./autogen.sh
 
 ./configure --prefix=/usr
