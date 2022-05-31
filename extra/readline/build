@@ -1,8 +1,13 @@
 #!/bin/sh -e
 
+# Static build fails
+# .../usr/lib/libreadline.a': No such file or directory
+# .../usr/lib/libhistory.a': No such file or directory
+
 ./configure \
     --prefix=/usr
-
+    --enable-static=no
+    
 make
 make DESTDIR="$1" install
 
