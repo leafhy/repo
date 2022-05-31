@@ -5,7 +5,7 @@
 # .../usr/lib/libhistory.a': No such file or directory
 
 ./configure \
-    --prefix=/usr
+    --prefix=/usr \
     --enable-static=no
     
 make
