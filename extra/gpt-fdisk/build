@@ -12,3 +12,7 @@ done
 for f in *.8; do
 install -Dm644 $f $1/usr/share/man/man8
 done
+
+for f in gdisk sgdisk cgdisk fixparts; do
+install -Dm644 $f $1/usr/bin
+done
