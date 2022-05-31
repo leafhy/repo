@@ -1,0 +1,3 @@
+#!/bin/sh -e
+
+deluser --remove-home fcron
