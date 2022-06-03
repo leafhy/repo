@@ -9,13 +9,13 @@ sed '25s/sbindir/bindir/' Makefile.in > _
 mv -f _ Makefile.in
 
 ./configure \
-        --prefix=/usr \
-        --with-boot-install=no \
-        --with-systemdsystemunitdir=no \
-        --with-docdir=/usr/share/doc \
-        --localstatedir=/var \
-        --mandir=/usr/share/man \
-        --sysconfdir=/etc
+    --prefix=/usr \
+    --with-boot-install=no \
+    --with-systemdsystemunitdir=no \
+    --with-docdir=/usr/share/doc \
+    --localstatedir=/var \
+    --mandir=/usr/share/man \
+    --sysconfdir=/etc
         
         
 make
