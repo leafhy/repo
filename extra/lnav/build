@@ -1,4 +1,5 @@
 #!/bin/sh -e
+#
 # If ~/.config does not exist ~/.lnav is created
 
 ./configure \
