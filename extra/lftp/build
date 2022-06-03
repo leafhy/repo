@@ -1,9 +1,9 @@
 #!/bin/sh -e
 
 ./configure \
-       --prefix=/usr \
-       --without-gnutls \
-       --with-openssl
+    --prefix=/usr \
+    --without-gnutls \
+    --with-openssl
 
 make
 make install
