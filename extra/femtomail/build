@@ -1,5 +1,11 @@
 #!/bin/sh -e
 
+echo "#####################################"
+echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
+echo "#                                   #"
+echo "#        ssu -p b femtomail         #"
+echo "#####################################"
+
 [ -f /usr/bin/sendmail ] && unlink /usr/bin/sendmail
 
 # Change install location from /usr/sbin to /usr/bin
