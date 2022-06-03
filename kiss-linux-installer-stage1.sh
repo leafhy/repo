@@ -56,7 +56,7 @@ done
 echo "$device has been selected"
 
 echo ''
-echo "May need to use [ wipefs --all $device ] if hardrive fails to format properly"
+echo "May need to use "wipefs --all $device" if hardrive fails to format properly"
 wipefs $device*
 echo '--------------------------------------------'
 
@@ -75,7 +75,7 @@ mount ${device}2 /mnt
 rootuuid=$(blkid -s UUID -o value ${device}2)
 partuuid=$(blkid -s PARTUUID -o value ${device}2)
 else
-echo "[ ! ] EFI NOT FOUND [ ! ]
+echo "[ ! ] EFI NOT FOUND [ ! ]"
 echo ""
 echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
 fdisk $device
