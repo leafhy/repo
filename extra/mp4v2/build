@@ -3,7 +3,7 @@
 CXXFLAGS="-std=gnu++98" 
 
 ./configure \
-      --prefix=/usr
+    --prefix=/usr
 
 make
 make install
