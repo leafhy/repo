@@ -8,7 +8,7 @@
     --prefix=/usr \
     --enable-static=no
     
-make
+make SHLIB_LIBS=-lncurses
 make DESTDIR="$1" install
 
 if [ -d /var/db/kiss/installed/libedit ] && [ /usr/share/man/man3/history.3 ]; then
