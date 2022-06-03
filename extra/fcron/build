@@ -2,6 +2,12 @@
 #
 # Build fails as USER chown: changing ownership of pkg/fcron/usr/sbin : Operation not permitted
 
+echo "#####################################"
+echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
+echo "#                                   #"
+echo "#        ssu -p kiss b fcron        #"
+echo "#####################################"
+
 sed 's/ fr//' doc/Makefile.in > _
 mv -f _ doc/Makefile.in
 
