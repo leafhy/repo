@@ -78,4 +78,4 @@ find . -type d -a -name testdata |
         rm -rf "$dir"
     done
 
-echo "export PATH:~/go/bin" >> $HOME/.profile
+echo "export PATH="$PATH:~/go/bin"" >> $HOME/.profile
