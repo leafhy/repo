@@ -10,6 +10,7 @@ mv -f _ Makefile.in
 
 sed 's+-O2++g' configure > _
 mv -f _ configure
+chmod +x configure
 
 ./configure \
     --prefix=/usr \
