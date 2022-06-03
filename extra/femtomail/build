@@ -3,7 +3,7 @@
 echo "#####################################"
 echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
 echo "#                                   #"
-echo "#        ssu -p b femtomail         #"
+echo "#      ssu -p kiss b femtomail      #"
 echo "#####################################"
 
 [ -f /usr/bin/sendmail ] && unlink /usr/bin/sendmail
