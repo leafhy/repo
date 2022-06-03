@@ -9,6 +9,8 @@ set -e
 #
 # [!] EXTLINUX [6.03+] supports: FAT12/16/32, NTFS, ext2/3/4, Btrfs, XFS, UFS/FFS [!]
 # [!] f2fs is not compatable with extlinux [!]
+#
+# Script uses /mnt for installing
 
 efi-kver=5.15.6
 efi-label=KISS_LINUX
@@ -144,5 +146,12 @@ export KISSREPO="/var/db/kiss"
 export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
 alias ls="ls --color=auto"
 EOF
+
+# Change cache location to one more apt for Single User
+sed 's+cac_+#cac_+g' /mnt/usr/bin/kiss > _
+mv -f _ /mnt/usr/bin/kiss
+
+sed '1909i\   cac_dir=/var/db/kiss/cache' /mnt/usr/bin/kiss > _
+mv -f _ /mnt/usr/bin/kiss
 
 /mnt/bin/kiss-chroot /mnt
