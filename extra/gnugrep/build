@@ -7,5 +7,5 @@ export CFLAGS="$CFLAGS -Wno-error -static"
 
 make
 make install
-
-cp -f src/grep "$1/usr/bin/ggrep"
+ 
+mv "$1/usr/bin/grep" "$1/usr/bin/ggrep"
