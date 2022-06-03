@@ -1,6 +1,5 @@
 #!/bin/sh -e
 
-# PREFIX=/usr has no effect
 sed 's+/usr/local+/usr+g' Makefile > _
 mv -f _ Makefile
 
