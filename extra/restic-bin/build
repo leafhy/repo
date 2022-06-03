@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+bzip2 -d restic_*_linux_amd64.bz2
+
 install -Dm755 restic_*_linux_amd64 $1/usr/bin/restic-bin
 
 if [ ! -L /usr/bin/fusermount ]; then
