@@ -1,9 +1,9 @@
 #!/bin/sh -e
 
 ./configure\
-     --prefix=/usr\
-     --sbindir=/usr/bin\
-     --disable-rpath
+    --prefix=/usr\
+    --sbindir=/usr/bin\
+    --disable-rpath
      
  make
  make DESTDIR="$1" install
