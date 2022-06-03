@@ -2,7 +2,9 @@
 
 mkdir build
 
-meson --prefix=/usr build
+meson \
+    --prefix=/usr \
+    build
 
 ninja -C build
 ninja -C build install
