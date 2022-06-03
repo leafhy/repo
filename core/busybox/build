@@ -5,8 +5,8 @@ for patch in patch/*.patch; do
 done
 
 # Disable sendmail (and use femtomail instead)
-sed 's+CONFIG_SENDMAIL=y+# CONFIG_SENDMAIL is not set+' files/.config > _
-mv -f _ files/.config
+sed 's+CONFIG_SENDMAIL=y+# CONFIG_SENDMAIL is not set+' .config > _
+mv -f _ .config
 
 # Remove forced gcc/g++ usage so builds work on gcc-less systems.
 sed -e "s#= g[c+][c+]#= $CC#g" \
