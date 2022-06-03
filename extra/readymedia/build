@@ -12,7 +12,7 @@
 make
 make DESTDIR="$1" install
 
-for opt in '#user=jmaggard+user=minidlna' '#db_dir=/var/cache/minidlna+#db_dir=/var/lib/minidlna' '#log_dir=/var/log+log_dir=/var/log'; do
+for opt in '#user=jmaggard+user=minidlna' '#log_dir=/var/log+log_dir=/var/log'; do
 sed "s+$opt+" minidlna.conf >_
 mv -f _ minidlna.conf
 done
