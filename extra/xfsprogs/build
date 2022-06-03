@@ -7,12 +7,12 @@ mv -f _ install-sh
 chmod +x install-sh
 
 ./configure \
-   --prefix=/usr \
-   --sbindir=/bin \
-   --enable-lib64=no \
-   --disable-gettext \
-   --enable-lto \
-   --enable-editline=yes
+    --prefix=/usr \
+    --sbindir=/bin \
+    --enable-lib64=no \
+    --disable-gettext \
+    --enable-lto \
+    --enable-editline=yes
 
 make DEBUG=-DNDEBUG
 
