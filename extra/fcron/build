@@ -8,6 +8,9 @@ mv -f _ doc/Makefile.in
 sed '25s/sbindir/bindir/' Makefile.in > _
 mv -f _ Makefile.in
 
+sed 's+-O2++g' configure > _
+mv -f _ configure
+
 ./configure \
     --prefix=/usr \
     --with-boot-install=no \
