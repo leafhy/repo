@@ -1,8 +1,7 @@
 This repo is setup for an headless server focused towards minimalism and reduced complexity.
 
 ## NOTES
-Building everything takes ~8hrs with Celeron 2.80GHz
-ram useage starts @ 156MB and barely goes over 2GB compiling (snapraid uses 3GB)
+Building everything takes ~8hrs with Celeron 2.80GHz & 8GB ram
 bootime ~50s (server motherboard) increases with HBA & multiple hardrives
 kiss-chroot can override CXXFLAGS in .profile
 find $KISSREPO -name build -exec chmod +x {} +
