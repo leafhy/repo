@@ -38,13 +38,13 @@ mkdir -p /boot/extlinux
 # extlinux --install /boot/extlinux --device /dev/sda1
 bios/extlinux/extlinux --install /boot/extlinux
 
-install -Dm644 bios/mbr/mbr.bin /boot/extlinux
-install -Dm644 bios/com32/libutil/libutil.c32 /boot/extlinux
-install -Dm644 bios/com32/lib/libcom32.c32 /boot/extlinux
-install -Dm644 bios/com32/menu/menu.c32 /boot/extlinux
-install -Dm644 bios/com32/menu/vesamenu.c32 /boot/extlinux
-install -Dm644 sample/syslinux_splash.jpg /boot/extlinux
-install -Dm644 sample/m16-640x640-syslinux.jpg /boot/extlinux
+install -m644 bios/mbr/mbr.bin /boot/extlinux
+install -m644 bios/com32/libutil/libutil.c32 /boot/extlinux
+install -m644 bios/com32/lib/libcom32.c32 /boot/extlinux
+install -m644 bios/com32/menu/menu.c32 /boot/extlinux
+install -m644 bios/com32/menu/vesamenu.c32 /boot/extlinux
+install -m644 sample/syslinux_splash.jpg /boot/extlinux
+install -m644 sample/m16-640x640-syslinux.jpg /boot/extlinux
 
 tee /boot/extlinux/extlinux.conf <<EOF
 ui vesamenu.c32
