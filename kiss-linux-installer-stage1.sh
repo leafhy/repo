@@ -24,7 +24,8 @@ home=/mnt/root
 #fsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $fsys-label"
 fsys=xfs
 fsysopts="-f -L $fsys-label"
-kiss_cache="/var/db/kiss/cache"
+# /usr/bin/kiss cache default locations "$HOME/.cache/kiss" "/root/.cache/kiss"
+kiss_cache="/var/db/kiss/cache" 
 
 
 wget "$url/$file" || curl -fLO "$url/$file"
