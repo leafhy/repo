@@ -149,12 +149,12 @@ alias ls="ls --color=auto"
 EOF
 
 # Change cache location to one more apt for Single User
-if [ kiss_cache != "" ]; then
+if [[ $kiss_cache ]]; then
 sed 's+cac_+#cac_+g' /mnt/usr/bin/kiss > _
 mv -f _ /mnt/usr/bin/kiss
 
 sed '1909i\   cac_dir=$kiss_cache' /mnt/usr/bin/kiss > _
 mv -f _ /mnt/usr/bin/kiss
-done
+fi
 
 /mnt/bin/kiss-chroot /mnt
