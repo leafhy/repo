@@ -24,6 +24,7 @@ home=/mnt/root
 #fsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $fsys-label"
 fsys=xfs
 fsysopts="-f -L $fsys-label"
+kiss_cache="/var/db/kiss/cache"
 
 
 wget "$url/$file" || curl -fLO "$url/$file"
@@ -148,10 +149,12 @@ alias ls="ls --color=auto"
 EOF
 
 # Change cache location to one more apt for Single User
+if [ kiss_cache != "" ]; then
 sed 's+cac_+#cac_+g' /mnt/usr/bin/kiss > _
 mv -f _ /mnt/usr/bin/kiss
 
-sed '1909i\   cac_dir=/var/db/kiss/cache' /mnt/usr/bin/kiss > _
+sed '1909i\   cac_dir=$kiss_cache' /mnt/usr/bin/kiss > _
 mv -f _ /mnt/usr/bin/kiss
+done
 
 /mnt/bin/kiss-chroot /mnt
