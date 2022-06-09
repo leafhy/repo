@@ -5,8 +5,6 @@ set -e
 # https://www.system-rescue.org/ 
 # https://voidlinux.org/
 #
-# Note: ext4 on usb/sdcard has a tendancy to corrupt
-#
 # [!] EXTLINUX [6.03+] supports: FAT12/16/32, NTFS, ext2/3/4, Btrfs, XFS, UFS/FFS [!]
 # [!] f2fs is not compatable with extlinux [!]
 #
