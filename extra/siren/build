@@ -7,6 +7,9 @@ mv -f _ GNUmakefile
 sed '43s/444/755/' GNUmakefile > _
 mv -f _ GNUmakefile
 
+sed 's+.siren+.cache/siren+' siren.h > _
+mv -f _ siren.h
+
 ./configure \
     prefix=/usr \
     bindir=/usr/bin \
