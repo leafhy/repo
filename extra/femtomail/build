@@ -1,10 +1,13 @@
 #!/bin/sh -e
 
+if [ "$UID" != 0 ]; then
 echo "#####################################"
 echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
 echo "#                                   #"
 echo "#      ssu -p kiss b femtomail      #"
 echo "#####################################"
+exit 1
+fi
 
 [ -f /usr/bin/sendmail ] && unlink /usr/bin/sendmail
 
