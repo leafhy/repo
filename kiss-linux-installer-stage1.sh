@@ -41,8 +41,6 @@ echo '****************************************'
 # Generate drive options dynamically
 PS3="Select drive to format: "
 echo ''
-# sed removes the single partition number:
-# sda1 > sda
 select device in $(blkid | grep -e sd | cut -d : -f 1 | sed -e 's/[1-9]\+$//' | uniq | sort)
 do
 if [[ $device = "" ]]; then
@@ -88,7 +86,7 @@ tar xvf /root/$file -C /mnt --strip-components=1
 if [[ $UEFI ]]; then
 mkdir /mnt/boot/efi
 mount ${device}1 /mnt/boot/efi
-tee --append /mnt/etc/fstab <<EOF
+tee --append /mnt/etc/fstab << EOF
 LABEL=EFI         /boot/efi   vfat    defaults     0 0
 UUID=$rootuuid    /           $fsys   defaults     0 0
 EOF
@@ -135,7 +133,7 @@ fi
 
 tee $home/.profile << EOF
 export KISS_DEBUG=0
-export KISS_COMPRESS=zst
+export KISS_COMPRESS=gz
 export KISS_GET=curl
 export CFLAGS="-O3 -pipe -march=native"
 export CXXFLAGS="$CFLAGS"
