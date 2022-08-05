@@ -7,24 +7,22 @@ set -e
 #
 # [!] EXTLINUX [6.03+] supports: FAT12/16/32, NTFS, ext2/3/4, Btrfs, XFS, UFS/FFS [!]
 # [!] f2fs is not compatable with extlinux [!]
-#
-# Script uses /mnt for installing
 
-efi-kver=5.15.6
-efi-label=KISS_LINUX
-fsys-label=KISS_LINUX
+efikver=5.15.6
+efilabel=KISS_LINUX
+fsyslabel=KISS_LINUX
 chrootver=2021.7-9
 url=https://github.com/kisslinux/repo/releases/download/$chrootver
 file=kiss-chroot-$chrootver.tar.xz
+ipaddress=192.168.1.XX
 nameserver=192.168.1.1
 home=/mnt/root
 #fsys=f2fs
-#fsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $fsys-label"
+#fsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $fsyslabel"
 fsys=xfs
-fsysopts="-f -L $fsys-label"
+fsysopts="-f -L $fsyslabel"
 # /usr/bin/kiss cache default locations "$HOME/.cache/kiss" "/root/.cache/kiss"
 kiss_cache="/var/db/kiss/cache" 
-
 
 wget "$url/$file" || curl -fLO "$url/$file"
 wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
@@ -79,7 +77,7 @@ echo "[ ! ] EFI NOT FOUND [ ! ]"
 echo ""
 echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
 fdisk $device
-mkfs.$fsys $fsysopts ${device}1"
+mkfs.$fsys $fsysopts ${device}1
 mount ${device}1 /mnt
 rootuuid=$(blkid -s UUID -o value ${device}1)
 partuuid=$(blkid -s PARTUUID -o value ${device}1)
@@ -102,7 +100,7 @@ echo "nameserver $nameserver" >> /mnt/etc/resolv.conf
 
 mkdir -p /mnt/etc/rc.d
 
-tee /mnt/etc/rc.d/setup.boot <<EOF
+tee /mnt/etc/rc.d/setup.boot << EOF
 # Set font for tty1..tty6
 for i in `seq 1 6`; do
   setfont /usr/share/consolefonts/Tamsyn8x16r.psf.gz -C /dev/tty$i
@@ -110,8 +108,8 @@ done
 
 # Setup network
 ip link set dev eth0 up
-ip addr add 192.168.1.XX/24 brd + dev eth0
-ip route add default via 192.168.1.1
+ip addr add $ipaddress/24 brd + dev eth0
+ip route add default via $nameserver
 
 # Ethernet on server board is slow to start thus
 # sleep keeps log messages from overriding login prompt
@@ -131,11 +129,11 @@ tee /mnt/efiboot.sh << EOF
 # kiss linux
 # Kernel panic will occur without unicode - unable to find root
 # PARTUUID is used as UUID doesn't work
-efibootmgr --create --disk /dev/sda --loader '\vmlinuz-$efi-kver' --label '$efi-label' --unicode root=PARTUUID=$partuuid loglevel=4 Page_Poison=1
+efibootmgr --create --disk /dev/sda --loader '\vmlinuz-$efikver' --label '$efilabel' --unicode root=PARTUUID=$partuuid loglevel=4 Page_Poison=1
 EOF
 fi
 
-tee $home/.profile <<EOF
+tee $home/.profile << EOF
 export KISS_DEBUG=0
 export KISS_COMPRESS=zst
 export KISS_GET=curl
@@ -149,11 +147,13 @@ EOF
 
 # Change cache location to one more apt for Single User
 if [[ $kiss_cache ]]; then
-sed 's+cac_+#cac_+g' /mnt/usr/bin/kiss > _
+sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
 mv -f _ /mnt/usr/bin/kiss
 
-sed '1909i\   cac_dir=$kiss_cache' /mnt/usr/bin/kiss > _
+sed '/Top-level cache/a\
+    cac_dir=$kiss_cache' /mnt/usr/bin/kiss > _
 mv -f _ /mnt/usr/bin/kiss
+chmod +x /mnt/usr/bin/kiss
 fi
 
 /mnt/bin/kiss-chroot /mnt
