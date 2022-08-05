@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-# kiss & axel, aria2c, curl, wget2 url problem - erroneous directory is created
+# kiss filename problem - erroneous directory is created
 # .../.cache/kiss/sources/syslinux/│/syslinux-6.04-pre1.tar.xz
 # Note:
 # “│” U+2502 Box Drawings Light Vertical 
@@ -46,7 +46,7 @@ install -m644 bios/com32/menu/vesamenu.c32 /boot/extlinux
 install -m644 sample/syslinux_splash.jpg /boot/extlinux
 install -m644 sample/m16-640x640-syslinux.jpg /boot/extlinux
 
-tee /boot/extlinux/extlinux.conf <<EOF
+tee /boot/extlinux/extlinux.conf << EOF
 ui vesamenu.c32
 menu title Welcome To Kiss Linux
 menu background m16-640x640-syslinux.jpg
