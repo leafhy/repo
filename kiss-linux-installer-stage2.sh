@@ -8,9 +8,11 @@ kernel=https://cdn.kernel.org/pub/linux/kernel/v5.x/$kver.tar.xz
 #lver=linux-firmware-20211027
 linuxfirmware=https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/$lver.tar.gz
 kissrepo=/var/db/kiss
+kiss_cache=$kissrepo/cache
 hostname=kiss
 
 adduser $username
+adduser -G wheel $username
 
 tee $home/.profile <<EOF
 export KISS_DEBUG=0
@@ -24,7 +26,7 @@ export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/communit
 alias ls="ls --color=auto"
 EOF     
 
-source $home/.profile
+source /root/.profile
 
 git clone https://github.com/leafhy/repo.git $kissrepo/repo
 #git clone https://github.com/kisslinux/repo.git $kissrepo/repo
@@ -40,11 +42,24 @@ kiss search \*
 #gpg --keyserver keyserver.ubuntu.com --recv-key 13295DAC2CF13B5C
 #echo trusted-key 0x13295DAC2CF13B5C >> /root/.gnupg/gpg.conf
 
-#kiss update
+kiss update
+
+# Change cache location to one more apt for Single User
+if [[ $kiss_cache ]]; then
+sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
+mv -f _ /mnt/usr/bin/kiss
+
+sed '/Top-level cache/a\
+    cac_dir=$kiss_cache' /mnt/usr/bin/kiss > _
+mv -f _ /mnt/usr/bin/kiss
+chmod +x /mnt/usr/bin/kiss
+fi
+
+kiss update
 
 #cd /var/db/kiss/installed && kiss build *
 
-#kiss build baseinit libelf runit iproute2
+kiss build ssu efibootmgr intel-ucode tamsyn-font libelf runit iproute2
 
 printf '%s\n' $hostname > /etc/hostname
 
