@@ -3,7 +3,8 @@
 # ipmitool & freeipmi failed to build
 
 ./beforeconf.sh
-./configure
+./configure \
+    --disable-dependency-tracking
 
 make
 make DESTDIR="$1" install
