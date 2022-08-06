@@ -5,3 +5,6 @@
 
 make
 make install
+
+# Remove documentation
+rm -rf $1/usr/share
