@@ -9,3 +9,7 @@ set -- africa asia australasia europe northamerica southamerica
 ./zic -d "$DESTDIR/usr/share/zoneinfo/posix" "$@"
 ./zic -d "$DESTDIR/usr/share/zoneinfo/right" -L leapseconds "$@"
 ./zic -d "$DESTDIR/usr/share/zoneinfo" -p America/New_York
+
+echo "#######################################################"
+echo "# SET BIOS CLOCK TO 'UTC' TO ENSURE CORRECT LOCALTIME #"
+echo "#######################################################"
