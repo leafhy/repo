@@ -11,7 +11,7 @@ mv -f _ configure
 sh ./configure \
     FRIBIDI_LIBS="  " \
     --prefix=/usr \
-    --disable-fontconfig
+    --disable-require-system-font-provider
 
 make
 make install
