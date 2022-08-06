@@ -1,6 +1,8 @@
 #!/bin/sh -e
 
-if [ "$UID" != 0 ]; then
+UID="$(id | cut -d "(" -f 1)"
+
+if [ "$UID" != uid=0 ]; then
 echo "#####################################"
 echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
 echo "#                                   #"
