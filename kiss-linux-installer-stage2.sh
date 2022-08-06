@@ -14,7 +14,7 @@ hostname=kiss
 adduser $username
 adduser -G wheel $username
 
-tee $home/.profile <<EOF
+tee $home/.profile << EOF
 export KISS_DEBUG=0
 export KISS_COMPRESS=zst
 export KISS_GET=curl
@@ -35,7 +35,6 @@ git clone https://github.com/dylanaraps/community.git $kissrepo/community
 kiss search \*
 
 #cd $kissrepo/repo
-
 #git config merge.verifySignatures true
 
 #kiss build gnupg1$kissrepo/repo
@@ -59,7 +58,7 @@ kiss update
 
 #cd /var/db/kiss/installed && kiss build *
 
-kiss build ssu efibootmgr intel-ucode tamsyn-font libelf runit iproute2
+kiss build ssu efibootmgr intel-ucode tamsyn-font runit iproute2
 
 printf '%s\n' $hostname > /etc/hostname
 
