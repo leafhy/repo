@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+chmod 444 $1/usr/lib/siren/ip/*
+chmod 555 $1/usr/bin/siren
