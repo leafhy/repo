@@ -1,5 +1,16 @@
 #!/bin/sh -e
 
+UID="$(id | cut -d "(" -f 1)"
+
+if [ "$UID" != uid=0 ]; then
+echo "#####################################"
+echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
+echo "#                                   #"
+echo "#        ssu -p kiss b micro        #"
+echo "#####################################"
+exit 1
+fi
+
 make build
 
 install -Dm755 micro $1/usr/bin/micro
