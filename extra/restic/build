@@ -3,6 +3,7 @@
 UID="$(id | cut -d "(" -f 1)"
 
 if [ "$UID" != uid=0 ]; then
+sleep 1
 echo "#####################################"
 echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
 echo "#                                   #"
@@ -10,6 +11,7 @@ echo "#       ssu -p kiss b restic        #"
 echo "#####################################"
 exit 1
 fi
+
 make
 
 install -Dm755 restic "$1/usr/bin/restic"
