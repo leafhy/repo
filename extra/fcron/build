@@ -39,7 +39,9 @@ chmod +x configure
 make
 make DESTDIR="$1" install
 
-install -dm755 $1/etc/cron.{hourly,daily,weekly,monthly}
+for d in hourly daily weekly monthly; do
+install -dm755 $1/etc/cron.$d
+done
 
 install -m640 systab.orig $1/var/spool/fcron
 install -m755 run-parts $1/usr/bin
