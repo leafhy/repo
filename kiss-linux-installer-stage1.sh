@@ -128,6 +128,16 @@ tee /mnt/efiboot.sh << EOF
 # Kernel panic will occur without unicode - unable to find root
 # PARTUUID is used as UUID doesn't work
 efibootmgr --create --disk /dev/sda --loader '\vmlinuz-$efikver' --label '$efilabel' --unicode root=PARTUUID=$partuuid loglevel=4 Page_Poison=1
+
+echo '**********************************************************'
+echo -e "[!] Check \x1B[1;92m BootOrder: \x1B[1;0m is correct [!]"
+echo ' Boot entry needs to be towards the top of list otherwise '
+echo '       it will not appear in the boot menu                '
+echo '**********************************************************'
+echo '**********************************************************'
+echo '      Resetting BIOS will restore default boot order      '
+echo '**********************************************************'
+efibootmgr -v
 EOF
 fi
 
