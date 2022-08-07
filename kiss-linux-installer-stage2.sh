@@ -12,19 +12,19 @@ kiss_cache=$kissrepo/cache
 hostname=kiss
 
 adduser $username
-adduser -G wheel $username
+addgroup $username wheel
 
 tee $home/.profile << EOF
 export KISS_DEBUG=0
 export KISS_COMPRESS=zst
 export KISS_GET=curl
-export CFLAGS="-O3 -pipe -march=native"                                                                                                                                                                           
-export CXXFLAGS="$CFLAGS"                                                                                                                                                                                         
-export MAKEFLAGS="-j$(nproc)"                                                                                                                                                                                     
-export KISSREPO="/var/db/kiss"                                                                                                                                                                                    
+export CFLAGS="-O3 -pipe -march=native"
+export CXXFLAGS="$CFLAGS"
+export MAKEFLAGS="-j$(nproc)"
+export KISSREPO="/var/db/kiss"
 export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
 alias ls="ls --color=auto"
-EOF     
+EOF
 
 source /root/.profile
 
@@ -80,7 +80,7 @@ if [[ $kver && -f /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch ]]; then
 patch -p1 < /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch
 fi
 
-if [[ $lver ]]; then 
+if [[ $lver ]]; then
 mkdir -p /usr/lib/firmware
 curl -fLO $linuxfirmware
 tar xf $lver.tar.xz
