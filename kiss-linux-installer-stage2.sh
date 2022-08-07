@@ -67,7 +67,7 @@ cd $home
 curl -fLO $kernel
 tar xf $kver.tar.xz
 cd  $kver
-cp $kissrepo/repo/linux.config .config
+cp $kissrepo/repo/linux-kernel.config .config
 sed '/<stdlib.h>/a #include <linux/stddef.h>' tools/objtool/arch/x86/decode.c > _
 mv -f _ tools/objtool/arch/x86/decode.c
 fi
