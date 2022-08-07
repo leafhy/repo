@@ -53,8 +53,8 @@ menu background m16-640x640-syslinux.jpg
 timeout 50
 
 label Kiss
-menu label kernel-5.15.6_1
-linux /boot/vmlinuz-5.15.6_1
+menu label kernel-5.15.6
+linux /boot/vmlinuz-5.15.6
 EOF
 
 partuuid=$(blkid -s PARTUUID -o value /dev/sda1)
