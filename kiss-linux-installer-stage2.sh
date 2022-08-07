@@ -45,13 +45,13 @@ kiss update
 
 # Change cache location to one more apt for Single User
 if [[ $kiss_cache ]]; then
-sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
-mv -f _ /mnt/usr/bin/kiss
+sed 's/cac_dir=/#cac_dir=/g' /usr/bin/kiss > _
+mv -f _ /usr/bin/kiss
 
 sed '/Top-level cache/a\
-    cac_dir=/var/db/kiss/cache' /mnt/usr/bin/kiss > _
-mv -f _ /mnt/usr/bin/kiss
-chmod +x /mnt/usr/bin/kiss
+    cac_dir=/var/db/kiss/cache' /usr/bin/kiss > _
+mv -f _ /usr/bin/kiss
+chmod +x /usr/bin/kiss
 fi
 
 kiss update
