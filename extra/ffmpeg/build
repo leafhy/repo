@@ -25,8 +25,8 @@
     --enable-openssl \
     --enable-shared \
     --enable-version3 \
-    --x86asmexe=nasm
-#   --enable-libass \
+    --x86asmexe=nasm \
+    --enable-libass 
 #   --enable-libdrm \
 
 make
