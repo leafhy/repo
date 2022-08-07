@@ -100,7 +100,7 @@ mkdir -p /mnt/etc/rc.d
 
 tee /mnt/etc/rc.d/setup.boot << EOF
 # Set font for tty1..tty6
-for i in `seq 1 6`; do
+for i in \`seq 1 6\`; do
   setfont /usr/share/consolefonts/Tamsyn8x16r.psf.gz -C /dev/tty$i
 done
 
