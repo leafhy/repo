@@ -164,7 +164,9 @@ mv -f _ /mnt/usr/bin/kiss
 chmod +x /mnt/usr/bin/kiss
 fi
 
+echo "#####################"
 echo "#### FINAL STEPS ####"
+echo "#####################"
 echo "Copy kiss-linux-installer-stage2.sh to /mnt"
 echo "cp kiss-linux-installer-stage2.sh /mnt"
 echo "### Enter chroot"
