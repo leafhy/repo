@@ -172,7 +172,7 @@ echo "cp kiss-linux-installer-stage2.sh /mnt"
 echo "### Enter chroot"
 echo "/mnt/bin/kiss-chroot /mnt"
 echo "### Make kiss-linux-installer-stage2.sh executable"
-echo "chmod +x kiss-linux-installer-stage2.sh
+echo "chmod +x kiss-linux-installer-stage2.sh"
 echo "### Run kiss-linux-installer-stage2.sh"
 echo "./kiss-linux-installer-stage2.sh"
 echo "#####################"
