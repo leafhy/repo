@@ -2,7 +2,7 @@
 set -e
 #
 # Script used with systemrescue 8.05 (contains all commands) & void linux musl (some commands need installing)
-# https://www.system-rescue.org/ 
+# https://www.system-rescue.org/
 # https://voidlinux.org/
 #
 # [!] EXTLINUX [6.03+] supports: FAT12/16/32, NTFS, ext2/3/4, Btrfs, XFS, UFS/FFS [!]
@@ -22,7 +22,7 @@ home=/mnt/root
 fsys=xfs
 fsysopts="-f -L $fsyslabel"
 # /usr/bin/kiss cache default locations "$HOME/.cache/kiss" "/root/.cache/kiss"
-kiss_cache="/var/db/kiss/cache" 
+kiss_cache="/var/db/kiss/cache"
 
 wget "$url/$file" || curl -fLO "$url/$file"
 wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
