@@ -48,8 +48,8 @@ if [[ $kiss_cache ]]; then
 sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
 mv -f _ /mnt/usr/bin/kiss
 
-sed "/Top-level cache/a\
-    cac_dir=$kiss_cache" /mnt/usr/bin/kiss > _
+sed '/Top-level cache/a\
+    cac_dir=/var/db/kiss/cache' /mnt/usr/bin/kiss > _
 mv -f _ /mnt/usr/bin/kiss
 chmod +x /mnt/usr/bin/kiss
 fi
