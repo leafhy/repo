@@ -17,10 +17,10 @@ file=kiss-chroot-$chrootver.tar.xz
 ipaddress=192.168.1.XX
 nameserver=192.168.1.1
 home=/mnt/root
-#fsys=f2fs
-#fsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $fsyslabel"
-fsys=xfs
-fsysopts="-f -L $fsyslabel"
+fsys=f2fs
+fsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $fsyslabel"
+#fsys=xfs
+#fsysopts="-f -L $fsyslabel"
 # /usr/bin/kiss cache default locations "$HOME/.cache/kiss" "/root/.cache/kiss"
 kiss_cache="/var/db/kiss/cache"
 
@@ -159,7 +159,7 @@ sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
 mv -f _ /mnt/usr/bin/kiss
 
 sed '/Top-level cache/a\
-    cac_dir=$kiss_cache' /mnt/usr/bin/kiss > _
+    cac_dir=/var/db/kiss/cache' /mnt/usr/bin/kiss > _
 mv -f _ /mnt/usr/bin/kiss
 chmod +x /mnt/usr/bin/kiss
 fi
