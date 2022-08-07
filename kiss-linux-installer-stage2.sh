@@ -32,6 +32,10 @@ git clone https://github.com/leafhy/repo.git $kissrepo/repo
 #git clone https://github.com/kisslinux/repo.git $kissrepo/repo
 git clone https://github.com/dylanaraps/community.git $kissrepo/community
 
+for f in build post-install pre-remove; do
+find $kissrepo/repo -name $f -exec chmod +x {} +
+done
+
 kiss search \*
 
 #cd $kissrepo/repo
@@ -97,5 +101,5 @@ echo "mv /boot/System.map /boot/System.map-5.15.6"
 echo "### Create boot entry for UEFI"
 echo "./efiboot.sh"
 echo "### Create boot entry for NON-UEFI"
-echo "./syslinux-extlinux-installer.sh
+echo "./syslinux-extlinux-installer.sh"
 echo "#####################"
