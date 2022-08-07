@@ -67,6 +67,7 @@ cd $home
 curl -fLO $kernel
 tar xf $kver.tar.xz
 cd  $kver
+cp $kissrepo/repo/linux.config .config
 sed '/<stdlib.h>/a #include <linux/stddef.h>' tools/objtool/arch/x86/decode.c > _
 mv -f _ tools/objtool/arch/x86/decode.c
 fi
@@ -86,3 +87,15 @@ tar xf $lver.tar.xz
 # git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
 cp -R linux-firmware/intel /usr/lib/firmware/
 fi
+echo "#####################"
+echo "#### FINAL STEPS ####"
+echo "#####################"
+echo "### Build & install kernel"
+echo "make && make install"
+echo "mv /boot/vmlinuz /boot/efi/vmlinuz-5.15.6"
+echo "mv /boot/System.map /boot/System.map-5.15.6"
+echo "### Create boot entry for UEFI"
+echo "./efiboot.sh
+echo "### Create boot entry for NON-UEFI"
+echo "./syslinux-extlinux-installer.sh
+echo "#####################"
