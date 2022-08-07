@@ -62,7 +62,7 @@ kiss update
 
 #cd /var/db/kiss/installed && kiss build *
 
-kiss build ssu efibootmgr intel-ucode tamsyn-font runit iproute2
+kiss build ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd
 
 printf '%s\n' $hostname > /etc/hostname
 
