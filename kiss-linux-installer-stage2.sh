@@ -88,6 +88,8 @@ if [[ $kver && -f /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch ]]; then
 patch -p1 < /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch
 fi
 
+chown -R 1000:1000 $home
+
 if [[ $lver ]]; then
 mkdir -p /usr/lib/firmware
 curl -fLO $linuxfirmware
