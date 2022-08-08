@@ -93,14 +93,14 @@ else
 echo "UUID=$rootuuid    /           $fsys   defaults     0 0" >> /mnt/etc/fstab
 fi
 
-echo "nameserver $nameserver" >> /mnt/etc/resolv.conf
+echo "nameserver $nameserver" > /mnt/etc/resolv.conf
 
 mkdir /mnt/etc/rc.d
 
 tee /mnt/etc/rc.d/setup.boot << EOF
 # Set font for tty1..tty6
 for i in \`seq 1 6\`; do
-  setfont /usr/share/consolefonts/Tamsyn8x16r.psf.gz -C /dev/tty$i
+  setfont /usr/share/consolefonts/Tamsyn8x16r.psf.gz -C /dev/tty\$i
 done
 
 # Setup network
