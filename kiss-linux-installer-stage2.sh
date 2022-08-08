@@ -2,7 +2,6 @@
 username=
 home=/home/$username
 # Uncomment kver to download and patch kernel
-# Building kernel requires "linux-5.15.6/.config"
 #kver=linux-5.15.6
 kernel=https://cdn.kernel.org/pub/linux/kernel/v5.x/$kver.tar.xz
 #lver=linux-firmware-20211027
