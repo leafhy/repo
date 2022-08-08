@@ -60,6 +60,10 @@ fi
 
 kiss update
 
+if [ $kiss_cache ]; then
+chown -R 1000:1000 $kiss_cache
+fi
+
 #cd /var/db/kiss/installed && kiss build *
 
 kiss build baseinit ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd
