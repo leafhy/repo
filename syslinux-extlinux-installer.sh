@@ -60,8 +60,11 @@ EOF
 partuuid=$(blkid -s PARTUUID -o value /dev/sda1)
 echo "append root=PARTUUID=$partuuid ro" >> /boot/extlinux/extlinux.conf
 
-# install master boot record
-# Note: https://wiki.syslinux.org/wiki/index.php?title=Mbr
-#       dd is the "safe approach"
-# cat mbr.bin > /dev/sda 
-# dd bs=440 count=1 if=/boot/extlinux/mbr.bin of=/dev/sda
+echo "##############################"
+echo "# INSTALL MASTER BOOT RECORD #"
+echo "##############################"
+echo "Note: https://wiki.syslinux.org/wiki/index.php?title=Mbr"
+echo "      dd is the "safe approach""
+echo "cat /boot/extlinux/mbr.bin > /dev/sda"
+echo "dd bs=440 count=1 if=/boot/extlinux/mbr.bin of=/dev/sda"
+echo "##############################"
