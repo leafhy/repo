@@ -7,7 +7,6 @@ set -e
 #
 # [!] EXTLINUX [6.03+] supports: FAT12/16/32, NTFS, ext2/3/4, Btrfs, XFS, UFS/FFS [!]
 # [!] f2fs is not compatable with extlinux [!]
-# [!] xfs is not compatable with EFI [!]
 
 kver=5.15.6
 efilabel=KISS_LINUX
