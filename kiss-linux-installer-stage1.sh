@@ -7,8 +7,9 @@ set -e
 #
 # [!] EXTLINUX [6.03+] supports: FAT12/16/32, NTFS, ext2/3/4, Btrfs, XFS, UFS/FFS [!]
 # [!] f2fs is not compatable with extlinux [!]
+# [!] xfs is not compatable with EFI [!]
 
-efikver=5.15.6
+kver=5.15.6
 efilabel=KISS_LINUX
 fsyslabel=KISS_LINUX
 chrootver=2021.7-9
@@ -16,11 +17,10 @@ url=https://github.com/kisslinux/repo/releases/download/$chrootver
 file=kiss-chroot-$chrootver.tar.xz
 ipaddress=192.168.1.XX
 nameserver=192.168.1.1
-home=/mnt/root
-fsys=f2fs
-fsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $fsyslabel"
-#fsys=xfs
-#fsysopts="-f -L $fsyslabel"
+efifsys=f2fs
+efifsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $fsyslabel"
+extfsys=xfs
+extfsysopts="-f -L $fsyslabel"
 # /usr/bin/kiss cache default locations "$HOME/.cache/kiss" "/root/.cache/kiss"
 kiss_cache="/var/db/kiss/cache"
 
@@ -66,7 +66,7 @@ sgdisk -n 2:0:0 -t 2:8300 $device
 sgdisk --verify $device
 
 mkfs.vfat -F 32 -n EFI ${device}1
-mkfs.$fsys $fsysopts ${device}2
+mkfs.$efifsys $efifsysopts ${device}2
 mount ${device}2 /mnt
 rootuuid=$(blkid -s UUID -o value ${device}2)
 partuuid=$(blkid -s PARTUUID -o value ${device}2)
@@ -75,20 +75,20 @@ echo "[ ! ] EFI NOT FOUND [ ! ]"
 echo ""
 echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
 fdisk $device
-mkfs.$fsys $fsysopts ${device}1
+mkfs.$extfsys $extfsysopts ${device}1
 mount ${device}1 /mnt
 rootuuid=$(blkid -s UUID -o value ${device}1)
 partuuid=$(blkid -s PARTUUID -o value ${device}1)
 fi
 
-tar xvf /root/$file -C /mnt --strip-components=1
+tar xvf $file -C /mnt --strip-components=1
 
 if [[ $UEFI ]]; then
 mkdir /mnt/boot/efi
 mount ${device}1 /mnt/boot/efi
 tee --append /mnt/etc/fstab << EOF
 LABEL=EFI         /boot/efi   vfat    defaults     0 0
-UUID=$rootuuid    /           $fsys   defaults     0 0
+UUID=$rootuuid    /           $efifsys   defaults     0 0
 EOF
 else
 echo "UUID=$rootuuid    /           $fsys   defaults     0 0" >> /mnt/etc/fstab
@@ -96,7 +96,7 @@ fi
 
 echo "nameserver $nameserver" >> /mnt/etc/resolv.conf
 
-mkdir -p /mnt/etc/rc.d
+mkdir /mnt/etc/rc.d
 
 tee /mnt/etc/rc.d/setup.boot << EOF
 # Set font for tty1..tty6
@@ -127,10 +127,10 @@ tee /mnt/efiboot.sh << EOF
 # kiss linux
 # Kernel panic will occur without unicode - unable to find root
 # PARTUUID is used as UUID doesn't work
-efibootmgr --create --disk /dev/sda --loader '\vmlinuz-$efikver' --label '$efilabel' --unicode root=PARTUUID=$partuuid loglevel=4 Page_Poison=1
+efibootmgr --create --disk /dev/sda --loader '\vmlinuz-$kver' --label '$efilabel' --unicode root=PARTUUID=$partuuid loglevel=4 Page_Poison=1
 
 echo '**********************************************************'
-echo -e "[!] Check \x1B[1;92m BootOrder: \x1B[1;0m is correct [!]"
+echo -e "\x1B[1;31m [ ! ] CHECK \x1B[1;92m BootOrder: \x1B[1;31m IS CORRECT [ ! ]\x1B[1;0m"
 echo ' Boot entry needs to be towards the top of list otherwise '
 echo '       it will not appear in the boot menu                '
 echo '**********************************************************'
@@ -141,7 +141,7 @@ efibootmgr -v
 EOF
 fi
 
-tee $home/.profile << EOF
+tee /mnt/root/.profile << EOF
 export KISS_DEBUG=0
 export KISS_COMPRESS=gz
 export KISS_GET=curl
