@@ -6,5 +6,7 @@
 ./configure \
     --disable-dependency-tracking
 
+chmod +x install-sh
+
 make
 make DESTDIR="$1" install
