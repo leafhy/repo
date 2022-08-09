@@ -79,11 +79,11 @@ sed '/<stdlib.h>/a #include <linux/stddef.h>' tools/objtool/arch/x86/decode.c > 
 mv -f _ tools/objtool/arch/x86/decode.c
 fi
 
-if [ $kver && -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ]; then
+if [ $kver ] && [ -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ]; then
 patch -p1 < /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch
 fi
 
-if [ $kver && -f /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch ]; then
+if [ $kver ] && [ -f /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch ]; then
 patch -p1 < /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch
 fi
 
