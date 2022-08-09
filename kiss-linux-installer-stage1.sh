@@ -126,7 +126,7 @@ tee /mnt/efiboot.sh << EOF
 #efibootmgr -c -d /dev/sda -p 1 -l '\vmlinuz-5.7.7_1' -L 'Void' initrd=\initramfs-5.7.7_1.img root=/dev/sda2
 
 # kiss linux
-# Kernel panic will occur without unicode - unable to find root
+# Kernel panic will occur without unicode -> unable to find root
 # PARTUUID is used as UUID doesn't work
 efibootmgr --create --disk /dev/sda --loader '\vmlinuz-$kver' --label '$efilabel' --unicode root=PARTUUID=$partuuid loglevel=4 Page_Poison=1
 
