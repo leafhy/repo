@@ -47,7 +47,7 @@ kiss search \*
 kiss update
 
 # Change cache location to one more apt for Single User
-if [[ $kiss_cache ]]; then
+if [ $kiss_cache ]; then
 sed 's/cac_dir=/#cac_dir=/g' /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
 
@@ -69,7 +69,7 @@ kiss build baseinit ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd
 
 printf '%s\n' $hostname > /etc/hostname
 
-if [[ $kver ]]; then
+if [ $kver ]; then
 cd $home
 curl -fLO $kernel
 tar xf $kver.tar.xz
@@ -79,17 +79,17 @@ sed '/<stdlib.h>/a #include <linux/stddef.h>' tools/objtool/arch/x86/decode.c > 
 mv -f _ tools/objtool/arch/x86/decode.c
 fi
 
-if [[ $kver && -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ]]; then
+if [ $kver && -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ]; then
 patch -p1 < /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch
 fi
 
-if [[ $kver && -f /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch ]]; then
+if [ $kver && -f /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch ]; then
 patch -p1 < /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch
 fi
 
 chown -R 1000:1000 $home
 
-if [[ $lver ]]; then
+if [ $lver ]; then
 mkdir -p /usr/lib/firmware
 curl -fLO $linuxfirmware
 tar xf $lver.tar.xz
