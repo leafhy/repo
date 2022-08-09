@@ -92,7 +92,7 @@ LABEL=EFI         /boot/efi   vfat    defaults     0 0
 UUID=$rootuuid    /           $efifsys   defaults     0 0
 EOF
 else
-echo "UUID=$rootuuid    /           $fsys   defaults     0 0" >> /mnt/etc/fstab
+echo "UUID=$rootuuid    /           $extfsys   defaults     0 0" >> /mnt/etc/fstab
 fi
 
 echo "nameserver $nameserver" > /mnt/etc/resolv.conf
