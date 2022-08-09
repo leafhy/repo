@@ -81,6 +81,8 @@ partuuid=$(blkid -s PARTUUID -o value ${device}1)
 fi
 
 tar xvf $file -C /mnt --strip-components=1
+# remove uneeded directories + broken symbolic link
+rm -r /mnt/usr/local
 
 if [[ $UEFI ]]; then
 mkdir /mnt/boot/efi
