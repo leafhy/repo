@@ -92,6 +92,7 @@ tar xf $lver.tar.xz
 # git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
 cp -R linux-firmware/intel /usr/lib/firmware/
 fi
+
 echo "#####################"
 echo "#### FINAL STEPS ####"
 echo "#####################"
