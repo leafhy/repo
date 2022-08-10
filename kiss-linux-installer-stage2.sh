@@ -8,7 +8,6 @@ kernel=https://cdn.kernel.org/pub/linux/kernel/v5.x/$kver.tar.xz
 linuxfirmware=https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/$lver.tar.gz
 kissrepo=/var/db/kiss
 kiss_cache=$kissrepo/cache
-hostname=kiss
 
 adduser $username
 addgroup $username wheel
@@ -66,8 +65,6 @@ fi
 #cd /var/db/kiss/installed && kiss build *
 
 kiss build baseinit ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd
-
-printf '%s\n' $hostname > /etc/hostname
 
 if [ $kver ]; then
 cd $home
