@@ -16,6 +16,7 @@ url=https://github.com/kisslinux/repo/releases/download/$chrootver
 file=kiss-chroot-$chrootver.tar.xz
 ipaddress=192.168.1.XX
 nameserver=192.168.1.1
+hostname=kiss
 efifsys=f2fs
 efifsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $fsyslabel"
 extfsys=xfs
