@@ -55,6 +55,8 @@ mv -f _ /usr/bin/kiss
 chmod +x /usr/bin/kiss
 fi
 
+cp /usr/bin/kiss /usr/bin/kiss.bak
+
 kiss update
 
 if [ $kiss_cache ]; then
