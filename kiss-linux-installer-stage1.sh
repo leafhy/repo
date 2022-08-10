@@ -95,7 +95,8 @@ else
 echo "UUID=$rootuuid    /           $extfsys   defaults     0 0" >> /mnt/etc/fstab
 fi
 
-echo "nameserver $nameserver" > /mnt/etc/resolv.conf
+printf '%s\n' $hostname > /mnt/etc/hostname
+printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf
 
 mkdir /mnt/etc/rc.d
 
