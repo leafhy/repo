@@ -1,8 +1,7 @@
 #!/bin/sh -e
 username=
 home=/home/$username
-# Uncomment kver to download and patch kernel
-#kver=linux-5.15.6
+kver=linux-5.15.6
 kernel=https://cdn.kernel.org/pub/linux/kernel/v5.x/$kver.tar.xz
 #lver=linux-firmware-20211027
 linuxfirmware=https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/$lver.tar.gz
