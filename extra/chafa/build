@@ -1,8 +1,10 @@
 #!/bin/sh -e
 
 ./configure \
-    --prefix=/usr \
-    --disable-gtk-doc
+    --prefix=/usr
 
 make
 make install
+
+# Remove documentation
+rm -rf $1/usr/share
