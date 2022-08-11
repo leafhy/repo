@@ -29,8 +29,6 @@ youtube-dl & yt-dlp + glibc + openssl 1.0.2
 > some urls may/may not need trailing '/' even on same site
 > using different ffmpeg version sometimes works
 
-# Installed programs (not in repo)
-https://github.com/docwhat/chronic
 
 |/
 |\ISS LINUX                                                https://kisslinux.org
