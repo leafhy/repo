@@ -3,9 +3,7 @@ This repo is setup for an headless server focused towards minimalism and reduced
 ## NOTES
 Building everything takes ~8hrs with Celeron 2.80GHz & 8GB ram
 bootime ~50s (server motherboard) increases with HBA & multiple hardrives
-kiss-chroot can override CXXFLAGS in .profile
-find $KISSREPO -name build -exec chmod +x {} +
-find $KISSREPO -name post-install -exec chmod +x {} + 
+kiss-chroot can override CXXFLAGS in .profile 
 GCC builds everything in this *repo*
 Clang requires compiler-rt for LTO
 libclang-rt.builtins-x86_64.a is needed for efivar
