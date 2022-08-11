@@ -1,0 +1,3 @@
+#!/bin/sh -e
+
+install -Dm755 chronic $1/usr/bin/chronic
