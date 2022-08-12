@@ -85,14 +85,15 @@ if [[ $UEFI ]]; then
 mkdir /mnt/boot/efi
 mount ${device}1 /mnt/boot/efi
 tee --append /mnt/etc/fstab << EOF
-LABEL=EFI        /boot/efi   vfat    defaults     0 0
-LABEL=$fsyslabel /           $efifsys   defaults     0 0
-# UUID=$(blkid -s UUID -o value ${device}2)    
+LABEL=EFI        /boot/efi    vfat    defaults    0 0
+
+# UUID=$(blkid -s UUID -o value ${device}2)
+LABEL=$fsyslabel /           $efifsys    defaults    0 0
 EOF
 else
 tee --append /mnt/etc/fstab << EOF
-LABEL=$fsyslabel    $extfsys   defaults     0 0
 # UUID=$(blkid -s UUID -o value ${device}1)
+LABEL=$fsyslabel    $extfsys    defaults    0 0
 EOF
 fi
 
