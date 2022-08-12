@@ -2,3 +2,5 @@
 
 python3 setup.py build
 python3 setup.py install --prefix=/usr --root="$1"
+
+rm -rf "$1/usr/lib/python"*/site-packages/urwid/tests
