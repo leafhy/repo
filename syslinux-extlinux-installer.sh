@@ -55,10 +55,8 @@ timeout 50
 label Kiss
 menu label kernel-5.15.6
 linux /boot/vmlinuz-5.15.6
+append root=PARTUUID=$(blkid -s PARTUUID -o value /dev/sda1) ro
 EOF
-
-partuuid=$(blkid -s PARTUUID -o value /dev/sda1)
-echo "append root=PARTUUID=$partuuid ro" >> /boot/extlinux/extlinux.conf
 
 echo "##############################"
 echo "# INSTALL MASTER BOOT RECORD #"
