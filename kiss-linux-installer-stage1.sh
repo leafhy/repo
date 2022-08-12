@@ -68,8 +68,6 @@ sgdisk --verify $device
 mkfs.vfat -F 32 -n EFI ${device}1
 mkfs.$efifsys $efifsysopts ${device}2
 mount ${device}2 /mnt
-rootuuid=$(blkid -s UUID -o value ${device}2)
-partuuid=$(blkid -s PARTUUID -o value ${device}2)
 else
 echo "[ ! ] EFI NOT FOUND [ ! ]"
 echo ""
@@ -77,8 +75,6 @@ echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
 fdisk $device
 mkfs.$extfsys $extfsysopts ${device}1
 mount ${device}1 /mnt
-rootuuid=$(blkid -s UUID -o value ${device}1)
-partuuid=$(blkid -s PARTUUID -o value ${device}1)
 fi
 
 tar xvf $file -C /mnt --strip-components=1
@@ -89,11 +85,15 @@ if [[ $UEFI ]]; then
 mkdir /mnt/boot/efi
 mount ${device}1 /mnt/boot/efi
 tee --append /mnt/etc/fstab << EOF
-LABEL=EFI         /boot/efi   vfat    defaults     0 0
-UUID=$rootuuid    /           $efifsys   defaults     0 0
+LABEL=EFI        /boot/efi   vfat    defaults     0 0
+LABEL=$fsyslabel /           $efifsys   defaults     0 0
+# UUID=$(blkid -s UUID -o value ${device}2)    
 EOF
 else
-echo "UUID=$rootuuid    /           $extfsys   defaults     0 0" >> /mnt/etc/fstab
+tee --append /mnt/etc/fstab << EOF
+LABEL=$fsyslabel    $extfsys   defaults     0 0
+# UUID=$(blkid -s UUID -o value ${device}1)
+EOF
 fi
 
 printf '%s\n' $hostname > /mnt/etc/hostname
@@ -130,7 +130,7 @@ tee /mnt/efiboot.sh << EOF
 # kiss linux
 # Kernel panic will occur without unicode -> unable to find root
 # PARTUUID is used as UUID doesn't work
-efibootmgr --create --disk /dev/sda --loader '\vmlinuz-$kver' --label '$efilabel' --unicode root=PARTUUID=$partuuid loglevel=4 Page_Poison=1
+efibootmgr --create --disk /dev/sda --loader '\vmlinuz-$kver' --label '$efilabel' --unicode root=PARTUUID=$(blkid -s PARTUUID -o value ${device}2) loglevel=4 Page_Poison=1
 
 echo '**********************************************************'
 echo -e "\x1B[1;31m [ ! ] CHECK \x1B[1;92m BootOrder: \x1B[1;31m IS CORRECT [ ! ]\x1B[1;0m"
