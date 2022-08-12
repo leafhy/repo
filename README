@@ -9,7 +9,6 @@ Clang requires compiler-rt for LTO
 libclang-rt.builtins-x86_64.a is needed for efivar
 -march=native is required to build libffi on Intel Celeron G1840
 rust fails to build with clang
-Some runit symlinks appear to be backwards
 
 # Use the below commands if 'kiss update' fails
 git fetch origin master
