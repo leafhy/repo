@@ -1,3 +1,5 @@
+automake
+libtool
 attr
 ncurses
 util-linux
