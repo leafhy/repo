@@ -1,3 +1,5 @@
 #!/bin/sh -e
 
+if [ -L /usr/bin/stat ]; then
 kiss a coreutils /usr/bin/stat
+fi
