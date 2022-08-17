@@ -17,7 +17,7 @@ curl -fLO https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/
 
 SHASUM=$(shasum -a 256 syslinux-$VERSION-pre1.tar.xz)
 
-if [ "$SHASUM" = "$CHECKSUM syslinux-$VERSION-pre1.tar.xz" ] ; then
+if [ "$SHASUM" = "$CHECKSUM  syslinux-$VERSION-pre1.tar.xz" ] ; then
 echo "Signature OK"
 else
 exit 1
