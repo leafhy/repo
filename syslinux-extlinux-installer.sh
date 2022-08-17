@@ -8,7 +8,7 @@
 # Install worked with internal USB and failed with external USB however YMMV
 
 # Dependencies
-kiss b util-linux perl nasm popt
+# util-linux perl nasm popt
 
 VERSION=6.04
 CHECKSUM=3f6d50a57f3ed47d8234fd0ab4492634eb7c9aaf7dd902f33d3ac33564fd631d
