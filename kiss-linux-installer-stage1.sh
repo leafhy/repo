@@ -98,7 +98,8 @@ EOF
 fi
 
 printf '%s\n' $hostname > /mnt/etc/hostname
-printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf
+# kiss-chroot will overwrite /ete/resolv.conf
+printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf.new
 
 mkdir /mnt/etc/rc.d
 
