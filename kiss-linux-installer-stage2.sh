@@ -61,11 +61,12 @@ kiss update
 
 if [ $kiss_cache ]; then
 chown -R 1000:1000 $kiss_cache
+chmod -R 777 $kiss_cache/logs
 fi
 
 #cd /var/db/kiss/installed && kiss build *
 
-kiss build baseinit ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd
+kiss build baseinit ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd util-linux nasm popt
 
 if [ $kver ]; then
 cd $home
