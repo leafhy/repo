@@ -4,6 +4,7 @@ export CFLAGS="$CFLAGS -static"
 
 make prefix=/usr \
     LIBS="$(curl-config --static-libs) libgit.a xdiff/lib.a -lz" \
+    NO_REGEX=NeedsStartEnd \
     NO_GETTEXT=YesPlease \
     NO_SVN_TESTS=YesPlease \
     NO_TCLTK=YesPlease \
