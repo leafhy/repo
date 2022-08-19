@@ -3,7 +3,6 @@
 export CFLAGS="$CFLAGS -static"
 
 make prefix=/usr \
-    LIBS="$(curl-config --static-libs) libgit.a xdiff/lib.a -lz" \
     NO_REGEX=NeedsStartEnd \
     NO_GETTEXT=YesPlease \
     NO_SVN_TESTS=YesPlease \
@@ -15,8 +14,24 @@ make prefix=/usr \
     NO_SYS_POLL_H=1 \
     NO_CROSS_DIRECTORY_HARDLINKS=1 \
     NO_INSTALL_HARDLINKS=1 \
-    ac_cv_lib_curl_curl_global_init=yes \
-    ac_cv_snprintf_returns_bogus=no \
-    ac_cv_fread_reads_directories=yes
+    AC_CV_LIB_CURL_CURL_GLOBAL_INIT=YES \
+    AC_CV_SNPRINTF_RETURNS_BOGUS=NO \
+    AC_CV_FREAD_READS_DIRECTORIES=YES
 
-make install
+make prefix=/usr \
+    NO_REGEX=NeedsStartEnd \
+    NO_GETTEXT=YesPlease \
+    NO_SVN_TESTS=YesPlease \
+    NO_TCLTK=YesPlease \
+    NO_EXPAT=YesPlease \
+    NO_NSEC=YesPlease \
+    NO_PYTHON=YesPlease \
+    NO_PERL=YesPlease \
+    NO_SYS_POLL_H=1 \
+    NO_CROSS_DIRECTORY_HARDLINKS=1 \
+    NO_INSTALL_HARDLINKS=1 \
+    AC_CV_LIB_CURL_CURL_GLOBAL_INIT=YES \
+    AC_CV_SNPRINTF_RETURNS_BOGUS=NO \
+    AC_CV_FREAD_READS_DIRECTORIES=YES \
+    LIBS="$(curl-config --static-libs) libgit.a xdiff/lib.a -lz" \
+    install
