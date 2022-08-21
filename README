@@ -9,6 +9,7 @@ Clang requires compiler-rt for LTO
 libclang-rt.builtins-x86_64.a is needed for efivar
 -march=native is required to build libffi on Intel Celeron G1840
 rust fails to build with clang
+kiss build can fail if /var/db/kiss/cache/logs/* have root ownership (some packages require root to build)
 
 # Use the below commands if 'kiss update' fails
 git fetch origin master
