@@ -61,7 +61,6 @@ kiss update
 
 if [ $kiss_cache ]; then
 chown -R 1000:1000 $kiss_cache
-chmod -R 777 $kiss_cache/logs
 fi
 
 #cd /var/db/kiss/installed && kiss build *
