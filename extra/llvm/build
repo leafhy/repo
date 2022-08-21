@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-mv ../cmake/Modules/* cmake/modules
+cp ../cmake/Modules/* cmake/modules
 
 # Remove ncurses dependency.
 sed 's/\(LLVM_ENABLE_TERMINFO\) 1/\1 2/' \
