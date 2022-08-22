@@ -13,6 +13,7 @@ addgroup $username wheel
 
 tee $home/.profile << EOF
 export KISS_DEBUG=0
+export KISS_SU=ssu
 export KISS_COMPRESS=zst
 export KISS_GET=curl
 export CFLAGS="-O3 -pipe -march=native"
