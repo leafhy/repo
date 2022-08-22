@@ -30,6 +30,11 @@ git clone https://github.com/leafhy/repo.git $kissrepo/repo
 #git clone https://github.com/kisslinux/repo.git $kissrepo/repo
 git clone https://github.com/dylanaraps/community.git $kissrepo/community
 
+# fix git dubious permissions 
+git config --global --add safe.directory $kissrepo/repo
+cp /root/.gitconfig $home
+chown 1000:1000 $home/.gitconfig
+
 for f in build post-install pre-remove; do
 find $kissrepo/repo -name $f -exec chmod +x {} +
 done
