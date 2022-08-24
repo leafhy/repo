@@ -79,6 +79,7 @@ fi
 
 #cd /var/db/kiss/installed && kiss build *
 
+# Install requisite packages
 kiss build baseinit ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd util-linux nasm popt
 
 if [ $kver ]; then
