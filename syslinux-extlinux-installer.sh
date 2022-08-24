@@ -6,7 +6,13 @@
 # “│” U+2502 Box Drawings Light Vertical 
 # 
 # Install worked with internal USB and failed with external USB however YMMV
-
+#
+# 'dmesg' errors with extlinux 6.04-pre1, mbr.bin & xfs (gptmbr.bin & xfs fails to boot properly)
+# 'df' displays /dev/root (/dev/sda1)
+# exFAT-fs (sda1): invalid boot record signature
+# exFAT-fs (sda1): failed to read boot sector
+# exFAT-fs (sda1): failed to recognize exfat type
+#
 # Dependencies
 # util-linux perl nasm popt
 
