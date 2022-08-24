@@ -56,7 +56,8 @@ sed '/# SOFTWARE./a\
 
 UID="$(id | cut -d '(' -f 1)"
 if [ "$UID" != uid=0 ]; then
-ssu chown -R 1000:1000 $kiss_cache/logs' /usr/bin/kiss > _
+ssu chown -R 1000:1000 $kiss_cache/logs
+fi' /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
 
 sed 's/cac_dir=/#cac_dir=/g' /usr/bin/kiss > _
