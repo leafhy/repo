@@ -6,7 +6,7 @@ done
 
 # Disable busybox tools
 for L in BLKID LSOF LSPCI STAT TAR SENDMAIL; do
-sed 's+CONFIG_$L=y+# CONFIG_$L is not set+' .config > _
+sed "s+CONFIG_$L=y+# CONFIG_$L is not set+" .config > _
 mv -f _ .config
 done
 
