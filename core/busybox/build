@@ -4,9 +4,11 @@ for patch in patch/*.patch; do
     patch -p1 < "$patch"
 done
 
-# Disable sendmail (and use femtomail instead)
-sed 's+CONFIG_SENDMAIL=y+# CONFIG_SENDMAIL is not set+' .config > _
+# Disable busybox tools
+for L in BLKID LSOF LSPCI STAT TAR SENDMAIL; do
+sed 's+CONFIG_$L=y+# CONFIG_$L is not set+' .config > _
 mv -f _ .config
+done
 
 # Remove forced gcc/g++ usage so builds work on gcc-less systems.
 sed -e "s#= g[c+][c+]#= $CC#g" \
