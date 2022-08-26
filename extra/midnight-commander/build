@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+./autogen.sh
+
+./configure --prefix=/usr \
+            --with-screen=ncurses \
+            --disable-rpath \
+            --disable-nls
+            
+make
+make install
