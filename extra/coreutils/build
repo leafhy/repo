@@ -9,3 +9,5 @@ export CFLAGS="$CFLAGS -static"
 
 make
 make DESTDIR="$1" install
+
+ln -s "$1/usr/bin/cp" "$1/usr/bin/gcp"
