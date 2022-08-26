@@ -10,4 +10,4 @@ export CFLAGS="$CFLAGS -static"
 make
 make DESTDIR="$1" install
 
-mv "/usr/bin/cp" "$1/usr/bin/gcp"
+mv -f "$1/usr/bin/cp" "$1/usr/bin/gcp"
