@@ -1,1 +1,5 @@
+automake
+autoconf
+glib
 ncurses
+libtool
