@@ -12,13 +12,10 @@ sleep 1
 exit 1
 fi
 
-[ -f /usr/bin/sendmail ] && unlink /usr/bin/sendmail
+[ -L /usr/bin/sendmail ] && unlink /usr/bin/sendmail
 
 # Change install location from /usr/sbin to /usr/bin
 sed 's+/usr/sbin+/usr/bin+g' Makefile > _
-mv -f _ Makefile
-
-sed 's+-O2++g' Makefile > _
 mv -f _ Makefile
 
 make USERNAME=root MAILBOX_PATH=/var/mail
