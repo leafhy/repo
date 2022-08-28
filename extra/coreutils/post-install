@@ -1,7 +1,7 @@
 #!/bin/sh
 
-echo "##############################################"
-echo "## coreutils "cp" has been renamed to "gcp" ##"
-echo "## so as to coexist with busybox "cp"       ##"
-echo "## due to the different options             ##"
-echo "##############################################"
+echo "############################################"
+echo "# coreutils "cp" has been renamed to "gcp" #"
+echo "# so as to coexist with busybox "cp"       #"
+echo "# due to the different options             #"
+echo "############################################"
