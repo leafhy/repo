@@ -5,3 +5,7 @@
 
 make
 make install
+
+# Example7 checks for "-s SUBJECT" which femtomail does not use thus the addititional condition 
+sed 's+if \[+if \[ ! -x /usr/bin/femtomail ] && \[+' "$1/usr/share/doc/smartmontools/examplescripts/Example7" > _
+mv -f _ "$1/usr/share/doc/smartmontools/examplescripts/Example7"
