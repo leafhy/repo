@@ -1,1 +1,3 @@
 https://sourceforge.net/projects/smartmontools/files/smartmontools/VERSION/smartmontools-VERSION.tar.gz
+files/smartd.run
+files/smartd.finish
