@@ -2,8 +2,8 @@
 
 bzip2 -d restic_*_linux_amd64.bz2
 
-install -Dm755 restic_*_linux_amd64 $1/usr/bin/restic-bin
+install -Dm755 restic_*_linux_amd64 "$1/usr/bin/restic-bin"
 
 if [ ! -L /usr/bin/fusermount ]; then
-ln -s /usr/bin/fusermount3 $1/usr/bin/fusermount
+ln -s /usr/bin/fusermount3 "$1/usr/bin/fusermount"
 fi
