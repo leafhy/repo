@@ -17,7 +17,7 @@ sed "s+$opt+" minidlna.conf >_
 mv -f _ minidlna.conf
 done
 
-install -dm755 $1/usr/lib/minidlna
-install -Dm644 minidlnad.8 $1/usr/share/man/man8/minidlnad.8
-install -Dm644 minidlna.conf $1/etc/minidlna.conf
-install -Dm644 minidlna.conf.5 $1/usr/share/man/man5/minidlna.conf.5
+install -dm755 "$1/usr/lib/minidlna"
+install -Dm644 minidlnad.8 "$1/usr/share/man/man8/minidlnad.8"
+install -Dm644 minidlna.conf "$1/etc/minidlna.conf"
+install -Dm644 minidlna.conf.5 "$1/usr/share/man/man5/minidlna.conf.5"
