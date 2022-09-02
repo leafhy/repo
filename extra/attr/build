@@ -5,8 +5,8 @@
     --sbindir=/usr/bin\
     --disable-rpath
      
- make
- make DESTDIR="$1" install
+make
+make DESTDIR="$1" install
  
- # Remove documentation
+# Remove documentation
 rm -r "$1/usr/share/doc"
