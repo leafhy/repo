@@ -38,14 +38,14 @@ make
 make DESTDIR="$1" install
 
 for d in hourly daily weekly monthly; do
-install -dm755 $1/etc/cron.$d
+install -dm755 "$1/etc/cron.$d"
 done
 
-install -m640 systab.orig $1/var/spool/fcron
-install -m755 run-parts $1/usr/bin
+install -m640 systab.orig "$1/var/spool/fcron"
+install -m755 run-parts "$1/usr/bin"
 
 # Install runit services.
-install -Dm755 fcron.run $1/etc/sv/fcron/run
-install -dm755 $1/var/service
+install -Dm755 fcron.run "$1/etc/sv/fcron/run"
+install -dm755 "$1/var/service"
 
-ln -sf /etc/sv/fcron $1/var/service/
+ln -sf /etc/sv/fcron "$1/var/service/"
