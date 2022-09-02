@@ -1,4 +1,4 @@
 #!/bin/sh -e
 
-install -dm755 $1/lib/firmware/intel-ucode
-install -Dm644 intel-ucode/* $1/lib/firmware/intel-ucode 
+install -dm755 "$1/lib/firmware/intel-ucode"
+install -Dm644 intel-ucode/* "$1/lib/firmware/intel-ucode" 
