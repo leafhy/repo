@@ -6,9 +6,9 @@ mv -f _ gptcurses.cc
 make
 
 for f in gdisk cgdisk sgdisk fixparts; do
-install -Dm755 $f $1/usr/bin/$f
+install -Dm755 "$f" "$1/usr/bin/$f"
 done
 
 for f in *.8; do
-install -Dm644 $f $1/usr/share/man/man8/$f
+install -Dm644 "$f" "$1/usr/share/man/man8/$f"
 done
