@@ -9,6 +9,7 @@
 
 export LDFLAGS="$LDFLAGS -static"
 
+# Fix above errors
 sed 's/444/755/' MCONFIG.in > _
 mv -f _ MCONFIG.in
 
