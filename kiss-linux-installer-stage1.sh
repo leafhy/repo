@@ -147,9 +147,9 @@ EOF
 fi
 
 tee /mnt/root/.profile << EOF
-export KISS_DEBUG=0
-export KISS_COMPRESS=gz
-export KISS_GET=curl
+export KISS_DEBUG="0"
+export KISS_COMPRESS="gz"
+export KISS_GET="curl"
 export CFLAGS="-O3 -pipe -march=native"
 export CXXFLAGS="$CFLAGS"
 export MAKEFLAGS="-j$(nproc)"
