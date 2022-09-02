@@ -1,7 +1,9 @@
 #!/bin/sh -e
 
+export CXXFLAGS="$CXXFLAGS -pthread -static"
+
 sed 's+/usr/local+/usr+' Makefile > _
 mv -f _ Makefile
 
-make CXXFLAGS="-O3 -march=native -pthread -static"
+make 
 make DESTDIR="$1" install
