@@ -8,7 +8,7 @@ export CPPFLAGS="$CPPFLAGS -DSQLITE_ENABLE_COLUMN_METADATA=1"
     --enable-threadsafe \
     --enable-dynamic-extensions \
     --enable-fts5 \
-    ac_cv_search_readline=no \
+    ac_cv_search_readline=no
 
 make
 make install
