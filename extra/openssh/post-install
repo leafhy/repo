@@ -4,7 +4,7 @@
 ssh-keygen -A >/dev/null 2>&1
 
 echo ""
-echo "---------- ADD TO /etc/ssh/sshd_config ----------"
+echo "---------- Add to /etc/ssh/sshd_config ----------"
 echo '# The following resolves "no hostkey alg"'
 echo 'HostKeyAlgorithms +ssh-rsa'
 echo 'PubkeyAcceptedKeyTypes +ssh-rsa'
