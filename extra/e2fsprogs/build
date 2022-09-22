@@ -55,7 +55,6 @@ for f in \
     libe2p.a \
     libext2fs.a \
     libss.a
- do
-     chmod 444 "$1/usr/lib/$f"
- done
- 
+do
+chmod 444 "$DESTDIR/usr/lib/$f"
+done
