@@ -36,3 +36,6 @@ mv -f _ siren.h
       
 make
 make install
+
+chmod 444 "$1/usr/lib/siren/ip/*"
+chmod 555 "$1/usr/bin/siren"
