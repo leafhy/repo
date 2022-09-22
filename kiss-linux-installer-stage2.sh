@@ -49,6 +49,7 @@ kiss search \*
 
 kiss update
 
+cp /usr/bin/kiss /usr/bin/kiss.orig
 # Change cache location to one more apt for Single User
 # and fix log permissions so builds don't fail
 if [ "$kiss_cache" ]; then
@@ -67,9 +68,8 @@ sed '/Top-level cache/a\
     cac_dir=/var/db/kiss/cache' /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
 chmod +x /usr/bin/kiss
-fi
-
 cp /usr/bin/kiss /usr/bin/kiss.bak
+fi
 
 kiss update
 

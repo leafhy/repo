@@ -1,5 +1,17 @@
 #!/bin/sh -e
 
+UID="$(id | cut -d "(" -f 1)"
+
+if [ "$UID" != uid=0 ]; then
+echo "#####################################"
+echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
+echo "#                                   #"
+echo "#        ssu -p kiss b siren        #"
+echo "#####################################"
+sleep 1
+exit 1
+fi
+
 # Fix permission errors
 sed '42s/555/755/' GNUmakefile > _
 mv -f _ GNUmakefile
@@ -37,5 +49,5 @@ mv -f _ siren.h
 make
 make install
 
-chmod 444 "$1/usr/lib/siren/ip/*"
-chmod 555 "$1/usr/bin/siren"
+#chmod 444 "$DESTDIR/usr/lib/siren/ip/"*
+chmod 555 "$DESTDIR/usr/bin/siren"
