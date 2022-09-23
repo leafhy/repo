@@ -35,10 +35,6 @@ git clone https://github.com/dylanaraps/community.git $kissrepo/community
 git config --global --add safe.directory "$kissrepo/repo"
 cp /root/.gitconfig "$home"
 
-for f in build post-install pre-remove; do
-find "$kissrepo/repo" -name "$f" -exec chmod +x {} +
-done
-
 kiss search \*
 
 #cd $kissrepo/repo
