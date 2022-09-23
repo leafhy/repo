@@ -11,4 +11,7 @@ cp -rf docs/site/wiki  "$1/usr/share/doc/kiss"
 rm -f \
     "$1/usr/share/doc/kiss/README.txt" \
     "$1/usr/share/doc/kiss/post.txt" \
-    "$1/usr/share/doc/kiss/tidbits.txt"
+    "$1/usr/share/doc/kiss/tidbits.txt" \
+    "$1/usr/share/doc/kiss/package-manager.txt" \
+    "$1/usr/share/doc/kiss/package-system.txt"
+    
