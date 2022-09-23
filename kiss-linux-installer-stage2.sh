@@ -1,4 +1,5 @@
 #!/bin/sh -e
+
 username=
 home="/home/$username"
 kver="linux-5.15.6"
@@ -35,12 +36,13 @@ git config --global --add safe.directory "$kissrepo/repo"
 cp /root/.gitconfig "$home"
 
 for f in build post-install pre-remove; do
-find $kissrepo/repo -name "$f" -exec chmod +x {} +
+find "$kissrepo/repo" -name "$f" -exec chmod +x {} +
 done
 
 kiss search \*
 
 #cd $kissrepo/repo
+
 #git config merge.verifySignatures true
 
 #kiss build gnupg1$kissrepo/repo
@@ -53,11 +55,13 @@ cp /usr/bin/kiss /usr/bin/kiss.orig
 # Change cache location to one more apt for Single User
 # and fix log permissions so builds don't fail
 if [ "$kiss_cache" ]; then
-sed '/# SOFTWARE./a                     \
-                                        \
-UID="$(id | cut -d "(" -f 1)"           \
-if [ "$UID" != uid=0 ]; then            \
-ssu chown -R 1000:1000 $kiss_cache/logs \
+sed '/# SOFTWARE./a                       \
+                                          \
+kiss_cache="$kiss_cache"                  \
+                                          \
+UID="$(id | cut -d "(" -f 1)"             \
+if [ "$UID" != uid=0 ]; then              \
+ssu chown -R 1000:1000 "$kiss_cache/logs" \
 fi' /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
 
@@ -65,7 +69,7 @@ sed 's/cac_dir=/#cac_dir=/g' /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
 
 sed '/Top-level cache/a\
-    cac_dir=/var/db/kiss/cache' /usr/bin/kiss > _
+    cac_dir="$kiss_cache"' /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
 chmod +x /usr/bin/kiss
 cp /usr/bin/kiss /usr/bin/kiss.bak
@@ -74,7 +78,7 @@ fi
 kiss update
 
 if [ "$kiss_cache" ]; then
-chown -R 1000:1000 $kiss_cache
+chown -R 1000:1000 "$kiss_cache"
 fi
 
 #cd /var/db/kiss/installed && kiss build *
@@ -83,7 +87,7 @@ fi
 kiss build baseinit ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd util-linux nasm popt
 
 if [ "$kver" ]; then
-cd $home
+cd "$home"
 curl -fLO "$kernel"
 tar xf "$kver.tar.xz"
 cd  "$kver"
@@ -100,7 +104,7 @@ if [ "$kver" ] && [ -f /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch ]; t
 patch -p1 < /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch
 fi
 
-chown -R 1000:1000 $home
+chown -R 1000:1000 "$home"
 
 if [ "$lver" ]; then
 mkdir -p /usr/lib/firmware
