@@ -47,10 +47,10 @@ kiss search \*
 
 kiss update
 
-cp /usr/bin/kiss /usr/bin/kiss.orig
 # Change cache location to one more apt for Single User
 # and fix log permissions so builds don't fail
 if [ "$kiss_cache" ]; then
+cp /usr/bin/kiss /usr/bin/kiss.orig
 sed '/# SOFTWARE./a                       \
                                           \
 kiss_cache="$kiss_cache"                  \
