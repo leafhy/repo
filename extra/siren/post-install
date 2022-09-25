@@ -1,0 +1,4 @@
+#!/bin/sh
+
+chmod 444 "$DESTDIR/usr/lib/siren/ip/"*
+chmod 555 "$DESTDIR/usr/bin/siren"
