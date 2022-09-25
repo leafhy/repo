@@ -1,23 +1,11 @@
 #!/bin/sh -e
 
-UID="$(id | cut -d "(" -f 1)"
-
-#if [ "$UID" != uid=0 ]; then
-echo "#####################################"
-echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
-echo "#                                   #"
-echo "#        ssu -p kiss b siren        #"
-echo "#####################################"
-sleep 1
-#exit 1
-#fi
-
 # Fix permission errors
-#sed '42s/555/755/' GNUmakefile > _
-#mv -f _ GNUmakefile
+sed '42s/555/755/' GNUmakefile > _
+mv -f _ GNUmakefile
 
-#sed '43s/444/755/' GNUmakefile > _
-#mv -f _ GNUmakefile
+sed '43s/444/755/' GNUmakefile > _
+mv -f _ GNUmakefile
 
 # Change metadata location
 sed 's+.siren+.cache/siren+' siren.h > _
@@ -48,6 +36,3 @@ mv -f _ siren.h
       
 make
 make install
-
-#chmod 444 "$DESTDIR/usr/lib/siren/ip/"*
-#chmod 555 "$DESTDIR/usr/bin/siren"
