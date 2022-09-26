@@ -1,3 +1,20 @@
 #!/bin/sh -e
 
+sv down fcron
+unlink /var/service/fcron
+rm -r /etc/sv/fcron
+chgrp root /etc/fcron*
+rm /etc/fcron.allow \
+   /etc/fcron.deny \
+   /etc/fcron.conf
 deluser --remove-home fcron
+
+cat <<EOF
+###########################################################
+These files have been removed despite the skipping modified files below
+/etc/fcron.allow
+/etc/fcron.deny
+/etc/fcron.conf
+/etc/sv/fcron/
+##########################################################
+EOF
