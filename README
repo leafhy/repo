@@ -10,6 +10,8 @@ libclang-rt.builtins-x86_64.a is needed for efivar
 -march=native is required to build libffi on Intel Celeron G1840
 rust fails to build with clang
 kiss build can fail if /var/db/kiss/cache/logs/* have root ownership (some packages require root to build)
+linux kernel 5.18 & f2fs caused corruption
+linux kernel 5.15.6 & f2fs no corruption
 
 # Use the below commands if 'kiss update' fails
 git fetch origin master
