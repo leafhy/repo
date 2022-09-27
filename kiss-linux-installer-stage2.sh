@@ -54,8 +54,8 @@ cp /usr/bin/kiss /usr/bin/kiss.orig
 sed '/# SOFTWARE./a                       \
                                           \
 kiss_cache="$kiss_cache"                  \
-                                          \
 UID="$(id | cut -d "(" -f 1)"             \
+                                          \
 if [ "$UID" != uid=0 ]; then              \
 ssu chown -R 1000:1000 "$kiss_cache/logs" \
 fi' /usr/bin/kiss > _
