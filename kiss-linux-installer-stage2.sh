@@ -22,6 +22,7 @@ export CXXFLAGS="$CFLAGS"
 export MAKEFLAGS="-j$(nproc)"
 export KISSREPO="/var/db/kiss"
 export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
+export KISS_CACHE="$KISSREPO/cache"
 alias ls="ls --color=auto"
 EOF
 
@@ -53,11 +54,10 @@ if [ "$kiss_cache" ]; then
 cp /usr/bin/kiss /usr/bin/kiss.orig
 sed '/# SOFTWARE./a                       \
                                           \
-kiss_cache="$kiss_cache"                  \
 UID="$(id | cut -d "(" -f 1)"             \
                                           \
 if [ "$UID" != uid=0 ]; then              \
-ssu chown -R 1000:1000 "$kiss_cache/logs" \
+ssu chown -R 1000:1000 "$KISS_CACHE/logs" \
 fi' /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
 
@@ -65,7 +65,7 @@ sed 's/cac_dir=/#cac_dir=/g' /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
 
 sed '/Top-level cache/a\
-    cac_dir="$kiss_cache"' /usr/bin/kiss > _
+    cac_dir="$KISS_CACHE"' /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
 chmod +x /usr/bin/kiss
 cp /usr/bin/kiss /usr/bin/kiss.bak
@@ -80,7 +80,7 @@ fi
 #cd /var/db/kiss/installed && kiss build *
 
 # Install requisite packages
-kiss build baseinit ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd util-linux nasm popt
+kiss build baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd util-linux nasm popt
 
 if [ "$kver" ]; then
 cd "$home"
