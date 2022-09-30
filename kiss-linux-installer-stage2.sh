@@ -22,7 +22,7 @@ export CXXFLAGS="$CFLAGS"
 export MAKEFLAGS="-j$(nproc)"
 export KISSREPO="/var/db/kiss"
 export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
-export KISS_CACHE="$KISSREPO/cache"
+export KISS_CACHE="\$KISSREPO/cache"
 alias ls="ls --color=auto"
 EOF
 
