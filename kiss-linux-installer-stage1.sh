@@ -155,6 +155,7 @@ export CXXFLAGS="$CFLAGS"
 export MAKEFLAGS="-j$(nproc)"
 export KISSREPO="/var/db/kiss"
 export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
+export KISS_CACHE="\$KISSREPO/cache"
 alias ls="ls --color=auto"
 EOF
 
@@ -164,7 +165,7 @@ sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
 mv -f _ /mnt/usr/bin/kiss
 
 sed '/Top-level cache/a\
-    cac_dir=/var/db/kiss/cache' /mnt/usr/bin/kiss > _
+    cac_dir=$kiss_cache' /mnt/usr/bin/kiss > _
 mv -f _ /mnt/usr/bin/kiss
 chmod +x /mnt/usr/bin/kiss
 fi
