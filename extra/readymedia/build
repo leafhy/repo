@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -ex
 
 ./configure \
     --prefix=/usr \
@@ -17,7 +17,13 @@ sed "s+$opt+" minidlna.conf >_
 mv -f _ minidlna.conf
 done
 
+install -dm755 "$1/etc/sv/minidlnad"
 install -dm755 "$1/usr/lib/minidlna"
+install -dm755 "$1/var/db/minidlna"
+install -dm755 "$1/var/service"
 install -Dm644 minidlnad.8 "$1/usr/share/man/man8/minidlnad.8"
 install -Dm644 minidlna.conf "$1/etc/minidlna.conf"
 install -Dm644 minidlna.conf.5 "$1/usr/share/man/man5/minidlna.conf.5"
+install -Dm755 minidlnad.run "$1/etc/sv/minidlnad/run"
+
+ln -sf /etc/sv/minidlnad "$1/var/service/" 
