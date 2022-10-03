@@ -1,4 +1,4 @@
 #!/bin/sh
 
 [ -r conf ] && . ./conf
-exec minidlnad -S ${OPTS} 2>&1
+exec minidlnad -S ${OPTS} >/dev/null 2>&1
