@@ -51,21 +51,20 @@ kiss update
 # and fix log permissions so builds don't fail
 if [ "$kiss_cache" ]; then
 cp /usr/bin/kiss /usr/bin/kiss.orig
-sed '/# SOFTWARE./a                       \
+sed "/# SOFTWARE./a                       \
                                           \
-kiss_cache="$kiss_cache"                  \
 uid="$(id | cut -d "(" -f 1)"             \
                                           \
 if [ "$uid" != uid=0 ]; then              \
 ssu chown -R 1000:1000 "$kiss_cache/logs" \
-fi' /usr/bin/kiss > _
+fi" /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
 
 sed 's/cac_dir=/#cac_dir=/g' /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
 
-sed '/Top-level cache/a\
-    cac_dir="$kiss_cache"' /usr/bin/kiss > _
+sed "/Top-level cache/a\
+    cac_dir=$kiss_cache" /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
 chmod +x /usr/bin/kiss
 cp /usr/bin/kiss /usr/bin/kiss.bak
