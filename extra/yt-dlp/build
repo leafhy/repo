@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+make
+
+install -Dm755 yt-dlp "$1/usr/bin/yt-dlp"
+
+if [ ! -f /usr/share/man/man1/yt-dlp.1 ]; then
+install -m644 yt-dlp.1 "$1/usr/share/man/man1/yt-dlp.1"
+fi
