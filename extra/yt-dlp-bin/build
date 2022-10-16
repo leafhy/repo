@@ -1,4 +1,6 @@
 #!/bin/sh -e
 
-install -Dm755 yt-dlp "$1/usr/bin/yt-dlp"
-install -Dm644 yt-dlp.1 "$1/usr/share/man/man1/yt-dlp.1"
+cd 2022.10.04
+
+    install -Dm755 yt-dlp "$1/usr/bin/yt-dlp-bin"
+    install -Dm644 yt-dlp.1 "$1/usr/share/man/man1/yt-dlp.1"
