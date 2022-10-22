@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+ver=0.8.0
+
+install -Dm755 "$ver/shellcheck" "$1/usr/bin/shellcheck"
