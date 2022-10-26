@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --disable-nls \
+    --disable-metalink \
+    --disable-websocket \
+    --without-libxml2 \
+    --without-libexpat \
+    --without-sqlite3 \
+    --without-gnutls \
+    --with-openssl
+
+make
+make DESTDIR="$1" install
