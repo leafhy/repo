@@ -12,6 +12,16 @@ getent passwd fcron || adduser -H -h /var/spool/fcron -s /bin/sh -D -S -G fcron 
 
 	chown root:fcron /etc/fcron.conf /etc/fcron.allow /etc/fcron.deny
 	chmod  640 /etc/fcron.conf /etc/fcron.allow /etc/fcron.deny
-        chown fcron:fcron /var/spool/fcron
+	chown fcron:fcron /var/spool/fcron
 
 fcrontab /var/spool/fcron/systab.orig
+
+cat <<EOF
+
+NOTE: If $USER's shell is "/usr/bin/bash" and the system shell is "busybox /usr/bin/sh"
+
+roots fcrontab will fail to run command as $USER unless the system shell is changed to
+
+"bash /usr/bin/sh" or "/etc/fcron.conf" "shell = /usr/bin/sh" is changed to "/usr/bin/bash"
+
+EOF
