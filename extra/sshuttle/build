@@ -1,0 +1,25 @@
+#!/bin/sh -e
+
+sh="$(stat /usr/bin/sh | grep -o busybox)"
+
+if [ "$sh" != busybox ];
+then
+echo "##################################################"
+echo "#                                                #"
+echo "# [ ! ] Build requires busybox /usr/bin/sh [ ! ] #"
+echo "#                                                #"
+echo "#           kiss a busybox /usr/bin/sh           #"
+echo "#                                                #"
+echo "##################################################"
+exit 1 
+fi
+
+sed '/addopts/d' setup.cfg > _
+mv _ setup.cfg
+
+chmod -R go+rX .
+
+python3 setup.py install \
+   --root="$1"           \
+   --prefix=/usr
+   

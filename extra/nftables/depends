@@ -1,0 +1,6 @@
+libmnl
+libnftnl
+libtool
+readline
+pkgconf
+automake
