@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+install -Dm755 testdisk_static "$1/usr/bin/testdisk_static"
+install -Dm755 photorec_static "$1/usr/bin/photorec_static"
+install -Dm755 fidentify_static "$1/usr/bin/fidentify_static"
+
+install -Dm644 testdisk.8 "$1/usr/share/man/man8/testdisk.8"
+install -Dm644 photorec.8 "$1/usr/share/man/man8/photorec.8"
+install -Dm644 fidentify.8 "$1/usr/share/man/man8/fidentify.8"
