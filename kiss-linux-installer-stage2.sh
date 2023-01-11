@@ -27,6 +27,23 @@ EOF
 
 source /root/.profile
 
+##############################################
+# Create ssh key and add to github.com account
+# ssh-keygen -t id_ed25519 -C 'comment'
+#
+# Clone repo using ssh key
+# git clone git@github.com:leafhy/repo.git
+# 
+# Clone repo using ~/.ssh/config
+# -------------------------------------
+# host github
+# hostname github.com
+# user git
+# identityfile ~/.ssh/github-id_ed25519
+# -------------------------------------
+# git clone github:leafhy/repo.git
+##############################################
+
 git clone https://github.com/leafhy/repo.git $kissrepo/repo
 #git clone https://github.com/kisslinux/repo.git $kissrepo/repo
 git clone https://github.com/dylanaraps/community.git $kissrepo/community
