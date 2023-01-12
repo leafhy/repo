@@ -1,0 +1,12 @@
+#!/bin/sh -ex
+
+sed 's/-O2/-O3 -pipe -march=native/g' configure > _
+mv -f _ configure
+
+chmod +x configure
+
+./configure \
+   --prefix=/usr
+
+make
+make install
