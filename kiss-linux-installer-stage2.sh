@@ -48,6 +48,8 @@ source /root/.profile
 # -------------------------------------
 # Test ssh key works
 # ssh -T github
+#
+# Clone repo using ssh config
 # git clone github:leafhy/repo.git
 #
 # NOTE: Re-clone repo if permission denied occurs
