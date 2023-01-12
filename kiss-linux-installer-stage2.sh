@@ -39,14 +39,14 @@ source /root/.profile
 # Clone repo using ssh key
 # git clone git@github.com:leafhy/repo.git
 # 
-# Clone repo using ~/.ssh/config
+# Create ~/.ssh/config
 # -------------------------------------
 # host github
 # hostname github.com
 # user git
 # identityfile ~/.ssh/github-id_ed25519
 # -------------------------------------
-# Test ssh key works
+# Test ssh config works
 # ssh -T github
 #
 # Clone repo using ssh config
