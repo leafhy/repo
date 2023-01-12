@@ -48,7 +48,7 @@ source /root/.profile
 # -------------------------------------
 # Test ssh key works
 # ssh -T github
-# /git clone github:leafhy/repo.git
+# git clone github:leafhy/repo.git
 #
 # NOTE: Re-clone repo if permission denied occurs
 # ie. repo out of sync
