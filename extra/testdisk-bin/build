@@ -1,5 +1,5 @@
 #!/bin/sh -e
-# NOTE: Building testdisk from source requiers bash to be /bin/sh
+
 install -Dm755 testdisk_static "$1/usr/bin/testdisk_static"
 install -Dm755 photorec_static "$1/usr/bin/photorec_static"
 install -Dm755 fidentify_static "$1/usr/bin/fidentify_static"
