@@ -24,10 +24,16 @@ extfsysopts="-f -L $fsyslabel"
 # /usr/bin/kiss cache default locations "$HOME/.cache/kiss" "/root/.cache/kiss"
 kiss_cache="/var/db/kiss/cache"
 
-wget "$url/$file" || curl -fLO "$url/$file"
-wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
+# kiss-chroot-2021.7-9.tar.xz
+checksum=3f4ebe1c6ade01fff1230638d37dea942c28ef85969b84d6787d90a9db6a5bf5
 
-sha256sum -c < "$file.sha256"
+if [[ ! -f ../$file ]]; then
+wget "$url/$file" || curl -fLO "$url/$file"
+# wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
+fi
+
+# sha256sum -c < "$file.sha256" || exit 1
+sha256sum -c < (echo "$checksum"  "$file") || exit 1
 
 #curl -fLO "$url/$file.asc"
 #gpg --keyserver keyserver.ubuntu.com --recv-key 13295DAC2CF13B5C
@@ -77,7 +83,8 @@ mkfs.$extfsys $extfsysopts ${device}1
 mount ${device}1 /mnt
 fi
 
-tar xvf $file -C /mnt --strip-components=1
+tar xvf ../"$file" -C /mnt --strip-components=1
+
 # remove uneeded directories + broken symbolic link
 rm -r /mnt/usr/local
 
