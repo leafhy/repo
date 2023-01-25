@@ -33,7 +33,7 @@ wget "$url/$file" || curl -fLO "$url/$file"
 fi
 
 # sha256sum -c < "$file.sha256" || exit 1
-sha256sum -c < (echo "$checksum"  "$file") || exit 1
+sha256sum -c <(echo "$checksum  $file") || exit 1
 
 #curl -fLO "$url/$file.asc"
 #gpg --keyserver keyserver.ubuntu.com --recv-key 13295DAC2CF13B5C
