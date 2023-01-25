@@ -32,8 +32,8 @@ wget "$url/$file" || curl -fLO "$url/$file"
 # wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
 fi
 
-# sha256sum -c < "$file.sha256" || exit 1
 sha256sum -c <(echo "$checksum  $file") || exit 1
+# sha256sum -c < "$file.sha256" || exit 1
 
 #curl -fLO "$url/$file.asc"
 #gpg --keyserver keyserver.ubuntu.com --recv-key 13295DAC2CF13B5C
@@ -41,9 +41,9 @@ sha256sum -c <(echo "$checksum  $file") || exit 1
 
 lsblk -f -l | grep sd
 
-echo '****************************************'
-echo '[!] Verify Connected Drive Is Listed [!]'
-echo '****************************************'
+echo '********************************************'
+echo '[ ! ] Verify Connected Drive Is Listed [ ! ]'
+echo '********************************************'
 # Generate drive options dynamically
 PS3="Select drive to format: "
 echo ''
@@ -133,7 +133,7 @@ tee /mnt/efiboot.sh << EOF
 #!/bin/sh
 
 # void linux
-# can use UUID
+# Can use UUID
 #efibootmgr -c -d /dev/sda -p 1 -l '\vmlinuz-5.7.7_1' -L 'Void' initrd=\initramfs-5.7.7_1.img root=/dev/sda2
 
 # kiss linux
