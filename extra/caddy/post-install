@@ -1,0 +1,10 @@
+#!/bin/sh 
+
+getent group caddy || addgroup -S -g 995 caddy
+getent passwd caddy || adduser -H -h /var/lib/caddy -s /bin/nologin -D -S -G caddy -u 999 -g "caddy daemon" caddy
+
+setcap CAP_NET_BIND_SERVICE=+ep /usr/bin/caddy
+chown -R caddy:caddy /etc/caddy
+chown caddy:caddy /var/lib/caddy
+
+sv up caddy

@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+sv down vaultwarden
+deluser --remove-home vaultwarden

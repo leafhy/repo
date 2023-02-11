@@ -1,0 +1,3 @@
+git+https://github.com/caddyserver/caddy.git
+files/Caddyfile-example
+files/caddy.run

@@ -1,0 +1,24 @@
+#!/bin/sh -e
+
+sed "s+# DATA_FOLDER=data+DATA_FOLDER=/var/lib/vaultwarden/data+" .env.template > _
+mv -f _ .env.template
+sed "s/# ROCKET_ADDRESS=0\.0\.0\.0/ROCKET_ADDRESS=127.0.0.1/" .env.template > _
+mv -f _ .env.template
+sed "s+# WEB_VAULT_FOLDER=web-vault+WEB_VAULT_FOLDER=\/var\/lib\/vaultwarden\/web-vault+" .env.template > _
+mv -f _ .env.template
+sed "s/# WEBSOCKET_ENABLED=false/WEBSOCKET_ENABLED=true/" .env.template > _
+mv -f _ .env.template
+sed "s+# LOG_FILE=/path/to/log+LOG_FILE=/var/lib/vaultwarden/vaultwarden.log+" .env.template > _
+mv -f _ .env.template
+
+cargo clean && cargo build --features sqlite --release
+
+install -dm750 "$1/etc/vaultwarden"
+install -Dm750 target/release/vaultwarden "$1/usr/bin/vaultwarden"
+install -Dm640 .env.template "$1/etc/vaultwarden/.env"
+install -Dm755 vaultwarden.run "$1/etc/sv/vaultwarden/run"
+install -dm750 "$1/var/lib/vaultwarden/data"
+install -dm750 "$1/var/service"
+mv web-vault "$1/var/lib/vaultwarden"
+
+ln -sf /etc/sv/vaultwarden "$1/var/service/"

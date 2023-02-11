@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+sv down caddy
+deluser --remove-home caddy

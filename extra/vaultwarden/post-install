@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+getent group vaultwarden || addgroup -S -g 989 vaultwarden
+getent passwd vaultwarden || adduser -H -h /var/lib/vaultwarden -s /usr/bin/false -D -S -G vaultwarden -u 989 -g "Unprivileged User" vaultwarden
+
+chown root:vaultwarden /usr/bin/vaultwarden
+chown -R vaultwarden:vaultwarden /var/lib/vaultwarden
+chown -R vaultwarden:vaultwarden "/etc/vaultwarden"
+
+sv up vaultwarden
+
+cat <<EOF
+###########################################
+# WARNING WARNING WARNING WARNING WARNING #
+#                                         #
+# Removing vaultwarden WILL remove vault  # 
+#                                         #
+###########################################
+EOF
