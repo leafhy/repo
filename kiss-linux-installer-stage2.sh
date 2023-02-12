@@ -31,7 +31,7 @@ source /root/.profile
 #           Github & SSH Key Setup            
 ###############################################
 # Create ssh key and add to github.com account
-# ssh-keygen -t id_ed25519 -C 'comment'
+# ssh-keygen -t ed25519 -C 'comment'
 #
 # Test ssh key works
 # ssh -T git@github.com
