@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+cargo build --release --target x86_64-unknown-linux-musl
+
+install -Dm755 target/x86_64-unknown-linux-musl/release/rbw "$1/usr/bin/rbw"
+install -Dm755 target/x86_64-unknown-linux-musl/release/rbw-agent "$1/usr/bin/rbw-agent"

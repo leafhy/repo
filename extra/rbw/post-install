@@ -1,0 +1,24 @@
+#!/bin/sh -e
+
+cat <<EOF
+#############################################
+#                                           #
+# Use rbw with caddy + http                 #
+# add the following to                      #
+#                                           #
+#     /etc/caddy/Caddyfile                  #
+#                                           #
+# ========================================= #
+#                                           #
+# # rbw Unofficial Bitwarden CLI            #
+#   http://vaultwarden:2018 {               #
+#	    reverse_proxy 127.0.0.1:8000    #
+# }                                         #
+#                                           #
+# ========================================= #
+#                                           #
+# NOTE: caddy + https failed to work        #
+#     :  kiss linux lacks nss-tools         #
+#                                           #
+#############################################
+EOF
