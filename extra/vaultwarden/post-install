@@ -7,8 +7,6 @@ chown root:vaultwarden /usr/bin/vaultwarden
 chown -R vaultwarden:vaultwarden /var/lib/vaultwarden
 chown -R vaultwarden:vaultwarden "/etc/vaultwarden"
 
-sv up vaultwarden
-
 cat <<EOF
 ###########################################
 #   [ ! ] WARNING WARNING WARNING [ ! ]   #
