@@ -6,10 +6,6 @@
 make
 make install
 
-# Example7 checks for "-s SUBJECT" which femtomail does not use thus the addititional condition 
-sed 's+if \[+if \[ ! -x /usr/bin/femtomail \] \&\& \[+' "$1/usr/share/doc/smartmontools/examplescripts/Example7" > _
-mv -f _ "$1/usr/share/doc/smartmontools/examplescripts/Example7"
-
 # Install runit services.
 install -Dm755 smartd.run    "$1/etc/sv/smartd/run"
 install -Dm755 smartd.finish "$1/etc/sv/smartd/finish"
