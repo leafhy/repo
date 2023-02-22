@@ -7,8 +7,10 @@ make
 make install
 
 # Install runit services.
-install -Dm755 smartd.run    "$1/etc/sv/smartd/run"
-install -Dm755 smartd.finish "$1/etc/sv/smartd/finish"
+install -Dm644 smartd.run    "$1/etc/sv/smartd/run"
+install -Dm644 smartd.finish "$1/etc/sv/smartd/finish"
+install -Dm644 smartd.conf   "$1/etc/smartd.conf"
+
 install -dm755               "$1/var/service"
 
 ln -sf /etc/sv/smartd "$1/var/service/"
