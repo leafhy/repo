@@ -4,6 +4,6 @@
 # exec chpst -u vaultwarden:vaultwarden -e "$envar" /usr/bin/vaultwarden
 
 # Export .env varibles before starting vaultwarden 
-export ENV_FILE=/etc/vaultwarden/.env
+export ENV_FILE=/etc/vaultwarden/env
 exec chpst -u vaultwarden:vaultwarden /usr/bin/vaultwarden
 
