@@ -9,6 +9,8 @@ echo "#                                   #"
 echo "#        ssu -p kiss b micro        #"
 echo "#####################################"
 sleep 1
+[ -d  /var/db/kiss/cache/sources/micro ] && \
+   rm -rf /var/db/kiss/cache/sources/micro
 exit 1
 fi
 

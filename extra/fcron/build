@@ -11,6 +11,8 @@ echo "#                                   #"
 echo "#        ssu -p kiss b fcron        #"
 echo "#####################################"
 sleep 1
+[ -d  /var/db/kiss/cache/sources/fcron ] && \
+   rm -rf /var/db/kiss/cache/sources/fcron
 exit 1
 fi
 
@@ -32,8 +34,7 @@ mv -f _ Makefile.in
     --localstatedir=/var \
     --mandir=/usr/share/man \
     --sysconfdir=/etc
-        
-        
+                
 make
 make DESTDIR="$1" install
 

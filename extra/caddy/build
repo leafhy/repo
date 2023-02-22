@@ -9,6 +9,8 @@ echo "#                                   #"
 echo "#        ssu -p kiss b caddy        #"
 echo "#####################################"
 sleep 1
+[ -d  /var/db/kiss/cache/sources/caddy ] && \
+   rm -rf /var/db/kiss/cache/sources/caddy
 exit 1
 fi
 
