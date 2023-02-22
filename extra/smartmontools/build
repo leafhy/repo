@@ -1,5 +1,11 @@
 #!/bin/sh -e
 
+sed '12, 15d' examplescripts/Example7 > _
+mv -f _ examplescripts/Example7
+
+sed '23s+DEVICESCAN+DEVICESCAN -m root -M exec /usr/share/doc/smartmontools/examplescripts/Example7+' smartd.conf > _
+mv -f _ smartd.conf
+
 ./configure \
     --prefix=/usr
 
@@ -9,7 +15,6 @@ make install
 # Install runit services.
 install -Dm755 smartd.run    "$1/etc/sv/smartd/run"
 install -Dm755 smartd.finish "$1/etc/sv/smartd/finish"
-install -Dm644 smartd.conf   "$1/etc/smartd.conf"
 
 install -dm755               "$1/var/service"
 
