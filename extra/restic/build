@@ -9,7 +9,7 @@ echo "#                                   #"
 echo "#       ssu -p kiss b restic        #"
 echo "#####################################"
 sleep 1
-[ -d  /var/db/kiss/cache/sources/restic ] && \
+[ -d /var/db/kiss/cache/sources/restic ] && \
    rm -rf /var/db/kiss/cache/sources/restic
 exit 1
 fi
