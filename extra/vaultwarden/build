@@ -15,7 +15,7 @@ cargo clean && cargo build --features sqlite --release
 
 install -dm750 "$1/etc/vaultwarden"
 install -Dm750 target/release/vaultwarden "$1/usr/bin/vaultwarden"
-install -Dm640 .env.template "$1/etc/vaultwarden/.env"
+install -Dm640 .env.template "$1/etc/vaultwarden/env"
 install -Dm755 vaultwarden.run "$1/etc/sv/vaultwarden/run"
 install -dm755 "$1/var/log/vaultwarden"
 install -dm750 "$1/var/lib/vaultwarden/data"

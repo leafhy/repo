@@ -5,7 +5,8 @@ getent passwd vaultwarden || adduser -H -h /var/lib/vaultwarden -s /usr/bin/fals
 
 chown root:vaultwarden /usr/bin/vaultwarden
 chown -R vaultwarden:vaultwarden /var/lib/vaultwarden
-chown -R vaultwarden:vaultwarden "/etc/vaultwarden"
+chown -R vaultwarden:vaultwarden /etc/vaultwarden
+chown vaultwarden:vaultwarden /var/log/vaultwarden
 
 cat <<EOF
 ###########################################
