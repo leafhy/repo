@@ -17,8 +17,7 @@ cat <<EOF
 #                                           #
 # ========================================= #
 #                                           #
-# NOTE: caddy + https failed to work        #
-#     :  kiss linux lacks nss-tools         #
+# NOTE: kiss linux lacks nss-tools          #
 #                                           #
 #############################################
 EOF
