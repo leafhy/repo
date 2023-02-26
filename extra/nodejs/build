@@ -10,7 +10,7 @@
 
 # nodejs 18.4.2 LTS  
 # -march=native fails to build with core2
-march=$(gcc -march=native -Q --help=target | grep -- -march | grep -o core2)
+march=$(gcc -march=native -Q --help=target | grep -- -march | grep -o core2 || true)
 
 if [ "$march" ]; then
 export CXXFLAGS="$CXXFLAGS -march=$march"
