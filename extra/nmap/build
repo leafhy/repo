@@ -2,8 +2,9 @@
 
 ./configure \
      --prefix=/usr \
-     --without-zenmap
-
+     --without-zenmap \
+     --with-libpcap=included
+     
 make
 make DESTDIR="$1" install
 
