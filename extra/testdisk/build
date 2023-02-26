@@ -5,3 +5,6 @@
       
 make
 make install      
+
+# Remove docs
+rm -r "$1"/usr/share/man/zh_CN

@@ -13,3 +13,8 @@
 
 make
 make DESTDIR="$1" install
+
+# Remove docs
+for d in pt ru; do
+    rm -r "$1"/usr/share/man/"$d"
+    done
