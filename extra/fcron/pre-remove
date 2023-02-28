@@ -9,11 +9,12 @@
 
 sv down fcron
 deluser --remove-home fcron
+unlink /var/service/fcron
+rm -r /etc/sv/fcron
 
 cat <<EOF
 ###################################
 [!] Remove these files manually [!]
-/etc/sv/fcron/
 /etc/fcron.allow
 /etc/fcron.deny
 /etc/fcron.conf

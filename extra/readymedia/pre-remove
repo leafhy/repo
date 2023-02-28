@@ -1,3 +1,5 @@
 #!/bin/sh -e
 
 deluser --remove-home minidlna
+unlink /var/service/minidlnad
+rm -r /etc/sv/minidlnad

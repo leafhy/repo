@@ -2,3 +2,5 @@
 
 sv down caddy
 deluser --remove-home caddy
+unlink /var/service/caddy
+rm -r /etc/sv/caddy

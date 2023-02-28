@@ -2,3 +2,5 @@
 
 sv down vaultwarden
 deluser --remove-home vaultwarden
+unlink /var/service/vaultwarden
+rm -r /etc/sv/vaultwarden
