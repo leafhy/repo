@@ -17,7 +17,6 @@ sed "s+$opt+" minidlna.conf >_
 mv -f _ minidlna.conf
 done
 
-install -dm755 "$1/etc/sv/minidlnad"
 install -dm755 "$1/usr/lib/minidlna"
 install -dm755 "$1/var/db/minidlna"
 install -dm755 "$1/var/service"
