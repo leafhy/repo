@@ -7,4 +7,4 @@ make
 make DESTDIR="$1" install
 
 install -Dm644 safe.tbl "$1/usr/share/detox"
-install -Dm644 detoxrc "$1/usr/etc"
+install -Dm644 etc/detoxrc.sample "$1/usr/etc/detoxrc"
