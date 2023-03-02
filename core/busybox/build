@@ -6,7 +6,7 @@ done
 
 # Disable busybox tools
 for link in BLKID LSOF LSPCI STAT SENDMAIL; do
-sed "s+CONFIG_$link=y+# CONFIG_$L is not set+" .config > _
+sed "s+CONFIG_$link=y+# CONFIG_$link is not set+" .config > _
 mv -f _ .config
 done
 
