@@ -74,6 +74,8 @@ kiss search \*
 #gpg --keyserver keyserver.ubuntu.com --recv-key 13295DAC2CF13B5C
 #echo trusted-key 0x13295DAC2CF13B5C >> /root/.gnupg/gpg.conf
 
+kiss update
+
 cp /usr/bin/kiss /usr/bin/kiss.orig
 # Change cache location to one more apt for Single User
 # and fix log permissions so builds don't fail
@@ -103,7 +105,7 @@ chmod +x /usr/bin/kiss
 
 kiss update
 
-if [ "$kiss_cache" ]; then
+if [ -d "$kiss_cache" ]; then
 chown -R 1000:1000 "$kiss_cache"
 fi
 
