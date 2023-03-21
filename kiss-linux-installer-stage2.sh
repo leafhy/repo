@@ -74,12 +74,10 @@ kiss search \*
 #gpg --keyserver keyserver.ubuntu.com --recv-key 13295DAC2CF13B5C
 #echo trusted-key 0x13295DAC2CF13B5C >> /root/.gnupg/gpg.conf
 
-kiss update
-
+cp /usr/bin/kiss /usr/bin/kiss.orig
 # Change cache location to one more apt for Single User
 # and fix log permissions so builds don't fail
 if [ "$kiss_cache" ]; then
-cp /usr/bin/kiss /usr/bin/kiss.orig
 sed "/# SOFTWARE./a                       \
                                           \
 uid="$(id | cut -d "(" -f 1)"             \
@@ -95,9 +93,13 @@ mv -f _ /usr/bin/kiss
 sed "/Top-level cache/a\
     cac_dir=$kiss_cache" /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
-chmod +x /usr/bin/kiss
-cp /usr/bin/kiss /usr/bin/kiss.bak
 fi
+
+# Remove nonexistant compress option
+sed 's/lzip -z/lzip/' /usr/bin/kiss _
+mv -f _ /usr/bin/kiss
+
+chmod +x /usr/bin/kiss
 
 kiss update
 
