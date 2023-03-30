@@ -3,8 +3,8 @@
 # kiss filename problem - erroneous directory is created
 # .../.cache/kiss/sources/syslinux/│/syslinux-6.04-pre1.tar.xz
 # Note:
-# “│” U+2502 Box Drawings Light Vertical 
-# 
+# “│” U+2502 Box Drawings Light Vertical
+#
 # Install worked with internal USB and failed with external USB however YMMV
 #
 # 'dmesg' errors with extlinux 6.04-pre1, mbr.bin & xfs (gptmbr.bin & xfs fails to boot properly)
