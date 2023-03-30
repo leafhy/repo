@@ -28,7 +28,7 @@ EOF
 source /root/.profile
 
 ###############################################
-#           Github & SSH Key Setup            
+#           Github & SSH Key Setup            #
 ###############################################
 # Create ssh key and add to github.com account
 # ssh-keygen -t ed25519 -C 'comment'
@@ -38,7 +38,7 @@ source /root/.profile
 #
 # Clone repo using ssh key
 # git clone git@github.com:leafhy/repo.git
-# 
+#
 # Create ~/.ssh/config
 # -------------------------------------
 # host github
@@ -60,7 +60,7 @@ git clone https://github.com/leafhy/repo.git $kissrepo/repo
 #git clone https://github.com/kisslinux/repo.git $kissrepo/repo
 git clone https://github.com/dylanaraps/community.git $kissrepo/community
 
-# fix git dubious permissions 
+# fix git dubious permissions
 git config --global --add safe.directory "$kissrepo/repo"
 cp /root/.gitconfig "$home"
 
