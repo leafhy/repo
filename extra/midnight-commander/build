@@ -1,9 +1,10 @@
 #!/bin/sh -e
 
-./configure --prefix=/usr \
-            --with-screen=ncurses \
-            --disable-rpath \
-            --disable-nls
+./configure \
+    --prefix=/usr \
+    --with-screen=ncurses \
+    --disable-rpath \
+    --disable-nls
             
 make
 make install

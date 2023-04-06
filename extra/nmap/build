@@ -1,9 +1,9 @@
 #!/bin/sh -e
 
 ./configure \
-     --prefix=/usr \
-     --without-zenmap \
-     --with-libpcap=included
+    --prefix=/usr \
+    --without-zenmap \
+    --with-libpcap=included
      
 make
 make DESTDIR="$1" install

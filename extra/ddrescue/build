@@ -6,7 +6,7 @@ mv -f _ configure
 chmod +x configure
 
 ./configure \
-   --prefix=/usr
+    --prefix=/usr
 
 make
 make install
