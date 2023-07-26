@@ -6,6 +6,7 @@ cat <<EOF
 #################################
             IMPORTANT
 #################################
+
 Alsa works with USB UAC1 & UAC2
 
 Sndio does not work with USB UAC1
