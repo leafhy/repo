@@ -8,4 +8,4 @@ cat <<EOF
 aplay requires 'mdev{d}' to list USB sound cards
 
 #################################
-EOF 
+EOF
