@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+cat <<EOF
+#################################
+            IMPORTANT
+#################################
+
+aplay requires 'mdev{d}' to list USB sound cards
+
+#################################
+EOF 
