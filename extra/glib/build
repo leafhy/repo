@@ -11,7 +11,6 @@ mv -f _ meson.build
 # Note:
 # The mispelt 'mesom.build' allows build to succeed
 
-gobject/tests/mesom.build
 : > glib/tests/meson.build
 : > tests/meson.build
 : > gobject/tests/mesom.build
