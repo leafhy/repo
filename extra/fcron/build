@@ -19,6 +19,11 @@ fi
 getent group fcron || addgroup -S -g 997 fcron
 getent passwd fcron || adduser -H -h /var/spool/fcron -s /bin/sh -D -S -G fcron -u 997 -g "Unprivileged User" fcron
 
+sed "0,/\/bin\/sh/a exit 0" script/user-group > _
+mv -f _ script/user-group
+
+chmod +x script/user-group
+
 # Remove documentation
 sed 's/ fr//' doc/Makefile.in > _
 mv -f _ doc/Makefile.in
