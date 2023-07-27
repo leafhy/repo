@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+patch -p1 < zipnote.patch
+
 make \
     -f unix/Makefile generic_gcc
 
