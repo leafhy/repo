@@ -8,9 +8,13 @@ mv -f _ gio/meson.build
 sed 's/libmount_dep.found()/false/' meson.build > _
 mv -f _ meson.build
 
+# Note:
+# The mispelt 'mesom.build' allows build to succeed
+
+gobject/tests/mesom.build
 : > glib/tests/meson.build
 : > tests/meson.build
-: > gobject/tests/meson.build
+: > gobject/tests/mesom.build
 : > gio/tests/meson.build
 : > fuzzing/meson.build
 
