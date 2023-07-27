@@ -10,7 +10,7 @@ mv -f _ meson.build
 
 : > glib/tests/meson.build
 : > tests/meson.build
-: > gobject/tests/mesom.build
+: > gobject/tests/meson.build
 : > gio/tests/meson.build
 : > fuzzing/meson.build
 
