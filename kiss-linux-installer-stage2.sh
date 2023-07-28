@@ -98,7 +98,7 @@ mv -f _ /usr/bin/kiss
 fi
 
 # Remove nonexistant compress option
-sed 's/lzip -z/lzip/' /usr/bin/kiss _
+sed 's/lzip -z/lzip/' /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
 
 chmod +x /usr/bin/kiss
