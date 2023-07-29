@@ -6,3 +6,7 @@
 
 make
 make install
+
+# Remove docs
+rm -r "$1"/usr/share/man/fr
+rm -r "$1"/usr/share/man/man7
