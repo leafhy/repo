@@ -11,3 +11,4 @@ make
 make DESTDIR="$1" install
 
 mv -f "$1/usr/bin/cp" "$1/usr/bin/gcp"
+

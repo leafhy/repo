@@ -1,6 +1,10 @@
 #!/bin/sh
 
-echo "##############################################"
-echo "# As Busybox & Coreutils 'cp' options differ #"
-echo "# coreutils 'cp' has been renamed to 'gcp'   #"
-echo "##############################################"
+cat <<EOF
+##########################################
+
+As Busybox & Coreutils 'cp' options differ
+coreutils 'cp' has been renamed to 'gcp'
+
+##########################################
+EOF

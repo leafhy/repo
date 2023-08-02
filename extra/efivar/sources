@@ -1,2 +1,3 @@
+# git+https://github.com/rhboot/efivar.git
 https://github.com/rhboot/efivar/archive/VERSION.tar.gz
 patches/no-add-needed.patch

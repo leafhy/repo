@@ -1,8 +1,8 @@
 #!/bin/sh
 
-# Use separate files for varibles /etc/vaultwarden/env/varname
-# exec chpst -u vaultwarden:vaultwarden -e "$envar" /usr/bin/vaultwarden
+# Use separate files for varibles /etc/vaultwarden/varname
+# export envdir=/etc/vaultwarden
+# exec chpst -u vaultwarden:vaultwarden -e "$envdir" /usr/bin/vaultwarden
 
-# Export .env varibles before starting vaultwarden 
-export ENV_FILE=/etc/vaultwarden/env
+export ENV_FILE=/etc/vaultwarden.conf
 exec chpst -u vaultwarden:vaultwarden /usr/bin/vaultwarden >/dev/null 2>&1

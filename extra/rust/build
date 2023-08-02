@@ -29,7 +29,7 @@ mv -f _ vendor/curl-sys/.cargo-checksum.json
 cat > config.toml <<EOF
 [llvm]
 link-shared = true
-skip-rebuild = true
+download-ci-llvm = false
 
 [build]
 build     = "x86_64-unknown-linux-musl"

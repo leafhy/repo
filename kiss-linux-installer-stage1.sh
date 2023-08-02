@@ -78,6 +78,7 @@ else
 echo "[ ! ] EFI NOT FOUND [ ! ]"
 echo ""
 echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
+sleep 1
 fdisk $device
 mkfs.$extfsys $extfsysopts ${device}1
 mount ${device}1 /mnt
