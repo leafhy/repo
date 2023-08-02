@@ -1,11 +1,13 @@
 #!/bin/sh -e
 
+echo "############################################################################################"
 echo ''
-echo "---- Add to $HOME/.profile ----"
-echo 'eval "$(starship init bash)"' 
+echo "# Add the following to $HOME/.profile to start starship on login"
+echo 'eval "$(starship init bash)"'
 echo "export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml"
-echo '-------------------------------------'
-
+echo ''
+echo "# Add starship config to $HOME/.config/starship"
 echo "mkdir -p $HOME/.config/starship"
 echo "ln -s /usr/share/starship/starship.toml.plain-text $HOME/.config/starship/starship.toml"
 echo ''
+echo "############################################################################################"
