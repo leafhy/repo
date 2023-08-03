@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+unzip sponge-v*-linux-amd64.zip
+
+install -Dm755 sponge "$1/usr/bin/sponge-bin"

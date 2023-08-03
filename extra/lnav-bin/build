@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+unzip lnav-*-x86_64-linux-musl.zip
+
+install -Dm755 lnav*/lnav "$1/usr/bin/lnav-bin"

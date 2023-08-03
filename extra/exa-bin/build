@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+unzip exa-linux-x86_64-musl-v*.zip
+
+install -Dm755 bin/exa "$1/usr/bin/exa-bin"
+install -Dm644 man/exa.1 "$1/usr/share/man/man1/exa.1"
+install -Dm644 man/exa_colors.5 "$1/usr/share/man/man5/exa_colors.5"

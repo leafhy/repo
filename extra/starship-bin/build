@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+tar xf ../../../../sources/starship-bin/starship-x86_64-unknown-linux-musl.tar.gz
+
+install -Dm755 starship "$1/usr/bin/starship-bin"
+install -Dm644 starship.toml.plain-text "$1/usr/share/starship/starship.toml.plain-text"
