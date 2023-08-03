@@ -1,5 +1,5 @@
 coreutils
-mercury
-gpgme
 gnupg
+gpgme
+mercury
 ncurses

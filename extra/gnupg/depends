@@ -1,6 +1,6 @@
+libgpg-error
 libassuan
 libgcrypt
-libgpg-error
 libksba
 npth
 pinentry
