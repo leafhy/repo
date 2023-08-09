@@ -2,7 +2,8 @@
 
 ./configure \
    --prefix=/usr \
-   --without-rpath
+   --without-rpath \
+   --without-zsh-completion
 
 make
 make install
@@ -11,4 +12,3 @@ for f in 1 5 7 ; do
 install -Dm644 -t "$1/usr/share/man/man$f" doc/man$f/*
 done
 
-rm -rf "$1/usr/share/zsh"
