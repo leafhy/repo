@@ -3,7 +3,7 @@
 echo "############################################################################################"
 echo ''
 echo "# Add the following to $HOME/.profile to start starship on login"
-echo 'eval "$(starship init bash)"'
+echo 'eval "$(starship-bin init bash)"'
 echo "export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml"
 echo ''
 echo "# Add starship config to $HOME/.config/starship"
