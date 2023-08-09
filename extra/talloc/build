@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+./configure \
+   --prefix=/usr \
+   --disable-rpath \
+   --disable-rpath-install \
+   --sysconfdir=/etc \
+   --localstatedir=/var \
+   --without-gettext \
+   --builtin-libraries=replace \
+   --bundled-libraries=pytalloc-util
+
+make
+make DESTDIR="$1" install

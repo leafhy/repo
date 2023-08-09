@@ -1,0 +1,14 @@
+#!/bin/sh -e
+
+./configure \
+   --prefix=/usr \
+   --without-rpath
+
+make
+make install
+
+for f in 1 5 7 ; do
+install -Dm644 -t "$1/usr/share/man/man$f" doc/man$f/*
+done
+
+rm -rf "$1/usr/share/zsh"
