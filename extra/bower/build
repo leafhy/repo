@@ -10,6 +10,6 @@ fi
 make
 make man
 
-install -D bower.conf.sample "$1"/usr/share/bower/bower.conf
-install -Dm 755 bower "$1"/usr/bin/bower
-install -Dm 644 bower.1 "$1"/usr/share/man/man1/bower.1
+install -Dm 644 bower.conf.sample "$1/usr/share/bower/bower.conf"
+install -Dm 644 bower.1 "$1/usr/share/man/man1/bower.1"
+install -Dm 755 bower "$1/usr/bin/bower"
