@@ -1,0 +1,5 @@
+notmuch
+python3
+python3-dnspython
+python3-dkimpy
+python3-chardet

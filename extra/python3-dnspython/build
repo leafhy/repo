@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+unzip dnspython-*-py3-none-any.whl
+
+mkdir -p "$1/usr/lib/python3.11/site-packages"
+
+cp -R dns "$1/usr/lib/python3.11/site-packages"
+cp -R dnspython-*.dist-info "$1/usr/lib/python3.11/site-packages"

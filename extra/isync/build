@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr
+
+make
+
+install -Dm755 mbsync-get-cert "$1/usr/bin/mbsync-get-cert"
+install -Dm755 src/mbsync "$1/usr/bin/mbsync"
+install -Dm644 src/mbsyncrc.sample "$1/usr/share/isync/mbsyncrc.sample"
+install -Dm644 src/mbsync.1 "$1/usr/share/man/man1/mbsync.1"
