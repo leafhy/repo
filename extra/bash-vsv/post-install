@@ -1,0 +1,8 @@
+#!/bin/sh -e
+
+stat=$(stat /usr/bin/stat | grep -o busybox)
+
+if [ "$stat" ]; then
+   kiss a coreutils /usr/bin/stat
+fi
+

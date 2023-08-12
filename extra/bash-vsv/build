@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+install -Dm755 vsv "$1/usr/bin/vsv-bash"
+install -Dm644 man/vsv.8 "$1/usr/share/man/man8/vsv.8"
