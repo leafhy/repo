@@ -12,3 +12,6 @@ for f in 1 5 7 ; do
 install -Dm644 -t "$1/usr/share/man/man$f" doc/man$f/*
 done
 
+cd bindings/python
+python3 setup.py build --build-base=build \
+        install --prefix=/usr --root="$1"
