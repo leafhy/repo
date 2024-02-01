@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+make release
+cd build
+make
+
+install -Dm755 multimarkdown "$1/usr/bin/multimarkdown"

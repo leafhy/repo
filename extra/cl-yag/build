@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+install -dm755 "$1/opt/cl-yag"
+cp -R * "$1/opt/cl-yag"
