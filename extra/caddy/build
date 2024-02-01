@@ -14,14 +14,17 @@ sleep 1
 exit 1
 fi
 
-cd cmd/caddy
+TMPDIR="$(mktemp -d -p .)"
+
+tar xf ../../../../sources/caddy/caddy_2.7.6_src.tar.gz -C "$TMPDIR"
+cd "$TMPDIR/cmd/caddy"
 
 go build
 
 install -Dm755 caddy "$1/usr/bin/caddy"
 install -dm700 "$1/etc/caddy"
-install -Dm644 ../../Caddyfile-example "$1/etc/caddy/Caddyfile"
-install -Dm755 ../../caddy.run "$1/etc/sv/caddy/run"
+install -Dm644 ../../../Caddyfile-example "$1/etc/caddy/Caddyfile"
+install -Dm755 ../../../caddy.run "$1/etc/sv/caddy/run"
 install -dm755 "$1/var/service/"
 install -dm700 "$1/var/lib/caddy/"
 install -dm755 "$1/var/log/caddy/"

@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-ver=2022.10.04
+ver=2023.12.30
 
     install -Dm755 "$ver/yt-dlp" "$1/usr/bin/yt-dlp-bin"
     install -Dm644 "$ver/yt-dlp.1" "$1/usr/share/man/man1/yt-dlp.1"

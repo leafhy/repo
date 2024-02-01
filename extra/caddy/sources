@@ -1,3 +1,4 @@
-git+https://github.com/caddyserver/caddy.git
+https://github.com/caddyserver/caddy/releases/download/vVERSION/caddy_VERSION_src.tar.gz
+# git+https://github.com/caddyserver/caddy.git
 files/Caddyfile-example
 files/caddy.run
