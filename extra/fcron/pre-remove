@@ -23,5 +23,5 @@ cat <<EOF
 runsv: can't move 'supervise/stat.new' to 'supervise/stat': No such file or directory runsv
 fcron: warning: cannot open supervise/status.new: No such file or directory runsv
 fcron: warning: cannot open supervise/pid.new: No such file or directory
-t######################################
+######################################
 EOF
