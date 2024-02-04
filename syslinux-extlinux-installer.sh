@@ -1,9 +1,8 @@
 #!/bin/sh -e
 
-# kiss filename problem - erroneous directory is created
+# NOTE: syslinux is not included in repo due to the creation of
+# an erroneous directory (“│” U+2502 Box Drawings Light Vertical)
 # .../.cache/kiss/sources/syslinux/│/syslinux-6.04-pre1.tar.xz
-# Note:
-# “│” U+2502 Box Drawings Light Vertical
 #
 # Install worked with internal USB and failed with external USB however YMMV
 #
