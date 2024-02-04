@@ -5,11 +5,9 @@ sh="$(stat /usr/bin/sh | grep -o busybox)"
 if [ "$sh" != busybox ];
 then
 echo "##################################################"
-echo "#                                                #"
 echo "# [ ! ] Build requires busybox /usr/bin/sh [ ! ] #"
 echo "#                                                #"
 echo "#           kiss a busybox /usr/bin/sh           #"
-echo "#                                                #"
 echo "##################################################"
 exit 1
 fi
