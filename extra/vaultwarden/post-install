@@ -10,13 +10,6 @@ chown vaultwarden:vaultwarden /var/log/vaultwarden
 
 cat <<EOF
 ###########################################
-#   [ ! ] WARNING WARNING WARNING [ ! ]   #
-#                                         #
-# Removing vaultwarden WILL remove vault  #
-#                                         #
-###########################################
-
-###########################################
 #    [ ! ] Install Bitwarden CLI [ ! ]    #
 #                                         #
 #   npm install -g @bitwarden/cli         #

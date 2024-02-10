@@ -1,6 +1,24 @@
 #!/bin/sh -e
 
-sv down vaultwarden
-deluser --remove-home vaultwarden
-unlink /var/service/vaultwarden
-rm -r /etc/sv/vaultwarden
+cat <<EOF
+###########################################
+#   [ ! ] WARNING WARNING WARNING [ ! ]   #
+#                                         #
+#  Removing vaultwarden WILL remove vault #
+#                                         #
+###########################################
+EOF
+
+echo "Do you wish to remove Vaultwarden?"
+echo -n "yes/no: "
+read -r ans
+
+if [ "$ans" = yes ]; then
+   sv down vaultwarden
+   deluser --remove-home vaultwarden
+   unlink /var/service/vaultwarden
+   rm -r /etc/sv/vaultwarden
+else
+   echo "Aborting"
+   exit 1
+fi
