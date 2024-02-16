@@ -13,7 +13,7 @@ exit 1
 fi
 
 sed '/addopts/d' setup.cfg > _
-mv _ setup.cfg
+mv -f _ setup.cfg
 
 chmod -R go+rX .
 

@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+./configure \
+   --prefix=/usr \
+   --sbindir=/usr/bin \
+   --sysconfdir=/etc \
+   --localstatedir=/var/lib/netatalk \
+   --with-ssl-dir=/usr/lib/ssl \
+   --without-cnid-tdb-backend \
+   --disable-quota
+
+make
+make install
+
+# Remove the uneeded
+rm -rf "$1/usr/include/atalk"
+rm -f "$1/usr/bin/afpldaptest"
+rm -f "$1/usr/bin/lp2pap.sh"
+rm -rf "$1/usr/lib"

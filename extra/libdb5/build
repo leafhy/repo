@@ -1,0 +1,11 @@
+#!/bin/sh -e
+
+cd build_unix
+
+../dist/configure prefix=/usr
+
+make
+make DESTDIR="$1" install
+
+# Remove 20Mb of docs
+rm -r "$1/usr/docs"

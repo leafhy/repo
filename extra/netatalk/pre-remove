@@ -1,0 +1,4 @@
+#!/bin/sh
+
+[ -d /etc/netatalk ] && rm -rf /etc/netatalk
+

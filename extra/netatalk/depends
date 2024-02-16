@@ -1,0 +1,6 @@
+acl
+attr
+libdb5
+libgcrypt
+libgpg-error
+openssl
