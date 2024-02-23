@@ -2,6 +2,7 @@
 
 mv Modules/* cmake/modules
 
+# Fix lifted from https://github.com/noirlinux/main/blob/master/extra/llvm/build
 # Create a symbolic link to the expected folder
 mkdir -p ../cmake && ln -s "$(pwd)/cmake/modules" ../cmake/Modules
 
