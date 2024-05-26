@@ -79,13 +79,14 @@ fi
 
 kiss search \*
 
-#cd $kissrepo/repo
+#kiss build gnupg1
 
-#git config merge.verifySignatures true
-
-#kiss build gnupg1$kissrepo/repo
 #gpg --keyserver keyserver.ubuntu.com --recv-key 13295DAC2CF13B5C
 #echo trusted-key 0x13295DAC2CF13B5C >> /root/.gnupg/gpg.conf
+
+#cd $kissrepo/repo
+#git config merge.verifySignatures true
+
 
 kiss update
 
