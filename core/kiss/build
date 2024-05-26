@@ -1,5 +1,11 @@
 #!/bin/sh -e
 
+# Remove nonexistant compress option
+sed 's/lzip -z/lzip/' kiss > _
+mv -f _ kiss
+
+chmod +x kiss
+
 mkdir -p \
     "$1/usr/bin" \
     "$1/usr/share/doc/kiss"
@@ -14,4 +20,4 @@ rm -f \
     "$1/usr/share/doc/kiss/tidbits.txt" \
     "$1/usr/share/doc/kiss/package-manager.txt" \
     "$1/usr/share/doc/kiss/package-system.txt"
-    
+
