@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-#
+
 # Script used with systemrescue 8.05 (contains all commands) & void linux musl (some commands need installing)
 # https://www.system-rescue.org/
 # https://voidlinux.org/
@@ -28,8 +28,8 @@ kiss_cache="/var/db/kiss/cache"
 checksum=3f4ebe1c6ade01fff1230638d37dea942c28ef85969b84d6787d90a9db6a5bf5
 
 if [[ ! -f $file ]]; then
-wget "$url/$file" || curl -fLO "$url/$file"
-# wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
+   wget "$url/$file" || curl -fLO "$url/$file"
+   #wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
 fi
 
 sha256sum -c <(echo "$checksum  $file") || exit 1
@@ -66,22 +66,22 @@ echo '--------------------------------------------'
 [[ -d /sys/firmware/efi ]] && UEFI=1
 
 if [[ $UEFI ]]; then
-sgdisk --zap-all $device
-sgdisk -n 1:2048:550M -t 1:ef00 $device
-sgdisk -n 2:0:0 -t 2:8300 $device
-sgdisk --verify $device
+   sgdisk --zap-all $device
+   sgdisk -n 1:2048:550M -t 1:ef00 $device
+   sgdisk -n 2:0:0 -t 2:8300 $device
+   sgdisk --verify $device
 
-mkfs.vfat -F 32 -n EFI ${device}1
-mkfs.$efifsys $efifsysopts ${device}2
-mount ${device}2 /mnt
+   mkfs.vfat -F 32 -n EFI ${device}1
+   mkfs.$efifsys $efifsysopts ${device}2
+   mount ${device}2 /mnt
 else
-echo "[ ! ] EFI NOT FOUND [ ! ]"
-echo ""
-echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
-sleep 1
-fdisk $device
-mkfs.$extfsys $extfsysopts ${device}1
-mount ${device}1 /mnt
+   echo "[ ! ] EFI NOT FOUND [ ! ]"
+   echo ""
+   echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
+   sleep 1
+   fdisk $device
+   mkfs.$extfsys $extfsysopts ${device}1
+   mount ${device}1 /mnt
 fi
 
 tar xvf "$file" -C /mnt --strip-components=1
@@ -146,8 +146,8 @@ echo '**********************************************************'
 echo -e "\x1B[1;31m [ ! ] CHECK \x1B[1;92m BootOrder: \x1B[1;31m IS CORRECT [ ! ]\x1B[1;0m"
 echo ' Boot entry needs to be towards the top of list otherwise '
 echo '       it will not appear in the boot menu                '
-echo '**********************************************************'
-echo '**********************************************************'
+echo '                                                          '
+echo '                                                          '
 echo '      Resetting BIOS will restore default boot order      '
 echo '**********************************************************'
 efibootmgr -v
