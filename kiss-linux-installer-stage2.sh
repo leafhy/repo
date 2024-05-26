@@ -87,7 +87,6 @@ kiss search \*
 #cd $kissrepo/repo
 #git config merge.verifySignatures true
 
-
 kiss update
 
 # Change cache location to one more apt for Single User
