@@ -1,4 +1,5 @@
 pkgconf
+automake
 autoconf
 libtool
 util-linux
