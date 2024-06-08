@@ -3,30 +3,41 @@
 # NOTE: syslinux is not included in repo due to the creation of
 # an erroneous directory (“│” U+2502 Box Drawings Light Vertical)
 # .../.cache/kiss/sources/syslinux/│/syslinux-6.04-pre1.tar.xz
-#
-# Install worked with internal USB and failed with external USB however YMMV
-#
-# 'dmesg' errors with extlinux 6.04-pre1, mbr.bin & xfs (gptmbr.bin & xfs fails to boot properly)
+
+# Install to HDD may fail if script is not run from internal USB.
+
+# NOTE: Errors appear to be harmless
+# Errors occur with extlinux 6.04-pre1, mbr.bin & xfs (gptmbr.bin & xfs fails to boot properly)
 # exFAT-fs (sda1): invalid boot record signature
 # exFAT-fs (sda1): failed to read boot sector
 # exFAT-fs (sda1): failed to recognize exfat type
-#
-# 'df' displays /dev/root (/dev/sda1)
 
-# Dependencies
-# util-linux perl nasm popt
+#################
+#   IMPORTANT   #
+#################
+
+# 'Sandisk Ultra Flair 64G' displays in some BIOS as 'usb' instead of typical 'sandisk'
+# thus which appears to cause problems with UEFI & extlinux
+# : Kernel Panic - if PCI-E HBA is used.
+# : Missing background image - if PCI-E GPU is used.
+# : Normal boot - No PCI-E cards.
+
+#################
+
+# Dependencies: util-linux perl nasm popt
 
 VERSION=6.04
 CHECKSUM=3f6d50a57f3ed47d8234fd0ab4492634eb7c9aaf7dd902f33d3ac33564fd631d
-
-curl -fLO https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/$VERSION/syslinux-$VERSION-pre1.tar.xz
-
 SHASUM=$(shasum -a 256 syslinux-$VERSION-pre1.tar.xz)
 
-if [ "$SHASUM" = "$CHECKSUM  syslinux-$VERSION-pre1.tar.xz" ] ; then
-echo "Signature OK"
+if [ ! -f "syslinux-$VERSION-pre1.tar.xz" ]; then
+   curl -fLO https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/$VERSION/syslinux-$VERSION-pre1.tar.xz
+fi
+
+if [ "$SHASUM" = "$CHECKSUM  syslinux-$VERSION-pre1.tar.xz" ]; then
+   echo "Signature OK"
 else
-exit 1
+   exit 1
 fi
 
 tar xf syslinux-$VERSION-pre1.tar.xz
