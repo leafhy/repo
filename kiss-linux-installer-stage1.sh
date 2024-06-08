@@ -39,11 +39,13 @@ sha256sum -c <(echo "$checksum  $file") || exit 1
 #gpg --keyserver keyserver.ubuntu.com --recv-key 13295DAC2CF13B5C
 #gpg --verify "$file.asc"
 
+echo '********************************************'
+echo '                                            '
+echo '[ ! ] Verify listed drives are correct [ ! ]'
+echo '                                            '
+echo '********************************************'
 lsblk -f -l | grep sd
 
-echo '********************************************'
-echo '[ ! ] Verify Connected Drive Is Listed [ ! ]'
-echo '********************************************'
 # Generate drive options dynamically
 PS3="Select drive to format: "
 echo ''
@@ -56,9 +58,10 @@ fi
 break
 done
 echo "$device has been selected"
-
 echo ''
-echo "May need to use "wipefs --all $device" if hardrive fails to format properly"
+echo "Use "wipefs --all $device" if hardrive fails to format properly"
+echo ''
+echo "Showing information about $device and all partitions."
 wipefs $device*
 echo '--------------------------------------------'
 
@@ -76,9 +79,8 @@ if [[ $UEFI ]]; then
    mount ${device}2 /mnt
 else
    echo "[ ! ] EFI NOT FOUND [ ! ]"
-   echo ""
+   echo ''
    echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
-   sleep 1
    fdisk $device
    mkfs.$extfsys $extfsysopts ${device}1
    mount ${device}1 /mnt
@@ -134,12 +136,12 @@ tee /mnt/efiboot.sh << EOF
 #!/bin/sh
 
 # void linux
-# Can use UUID
+# initramfs can use 'UUID'
 #efibootmgr -c -d /dev/sda -p 1 -l '\vmlinuz-5.7.7_1' -L 'Void' initrd=\initramfs-5.7.7_1.img root=/dev/sda2
 
 # kiss linux
 # Kernel panic will occur without unicode -> unable to find root
-# PARTUUID is used as UUID doesn't work
+# 'PARTUUID' is used as initramfs is required to use 'UUID'
 efibootmgr --create --disk /dev/sda --loader '\vmlinuz-$kver' --label '$efilabel' --unicode root=PARTUUID=$(blkid -s PARTUUID -o value ${device}2) loglevel=4 Page_Poison=1
 
 echo '**********************************************************'
@@ -168,13 +170,13 @@ EOF
 
 # Change cache location to one more apt for Single User
 if [[ $kiss_cache ]]; then
-sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
-mv -f _ /mnt/usr/bin/kiss
+   sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
+   mv -f _ /mnt/usr/bin/kiss
 
-sed "/Top-level cache/a\
-    cac_dir=$kiss_cache" /mnt/usr/bin/kiss > _
-mv -f _ /mnt/usr/bin/kiss
-chmod +x /mnt/usr/bin/kiss
+   sed "/Top-level cache/a\
+ cac_dir=$kiss_cache" /mnt/usr/bin/kiss > _
+   mv -f _ /mnt/usr/bin/kiss
+   chmod +x /mnt/usr/bin/kiss
 fi
 
 echo "#####################"

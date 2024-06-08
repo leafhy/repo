@@ -126,21 +126,22 @@ fi
 # Install requisite packages
 kiss build baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd util-linux nasm popt
 
-if [ "$kver" ]; then
-   cd "$home"
+if [ "$kver" ] && [ ! "$kver.tar.xz" ]; then
    curl -fLO "$kernel"
+fi
+
+if [ -f "$kver.tar.xz" ]; then
    tar xf "$kver.tar.xz"
    cd  "$kver"
    cp "$kissrepo/repo/linux-kernel.config" .config
+
    sed '/<stdlib.h>/a #include <linux/stddef.h>' tools/objtool/arch/x86/decode.c > _
    mv -f _ tools/objtool/arch/x86/decode.c
-fi
 
-if [ "$kver" ] && [ -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ]; then
+   [ -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ] && \
    patch -p1 < /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch
-fi
 
-if [ "$kver" ] && [ -f /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch ]; then
+   [ -f /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch ] && \
    patch -p1 < /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch
 fi
 
