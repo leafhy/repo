@@ -1,4 +1,4 @@
-#!/bin/sh -ex
+#!/bin/sh -e
 
 sed 's/-O2/-O3 -pipe -march=native/g' configure > _
 mv -f _ configure
