@@ -1,12 +1,13 @@
 #!/bin/bash
+
 set -e
 
-# Script used with systemrescue 8.05 (contains all commands) & void linux musl (some commands need installing)
+# This script has been used with systemrescue 8.05 (contains all commands) & void linux musl (some commands need installing)
 # https://www.system-rescue.org/
 # https://voidlinux.org/
-#
-# [!] EXTLINUX [6.03+] supports: FAT12/16/32, NTFS, ext2/3/4, Btrfs, XFS, UFS/FFS [!]
-# [!] f2fs is not compatable with extlinux [!]
+
+# NOTE: EXTLINUX [6.03+] supports: FAT12/16/32, NTFS, ext2/3/4, Btrfs, XFS, UFS/FFS.
+#       f2fs is not compatable with extlinux.
 
 kver=5.15.6
 efilabel=KISS_LINUX
@@ -21,7 +22,7 @@ efifsys=f2fs
 efifsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $fsyslabel"
 extfsys=xfs
 extfsysopts="-f -L $fsyslabel"
-# /usr/bin/kiss cache default locations "$HOME/.cache/kiss" "/root/.cache/kiss"
+# 'kiss linux' default cache locations '$HOME/.cache/kiss' '/root/.cache/kiss'
 kiss_cache="/var/db/kiss/cache"
 
 # kiss-chroot-2021.7-9.tar.xz
