@@ -1,6 +1,4 @@
 #!/bin/sh -e
-#
-# build initially failed with pigz symbolic link -> gzip
 
 # Remove obsolete program
 sed '/RESIZECONS_PROGS=/s/yes/no/' configure > _
