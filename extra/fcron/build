@@ -1,19 +1,19 @@
 #!/bin/sh -e
 #
-# Build fails as USER chown: changing ownership of pkg/fcron/usr/sbin : Operation not permitted
+# NOTE: Build fails as USER chown: changing ownership of pkg/fcron/usr/sbin : Operation not permitted
 
-UID="$(id | cut -d "(" -f 1)"
+if [ "$(id -u)" != 0 ]; then
+   echo "#####################################"
+   echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
+   echo "#                                   #"
+   echo "#        ssu -p kiss b fcron        #"
+   echo "#####################################"
 
-if [ "$UID" != uid=0 ]; then
-echo "#####################################"
-echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
-echo "#                                   #"
-echo "#        ssu -p kiss b fcron        #"
-echo "#####################################"
-sleep 1
-[ -d /var/db/kiss/cache/sources/fcron ] && \
-   rm -rf /var/db/kiss/cache/sources/fcron
-exit 1
+   owner="$(ls -ld $KISSREPO/cache/sources/fcron | cut -d ' ' -f 3)"
+
+   [ "$owner" != root ] && rm -rf $KISSREPO/cache/sources/fcron
+
+   exit 1
 fi
 
 getent group fcron || addgroup -S -g 997 fcron
@@ -44,7 +44,7 @@ make
 make DESTDIR="$1" install
 
 for d in hourly daily weekly monthly; do
-install -dm755 "$1/etc/cron.$d"
+   install -dm755 "$1/etc/cron.$d"
 done
 
 install -m640 systab.orig "$1/var/spool/fcron"

@@ -1,17 +1,17 @@
 #!/bin/sh -e
 
-UID="$(id | cut -d "(" -f 1)"
+if [ "$(id -u)" != 0 ]; then
+   echo "#####################################"
+   echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
+   echo "#                                   #"
+   echo "#      ssu -p kiss b femtomail      #"
+   echo "#####################################"
 
-if [ "$UID" != uid=0 ]; then
-echo "#####################################"
-echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
-echo "#                                   #"
-echo "#      ssu -p kiss b femtomail      #"
-echo "#####################################"
-sleep 1
-[ -d /var/db/kiss/cache/sources/femtomail ] && \
-   rm -rf /var/db/kiss/cache/sources/femtomail
-exit 1
+   owner="$(ls -ld $KISSREPO/cache/sources/femtomail | cut -d ' ' -f 3)"
+
+   [ "$owner" != root ] && rm -rf $KISSREPO/cache/sources/femtomail
+
+   exit 1
 fi
 
 [ -L /usr/bin/sendmail ] && unlink /usr/bin/sendmail

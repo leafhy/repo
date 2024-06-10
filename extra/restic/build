@@ -1,21 +1,21 @@
 #!/bin/sh -e
 
-UID="$(id | cut -d "(" -f 1)"
+if [ "$(id -u)" != 0 ]; then
+   echo "#####################################"
+   echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
+   echo "#                                   #"
+   echo "#       ssu -p kiss b restic        #"
+   echo "#####################################"
 
-if [ "$UID" != uid=0 ]; then
-echo "#####################################"
-echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
-echo "#                                   #"
-echo "#       ssu -p kiss b restic        #"
-echo "#####################################"
-sleep 1
-[ -d /var/db/kiss/cache/sources/restic ] && \
-   rm -rf /var/db/kiss/cache/sources/restic
-exit 1
+   owner="$(ls -ld $KISSREPO/cache/sources/restic | cut -d ' ' -f 3)"
+
+   [ "$owner" != root ] && rm -rf $KISSREPO/cache/sources/restic
+
+   exit 1
 fi
 
 make
 
 install -Dm755 restic "$1/usr/bin/restic"
-install -Dm644 -t "$1/usr/share/man/man1/" doc/man/*.1 
+install -Dm644 -t "$1/usr/share/man/man1/" doc/man/*.1
 install -Dm644 doc/bash-completion.sh "$1/usr/share/bash-completion/completions/restic"

@@ -1,22 +1,24 @@
 #!/bin/sh -e
 
-UID="$(id | cut -d "(" -f 1)"
+vers=2.7.6
 
-if [ "$UID" != uid=0 ]; then
-echo "#####################################"
-echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
-echo "#                                   #"
-echo "#        ssu -p kiss b caddy        #"
-echo "#####################################"
-sleep 1
-[ -d /var/db/kiss/cache/sources/caddy ] && \
-   rm -rf /var/db/kiss/cache/sources/caddy
-exit 1
+if [ "$(id -u)" != 0 ]; then
+   echo "#####################################"
+   echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
+   echo "#                                   #"
+   echo "#        ssu -p kiss b caddy        #"
+   echo "#####################################"
+
+   owner="$(ls -ld $KISSREPO/cache/sources/caddy | cut -d ' ' -f 3)"
+
+   [ "$owner" != root ] && rm -rf $KISSREPO/cache/sources/caddy
+
+   exit 1
 fi
 
 TMPDIR="$(mktemp -d -p .)"
 
-tar xf ../../../../sources/caddy/caddy_2.7.6_src.tar.gz -C "$TMPDIR"
+tar xf ../../../../sources/caddy/caddy_$vers_src.tar.gz -C "$TMPDIR"
 cd "$TMPDIR/cmd/caddy"
 
 go build
