@@ -74,7 +74,7 @@ timeout 50
 label Kiss
 menu label kernel-5.15.6
 linux /boot/vmlinuz-5.15.6
-append root=PARTUUID=$(blkid -s PARTUUID -o value /dev/sda1) ro
+append root=PARTUUID=$(blkid -s PARTUUID -o value /dev/sda1) ro loglevel=4
 EOF
 
 echo "##############################"
