@@ -9,15 +9,18 @@ chown vaultwarden:vaultwarden /etc/vaultwarden.conf
 chown vaultwarden:vaultwarden /var/log/vaultwarden
 
 cat <<EOF
+
 ###########################################
-#    [ ! ] Install Bitwarden CLI [ ! ]    #
-#                                         #
-#   npm install -g @bitwarden/cli         #
-#                                         #
-#                                         #
-# Useage:                                 #
-# NODE_EXTRA_CA_CERTS=root.crt bw login   #
-# NODE_TLS_REJECT_UNAUTHORIZED=0 bw login #
-#                                         #
+
+NOTE: Install 'Bitwarden CLI' with
+
+-> npm install -g @bitwarden/cli
+
+NOTE: Useage
+
+-> NODE_EXTRA_CA_CERTS=root.crt bw login
+-> NODE_TLS_REJECT_UNAUTHORIZED=0 bw login
+
 ###########################################
+
 EOF

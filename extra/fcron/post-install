@@ -16,7 +16,7 @@ getent passwd fcron || adduser -H -h /var/spool/fcron -s /bin/sh -D -S -G fcron 
 
 fcrontab /var/spool/fcron/systab.orig
 
-cat <<'EOF'
+cat <<EOF
 
 NOTE: If the system shell is "/usr/bin/sh -> busybox",
       roots fcrontab entry may fail to run as "$USER".

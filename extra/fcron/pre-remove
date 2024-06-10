@@ -1,6 +1,5 @@
 #!/bin/sh -e
 
-# Quirk/bug?
 # These files are (modified) & not removed despite contents being unchanged.
 # /etc/fcron.conf
 # /etc/fcron.allow
@@ -10,18 +9,19 @@
 sv down fcron
 deluser --remove-home fcron
 unlink /var/service/fcron
-rm -r /etc/sv/fcron
+rm -r  /etc/sv/fcron
+rm     /etc/fcron.*
 
 cat <<EOF
-###################################
-[!] Remove these files manually [!]
-/etc/fcron.allow
-/etc/fcron.deny
-/etc/fcron.conf
+
+######################################
 
 [!] Reboot to resolve the following errors [!]
+
 runsv: can't move 'supervise/stat.new' to 'supervise/stat': No such file or directory runsv
 fcron: warning: cannot open supervise/status.new: No such file or directory runsv
 fcron: warning: cannot open supervise/pid.new: No such file or directory
+
 ######################################
+
 EOF

@@ -1,8 +1,8 @@
 #!/bin/sh
 
-ln=$(stat /usr/bin/ln | grep -o busybox)
+link=$(stat /usr/bin/ln | grep -o busybox)
 
-if [ "$ln" != busybox ]; then
+if [ "$link" != busybox ]; then
    kiss a busybox /usr/bin/ln
 fi
 

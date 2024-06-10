@@ -4,7 +4,7 @@ patch -p1 < 14-Fix-g++-warning.patch
 
 cp makefile.linux_amd64_asm makefile.machine
 
-sed 's+OPTFLAGS=-O -s+OPTFLAGS=-O3 -march=native -Wno-narrowing -s+' makefile.machine > _
+sed 's+OPTFLAGS=-O -s+OPTFLAGS=-O3 -Wno-narrowing -s+' makefile.machine > _
 mv -f _ makefile.machine
 
 make all3

@@ -33,6 +33,6 @@ mv -f _ siren.h
     portaudio=no \
     pulse=no \
     alsa=no
-      
+
 make
 make install

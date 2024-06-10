@@ -13,6 +13,6 @@ mv -f _ docs/man/man8/Makefile.in
 ./configure \
     --prefix=/usr \
     --disable-vlock
-      
- make
- make install
+
+make
+make install

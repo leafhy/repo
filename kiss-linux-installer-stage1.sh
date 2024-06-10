@@ -59,7 +59,7 @@ break
 done
 echo "$device has been selected"
 echo ''
-echo "Use "wipefs --all $device" if hardrive fails to format properly"
+echo "Use \"wipefs --all $device\" if hardrive fails to format properly"
 echo ''
 echo "Showing information about $device and all partitions."
 wipefs $device*
@@ -88,7 +88,7 @@ fi
 
 tar xvf "$file" -C /mnt --strip-components=1
 
-# remove uneeded directories + broken symbolic link
+# remove unneeded directories + broken symbolic link
 rm -r /mnt/usr/local
 
 if [[ $UEFI ]]; then

@@ -12,7 +12,7 @@
 make
 make install
 
-# Remove the uneeded
+# Remove the unneeded
 rm -rf "$1/usr/include/atalk"
 rm -f "$1/usr/bin/afpldaptest"
 rm -f "$1/usr/bin/lp2pap.sh"

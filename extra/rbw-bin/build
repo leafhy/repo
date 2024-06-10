@@ -1,6 +1,8 @@
 #!/bin/sh -e
 
-tar xf ../../../../sources/rbw-bin/rbw_1.9.0_linux_amd64.tar.gz
+vers=1.9.0
+
+tar xf ../../../../sources/rbw-bin/rbw_$vers_linux_amd64.tar.gz
 
 install -Dm755 rbw "$1/usr/bin/rbw-bin"
 install -Dm755 rbw-agent "$1/usr/bin/rbw-agent-bin"

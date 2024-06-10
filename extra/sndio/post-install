@@ -3,9 +3,12 @@
 getent passwd sndiod || adduser -H -h "/run/sndiod" -D -S -u 994 -g "sndio daemon" sndiod
 
 cat <<EOF
+
 #################################
             IMPORTANT
 #################################
+
+NOTE: Applicable to *this* 'Kiss Linux'
 
 Alsa works with USB UAC1 & UAC2
 
@@ -14,4 +17,5 @@ Sndio does not work with USB UAC1
 Sndio does work with USB UAC2
 
 #################################
+
 EOF

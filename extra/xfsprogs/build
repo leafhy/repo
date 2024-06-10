@@ -1,9 +1,9 @@
 #!/bin/sh -e
 
 # Remove incorrect bash dependency.
-# sed -i 's/bash/sh/' install-sh
 sed 's/bash/sh/' install-sh > _
 mv -f _ install-sh
+
 chmod +x install-sh
 
 ./configure \

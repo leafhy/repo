@@ -1,9 +1,9 @@
 #!/bin/sh -e
 
 # bower uses ln -L (--logical) which busybox does not support
-ln=$(stat /usr/bin/ln | grep -o busybox || true)
+link=$(stat /usr/bin/ln | grep -o busybox || true)
 
-if [ "$ln" = busybox ]; then
+if [ "$link" = busybox ]; then
    kiss a coreutils /usr/bin/ln
 fi
 

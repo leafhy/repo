@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
-tar xf ../../../../sources/caddy-bin/caddy_*_linux_amd64.tar.gz
+vers=2.7.0-beta.2
+
+tar xf ../../../../sources/caddy-bin/caddy_$vers_linux_amd64.tar.gz
 
 install -Dm755 caddy "$1/usr/bin/caddy-bin"
