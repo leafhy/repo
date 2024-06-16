@@ -67,11 +67,12 @@ source /root/.profile
 # ie. repo out of sync
 ###############################################
 
-if [ ! -d "$kissrepo/repo" ]; then
-   git clone https://github.com/leafhy/repo.git $kissrepo/repo
-   #git clone https://github.com/kisslinux/repo.git $kissrepo/repo
-   git clone https://github.com/dylanaraps/community.git $kissrepo/community
+[ ! -d "$kissrepo/repo" ] && git clone https://github.com/leafhy/repo.git $kissrepo/repo
+                            #git clone https://github.com/kisslinux/repo.git $kissrepo/repo
 
+[ ! -d "$kissrepo/community" ] && git clone https://github.com/dylanaraps/community.git $kissrepo/community
+
+if [ ! -f /root/.gitconfig ]; then
    # fix git dubious permissions
    git config --global --add safe.directory "$kissrepo/repo"
    cp /root/.gitconfig "$home"
