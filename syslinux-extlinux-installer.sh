@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-# NOTE: syslinux is not included in repo due to the creation of
+# NOTE: syslinux is not included in 'repo' due to the creation of
 # an erroneous directory (“│” U+2502 Box Drawings Light Vertical)
 # .../.cache/kiss/sources/syslinux/│/syslinux-6.04-pre1.tar.xz
 
@@ -16,10 +16,12 @@
 #   IMPORTANT   #
 #################
 
+NOTE: The following problems only occur with USB installation, not with SSD/HDD.
+
 # 'Sandisk Ultra Flair 64G' displays in some BIOS as 'usb' instead of typical 'sandisk'
-# thus which appears to cause problems with UEFI & extlinux
+# thus which appears to cause problems with UEFI & extlinux.
 # : Kernel Panic - if PCI-E HBA is used.
-# : Missing background image - if PCI-E GPU is used.
+# : Missing extlinux background image - if PCI-E GPU is used.
 # : Normal boot - No PCI-E cards.
 
 #################
@@ -28,15 +30,23 @@
 
 VERSION=6.04
 CHECKSUM=3f6d50a57f3ed47d8234fd0ab4492634eb7c9aaf7dd902f33d3ac33564fd631d
-SHASUM=$(shasum -a 256 syslinux-$VERSION-pre1.tar.xz)
+FILE=syslinux-$VERSION-pre1.tar.xz
 
-if [ ! -f "syslinux-$VERSION-pre1.tar.xz" ]; then
-   curl -fLO https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/$VERSION/syslinux-$VERSION-pre1.tar.xz
-fi
+die () {
+   echo "Missing commands (shasum, sha256sum)"
+   exit 1
+}
 
-if [ "$SHASUM" = "$CHECKSUM  syslinux-$VERSION-pre1.tar.xz" ]; then
+[ "$(command -v shasum 2>/dev/null)" ] || [ "$(command -v sha256sum 2>/dev/null)" ] || die
+
+[ ! -f "$FILE" ] && curl -fLO https://mirrors.edge.kernel.org/pub/linux/utils/boot/syslinux/Testing/$VERSION/syslinux-$VERSION-pre1.tar.xz
+
+SHASUM=$(shasum -a 256 $FILE || sha256 $FILE)
+
+if [ "$SHASUM" = "$CHECKSUM  $FILE" ]; then
    echo "Signature OK"
 else
+   echo "Signature Mismatch"
    exit 1
 fi
 
