@@ -77,7 +77,7 @@ install -m644 sample/m16-640x640-syslinux.jpg /boot/extlinux
 
 tee /boot/extlinux/extlinux.conf << EOF
 ui vesamenu.c32
-menu title Welcome To Kiss Linux
+menu title [ Welcome To Kiss Linux ]
 menu background m16-640x640-syslinux.jpg
 timeout 50
 
