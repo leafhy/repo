@@ -72,8 +72,8 @@ source /root/.profile
 
 [ ! -d "$kissrepo/community" ] && git clone https://github.com/dylanaraps/community.git $kissrepo/community
 
+# Fix git dubious permissions.
 if [ ! -f /root/.gitconfig ]; then
-   # fix git dubious permissions
    git config --global --add safe.directory "$kissrepo/repo"
    cp /root/.gitconfig "$home"
 fi

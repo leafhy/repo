@@ -26,7 +26,7 @@ NOTE: The following problems only occur with USB installation, not with SSD/HDD.
 
 #################
 
-# Dependencies: util-linux perl nasm popt
+# syslinux depends: util-linux perl nasm popt
 
 VERSION=6.04
 CHECKSUM=3f6d50a57f3ed47d8234fd0ab4492634eb7c9aaf7dd902f33d3ac33564fd631d
@@ -54,7 +54,7 @@ tar xf syslinux-$VERSION-pre1.tar.xz
 
 cd syslinux-$VERSION-pre1
 
-# fix undefined reference to major
+# Fix undefined reference to major
 sed s'+#include <sys/stat.h>+#include <sys/stat.h>\
 #include <sys/sysmacros.h>+' extlinux/main.c > _
 mv -f _ extlinux/main.c
@@ -63,7 +63,7 @@ make bios installer
 
 mkdir -p /boot/extlinux
 
-# install ldlinux.c32 & ldlinux.sys
+# Install ldlinux.c32 & ldlinux.sys
 # extlinux --install /boot/extlinux --device /dev/sda1
 bios/extlinux/extlinux --install /boot/extlinux
 
