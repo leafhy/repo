@@ -60,7 +60,7 @@ break
 done
 echo "$device has been selected"
 echo ''
-echo "Use \"wipefs --all $device\" if hardrive fails to format properly"
+echo "NOTE: Use \"wipefs --all $device\" if hardrive fails to format properly."
 echo ''
 echo "Showing information about $device and all partitions."
 wipefs $device*
@@ -137,7 +137,7 @@ tee /mnt/efiboot.sh << EOF
 #!/bin/sh
 
 # void linux
-# initramfs can use 'UUID'
+# initramfs uses 'UUID'
 #efibootmgr -c -d /dev/sda -p 1 -l '\vmlinuz-5.7.7_1' -L 'Void' initrd=\initramfs-5.7.7_1.img root=/dev/sda2
 
 # kiss linux
