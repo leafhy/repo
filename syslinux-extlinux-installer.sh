@@ -16,7 +16,7 @@
 #   IMPORTANT   #
 #################
 
-NOTE: The following problems only occur with USB installation, not with SSD/HDD.
+# NOTE: The following problems only occur with USB installation, not with SSD/HDD.
 
 # 'Sandisk Ultra Flair 64G' displays in some BIOS as 'usb' instead of typical 'sandisk'
 # thus which appears to cause problems with UEFI & extlinux.
