@@ -4,14 +4,14 @@
 ssh-keygen -A >/dev/null 2>&1
 
 cat <<EOF
-##########################################################################################
+####################################################################################
 
-To resolve "no hostkey alg" add the following to /etc/ssh/sshd_config and or ~/.ssh/config
+To resolve "no hostkey alg" add this to '/etc/ssh/sshd_confi' and/or '~/.ssh/config'
 
-'HostKeyAlgorithms +ssh-rsa'
-'PubkeyAcceptedAlgorithms +ssh-rsa'
+-> 'HostKeyAlgorithms +ssh-rsa'
+-> 'PubkeyAcceptedAlgorithms +ssh-rsa'
 
-PubkeyAcceptedKeyTypes is aliased to PubkeyAcceptedAlgorithms
+NOTE: PubkeyAcceptedKeyTypes is aliased to PubkeyAcceptedAlgorithms
 
-##########################################################################################
+####################################################################################
 EOF

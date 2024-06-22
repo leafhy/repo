@@ -10,9 +10,9 @@ NOTE:
                    ~/.config/nano/nanorc
 
 # Enable specific highlighting
-echo 'include /usr/share/nano/sh.nanorc' > ~/.nanorc
+-> echo 'include /usr/share/nano/sh.nanorc' > ~/.nanorc
 
 # Enable All highlighting
-echo 'include /usr/share/nano/*.nanorc' > ~/.nanorc
+-> echo 'include /usr/share/nano/*.nanorc' > ~/.nanorc
 
 EOF
