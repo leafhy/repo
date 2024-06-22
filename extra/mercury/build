@@ -29,9 +29,9 @@ for dir in ints inc mdb mmake ; do
 done
 
 install -D -t "$1/usr/lib/mercury/conf" usr/lib/mercury/conf/Mercury.config
-install -m644 usr/lib/mercury/conf/mercury_conf.h "$1/usr/lib/mercury/conf/mercury_conf.h"
-install -m644 usr/lib/mercury/lib/libgc.a "$1/usr/lib/mercury/lib/libgc.a"
-install -m644 usr/lib/mercury/lib/libgc.so "$1/usr/lib/mercury/lib/libgc.so"
+install -m644 usr/lib/mercury/conf/mercury_conf.h "$1/usr/lib/mercury/conf"
+install -m644 usr/lib/mercury/lib/libgc.a "$1/usr/lib/mercury/lib"
+install -m644 usr/lib/mercury/lib/libgc.so "$1/usr/lib/mercury/lib"
 
 rm -rf "$1/usr/lib/mercury/ints/hlc.gc.pregen"
 rm -rf "$1/usr/lib/mercury/lib/hlc.gc.pregen"
