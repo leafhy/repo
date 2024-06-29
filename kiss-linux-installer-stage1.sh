@@ -59,7 +59,7 @@ fi
 break
 done
 echo "$device has been selected"
-echo ''
+/echo ''
 echo "NOTE: Use \"wipefs --all $device\" if hardrive fails to format properly."
 echo ''
 echo "Showing information about $device and all partitions."
@@ -110,7 +110,7 @@ fi
 
 printf '%s\n' $hostname > /mnt/etc/hostname
 # kiss-chroot will overwrite /ete/resolv.conf
-printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf.new
+printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf.orig
 
 mkdir /mnt/etc/rc.d
 

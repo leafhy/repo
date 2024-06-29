@@ -11,7 +11,7 @@ kiss_cache="$kissrepo/cache"
 
 if [ ! "$username" ]; then
    echo "Missing username"
-   exit
+   exit 1
 fi
 
 user="$(getent passwd 1000 | cut -d: -f1)"
@@ -160,7 +160,7 @@ echo "#####################"
 echo "#### FINAL STEPS ####"
 echo "#####################"
 echo "### Build & install kernel"
-echo "cd $home/$kver"
+echo "cd $kver"
 echo "make && make install"
 echo "cp /boot/vmlinuz /boot/efi/vmlinuz-5.15.6"
 echo "cp /boot/System.map /boot/System.map-5.15.6"
