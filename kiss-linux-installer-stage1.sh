@@ -10,7 +10,7 @@ set -e
 #       f2fs is not compatable with extlinux.
 
 kver=5.15.6
-efilabel=KISS_LINUX
+efilabel=KISS_LINUX-$kver
 fsyslabel=KISS_LINUX
 chrootver=2021.7-9
 url=https://github.com/kisslinux/repo/releases/download/$chrootver
@@ -59,7 +59,7 @@ fi
 break
 done
 echo "$device has been selected"
-/echo ''
+echo ''
 echo "NOTE: Use \"wipefs --all $device\" if hardrive fails to format properly."
 echo ''
 echo "Showing information about $device and all partitions."
@@ -145,15 +145,17 @@ tee /mnt/efiboot.sh << EOF
 # 'PARTUUID' is used as initramfs is required to use 'UUID'
 efibootmgr --create --disk /dev/sda --loader '\vmlinuz-$kver' --label '$efilabel' --unicode root=PARTUUID=$(blkid -s PARTUUID -o value ${device}2) loglevel=4 Page_Poison=1
 
-echo '*********************************************************************************************'
+echo '***********************************************'
 echo -e "\x1B[1;31m [ ! ] CHECK \x1B[1;92m BootOrder: \x1B[1;31m IS CORRECT [ ! ]\x1B[1;0m"
 echo ''
-echo 'Boot entry needs to be towards the top of list otherwise it will not appear in the boot menu.'
+echo 'Boot entry needs to be towards the top of list'
+echo 'otherwise it will not appear in the boot menu.'
 echo ''
 echo 'BIOS reset will restore default boot order.'
-echo '*********************************************************************************************'
+echo '***********************************************'
 efibootmgr -v
 EOF
+chmod +x /mnt/efiboot.sh
 fi
 
 tee /mnt/root/.profile << EOF
