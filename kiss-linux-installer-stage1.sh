@@ -89,7 +89,7 @@ fi
 
 tar xvf "$file" -C /mnt --strip-components=1
 
-# remove unneeded directories + broken symbolic link
+# Remove unneeded directories + broken symbolic link
 rm -r /mnt/usr/local
 
 if [[ $UEFI ]]; then
