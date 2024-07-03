@@ -2,8 +2,8 @@
 
 username=
 home="/home/$username"
-kver="linux-5.15.6"
-kernel="https://cdn.kernel.org/pub/linux/kernel/v5.x/$kver.tar.xz"
+kver="5.15.6"
+kernel="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$kver.tar.xz"
 #lver="linux-firmware-20211027"
 linuxfirmware="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/$lver.tar.gz"
 kissrepo="/var/db/kiss"
@@ -127,14 +127,14 @@ fi
 # Install requisite packages
 kiss build baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd util-linux nasm popt
 
-if [ "$kver" ] && [ ! "$kver.tar.xz" ]; then
+if [ "$kver" ] && [ ! -f "linux-$kver.tar.xz" ]; then
    curl -fLO "$kernel"
 fi
 
-if [ -f "$kver.tar.xz" ]; then
-   tar xf "$kver.tar.xz"
-   cd  "$kver"
-   cp "$kissrepo/repo/linux-kernel.config" .config
+if [ -f "linux-$kver.tar.xz" ]; then
+   tar xf "linux-$kver.tar.xz"
+   cd  "linux-$kver"
+   cp "$kissrepo/repo/linux-kernel-$kver.config" .config
 
    sed '/<stdlib.h>/a #include <linux/stddef.h>' tools/objtool/arch/x86/decode.c > _
    mv -f _ tools/objtool/arch/x86/decode.c
