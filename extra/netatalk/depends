@@ -1,6 +1,6 @@
 acl
 attr
-libdb5
+libdb6
 libgcrypt
 libgpg-error
 openssl

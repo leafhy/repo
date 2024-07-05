@@ -3,7 +3,7 @@
 # NOTE: Berkeley DB 6.0.19 is the last Sleepycat license version
 #       not 5.3.28 as per netatalk docs.
 
-ver=5.3
+ver=6.0
 
 sed 's/__atomic_compare_exchange/__atomic_compare_exchange_db/g' src/dbinc/atomic.h > _
 mv -f _ src/dbinc/atomic.h

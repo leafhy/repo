@@ -6,6 +6,7 @@
    --sysconfdir=/etc \
    --localstatedir=/var/lib/netatalk \
    --with-ssl-dir=/usr/lib/ssl \
+   --with-bdb=/opt/BerkeleyDB.6.0 \
    --without-cnid-tdb-backend \
    --disable-quota
 
