@@ -190,7 +190,7 @@ fi
 echo "#####################"
 echo "#### FINAL STEPS ####"
 echo "#####################"
-echo "Copy stage2 installer to /mnt"
+echo "### Copy stage2 installer to /mnt"
 echo "cp kiss-linux-installer-stage2.sh /mnt"
 echo ''
 echo "### Enter chroot"
