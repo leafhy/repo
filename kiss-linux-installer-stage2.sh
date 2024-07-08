@@ -160,7 +160,7 @@ echo "#####################"
 echo "#### FINAL STEPS ####"
 echo "#####################"
 echo "### Build & install kernel"
-echo "cd $kver"
+echo "cd linux-$kver"
 echo "make && make install"
 echo''
 echo "### Create boot entry for UEFI"
