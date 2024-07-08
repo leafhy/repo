@@ -99,9 +99,9 @@ sed '/# SOFTWARE./a\
 \
 kiss_cache="/var/db/kiss/cache"\
 \
-uid="$(id | cut -d "(" -f 1)"\
+uid="$(id -u)"\
 \
-if [ "$uid" != uid=0 ]; then\
+if [ "$uid" != 0 ]; then\
    ssu chown -R 1000:1000 "$kiss_cache/logs"\
 fi' /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
@@ -162,12 +162,17 @@ echo "#####################"
 echo "### Build & install kernel"
 echo "cd $kver"
 echo "make && make install"
-echo "cp /boot/vmlinuz /boot/efi/vmlinuz-5.15.6"
-echo "cp /boot/System.map /boot/System.map-5.15.6"
+echo''
 echo "### Create boot entry for UEFI"
+echo "cp /boot/vmlinuz /boot/efi/vmlinuz-$kver"
+echo "cp /boot/System.map /boot/efi/System.map-$kver"
 echo "./efiboot.sh"
+echo''
 echo "### Create boot entry for NON-UEFI"
+echo "cp /boot/vmlinuz /boot/vmlinuz-$kver"
+echo "cp /boot/System.map /boot/System.map-$kver"
 echo "./syslinux-extlinux-installer.sh"
+echo''
 echo "### Rename resolv.conf.orig"
 echo "mv /etc/resolv.conf.orig /etc/resolv.conf"
 echo "#####################"

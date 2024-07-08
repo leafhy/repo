@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-vers=2.7.6
+ver=2.7.6
 
 if [ "$(id -u)" != 0 ]; then
    echo "#####################################"
@@ -9,7 +9,7 @@ if [ "$(id -u)" != 0 ]; then
    echo "#        ssu -p kiss b caddy        #"
    echo "#####################################"
 
-   owner="$(ls -ld $KISSREPO/cache/sources/caddy | cut -d ' ' -f 3)"
+   owner="$(ls -ld $KISSREPO/cache/sources/caddy | grep -o root | head -n1)"
 
    [ "$owner" != root ] && rm -rf $KISSREPO/cache/sources/caddy
 
@@ -18,7 +18,7 @@ fi
 
 TMPDIR="$(mktemp -d -p .)"
 
-tar xf ../../../../sources/caddy/caddy_$vers_src.tar.gz -C "$TMPDIR"
+tar xf ../../../../sources/caddy/caddy_$ver_src.tar.gz -C "$TMPDIR"
 cd "$TMPDIR/cmd/caddy"
 
 go build

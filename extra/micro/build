@@ -7,7 +7,7 @@ if [ "$(id -u)" != 0 ]; then
    echo "#        ssu -p kiss b micro        #"
    echo "#####################################"
 
-   owner="$(ls -ld $KISSREPO/cache/sources/micro | cut -d ' ' -f 3)"
+   owner="$(ls -ld $KISSREPO/cache/sources/micro | grep -o root | head -n1)"
 
    [ "$owner" != root ] && rm -rf $KISSREPO/cache/sources/micro
 
