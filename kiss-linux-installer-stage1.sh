@@ -109,7 +109,9 @@ EOF
 fi
 
 printf '%s\n' $hostname > /mnt/etc/hostname
-# kiss-chroot will overwrite /ete/resolv.conf
+
+# 'kiss-chroot' will overwrite '/etc/resolv.conf'
+# and apon exiting chroot, '/etc/resolv.conf' will be deleted.
 printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf.orig
 
 mkdir /mnt/etc/rc.d
@@ -184,10 +186,12 @@ fi
 echo "#####################"
 echo "#### FINAL STEPS ####"
 echo "#####################"
-echo "Copy kiss-linux-installer-stage2.sh to /mnt"
+echo "Copy stage2 installer to /mnt"
 echo "cp kiss-linux-installer-stage2.sh /mnt"
+echo ''
 echo "### Enter chroot"
 echo "/mnt/bin/kiss-chroot /mnt"
-echo "### Run kiss-linux-installer-stage2.sh"
+echo ''
+echo "### Run stage2 installer"
 echo "./kiss-linux-installer-stage2.sh"
 echo "#####################"
