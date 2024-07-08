@@ -2,8 +2,12 @@
 
 set -e
 
-# This script has been used with systemrescue 8.05 (contains all commands) & void linux musl (some commands need installing)
+# This script has been used with:
+
+# Systemrescue 8.05 (contains all commands)
 # https://www.system-rescue.org/
+
+# Void Linux musl (some commands need installing)
 # https://voidlinux.org/
 
 # NOTE: EXTLINUX [6.03+] supports: FAT12/16/32, NTFS, ext2/3/4, Btrfs, XFS, UFS/FFS.
