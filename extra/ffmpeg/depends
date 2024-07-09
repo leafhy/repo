@@ -1,11 +1,10 @@
-# alsa-lib
 lame
 libass
-# libdrm
 libogg
 libvorbis
 libvpx
 libwebp
+sndio
 linux-headers make
 nasm          make
 openssl

@@ -4,15 +4,21 @@
     --cc="$CC" \
     --cxx="$CXX" \
     --prefix=/usr \
+    --x86asmexe=nasm \
     --disable-debug \
     --disable-libxml2 \
-    --disable-static \
     --disable-libxcb \
     --disable-libxcb-shm \
     --disable-libxcb-xfixes \
     --disable-libxcb-shape \
+    --disable-shared \
     --disable-xlib \
+    --disable-alsa \
+    --disable-indev=oss \
+    --disable-outdev=oss \
+    --disable-runtime-cpudetect \
     --enable-gpl \
+    --enable-sndio \
     --enable-libmp3lame \
     --enable-libopus \
     --enable-libvorbis \
@@ -23,11 +29,9 @@
     --enable-libxvid \
     --enable-nonfree \
     --enable-openssl \
-    --enable-shared \
-    --enable-version3 \
-    --x86asmexe=nasm \
-    --enable-libass 
-#   --enable-libdrm \
+    --enable-static \
+    --enable-libass
+#   --enable-libdrm
 
 make
 make install
