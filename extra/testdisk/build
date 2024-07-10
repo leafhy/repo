@@ -2,9 +2,10 @@
 
 ./configure \
     --prefix=/usr
-      
+
 make
-make install      
+make install
 
 # Remove docs
-rm -r "$1"/usr/share/man/zh_CN
+rm -r "$1/usr/share/man/zh_CN"
+rm -r "$1/usr/share/doc"

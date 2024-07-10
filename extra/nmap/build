@@ -4,12 +4,12 @@
     --prefix=/usr \
     --without-zenmap \
     --with-libpcap=included
-     
+
 make
 make DESTDIR="$1" install
 
 # Remove docs
 for d in de es fr hr hu it ja pl pt_BR pt_PT ro ru sk zh; do
-    rm -r "$1"/usr/share/man/"$d"
+    rm -r "$1/usr/share/man/$d"
     done
 

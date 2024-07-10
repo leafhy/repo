@@ -1,0 +1,22 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --bindir=/usr/bin \
+    --sbindir=/usr/bin \
+    --enable-really-static
+
+make
+make install
+
+# Recreate symlinks
+mv -f "$1/bin/ntfs-3g" "$1/usr/bin"
+mv -f "$1/bin/lowntfs-3g" "$1/usr/bin"
+
+ln -sf "$1/usr/bin/ntfs-3g" "$1/usr/bin/mount.ntfs-3g"
+ln -sf "$1/usr/bin/lowntfs-3g" "$1/usr/bin/mount.lowntfs-3g"
+
+rm -rf "$1/bin"
+rm -rf "$1/sbin"
+rm -rf "$1/usr/lib"
+rm -rf "$1/usr/share/doc"
