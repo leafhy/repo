@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-mv Modules/* cmake/modules
+mv Modules/* cmake/modules/
 
 # Fix lifted from https://github.com/noirlinux/main/blob/master/extra/llvm/build
 # Create a symbolic link to the expected folder
