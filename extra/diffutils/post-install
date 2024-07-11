@@ -1,0 +1,12 @@
+#!/bin/sh
+
+cat <<EOF
+### IMPORTANT ###
+
+'busybox diff' conflicts with 'diffutils sdiff'.
+
+To use sdiff, swap 'busybox diff' with 'diffutils diff'
+
+-> kiss a diffutils /usr/bin/diff
+
+#################
