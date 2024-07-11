@@ -1,6 +1,7 @@
 #!/bin/sh
 
 cat <<EOF
+
 ### Nano Syntax Highlighting ###
 
 NOTE:
@@ -15,4 +16,5 @@ NOTE:
 # Enable All highlighting
 -> echo 'include /usr/share/nano/*.nanorc' > ~/.nanorc
 
+###############################
 EOF

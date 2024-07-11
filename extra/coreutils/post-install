@@ -1,6 +1,7 @@
 #!/bin/sh
 
 cat <<EOF
+
 ##########################################
 
 As Busybox & Coreutils 'cp' options differ

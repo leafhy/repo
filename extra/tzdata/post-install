@@ -1,6 +1,7 @@
 #!/bin/sh
 
 cat <<EOF
+
 ###################################################
 
 SET BIOS CLOCK TO 'UTC' TO ENSURE CORRECT LOCALTIME
