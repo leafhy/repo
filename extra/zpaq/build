@@ -5,5 +5,5 @@ export CXXFLAGS="$CXXFLAGS -pthread -static"
 sed 's+/usr/local+/usr+' Makefile > _
 mv -f _ Makefile
 
-make 
-make DESTDIR="$1" install
+make
+make install
