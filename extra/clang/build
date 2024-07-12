@@ -1,5 +1,10 @@
 #!/bin/sh -e
 
+# Use same fix as per llvm.
+mv Modules/* cmake/modules/
+# Create a symbolic link to the expected folder
+mkdir -p ../cmake && ln -s "$(pwd)/cmake/modules" ../cmake/Modules
+
 cmake -B build \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=Release \
@@ -9,6 +14,7 @@ cmake -B build \
     -DCLANG_BUILD_EXAMPLES=OFF \
     -DCLANG_INCLUDE_DOCS=OFF \
     -DCLANG_INCLUDE_TESTS=OFF \
+    -DLLVM_INCLUDE_TESTS=OFF \
     -DLIBCLANG_BUILD_STATIC=ON \
     -Wno-dev
 
