@@ -1,9 +1,7 @@
 #!/bin/sh -e
 
-export CXXFLAGS="$CXXFLAGS -pthread -static"
-
-sed 's+/usr/local+/usr+' Makefile > _
-mv -f _ Makefile
+sed -i "s/-O3 -march=native/$CFLAGS/" Makefile
+sed -i 's+/usr/local+/usr+' Makefile
 
 make
 make install
