@@ -2,7 +2,8 @@
 
 ./configure \
     --prefix=/usr \
-    --with-openssl 
+    --with-openssl \
+    --disable-doc
 
 make
-make DESTDIR="$1" install
+make install
