@@ -14,6 +14,7 @@
     --disable-shared \
     --disable-xlib \
     --disable-alsa \
+    --disable-static \
     --disable-indev=oss \
     --disable-outdev=oss \
     --disable-runtime-cpudetect \
@@ -29,7 +30,7 @@
     --enable-libxvid \
     --enable-nonfree \
     --enable-openssl \
-    --enable-static \
+    --enable-shared \
     --enable-libass
 #   --enable-libdrm
 
