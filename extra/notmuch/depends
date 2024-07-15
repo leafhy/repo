@@ -1,4 +1,5 @@
 pkgconf
+glib
 python3
 xapian
 talloc
