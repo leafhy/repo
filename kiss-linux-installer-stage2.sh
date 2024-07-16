@@ -41,30 +41,30 @@ source /root/.profile
 ###############################################
 #           Github & SSH Key Setup            #
 ###############################################
-# Create ssh key and add to github.com account
+### Create ssh key and add to github.com account
 # ssh-keygen -t ed25519 -C 'comment'
 #
-# Test ssh key works
+### Test ssh key works
 # ssh -T git@github.com
 #
-# Clone repo using ssh key
+### Clone repo using ssh key
 # git clone git@github.com:leafhy/repo.git
 #
-# Create ~/.ssh/config
-# -------------------------------------
+### Create ~/.ssh/config
+# ------ BEGIN ------ #
 # host github
 # hostname github.com
 # user git
 # identityfile ~/.ssh/github-id_ed25519
-# -------------------------------------
-# Test ssh config works
+# ------- END ------- #
+### Test ssh config works
 # ssh -T github
 #
-# Clone repo using ssh config
+### Clone repo using ssh config
 # git clone github:leafhy/repo.git
 #
 # NOTE: Re-clone repo if permission denied occurs
-# ie. repo out of sync
+#       ie. repo out of sync
 ###############################################
 
 [ ! -d "$kissrepo/repo" ] && git clone https://github.com/leafhy/repo.git $kissrepo/repo
@@ -91,7 +91,7 @@ kiss search \*
 kiss update
 
 # Change cache location to one more apt for Single User
-# and fix log permissions so builds don't fail
+# and fix log permissions so builds don't fail.
 if [ "$kiss_cache" ] && [ ! -f "/usr/bin/kiss.orig" ]; then
    cp /usr/bin/kiss /usr/bin/kiss.orig
 
