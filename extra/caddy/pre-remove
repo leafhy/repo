@@ -1,6 +1,10 @@
 #!/bin/sh -e
 
-sv down caddy
+if [ -L /var/service/caddy ]; then
+   sv down caddy
+   unlink /var/service/caddy
+fi
+
 deluser --remove-home caddy
-unlink /var/service/caddy
+
 rm -r /etc/sv/caddy

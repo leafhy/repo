@@ -18,10 +18,14 @@ fcrontab /var/spool/fcron/systab.orig
 
 cat <<EOF
 
+######################################################
+
 NOTE: If the system shell is "/usr/bin/sh -> busybox",
       roots fcrontab entry may fail to run as "$USER".
 
       Set shell used by fcron in "/etc/fcron.conf"
       or with "kiss a bash /usr/bin/sh".
+
+######################################################
 
 EOF

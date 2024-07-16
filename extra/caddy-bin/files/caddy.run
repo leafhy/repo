@@ -1,0 +1,8 @@
+#!/bin/sh
+
+[ -r ./conf ] && . ./conf
+
+export HOME=/var/lib/caddy-bin
+ulimit -n ${MAX_OPEN_FILES:-8192}
+
+exec chpst -u caddy caddy-bin run ${OPTS} --config ${CONFFILE:-/etc/caddy-bin/Caddyfile} >/dev/null 2>&1

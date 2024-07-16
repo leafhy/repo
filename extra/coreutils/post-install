@@ -4,8 +4,10 @@ cat <<EOF
 
 ##########################################
 
-As Busybox & Coreutils 'cp' options differ
-coreutils 'cp' has been renamed to 'gcp'
+NOTE: Busybox & Coreutils 'cp' options differ.
+
+      Coreutils 'cp' has been renamed to 'gcp'.
 
 ##########################################
+
 EOF

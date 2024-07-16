@@ -4,8 +4,9 @@ cat <<EOF
 
 ###################################################
 
-SET BIOS CLOCK TO 'UTC' TO ENSURE CORRECT LOCALTIME
+NOTE: Set BIOS clock to 'UTC' to ensure correct localtime.
 
 ###################################################
+
 EOF
 

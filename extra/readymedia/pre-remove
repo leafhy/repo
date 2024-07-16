@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
+if [ -L /var/service/minidlna ]; then
+   sv down minidlna
+   unlink /var/service/minidlnad
+fi
+
 deluser --remove-home minidlna
-unlink /var/service/minidlnad
 rm -r /etc/sv/minidlnad

@@ -2,13 +2,15 @@
 
 cat <<EOF
 
-### Nano Syntax Highlighting ###
+###############################
 
-NOTE:
-     System settings /etc/nanorc
+NOTE: To enable 'nano' syntax highlighting add
+      the requisite 'include' line to nanorc.
 
-     User settings ~/.nanorc
-                   ~/.config/nano/nanorc
+      System settings: /etc/nanorc
+
+      User settings: ~/.nanorc
+                     ~/.config/nano/nanorc
 
 # Enable specific highlighting
 -> echo 'include /usr/share/nano/sh.nanorc' > ~/.nanorc
@@ -17,4 +19,5 @@ NOTE:
 -> echo 'include /usr/share/nano/*.nanorc' > ~/.nanorc
 
 ###############################
+
 EOF

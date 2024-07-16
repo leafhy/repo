@@ -99,9 +99,7 @@ sed '/# SOFTWARE./a\
 \
 kiss_cache="/var/db/kiss/cache"\
 \
-uid="$(id -u)"\
-\
-if [ "$uid" != 0 ]; then\
+if [ "$(id -u)" != 0 ]; then\
    ssu chown -R 1000:1000 "$kiss_cache/logs"\
 fi' /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss

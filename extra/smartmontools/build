@@ -12,9 +12,9 @@ mv -f _ smartd.conf
 make
 make install
 
-# Install runit services.
+# Install runit service.
 install -Dm755 smartd.run    "$1/etc/sv/smartd/run"
 install -Dm755 smartd.finish "$1/etc/sv/smartd/finish"
 install -dm755               "$1/var/service"
-
 ln -sf /etc/sv/smartd "$1/var/service/"
+ln -sf "/run/runit/supervise.smartd" "$1/etc/sv/smartd/supervise"

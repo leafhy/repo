@@ -1,14 +1,18 @@
 #!/bin/sh -e
 
-# These files are (modified) & not removed despite contents being unchanged.
+if [ -L /var/service/fcron ]; then
+   sv down fcron
+   unlink /var/service/fcron
+fi
+
+deluser --remove-home fcron
+
+# NOTE: These files are (modified) & not removed despite contents being unchanged.
 # /etc/fcron.conf
 # /etc/fcron.allow
 # /etc/fcron.deny
 # /etc/sv/fcron/run
 
-sv down fcron
-deluser --remove-home fcron
-unlink /var/service/fcron
 rm -r  /etc/sv/fcron
 rm     /etc/fcron.*
 
@@ -16,7 +20,7 @@ cat <<EOF
 
 ######################################
 
-[!] Reboot to resolve the following errors [!]
+NOTE: Reboot to resolve the following errors.
 
 runsv: can't move 'supervise/stat.new' to 'supervise/stat': No such file or directory runsv
 fcron: warning: cannot open supervise/status.new: No such file or directory runsv

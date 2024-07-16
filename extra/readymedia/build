@@ -9,17 +9,19 @@
     --enable-lto
 
 make
-make DESTDIR="$1" install
+make install
 
 for opt in '#user=jmaggard+user=minidlna' '#log_dir=/var/log+log_dir=/var/log' '#db_dir=/var/cache/minidlna+db_dir=/var/lib/minidlna'; do
    sed "s+$opt+" minidlna.conf > _
    mv -f _ minidlna.conf
 done
 
-install -dm755 "$1/var/service"
 install -Dm644 minidlnad.8 "$1/usr/share/man/man8/minidlnad.8"
 install -Dm644 minidlna.conf "$1/etc/minidlna.conf"
 install -Dm644 minidlna.conf.5 "$1/usr/share/man/man5/minidlna.conf.5"
 install -Dm755 minidlnad.run "$1/etc/sv/minidlnad/run"
 
+# Install runit service.
+install -dm755 "$1/var/service"
 ln -sf /etc/sv/minidlnad "$1/var/service/"
+ln -sf "/run/runit/supervise.minidlna" "$1/etc/sv/minidlna/supervise"
