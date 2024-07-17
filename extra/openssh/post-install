@@ -8,7 +8,7 @@ cat <<EOF
 ###################################################################
 
 NOTE: To resolve "no hostkey alg"
-      add this to '/etc/ssh/sshd_confi' and/or '~/.ssh/config'
+      add this to '/etc/ssh/sshd_config' and/or '~/.ssh/config'
 
 -> 'HostKeyAlgorithms +ssh-rsa'
 -> 'PubkeyAcceptedAlgorithms +ssh-rsa'
