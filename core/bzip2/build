@@ -16,6 +16,8 @@ cp -f \
     bzmore \
     "$1/usr/bin"
 
+chmod +x "$1/usr/bin/bzmore"
+
 cp -f \
     libbz2.so.1.0.8 \
     libbz2.a \

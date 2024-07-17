@@ -2,7 +2,7 @@
 
 [ -r ./conf ] && . ./conf
 
-export HOME=/var/lib/caddy-bin
+export HOME=/var/lib/caddy
 ulimit -n ${MAX_OPEN_FILES:-8192}
 
-exec chpst -u caddy caddy-bin run ${OPTS} --config ${CONFFILE:-/etc/caddy-bin/Caddyfile} >/dev/null 2>&1
+exec chpst -u caddy caddy run ${OPTS} --config ${CONFFILE:-/etc/caddy/Caddyfile} >/dev/null 2>&1
