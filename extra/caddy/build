@@ -16,6 +16,13 @@ if [ "$(id -u)" != 0 ]; then
    exit 1
 fi
 
+die () {
+   echo "ERROR: caddy "$ver" requires a newer version of 'go', such as >='go1.20.1'"
+   exit 1
+}
+
+[ "$(go version | cut -d' ' -f3)" = "go1.18.2" ] && die
+
 TMPDIR="$(mktemp -d -p .)"
 
 tar xf ../../../../sources/caddy/caddy_"$ver"_src.tar.gz -C "$TMPDIR"
