@@ -26,7 +26,8 @@ efifsys=f2fs
 efifsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $fsyslabel"
 extfsys=xfs
 extfsysopts="-f -L $fsyslabel"
-# 'kiss linux' default cache locations '$HOME/.cache/kiss' '/root/.cache/kiss'
+# NOTE: Leave "kiss_cache" empty for default cache locations.
+#       '$HOME/.cache/kiss' '/root/.cache/kiss'
 kiss_cache="/var/db/kiss/cache"
 
 # kiss-chroot-2021.7-9.tar.xz
