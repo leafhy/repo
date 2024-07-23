@@ -11,4 +11,4 @@ install -Dm755 ../../../../sources/caddy-bin/files/caddy.run "$1/etc/sv/caddy-bi
 # Install runit service.
 install -dm755 "$1/var/service"
 ln -sf /etc/sv/caddy-bin "$1/var/service/"
-ln -sf "/run/runit/supervise.caddy-bin" "$1/etc/sv/caddy-bin/supervise"
+ln -sf /run/runit/supervise.caddy-bin "$1/etc/sv/caddy-bin/supervise"
