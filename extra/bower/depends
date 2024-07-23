@@ -1,5 +1,5 @@
+pandoc-bin
 coreutils
-gnupg
 gpgme
 mercury
 ncurses
