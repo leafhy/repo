@@ -171,14 +171,14 @@ export KISS_COMPRESS="gz"
 export KISS_GET="curl"
 export CFLAGS="-O2 -pipe -march=x86-64 -mtune=generic"
 #export CFLAGS="-O3 -pipe -march=native"
-export CXXFLAGS="$CFLAGS"
-export MAKEFLAGS="-j$(nproc)"
+export CXXFLAGS="\$CFLAGS"
+export MAKEFLAGS="-j\$(nproc)"
 export KISSREPO="/var/db/kiss"
 export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
 alias ls="ls --color=auto"
 EOF
 
-# Change cache location to one more apt for Single User
+# Change cache location to one more apt for Single User.
 if [[ $kiss_cache ]]; then
    sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
    mv -f _ /mnt/usr/bin/kiss
