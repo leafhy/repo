@@ -29,6 +29,7 @@ extfsysopts="-f -L $fsyslabel"
 # NOTE: Leave "kiss_cache" empty for default cache locations.
 #       '$HOME/.cache/kiss' '/root/.cache/kiss'
 kiss_cache="/var/db/kiss/cache"
+kissrepo="/var/db/kiss"
 
 # kiss-chroot-2021.7-9.tar.xz
 checksum=3f4ebe1c6ade01fff1230638d37dea942c28ef85969b84d6787d90a9db6a5bf5
@@ -133,7 +134,7 @@ ip addr add $ipaddress/24 brd + dev eth0
 ip route add default via $nameserver
 
 # Ethernet on server board is slow to start thus
-# sleep keeps log messages from overriding login prompt
+# sleep keeps log messages from overriding login prompt.
 sleep 4
 
 dmesg >/var/log/dmesg.log
@@ -173,7 +174,7 @@ export CFLAGS="-O2 -pipe -march=x86-64 -mtune=generic"
 #export CFLAGS="-O3 -pipe -march=native"
 export CXXFLAGS="\$CFLAGS"
 export MAKEFLAGS="-j\$(nproc)"
-export KISSREPO="/var/db/kiss"
+export KISSREPO="$kissrepo"
 export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
 alias ls="ls --color=auto"
 EOF

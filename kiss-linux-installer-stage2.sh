@@ -31,7 +31,7 @@ export CFLAGS="-O2 -pipe -march=x86-64 -mtune=generic"
 #export CFLAGS="-O3 -pipe -march=native"
 export CXXFLAGS="\$CFLAGS"
 export MAKEFLAGS="-j\$(nproc)"
-export KISSREPO="/var/db/kiss"
+export KISSREPO="$kissrepo"
 export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
 alias ls="ls --color=auto"
 EOF
@@ -89,6 +89,7 @@ kiss search \*
 #cd $kissrepo/repo
 #git config merge.verifySignatures true
 
+# Update package manager.
 kiss update
 
 # Change cache location to one more apt for Single User
@@ -115,16 +116,22 @@ mv -f _ /usr/bin/kiss
 chmod +x /usr/bin/kiss
 fi
 
+# Make sure all 'repo' pkgs are downloaded.
+kiss download $(ls "$kissrepo/repo/core" ; ls "$kissrepo/repo/extra")
+
+if [ -z "$kiss_cache" ]; then
+   cd /var/db/kiss/installed && kiss build *
+fi
+
+# Update other pkgs.
 kiss update
+
+# Install requisite packages.
+kiss build baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd util-linux nasm popt
 
 if [ -d "$kiss_cache" ]; then
    chown -R 1000:1000 "$kiss_cache"
 fi
-
-#cd /var/db/kiss/installed && kiss build *
-
-# Install requisite packages
-kiss build baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd util-linux nasm popt
 
 if [ "$kver" ] && [ ! -f "linux-$kver.tar.xz" ]; then
    curl -fLO "$kernel"
