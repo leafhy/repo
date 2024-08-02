@@ -22,7 +22,7 @@ if [ ! "$user" ]; then
 fi
 
 if [ ! -f "$home/.profile" ]; then
-tee $home/.profile << EOF
+tee $home/.profile << EOF >/dev/null
 export KISS_DEBUG="0"
 export KISS_SU="ssu"
 export KISS_COMPRESS="zst"
@@ -139,6 +139,7 @@ fi
 
 if [ -f "linux-$kver.tar.xz" ]; then
    tar xf "linux-$kver.tar.xz"
+   mv "linux-$kver.tar.xz" "$kissrepo/src"
    cd  "linux-$kver"
    cp "$kissrepo/repo/linux-kernel-$kver.config" .config
 
@@ -158,6 +159,7 @@ if [ "$lver" ]; then
    mkdir -p /usr/lib/firmware
    curl -fLO "$linuxfirmware"
    tar xf "$lver.tar.xz"
+   mv "$lver.tar.xz" "$kissrepo/src"
    # git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
    cp -R linux-firmware/intel /usr/lib/firmware/
 fi

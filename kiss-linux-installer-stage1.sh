@@ -66,10 +66,13 @@ break
 done
 echo "$device has been selected"
 echo ''
+echo '--------------------------------------------'
+echo ''
 echo "NOTE: Use \"wipefs --all $device\" if hardrive fails to format properly."
 echo ''
 echo "Showing information about $device and all partitions."
 wipefs $device*
+echo ''
 echo '--------------------------------------------'
 
 # Detect if we're in UEFI or legacy mode
@@ -93,7 +96,11 @@ else
    mount ${device}1 /mnt
 fi
 
+# Extract 'kiss-chroot'
 tar xvf "$file" -C /mnt --strip-components=1
+
+# Create 'src/' for tarballs, etc needed for installing 'KISS Linux'.
+mkdir /mnt/$kissrepo/src && cp --verbose "$file" /mnt/$kissrepo/src
 
 # Remove unneeded directories + broken symbolic link
 rm -r /mnt/usr/local
@@ -101,14 +108,14 @@ rm -r /mnt/usr/local
 if [[ $UEFI ]]; then
 mkdir /mnt/boot/efi
 mount ${device}1 /mnt/boot/efi
-tee --append /mnt/etc/fstab << EOF
+tee --append /mnt/etc/fstab << EOF >/dev/null
 LABEL=EFI        /boot/efi    vfat    defaults    0 0
 
 # UUID=$(blkid -s UUID -o value ${device}2)
 LABEL=$fsyslabel /           $efifsys    defaults    0 0
 EOF
 else
-tee --append /mnt/etc/fstab << EOF
+tee --append /mnt/etc/fstab << EOF >/dev/null
 # UUID=$(blkid -s UUID -o value ${device}1)
 LABEL=$fsyslabel    $extfsys    defaults    0 0
 EOF
@@ -122,7 +129,7 @@ printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf.orig
 
 mkdir /mnt/etc/rc.d
 
-tee /mnt/etc/rc.d/setup.boot << EOF
+tee /mnt/etc/rc.d/setup.boot << EOF >/dev/null
 # Set font for tty1..tty6
 for i in \`seq 1 6\`; do
   setfont /usr/share/consolefonts/Tamsyn8x16r.psf.gz -C /dev/tty\$i
@@ -141,7 +148,7 @@ dmesg >/var/log/dmesg.log
 EOF
 
 if [[ $UEFI ]]; then
-tee /mnt/efiboot.sh << EOF
+tee /mnt/efiboot.sh << EOF >/dev/null
 #!/bin/sh
 
 # void linux
@@ -166,7 +173,7 @@ EOF
 chmod +x /mnt/efiboot.sh
 fi
 
-tee /mnt/root/.profile << EOF
+tee /mnt/root/.profile << EOF >/dev/null
 export KISS_DEBUG="0"
 export KISS_COMPRESS="gz"
 export KISS_GET="curl"
