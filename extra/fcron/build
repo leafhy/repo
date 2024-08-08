@@ -1,6 +1,6 @@
 #!/bin/sh -e
-#
-# NOTE: Build fails as USER chown: changing ownership of pkg/fcron/usr/sbin : Operation not permitted
+
+# NOTE: Build fails as USER "chown: changing ownership of pkg/fcron/usr/sbin : Operation not permitted"
 
 if [ "$(id -u)" != 0 ]; then
    echo "#####################################"
@@ -8,10 +8,6 @@ if [ "$(id -u)" != 0 ]; then
    echo "#                                   #"
    echo "#        ssu -p kiss b fcron        #"
    echo "#####################################"
-
-   owner="$(ls -ld $KISSREPO/cache/sources/fcron | grep -o root | head -n1)"
-
-   [ "$owner" != root ] && rm -rf $KISSREPO/cache/sources/fcron
 
    exit 1
 fi

@@ -9,10 +9,6 @@ if [ "$(id -u)" != 0 ]; then
    echo "#        ssu -p kiss b caddy        #"
    echo "#####################################"
 
-   owner="$(ls -ld $KISSREPO/cache/sources/caddy | grep -o root | head -n1)"
-
-   [ "$owner" != root ] && rm -rf $KISSREPO/cache/sources/caddy
-
    exit 1
 fi
 

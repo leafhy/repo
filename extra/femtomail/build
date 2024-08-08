@@ -7,10 +7,6 @@ if [ "$(id -u)" != 0 ]; then
    echo "#      ssu -p kiss b femtomail      #"
    echo "#####################################"
 
-   owner="$(ls -ld $KISSREPO/cache/sources/femtomail | grep -o root | head -n1)"
-
-   [ "$owner" != root ] && rm -rf $KISSREPO/cache/sources/femtomail
-
    exit 1
 fi
 

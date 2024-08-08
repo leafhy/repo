@@ -7,10 +7,6 @@ if [ "$(id -u)" != 0 ]; then
    echo "#      ssu -p kiss b go-mtpfs       #"
    echo "#####################################"
 
-   owner="$(ls -ld $KISSREPO/cache/sources/go-mtpfs | grep -o root | head -n1)"
-
-   [ "$owner" != root ] && rm -rf $KISSREPO/cache/sources/go-mtpfs
-
    exit 1
 fi
 
