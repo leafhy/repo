@@ -35,6 +35,7 @@ export KISSREPO="$kissrepo"
 export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
 alias ls="ls --color=auto"
 EOF
+chown 1000:1000 "$home/.profile"
 fi
 
 source /root/.profile
@@ -69,7 +70,7 @@ source /root/.profile
 ###############################################
 
 [ ! -d "$kissrepo/repo" ] && git clone https://github.com/leafhy/repo.git $kissrepo/repo
-                            #git clone https://github.com/kisslinux/repo.git $kissrepo/repo
+                           # git clone https://github.com/kisslinux/repo.git $kissrepo/repo
 
 [ ! -d "$kissrepo/community" ] && git clone https://github.com/dylanaraps/community.git $kissrepo/community
 
@@ -77,17 +78,22 @@ source /root/.profile
 if [ ! -f /root/.gitconfig ]; then
    git config --global --add safe.directory "$kissrepo/repo"
    cp /root/.gitconfig "$home"
+   chown 1000:1000 "$home/.gitconfig"
 fi
 
 kiss search \*
 
-#kiss build gnupg1
-
-#gpg --keyserver keyserver.ubuntu.com --recv-key 13295DAC2CF13B5C
-#echo trusted-key 0x13295DAC2CF13B5C >> /root/.gnupg/gpg.conf
-
-#cd $kissrepo/repo
-#git config merge.verifySignatures true
+# ----------------- #
+# Trusted Key Setup #
+# ----------------- #
+# kiss build gnupg1
+#
+# gpg --keyserver keyserver.ubuntu.com --recv-key 13295DAC2CF13B5C
+# echo trusted-key 0x13295DAC2CF13B5C >> /root/.gnupg/gpg.conf
+#
+# cd $kissrepo/repo
+# git config merge.verifySignatures true
+# ----------------- #
 
 # Update package manager.
 kiss update
@@ -120,7 +126,7 @@ fi
 kiss download $(ls "$kissrepo/repo/core" ; ls "$kissrepo/repo/extra")
 
 if [ -z "$kiss_cache" ]; then
-   cd /var/db/kiss/installed && kiss build *
+   cd "$kissrepo/installed" && kiss build *
 fi
 
 # Update other pkgs.
@@ -129,9 +135,7 @@ kiss update
 # Install requisite packages.
 kiss build baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd util-linux nasm popt
 
-if [ -d "$kiss_cache" ]; then
-   chown -R 1000:1000 "$kiss_cache"
-fi
+[ -d "$kiss_cache" ] && chown -R 1000:1000 "$kiss_cache"
 
 if [ "$kver" ] && [ ! -f "linux-$kver.tar.xz" ]; then
    curl -fLO "$kernel"
@@ -153,15 +157,14 @@ if [ -f "linux-$kver.tar.xz" ]; then
    patch -p1 < /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch
 fi
 
-chown -R 1000:1000 "$home"
-
-if [ "$lver" ]; then
+if [ "$lver" ] && [ ! -f "$lver.tar.xz" ]; then
    mkdir -p /usr/lib/firmware
    curl -fLO "$linuxfirmware"
    tar xf "$lver.tar.xz"
+   cp -R linux-firmware/intel /usr/lib/firmware
    mv "$lver.tar.xz" "$kissrepo/src"
    # git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
-   cp -R linux-firmware/intel /usr/lib/firmware/
+   # cp -R linux-firmware.git/intel /usr/lib/firmware
 fi
 
 echo "#####################"
@@ -170,6 +173,7 @@ echo "#####################"
 echo "### Build & install kernel"
 echo "cd linux-$kver"
 echo "make && make install"
+echo "mv linux-$kver* $kissrepo/src"
 echo''
 echo "### Create boot entry for UEFI"
 echo "cp /boot/vmlinuz /boot/efi/vmlinuz-$kver"
@@ -183,4 +187,7 @@ echo "./syslinux-extlinux-installer.sh"
 echo''
 echo "### Rename resolv.conf.orig"
 echo "mv /etc/resolv.conf.orig /etc/resolv.conf"
+echo "Note: Exit chroot before renaming 'resolv.conf.orig', else it will be 'rm'."
 echo "#####################"
+echo '++ EOF ++'
+
