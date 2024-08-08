@@ -209,3 +209,5 @@ echo ''
 echo "### Run stage2 installer"
 echo "./kiss-linux-installer-stage2.sh"
 echo "#####################"
+echo '++ EOF ++'
+
