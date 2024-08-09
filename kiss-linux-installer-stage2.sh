@@ -184,6 +184,7 @@ echo "### Create boot entry for NON-UEFI"
 echo "cp /boot/vmlinuz /boot/vmlinuz-$kver"
 echo "cp /boot/System.map /boot/System.map-$kver"
 echo "./syslinux-extlinux-installer.sh"
+echo "mv syslinux-6.04-pre1.tar.xz $kissrepo/src"
 echo''
 echo "### Rename resolv.conf.orig"
 echo "mv /etc/resolv.conf.orig /etc/resolv.conf"
