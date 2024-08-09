@@ -123,8 +123,8 @@ fi
 
 printf '%s\n' $hostname > /mnt/etc/hostname
 
-# 'kiss-chroot' will overwrite '/etc/resolv.conf'
-# and apon exiting chroot, '/etc/resolv.conf' will be deleted.
+# NOTE: 'kiss-chroot' will overwrite '/etc/resolv.conf'
+#       and apon exiting chroot, '/etc/resolv.conf' will be deleted.
 printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf.orig
 
 mkdir /mnt/etc/rc.d
