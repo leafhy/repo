@@ -96,7 +96,7 @@ else
    mount ${device}1 /mnt
 fi
 
-# Extract 'kiss-chroot'
+# Extract 'KISS Linux' filesystem.
 tar xvf "$file" -C /mnt --strip-components=1
 
 # Create 'src/' for tarballs, etc needed for installing 'KISS Linux'.
