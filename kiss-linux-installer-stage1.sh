@@ -160,15 +160,16 @@ tee /mnt/efiboot.sh << EOF >/dev/null
 # 'PARTUUID' is used as initramfs is required to use 'UUID'
 efibootmgr --create --disk /dev/sda --loader '\vmlinuz-$kver' --label '$efilabel' --unicode root=PARTUUID=$(blkid -s PARTUUID -o value ${device}2) loglevel=4 Page_Poison=1
 
-echo '***********************************************'
-echo -e "\x1B[1;31m [ ! ] CHECK \x1B[1;92m BootOrder: \x1B[1;31m IS CORRECT [ ! ]\x1B[1;0m"
+echo '******************************************'
 echo ''
-echo 'Boot entry needs to be towards the top of list'
-echo 'otherwise it will not appear in the boot menu.'
+echo -e "\x1B[1;31m [ ! ] Check \x1B[1;92m BootOrder: \x1B[1;31m is correct [ ! ]\x1B[1;0m"
 echo ''
-echo 'BIOS reset will restore default boot order.'
-echo '***********************************************'
-efibootmgr -v
+echo '******************************************'
+echo ''
+echo 'NOTE: Boot entry needs to be towards the top of list'
+echo '      otherwise it will not appear in the boot menu.'
+echo ''
+efibootmgr
 EOF
 chmod +x /mnt/efiboot.sh
 fi
