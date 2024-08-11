@@ -34,11 +34,21 @@ kissrepo="/var/db/kiss"
 # kiss-chroot-2021.7-9.tar.xz
 checksum=3f4ebe1c6ade01fff1230638d37dea942c28ef85969b84d6787d90a9db6a5bf5
 
-[[ ! -f $file ]] && wget "$url/$file" || curl -fLO "$url/$file"
-[[ -z $checksum ]] && wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
+if [[ ! -f $file ]]; then
+   wget "$url/$file" || curl -fLO "$url/$file"
+fi
 
-[[ $file = kiss-chroot-$chrootver.tar.xz ]] && [[ $checksum ]] && sha256sum -c <(echo "$checksum  $file") || exit 1
-[[ -f $file.sha256 ]] && sha256sum -c < "$file.sha256" || exit 1
+if [[ -z $checksum ]]; then
+   wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
+fi
+
+if [[ $file = kiss-chroot-$chrootver.tar.xz ]] && [[ $checksum ]]; then
+   sha256sum -c <(echo "$checksum  $file") || exit 1
+fi
+
+if [[ -f $file.sha256 ]]; then
+   sha256sum -c < "$file.sha256" || exit 1
+fi
 
 #curl -fLO "$url/$file.asc"
 #gpg --keyserver keyserver.ubuntu.com --recv-key 13295DAC2CF13B5C
@@ -68,7 +78,7 @@ echo '--------------------------------------------'
 echo ''
 echo "NOTE: Use \"wipefs --all $device\" if hardrive fails to format properly."
 echo ''
-echo "\"wipefs $device\*\" : Showing information about $device and all partitions."
+echo "\"wipefs $device*\" : Showing information about $device and all partitions."
 wipefs $device*
 echo ''
 echo '--------------------------------------------'
