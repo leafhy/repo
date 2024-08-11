@@ -18,7 +18,7 @@ efilabel=KISS_LINUX-$kver
 fsyslabel=KISS_LINUX
 chrootver=2021.7-9
 url=https://github.com/kisslinux/repo/releases/download/$chrootver
-file=kiss-chroot-$chrootver.tar.xz
+file=${1-kiss-chroot-$chrootver.tar.xz}
 ipaddress=192.168.1.XX
 nameserver=192.168.1.1
 hostname=kiss
@@ -34,13 +34,11 @@ kissrepo="/var/db/kiss"
 # kiss-chroot-2021.7-9.tar.xz
 checksum=3f4ebe1c6ade01fff1230638d37dea942c28ef85969b84d6787d90a9db6a5bf5
 
-if [[ ! -f $file ]]; then
-   wget "$url/$file" || curl -fLO "$url/$file"
-   #wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
-fi
+[[ ! -f $file ]] && wget "$url/$file" || curl -fLO "$url/$file"
+[[ -z $checksum ]] && wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
 
-sha256sum -c <(echo "$checksum  $file") || exit 1
-# sha256sum -c < "$file.sha256" || exit 1
+[[ $file = kiss-chroot-$chrootver.tar.xz ]] && [[ $checksum ]] && sha256sum -c <(echo "$checksum  $file") || exit 1
+[[ -f $file.sha256 ]] && sha256sum -c < "$file.sha256" || exit 1
 
 #curl -fLO "$url/$file.asc"
 #gpg --keyserver keyserver.ubuntu.com --recv-key 13295DAC2CF13B5C
@@ -75,9 +73,10 @@ wipefs $device*
 echo ''
 echo '--------------------------------------------'
 
-# Detect if we're in UEFI or legacy mode
+# Detect if we're in UEFI or legacy mode.
 [[ -d /sys/firmware/efi ]] && UEFI=1
 
+# Creation of partitions & filesystems.
 if [[ $UEFI ]]; then
    sgdisk --zap-all $device
    sgdisk -n 1:2048:550M -t 1:ef00 $device
@@ -100,13 +99,13 @@ fi
 tar xvf "$file" -C /mnt --strip-components=1
 
 # Create 'src/' for tarballs, etc needed for installing 'KISS Linux'.
-mkdir /mnt/$kissrepo/src && cp --verbose "$file" /mnt/$kissrepo/src
+mkdir -p /mnt/$kissrepo/src && cp --verbose "$file" /mnt/$kissrepo/src
 
 # Remove unneeded directories + broken symbolic link
-rm -r /mnt/usr/local
+[[ -d /mnt/usr/local ]] && rm -r /mnt/usr/local
 
 if [[ $UEFI ]]; then
-mkdir /mnt/boot/efi
+mkdir -p /mnt/boot/efi
 mount ${device}1 /mnt/boot/efi
 tee --append /mnt/etc/fstab << EOF >/dev/null
 LABEL=EFI        /boot/efi    vfat    defaults    0 0
@@ -127,7 +126,7 @@ printf '%s\n' $hostname > /mnt/etc/hostname
 #       and apon exiting chroot, '/etc/resolv.conf' will be deleted.
 printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf.orig
 
-mkdir /mnt/etc/rc.d
+mkdir -p /mnt/etc/rc.d
 
 tee /mnt/etc/rc.d/setup.boot << EOF >/dev/null
 # Set font for tty1..tty6
