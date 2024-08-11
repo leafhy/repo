@@ -68,7 +68,7 @@ echo '--------------------------------------------'
 echo ''
 echo "NOTE: Use \"wipefs --all $device\" if hardrive fails to format properly."
 echo ''
-echo "Showing information about $device and all partitions."
+echo "\"wipefs $device\*\" : Showing information about $device and all partitions."
 wipefs $device*
 echo ''
 echo '--------------------------------------------'
