@@ -87,7 +87,7 @@ echo '--------------------------------------------'
 [[ -d /sys/firmware/efi ]] && UEFI=1
 
 # Creation of partitions & filesystems.
-read -p 'Do you want to format "$device"? [yes/No]: '
+read -p "Do you want to format "$device"? [yes/No]: "
 if [[ $REPLY =~ ^([Yy][Ee][Ss])$ ]]; then
 if [[ $UEFI ]]; then
    sgdisk --zap-all $device
