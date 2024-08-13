@@ -143,7 +143,7 @@ fi
 
 if [ -f "linux-$kver.tar.xz" ]; then
    tar xf "linux-$kver.tar.xz"
-   mv "linux-$kver.tar.xz" "$kissrepo/src"
+   mv -vn "linux-$kver.tar.xz" "$kissrepo/src"
    cd  "linux-$kver"
    cp "$kissrepo/repo/linux-kernel-$kver.config" .config
 
@@ -162,7 +162,7 @@ if [ "$lver" ] && [ ! -f "$lver.tar.xz" ]; then
    curl -fLO "$linuxfirmware"
    tar xf "$lver.tar.xz"
    cp -R linux-firmware/intel /usr/lib/firmware
-   mv "$lver.tar.xz" "$kissrepo/src"
+   mv -vn "$lver.tar.xz" "$kissrepo/src"
    # git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
    # cp -R linux-firmware.git/intel /usr/lib/firmware
 fi

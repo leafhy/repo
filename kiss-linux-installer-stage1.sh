@@ -61,7 +61,7 @@ echo '                                            '
 echo '********************************************'
 lsblk -f -l | grep sd
 
-# Generate drive options dynamically
+# Generate drive options dynamically.
 PS3="Select drive to format: "
 echo ''
 select device in $(blkid | grep -e sd | cut -d : -f 1 | sed -e 's/[1-9]\+$//' | uniq | sort)
@@ -78,7 +78,7 @@ echo '--------------------------------------------'
 echo ''
 echo "NOTE: Use \"wipefs --all $device\" if hardrive fails to format properly."
 echo ''
-echo "\"wipefs $device*\" : Showing information about $device and all partitions."
+echo  "Showing \"wipefs $device*\" information."
 wipefs $device*
 echo ''
 echo '--------------------------------------------'
@@ -87,6 +87,8 @@ echo '--------------------------------------------'
 [[ -d /sys/firmware/efi ]] && UEFI=1
 
 # Creation of partitions & filesystems.
+read -p 'Do you want to format "$device"? [yes/No]: '
+if [[ $REPLY =~ ^([Yy][Ee][Ss])$ ]]; then
 if [[ $UEFI ]]; then
    sgdisk --zap-all $device
    sgdisk -n 1:2048:550M -t 1:ef00 $device
@@ -104,14 +106,16 @@ else
    mkfs.$extfsys $extfsysopts ${device}1
    mount ${device}1 /mnt
 fi
+fi
 
 # Extract 'KISS Linux' filesystem.
 tar xvf "$file" -C /mnt --strip-components=1
 
 # Create 'src/' for tarballs, etc needed for installing 'KISS Linux'.
-mkdir -p /mnt/$kissrepo/src && cp --verbose "$file" /mnt/$kissrepo/src
+mkdir -p /mnt/$kissrepo/src
+[[ ! -f /mnt/$kissrepo/src/$file ]] && cp --verbose "$file" /mnt/$kissrepo/src
 
-# Remove unneeded directories + broken symbolic link
+# Remove unneeded directories + broken symbolic link.
 [[ -d /mnt/usr/local ]] && rm -r /mnt/usr/local
 
 if [[ $UEFI ]]; then
