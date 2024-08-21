@@ -153,8 +153,8 @@ if [ -f "linux-$kver.tar.xz" ]; then
    [ -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ] && \
    patch -p1 < /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch
 
-   [ -f /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch ] && \
-   patch -p1 < /usr/share/doc/kiss/wiki/kernel/kernel-no-perl.patch
+   [ -f /usr/share/doc/kiss/wiki/kernel/no-perl.patch ] && \
+   patch -p1 < /usr/share/doc/kiss/wiki/kernel/no-perl.patch
 fi
 
 if [ "$lver" ] && [ ! -f "$lver.tar.xz" ]; then
