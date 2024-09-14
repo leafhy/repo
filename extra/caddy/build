@@ -1,7 +1,6 @@
 #!/bin/sh -e
 
 ver=2.7.6
-pkg=$(basename $1)
 
 if [ "$(id -u)" != 0 ]; then
    echo "#####################################"
@@ -12,13 +11,6 @@ if [ "$(id -u)" != 0 ]; then
 
    exit 1
 fi
-
-die () {
-   echo "ERROR: $pkg-$ver requires a newer version of 'go', such as >='go1.20.1'"
-   exit 1
-}
-
-[ "$(go version | cut -d' ' -f3)" = "go1.18.2" ] && die
 
 TMPDIR="$(mktemp -d -p .)"
 
