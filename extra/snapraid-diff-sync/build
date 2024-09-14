@@ -1,0 +1,3 @@
+#!/bin/sh -e
+
+install -Dm755 snapraid-diff-sync.sh "$1/usr/share/snapraid/snapraid-diff-sync.sh"
