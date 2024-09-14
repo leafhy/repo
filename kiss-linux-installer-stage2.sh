@@ -66,7 +66,7 @@ source /root/.profile
 # git clone github:leafhy/repo.git
 #
 # NOTE: Re-clone repo if permission denied occurs
-#       ie. repo out of sync
+#       i.e. repo out of sync
 ###############################################
 
 [ ! -d "$kissrepo/repo" ] && git clone https://github.com/leafhy/repo.git $kissrepo/repo
