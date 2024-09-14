@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+cat <<EOF
+
+################################
+
+NOTE: Update 'go1.18.2' to >='go1.20.1'
+      otherwise some packages will
+      fail to build.
+
+################################
+
+EOF
