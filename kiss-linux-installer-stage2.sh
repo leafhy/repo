@@ -9,7 +9,7 @@ linuxfirmware="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-fi
 kissrepo="/var/db/kiss"
 kiss_cache="$kissrepo/cache"
 
-if [ ! "$username" ]; then
+if [ -z "$username" ]; then
    echo "Missing username"
    exit 1
 fi
