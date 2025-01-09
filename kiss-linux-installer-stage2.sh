@@ -16,7 +16,7 @@ fi
 
 user="$(getent passwd 1000 | cut -d: -f1)"
 
-if [ ! "$user" ]; then
+if [ -z "$user" ]; then
    adduser "$username"
    addgroup "$username" wheel
 fi
