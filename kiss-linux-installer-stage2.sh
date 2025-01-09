@@ -174,18 +174,18 @@ echo "### Build & install kernel"
 echo "cd linux-$kver"
 echo "make && make install"
 echo "mv linux-$kver* $kissrepo/src"
-echo''
+echo ''
 echo "### Create boot entry for UEFI"
 echo "cp /boot/vmlinuz /boot/efi/vmlinuz-$kver"
 echo "cp /boot/System.map /boot/efi/System.map-$kver"
 echo "./efiboot.sh"
-echo''
+echo ''
 echo "### Create boot entry for NON-UEFI"
 echo "cp /boot/vmlinuz /boot/vmlinuz-$kver"
 echo "cp /boot/System.map /boot/System.map-$kver"
 echo "./syslinux-extlinux-installer.sh"
 echo "mv syslinux-6.04-pre1.tar.xz $kissrepo/src"
-echo''
+echo ''
 echo "### Rename resolv.conf.orig"
 echo "mv /etc/resolv.conf.orig /etc/resolv.conf"
 echo "Note: Exit chroot before renaming 'resolv.conf.orig', else it will be 'rm'."
