@@ -133,7 +133,7 @@ fi
 kiss update
 
 # Install requisite packages.
-kiss build baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd util-linux nasm popt
+kiss build baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd lzip util-linux nasm popt
 
 [ -d "$kiss_cache" ] && chown -R 1000:1000 "$kiss_cache"
 
