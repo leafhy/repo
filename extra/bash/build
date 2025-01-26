@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+# NOTE: Build fails without "DESTDIR".
+
+export CFLAGS="$CFLAGS -static"
+
+./configure \
+    --prefix=/usr \
+    --without-bash-malloc \
+    --without-installed-readline \
+    --disable-nls
+
+make
+make DESTDIR="$1" install
+
+rm -r "$1/usr/share/doc"
+
+ln -s bash "$1/usr/bin/sh"
