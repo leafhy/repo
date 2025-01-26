@@ -8,7 +8,7 @@ cat <<'EOF'
 
 NOTE: To start starship on login add this to '.profile'
 
--> eval "$(starship-bin init bash)"
+-> eval "$(starship init bash)"
 -> export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 NOTE: Create starship config
