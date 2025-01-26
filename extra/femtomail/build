@@ -17,6 +17,6 @@ sed 's+/usr/sbin+/usr/bin+g' Makefile > _
 mv -f _ Makefile
 
 make USERNAME=root MAILBOX_PATH=/var/mail
-make install install-link-sendmail setcap
+make install install-link-sendmail
 
 install -dm755 "$1/var/mail/new"
