@@ -1,0 +1,19 @@
+#!/bin/sh -e
+
+sed '+bin/bash+bin/sh+' progs/mkcapshdoc.sh > _
+mv -f _ progs/mkcapshdoc.sh
+
+mk() {
+    make \
+        GOLANG=no \
+        PREFIX=/usr \
+        SBINDIR=/usr/bin \
+        LIBDIR=/usr/lib \
+        PKGCONFIGDIR=/usr/lib/pkgconfig \
+        RAISE_SETFCAP=no \
+        INDENT=" " \
+        "$@"
+}
+
+mk
+mk DESTDIR="$1" install
