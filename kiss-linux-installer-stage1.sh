@@ -201,12 +201,12 @@ alias ls="ls --color=auto"
 EOF
 
 # Change cache location to one more apt for Single User.
-if [[ $kiss_cache ]]; then
+if [[ $kiss_cache ]] && [[ -f kiss-chroot-$chrootver.tar.xz ]]; then
    sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
    mv -f _ /mnt/usr/bin/kiss
 
    sed "/Top-level cache/a\
- cac_dir=$kiss_cache" /mnt/usr/bin/kiss > _
+cac_dir=$kiss_cache" /mnt/usr/bin/kiss > _
    mv -f _ /mnt/usr/bin/kiss
    chmod +x /mnt/usr/bin/kiss
 fi

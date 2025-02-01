@@ -116,7 +116,7 @@ sed 's/cac_dir=/#cac_dir=/g' /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
 
 sed '/Top-level cache/a\
-    cac_dir=$kiss_cache' /usr/bin/kiss > _
+\ \ \ \ cac_dir=\$kiss_cache' /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
 
 chmod +x /usr/bin/kiss
