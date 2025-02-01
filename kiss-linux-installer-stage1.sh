@@ -12,6 +12,7 @@ set -e
 
 # NOTE: EXTLINUX [6.03+] supports: FAT12/16/32, NTFS, ext2/3/4, Btrfs, XFS, UFS/FFS.
 #       f2fs is not compatable with extlinux.
+#     :setcap(libcap) uses filesystem xattrs.
 
 kver=5.15.6
 efilabel=KISS_LINUX-$kver
@@ -36,11 +37,12 @@ kiss_cache="/var/db/kiss/cache"
 checksum=3f4ebe1c6ade01fff1230638d37dea942c28ef85969b84d6787d90a9db6a5bf5
 
 if [[ ! -f $file ]]; then
-   echo "[ INFO: Downloading fallback -> $file... ]"
+   echo -e "\e[1;92m [ INFO: Downloading fallback -> $file... ] \e[0m"
    wget "$url/$file" || curl -fLO "$url/$file"
 fi
 
 if [[ -z $checksum ]]; then
+   echo -e "\e[1;92m [ INFO: Downloading checksum -> $file.sha256... ] \e[0m"
    wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
 fi
 
