@@ -149,7 +149,7 @@ elif [[ $opt = ABORT ]]; then
      exit
 fi
 
-# Extract 'KISS Linux' filesystem.
+# Extract 'KISS Linux' to filesystem.
 echo  -e "\e[1;92m [ INFO: Extracting $file... ] \e[0m"
 tar xvf "$file" -C /mnt --strip-components=1
 
