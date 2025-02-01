@@ -26,15 +26,17 @@ efifsys=f2fs
 efifsysopts="-O extra_attr,sb_checksum,inode_checksum,lost_found -f -l $fsyslabel"
 extfsys=xfs
 extfsysopts="-f -L $fsyslabel"
+kissrepo="/var/db/kiss"
+kiss_cache="/var/db/kiss/cache"
+
 # NOTE: Leave "kiss_cache" empty for default cache locations.
 #       '$HOME/.cache/kiss' '/root/.cache/kiss'
-kiss_cache="/var/db/kiss/cache"
-kissrepo="/var/db/kiss"
 
 # kiss-chroot-2021.7-9.tar.xz
 checksum=3f4ebe1c6ade01fff1230638d37dea942c28ef85969b84d6787d90a9db6a5bf5
 
 if [[ ! -f $file ]]; then
+   echo "[ INFO: Downloading fallback -> $file... ]"
    wget "$url/$file" || curl -fLO "$url/$file"
 fi
 
@@ -62,7 +64,7 @@ echo '********************************************'
 lsblk -f -l | grep sd
 
 # Generate drive options dynamically.
-PS3="Select drive to format: "
+PS3="Select drive for installing KISS Linux: "
 echo ''
 select device in $(blkid | grep -e sd | cut -d : -f 1 | sed -e 's/[1-9]\+$//' | uniq | sort)
 do
@@ -72,8 +74,18 @@ continue
 fi
 break
 done
-echo "$device has been selected"
-echo ''
+
+echo -e "\e[1;92m [ INFO: $device has been selected ] \e[0m"
+
+# Detect if we're in UEFI or legacy mode.
+[[ -d /sys/firmware/efi ]] && UEFI=1
+
+if [[ $UEFI ]]; then
+   echo -e "\e[1;92m [ INFO: EFI has been found ] \e[0m"
+else
+   echo -e "\e[1;31m [ INFO: EFI not found ] \e[0m"
+fi
+
 echo '--------------------------------------------'
 echo ''
 echo "NOTE: Use \"wipefs --all $device\" if hardrive fails to format properly."
@@ -83,13 +95,37 @@ wipefs $device*
 echo ''
 echo '--------------------------------------------'
 
-# Detect if we're in UEFI or legacy mode.
-[[ -d /sys/firmware/efi ]] && UEFI=1
-
 # Creation of partitions & filesystems.
-read -p "Do you want to format "$device"? [yes/No]: "
+read -p "Do you want to format $device? [yes/No]: "
 if [[ $REPLY =~ ^([Yy][Ee][Ss])$ ]]; then
 if [[ $UEFI ]]; then
+PS3="Select partition type or ABORT: "
+select opt in EFI MBR ABORT
+do
+
+if [[ $opt = "" ]]; then
+echo "try again"
+continue
+fi
+break
+done
+fi
+
+if [[ -z $UEFI ]]; then
+PS3="Select partition type or ABORT: "
+select opt in MBR ABORT
+do
+
+if [[ $opt = "" ]]; then
+echo "try again"
+continue
+fi
+break
+done
+fi
+fi
+
+if [[ $opt = EFI ]]; then
    sgdisk --zap-all $device
    sgdisk -n 1:2048:550M -t 1:ef00 $device
    sgdisk -n 2:0:0 -t 2:8300 $device
@@ -98,17 +134,21 @@ if [[ $UEFI ]]; then
    mkfs.vfat -F 32 -n EFI ${device}1
    mkfs.$efifsys $efifsysopts ${device}2
    mount ${device}2 /mnt
-else
-   echo "[ ! ] EFI NOT FOUND [ ! ]"
-   echo ''
-   echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
-   fdisk $device
-   mkfs.$extfsys $extfsysopts ${device}1
-   mount ${device}1 /mnt
-fi
+   mkdir -p /mnt/boot/efi
+   mount ${device}1 /mnt/boot/efi
+
+elif [[ $opt = MBR ]]; then
+     echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
+     fdisk $device
+     mkfs.$extfsys $extfsysopts ${device}1
+     mount ${device}1 /mnt
+
+elif [[ $opt = ABORT ]]; then
+     exit
 fi
 
 # Extract 'KISS Linux' filesystem.
+echo  -e "\e[1;92m [ INFO: Extracting $file... ] \e[0m"
 tar xvf "$file" -C /mnt --strip-components=1
 
 # Create 'src/' for tarballs, etc needed for installing 'KISS Linux'.
@@ -136,9 +176,9 @@ fi
 
 printf '%s\n' $hostname > /mnt/etc/hostname
 
+printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf.orig
 # NOTE: 'kiss-chroot' will overwrite '/etc/resolv.conf'
 #       and apon exiting chroot, '/etc/resolv.conf' will be deleted.
-printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf.orig
 
 mkdir -p /mnt/etc/rc.d
 
@@ -156,6 +196,27 @@ ip route add default via $nameserver
 # Ethernet on server board is slow to start thus
 # sleep keeps log messages from overriding login prompt.
 sleep 4
+
+EOF
+
+tee --append /mnt/etc/rc.d/setup.boot << 'EOF' >/dev/null
+# Setup zram if totalmem is => 8GB
+if [ -b /dev/zram0 ]; then
+totmem=0
+for mem in /sys/devices/system/memory/memory*; do
+  [ "$(cat ${mem}/online)" = "1" ] && totalmem=$((totalmem+$((0x$(cat /sys/devices/system/memory/block_size_bytes)))))
+done
+
+if ! [ "$(( totalmem / 1024 ** 3 ))" -lt "8" ]; then
+   echo "Setting up Zram..."
+   zramsize=$(printf "$(awk '/MemTotal/ { print $2 }' /proc/meminfo) * 1.5 / 1024 / 1024" | bc) &&
+   echo "${zramsize}"G > /sys/block/zram0/disksize &&
+   [ -x /usr/bin/mkfs.xfs ] &&
+   mkfs.xfs -m finobt=0,reflink=0,rmapbt=0 /dev/zram0 >/dev/null &&
+   mount -t xfs /dev/zram0 /var/db/kiss/cache/proc &&
+   chown 1000:1000 /var/db/kiss/cache/proc
+fi
+fi
 
 dmesg >/var/log/dmesg.log
 EOF
@@ -180,7 +241,7 @@ echo ''
 echo '******************************************'
 echo ''
 echo 'NOTE: Boot entry needs to be towards the top of list'
-echo '      otherwise it will not appear in the boot menu.'
+echo '      otherwise it will not appear in the UEFI boot menu.'
 echo ''
 efibootmgr
 EOF
@@ -206,7 +267,7 @@ if [[ $kiss_cache ]] && [[ -f kiss-chroot-$chrootver.tar.xz ]]; then
    mv -f _ /mnt/usr/bin/kiss
 
    sed "/Top-level cache/a\
-cac_dir=$kiss_cache" /mnt/usr/bin/kiss > _
+   cac_dir=$kiss_cache" /mnt/usr/bin/kiss > _
    mv -f _ /mnt/usr/bin/kiss
    chmod +x /mnt/usr/bin/kiss
 fi
