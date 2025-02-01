@@ -151,7 +151,7 @@ fi
 
 # Extract 'KISS Linux' to filesystem.
 echo  -e "\e[1;92m [ INFO: Extracting $file... ] \e[0m"
-tar xvf "$file" -C /mnt --strip-components=1
+tar xf "$file" -C /mnt --strip-components=1
 
 # Create 'src/' for tarballs, etc needed for installing 'KISS Linux'.
 mkdir -p /mnt/$kissrepo/src
