@@ -9,12 +9,19 @@ linuxfirmware="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-fi
 kissrepo="/var/db/kiss"
 kiss_cache="$kissrepo/cache"
 
+while true; do
+read -p "Create user now? [yes/no]: "  ans
+case "$ans" in
+
+[Yy][Ee][Ss] )
+
 if [ -z "$username" ]; then
    echo "Missing username"
    exit 1
 fi
 
-user="$(getent passwd 1000 | cut -d: -f1)"
+user="$(grep -w $username <(getent passwd | cut -d: -f1) || :)"
+#user="$(getent passwd 1000 | cut -d: -f1)"
 
 if [ -z "$user" ]; then
    adduser "$username"
@@ -37,6 +44,19 @@ alias ls="ls --color=auto"
 EOF
 chown 1000:1000 "$home/.profile"
 fi
+
+break;;
+
+[Nn][Oo] )
+
+   echo '[ INFO: No user added, continuing... ]'
+
+break;;
+
+*) echo retry;;
+
+esac
+done
 
 source /root/.profile
 
@@ -76,8 +96,8 @@ source /root/.profile
 
 # Fix git dubious permissions.
 if [ ! -f /root/.gitconfig ]; then
-   git config --global --add safe.directory "$kissrepo/repo"
-   cp /root/.gitconfig "$home"
+   git config --global --add safe.directory "$kissrepo/repo" &&
+   [ -d "$home" ] && cp /root/.gitconfig "$home" &&
    chown 1000:1000 "$home/.gitconfig"
 fi
 
@@ -133,17 +153,27 @@ fi
 kiss update
 
 # Install requisite packages.
-kiss build baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd lzip util-linux nasm popt f2fs-tools e2fsprogs xfsprogs dosfstools
+for pkg in baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd lzip util-linux nasm popt f2fs-tools e2fsprogs xfsprogs dosfstools; do
+   [ -d "$kissrepo/installed/$pkg" ] && installed="$(cat $kissrepo/installed/$pkg/version)"
+   [ -d "$kissrepo/repo/core/$pkg" ] && repo="$(cat $kissrepo/repo/core/$pkg/version)"
+   [ -d "$kissrepo/repo/extra/$pkg" ] && repo="$(cat $kissrepo/repo/extra/$pkg/version)"
+
+if ! [ "$installed" = "$repo" ]; then
+   kiss build "$pkg"
+fi
+
+done
 
 [ -d "$kiss_cache" ] && chown -R 1000:1000 "$kiss_cache"
 
-if [ "$kver" ] && [ ! -f "linux-$kver.tar.xz" ]; then
-   curl -fLO "$kernel"
+if [ "$kver" ] && [ ! -f "$kissrepo/src/linux-$kver.tar.xz" ]; then
+   echo "[ INFO: Downloading -> $kernel ]"
+   curl -fLO "$kissrepo/src/$kernel"
 fi
 
-if [ -f "linux-$kver.tar.xz" ]; then
-   tar xf "linux-$kver.tar.xz"
-   mv -vn "linux-$kver.tar.xz" "$kissrepo/src"
+if ! [ -f "/boot/vmlinuz-$kver" ] && [ -f "$kissrepo/src/linux-$kver.tar.xz" ]; then
+   echo "[ INFO: Extracting -> linux-$kver... ]"
+   tar xf "$kissrepo/src/linux-$kver.tar.xz"
    cd  "linux-$kver"
    cp "$kissrepo/repo/linux-kernel-$kver.config" .config
 
@@ -157,12 +187,12 @@ if [ -f "linux-$kver.tar.xz" ]; then
    patch -p1 < /usr/share/doc/kiss/wiki/kernel/no-perl.patch
 fi
 
-if [ "$lver" ] && [ ! -f "$lver.tar.xz" ]; then
+if [ "$lver" ] && [ ! -f "$kissrepo/src/$lver.tar.xz" ]; then
+   echo "[ INFO: Downloading -> $linuxfirmware... ]"
+   curl -fLO "$kissrepo/src/$linuxfirmware"
+   tar xf "$kissrepo/src/$lver.tar.xz"
    mkdir -p /usr/lib/firmware
-   curl -fLO "$linuxfirmware"
-   tar xf "$lver.tar.xz"
    cp -R linux-firmware/intel /usr/lib/firmware
-   mv -vn "$lver.tar.xz" "$kissrepo/src"
    # git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
    # cp -R linux-firmware.git/intel /usr/lib/firmware
 fi
