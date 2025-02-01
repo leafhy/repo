@@ -96,8 +96,11 @@ source /root/.profile
 
 # Fix git dubious permissions.
 if [ ! -f /root/.gitconfig ]; then
-   git config --global --add safe.directory "$kissrepo/repo" &&
-   [ -d "$home" ] && cp /root/.gitconfig "$home" &&
+   git config --global --add safe.directory "$kissrepo/repo"
+fi
+
+if [ -d "$home" ]; then
+   cp /root/.gitconfig "$home"
    chown 1000:1000 "$home/.gitconfig"
 fi
 
