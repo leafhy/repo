@@ -186,11 +186,13 @@ mkdir -p /mnt/etc/rc.d
 
 tee /mnt/etc/rc.d/setup.boot << EOF >/dev/null
 # Set font for tty1..tty6
+log "Setting up tty..."
 for i in \`seq 1 6\`; do
   setfont /usr/share/consolefonts/Tamsyn8x16r.psf.gz -C /dev/tty\$i
 done
 
 # Setup network
+log "Setting up network..."
 ip link set dev eth0 up
 ip addr add $ipaddress/24 brd + dev eth0
 ip route add default via $nameserver
@@ -210,7 +212,7 @@ for mem in /sys/devices/system/memory/memory*; do
 done
 
 if ! [ "$(( totalmem / 1024 ** 3 ))" -lt "8" ]; then
-   echo "Setting up Zram..."
+   log "Setting up zram..."
    zramsize=$(printf "$(awk '/MemTotal/ { print $2 }' /proc/meminfo) * 1.5 / 1024 / 1024" | bc) &&
    echo "${zramsize}"G > /sys/block/zram0/disksize &&
    [ -x /usr/bin/mkfs.xfs ] &&
