@@ -97,6 +97,12 @@ source /root/.profile
 # Fix git dubious permissions.
 if [ ! -f /root/.gitconfig ]; then
    git config --global --add safe.directory "$kissrepo/repo"
+
+for pkg in "$kissrepo/extra/"*; do
+   url=$(grep git+ $f/sources | grep -v '#')
+   git config --global --add safe.directory $(echo $kissrepo/cache/sources/$(basename $f)/$(basename $p))
+done
+
 fi
 
 if [ -d "$home" ]; then
