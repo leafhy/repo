@@ -99,8 +99,8 @@ if [ ! -f /root/.gitconfig ]; then
    git config --global --add safe.directory "$kissrepo/repo"
 
 for pkg in "$kissrepo/repo/extra/"*; do
-   url=$(grep git+ $pkg/sources | grep -v '#')
-   git config --global --add safe.directory $(echo $kiss_cache/sources/$(basename $pkg)/$(basename $url))
+   url="$(grep git+ $pkg/sources | grep -v '#')" && url="$url"
+   [ "$url" ] && git config --global --add safe.directory $(echo $kiss_cache/sources/$(basename $pkg)/$(basename $url))
 done
 
 fi
