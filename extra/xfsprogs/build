@@ -22,3 +22,5 @@ PKG_ROOT_SBIN_DIR=/usr/bin \
 PKG_ROOT_LIB_DIR=/lib \
 install \
 install-dev
+
+rm -r "$1/usr/share/doc"

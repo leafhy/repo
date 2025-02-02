@@ -2,7 +2,7 @@
 
 make \
 DEBUG=-DNDEBUG \
-LOCAL_CONFIGURE_OPTIONS="--prefix=/usr --sbindir=/bin --enable-lib64=no --disable-gettext"
+LOCAL_CONFIGURE_OPTIONS="--prefix=/usr --sbindir=/usr/bin --enable-lib64=no --disable-gettext"
 
 make DESTDIR="$1" install
 
