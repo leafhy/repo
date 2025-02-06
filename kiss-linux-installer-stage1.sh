@@ -129,7 +129,7 @@ fi
 
 if [[ $opt = EFI ]]; then
    sgdisk --zap-all $device
-   sgdisk -n 1:2048:550M -t 1:ef00 $device
+   sgdisk -n 1:2048:96M -t 1:ef00 $device
    sgdisk -n 2:0:0 -t 2:8300 $device
    sgdisk --verify $device
 
