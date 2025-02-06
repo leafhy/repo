@@ -217,7 +217,7 @@ if ! [ "$(( totalmem / 1024 ** 3 ))" -lt "8" ]; then
    echo "${zramsize}"G > /sys/block/zram0/disksize &&
    [ -x /usr/bin/mkfs.xfs ] &&
    mkfs.xfs -m finobt=0,reflink=0,rmapbt=0 /dev/zram0 >/dev/null &&
-   mount -t xfs /dev/zram0 /var/db/kiss/cache/proc &&
+   mount -t xfs -o discard /dev/zram0 /var/db/kiss/cache/proc &&
    chown 1000:1000 /var/db/kiss/cache/proc
 fi
 fi
