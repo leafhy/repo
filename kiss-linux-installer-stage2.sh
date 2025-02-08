@@ -216,12 +216,12 @@ echo "mv linux-$kver $kissrepo/src"
 echo ''
 echo "### Create boot entry for UEFI"
 echo "cp /boot/vmlinuz /boot/efi/vmlinuz-$kver"
-echo "cp /boot/System.map /boot/System.map-$kver"
+echo "mv /boot/System.map /boot/System.map-$kver"
 echo "./efiboot.sh"
 echo ''
 echo "### Create boot entry for NON-UEFI"
 echo "cp /boot/vmlinuz /boot/vmlinuz-$kver"
-echo "cp /boot/System.map /boot/System.map-$kver"
+echo "mv /boot/System.map /boot/System.map-$kver"
 echo "./syslinux-extlinux-installer.sh"
 echo "mv syslinux-6.04-pre1.tar.xz $kissrepo/src"
 echo ''
