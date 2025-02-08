@@ -105,7 +105,7 @@ done
 
 fi
 
-if [ -d "$home" ]; then
+if [ -f /root/.gitconfig ] && [ -d "$home" ]; then
    cp /root/.gitconfig "$home"
    chown 1000:1000 "$home/.gitconfig"
 fi
