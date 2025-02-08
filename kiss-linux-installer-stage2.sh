@@ -103,10 +103,10 @@ for pkg in "$kissrepo/repo/extra/"*; do
    [ "$url" ] && git config --global --add safe.directory $(echo $kiss_cache/sources/$(basename $pkg)/$(basename $url))
 done
 
+fi
+
 [ -d "$home" ] && cp /root/.gitconfig "$home"
 [ -f "$home/.gitconfig" ] && chown 1000:1000 "$home/.gitconfig"
-
-fi
 
 kiss search \*
 
