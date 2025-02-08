@@ -212,11 +212,11 @@ echo "#####################"
 echo "### Build & install kernel"
 echo "cd linux-$kver"
 echo "make && make install"
-echo "mv linux-$kver* $kissrepo/src"
+echo "mv linux-$kver $kissrepo/src"
 echo ''
 echo "### Create boot entry for UEFI"
 echo "cp /boot/vmlinuz /boot/efi/vmlinuz-$kver"
-echo "cp /boot/System.map /boot/efi/System.map-$kver"
+echo "cp /boot/System.map /boot/System.map-$kver"
 echo "./efiboot.sh"
 echo ''
 echo "### Create boot entry for NON-UEFI"
