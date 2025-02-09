@@ -158,7 +158,7 @@ elif [[ $opt = MBR ]]; then
 fi
 
 # Extract 'KISS Linux' to filesystem.
-[[ ! -d /mnt/usr ]]; then
+if [[ ! -d /mnt/usr ]]; then
    echo  -e "\e[1;92m [ INFO: Extracting $file... ] \e[0m"
    tar xf "$file" -C /mnt --strip-components=1
 fi
