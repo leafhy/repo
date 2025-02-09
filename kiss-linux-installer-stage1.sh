@@ -11,8 +11,8 @@ set -e
 # https://voidlinux.org/
 
 # NOTE: EXTLINUX [6.03+] supports: FAT12/16/32, NTFS, ext2/3/4, Btrfs, XFS, UFS/FFS.
-#       f2fs is not compatable with extlinux.
-#     :setcap(libcap) uses filesystem xattrs.
+#     : f2fs is not compatable with extlinux.
+#     : setcap(libcap) uses filesystem xattrs.
 
 kver=5.15.6
 efilabel=KISS_LINUX-$kver
@@ -97,9 +97,7 @@ wipefs $device*
 echo ''
 echo '--------------------------------------------'
 
-# Creation of partitions & filesystems.
-read -p "Do you want to format $device? [yes/No]: "
-if [[ $REPLY =~ ^([Yy][Ee][Ss])$ ]]; then
+# Partition selection.
 if [[ $UEFI ]]; then
 PS3="Select partition type or ABORT: "
 select opt in EFI MBR ABORT
@@ -124,9 +122,14 @@ continue
 fi
 break
 done
-fi
+
 fi
 
+[[ $opt = ABORT ]] && exit 1
+
+# Filesystem creation.
+read -p "Do you want to format $device? [yes/No]: "
+if [[ $REPLY =~ ^([Yy][Ee][Ss])$ ]]; then
 if [[ $opt = EFI ]]; then
    sgdisk --zap-all $device
    sgdisk -n 1:2048:96M -t 1:ef00 $device
@@ -135,23 +138,30 @@ if [[ $opt = EFI ]]; then
 
    mkfs.vfat -F 32 -n EFI ${device}1
    mkfs.$efifsys $efifsysopts ${device}2
-   mount ${device}2 /mnt
-   mkdir -p /mnt/boot/efi
-   mount ${device}1 /mnt/boot/efi
 
 elif [[ $opt = MBR ]]; then
      echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
      fdisk $device
      mkfs.$extfsys $extfsysopts ${device}1
-     mount ${device}1 /mnt
 
-elif [[ $opt = ABORT ]]; then
-     exit
+fi
+fi
+
+# Mount the filesystems.
+if [[ $opt = EFI ]]; then
+   mount ${device}2 /mnt
+   mkdir -p /mnt/boot/efi
+   mount ${device}1 /mnt/boot/efi
+
+elif [[ $opt = MBR ]]; then
+     mount ${device}1 /mnt
 fi
 
 # Extract 'KISS Linux' to filesystem.
-echo  -e "\e[1;92m [ INFO: Extracting $file... ] \e[0m"
-tar xf "$file" -C /mnt --strip-components=1
+[[ ! -d /mnt/usr ]]; then
+   echo  -e "\e[1;92m [ INFO: Extracting $file... ] \e[0m"
+   tar xf "$file" -C /mnt --strip-components=1
+fi
 
 # Create 'src/' for tarballs, etc needed for installing 'KISS Linux'.
 mkdir -p /mnt/$kissrepo/src
@@ -160,9 +170,7 @@ mkdir -p /mnt/$kissrepo/src
 # Remove unneeded directories + broken symbolic link.
 [[ -d /mnt/usr/local ]] && rm -r /mnt/usr/local
 
-if [[ $UEFI ]]; then
-mkdir -p /mnt/boot/efi
-mount ${device}1 /mnt/boot/efi
+if [[ $opt = EFI ]]; then
 tee --append /mnt/etc/fstab << EOF >/dev/null
 LABEL=EFI        /boot/efi    vfat    defaults    0 0
 
@@ -205,6 +213,7 @@ EOF
 
 tee --append /mnt/etc/rc.d/setup.boot << 'EOF' >/dev/null
 # Setup zram if totalmem is => 8GB
+# https://stackoverflow.com/questions/20348007/how-can-i-find-out-the-total-physical-memory-ram-of-my-linux-box-suitable-to-b/53186875#53186875
 if [ -b /dev/zram0 ]; then
 totmem=0
 for mem in /sys/devices/system/memory/memory*; do
