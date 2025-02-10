@@ -272,6 +272,7 @@ EOF
 chmod +x /mnt/efiboot.sh
 fi
 
+if [[ ! -f /mnt/root/.profile ]]; then
 tee /mnt/root/.profile << EOF >/dev/null
 export KISS_DEBUG="0"
 export KISS_COMPRESS="gz"
@@ -284,6 +285,7 @@ export KISSREPO="$kissrepo"
 export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
 alias ls="ls --color=auto"
 EOF
+fi
 
 # Change cache location to one more apt for Single User.
 if [[ $kiss_cache ]] && [[ -f kiss-chroot-$chrootver.tar.xz ]]; then
