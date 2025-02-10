@@ -182,7 +182,6 @@ fi
 [[ -d /mnt/usr/local ]] && rm -r /mnt/usr/local
 
 if [[ $opt = EFI ]]; then
-
 tee --append /mnt/etc/fstab << EOF >/dev/null
 LABEL=EFI        /boot/efi    vfat    defaults    0 0
 
