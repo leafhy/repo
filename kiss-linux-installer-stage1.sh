@@ -202,9 +202,8 @@ printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf.orig
 # NOTE: 'kiss-chroot' will overwrite '/etc/resolv.conf'
 #       and apon exiting chroot, '/etc/resolv.conf' will be deleted.
 
-mkdir -p /mnt/etc/rc.d
-
 if [[ ! -f /mnt/etc/rc.d/setup.boot ]]; then
+mkdir -p /mnt/etc/rc.d
 tee /mnt/etc/rc.d/setup.boot << EOF >/dev/null
 # Set font for tty1..tty6
 log "Setting up tty..."
