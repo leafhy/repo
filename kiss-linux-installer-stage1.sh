@@ -251,7 +251,7 @@ dmesg >/var/log/dmesg.log
 EOF
 fi
 
-if [[ $opt = EFI ]]; then
+if [[ $opt = EFI ]] && [[ ! -f /mnt/efiboot.sh ]]; then
 tee /mnt/efiboot.sh << EOF >/dev/null
 #!/bin/sh
 
