@@ -83,15 +83,15 @@ fi
 break
 done
 
-echo -e "\e[1;92m [ INFO: $device has been selected ] \e[0m"
+echo -e "\e[1;92m [ INFO: $device has been selected. ] \e[0m"
 
 # Detect if we're in UEFI or legacy mode.
 [[ -d /sys/firmware/efi ]] && UEFI=1
 
 if [[ $UEFI ]]; then
-   echo -e "\e[1;92m [ INFO: EFI has been found ] \e[0m"
+   echo -e "\e[1;92m [ INFO: EFI has been found. ] \e[0m"
 else
-   echo -e "\e[1;31m [ INFO: EFI not found ] \e[0m"
+   echo -e "\e[1;31m [ INFO: EFI not found. ] \e[0m"
 fi
 
 # Partition selection.
@@ -126,10 +126,10 @@ fi
 
 echo '--------------------------------------------'
 echo ''
-echo  "Showing \"wipefs $device*\" information."
+echo -e "\e[1;92m [ INFO: Listing \"$device\" filesystems. ] \e[0m"
 wipefs $device*
 echo ''
-echo "NOTE: Use \"wipefs --all $device\" if hardrive fails to format properly."
+echo "Note: Use \"wipefs --all $device\" if hardrive fails to format properly."
 echo ''
 echo '--------------------------------------------'
 
