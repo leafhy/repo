@@ -126,10 +126,10 @@ fi
 
 echo '--------------------------------------------'
 echo ''
-echo "NOTE: Use \"wipefs --all $device\" if hardrive fails to format properly."
-echo ''
 echo  "Showing \"wipefs $device*\" information."
 wipefs $device*
+echo ''
+echo "NOTE: Use \"wipefs --all $device\" if hardrive fails to format properly."
 echo ''
 echo '--------------------------------------------'
 
