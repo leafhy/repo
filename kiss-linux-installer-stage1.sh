@@ -94,15 +94,6 @@ else
    echo -e "\e[1;31m [ INFO: EFI not found ] \e[0m"
 fi
 
-echo '--------------------------------------------'
-echo ''
-echo "NOTE: Use \"wipefs --all $device\" if hardrive fails to format properly."
-echo ''
-echo  "Showing \"wipefs $device*\" information."
-wipefs $device*
-echo ''
-echo '--------------------------------------------'
-
 # Partition selection.
 if [[ $UEFI ]]; then
 PS3="Select partition type or ABORT: "
@@ -132,6 +123,15 @@ done
 fi
 
 [[ $opt = ABORT ]] && exit 1
+
+echo '--------------------------------------------'
+echo ''
+echo "NOTE: Use \"wipefs --all $device\" if hardrive fails to format properly."
+echo ''
+echo  "Showing \"wipefs $device*\" information."
+wipefs $device*
+echo ''
+echo '--------------------------------------------'
 
 # Filesystem creation.
 read -p "Do you want to format $device? [yes/No]: "
