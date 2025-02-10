@@ -194,11 +194,15 @@ LABEL=$fsyslabel    $extfsys    defaults    0 0
 EOF
 fi
 
-printf '%s\n' $hostname > /mnt/etc/hostname
+if ! [[ -f /mnt/etc/hostname ]]; then
+   printf '%s\n' $hostname > /mnt/etc/hostname
+fi
 
-printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf.orig
-# NOTE: 'kiss-chroot' will overwrite '/etc/resolv.conf'
-#       and apon exiting chroot, '/etc/resolv.conf' will be deleted.
+if ! [[ -f /mnt/etc/resolv.conf.orig ]]; then
+   printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf.orig
+   # NOTE: 'kiss-chroot' will overwrite '/etc/resolv.conf'
+   #       and apon exiting chroot, '/etc/resolv.conf' will be deleted.
+fi
 
 if [[ ! -f /mnt/etc/rc.d/setup.boot ]]; then
 mkdir -p /mnt/etc/rc.d
