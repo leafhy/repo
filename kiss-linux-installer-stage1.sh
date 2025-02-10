@@ -149,7 +149,6 @@ elif [[ $opt = MBR ]]; then
      echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
      fdisk $device
      mkfs.$extfsys $extfsysopts ${device}1
-
 fi
 fi
 
