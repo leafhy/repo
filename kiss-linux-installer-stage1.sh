@@ -180,6 +180,8 @@ fi
 # Remove unneeded directories + broken symbolic link.
 [[ -d /mnt/usr/local ]] && rm -r /mnt/usr/local
 
+! [[ -f /mnt/etc/fstab.orig ]] && cp /mnt/etc/fstab /mnt/etc/fstab.orig
+
 if [[ $opt = EFI ]]; then
 tee --append /mnt/etc/fstab << EOF >/dev/null
 
