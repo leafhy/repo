@@ -255,6 +255,13 @@ if [[ $opt = EFI && ! -f /mnt/efiboot.sh ]]; then
 tee /mnt/efiboot.sh << EOF >/dev/null
 #!/bin/sh
 
+device=$device
+efilabel=$efilabel
+kver=$kver
+
+EOF
+
+tee --append /mnt/efiboot.sh << 'EOF' >/dev/null
 # void linux
 # initramfs uses 'UUID'
 #efibootmgr -c -d /dev/sda -p 1 -l '\vmlinuz-5.7.7_1' -L 'Void' initrd=\initramfs-5.7.7_1.img root=/dev/sda2
