@@ -36,7 +36,7 @@ kiss_cache="/var/db/kiss/cache"
 # kiss-chroot-2021.7-9.tar.xz
 checksum=3f4ebe1c6ade01fff1230638d37dea942c28ef85969b84d6787d90a9db6a5bf5
 
-if [[ ! -f $file ]]; then
+if ! [[ -f $file ]]; then
    echo -e "\e[1;92m [ INFO: Downloading fallback -> $file... ] \e[0m"
    wget "$url/$file" || curl -fLO "$url/$file"
    echo '--------------------------------------------'
