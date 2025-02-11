@@ -48,7 +48,7 @@ if [[ -z $checksum ]]; then
    echo '--------------------------------------------'
 fi
 
-if [[ $file = kiss-chroot-$chrootver.tar.xz ]] && [[ $checksum ]]; then
+if [[ $file = kiss-chroot-$chrootver.tar.xz && $checksum ]]; then
    echo -e "\e[1;92m [ INFO: Verifying $file checksum... ] \e[0m"
    sha256sum -c <(echo "$checksum  $file") || exit 1
    echo '--------------------------------------------'
@@ -163,14 +163,14 @@ elif [[ $opt = MBR ]]; then
 fi
 
 # Extract 'KISS Linux' to filesystem.
-if [[ ! -d /mnt/usr ]]; then
+if ! [[ -d /mnt/usr ]]; then
    echo  -e "\e[1;92m [ INFO: Extracting $file... ] \e[0m"
    tar xf "$file" -C /mnt --strip-components=1
    echo '--------------------------------------------'
 fi
 
 # Create 'src/' for tarballs, etc needed for installing 'KISS Linux'.
-if [[ ! -f /mnt/$kissrepo/src/$file ]]; then
+if ! [[ -f /mnt/$kissrepo/src/$file ]]; then
    mkdir -p /mnt/$kissrepo/src
    echo  -e "\e[1;92m [ INFO: Transferring $file... ] \e[0m"
    cp --verbose "$file" /mnt/$kissrepo/src
@@ -251,7 +251,7 @@ dmesg >/var/log/dmesg.log
 EOF
 fi
 
-if [[ $opt = EFI ]] && [[ ! -f /mnt/efiboot.sh ]]; then
+if [[ $opt = EFI && ! -f /mnt/efiboot.sh ]]; then
 tee /mnt/efiboot.sh << EOF >/dev/null
 #!/bin/sh
 
@@ -294,7 +294,7 @@ EOF
 fi
 
 # Change cache location to one more apt for Single User.
-if [[ $kiss_cache ]] && [[ -f kiss-chroot-$chrootver.tar.xz ]]; then
+if [[ $kiss_cache && -f kiss-chroot-$chrootver.tar.xz ]]; then
    sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
    mv -f _ /mnt/usr/bin/kiss
 
