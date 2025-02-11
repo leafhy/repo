@@ -278,7 +278,7 @@ EOF
 chmod +x /mnt/efiboot.sh
 fi
 
-if [[ ! -f /mnt/root/.profile ]]; then
+if ! [[ -f /mnt/root/.profile ]]; then
 tee /mnt/root/.profile << EOF >/dev/null
 export KISS_DEBUG="0"
 export KISS_COMPRESS="gz"
