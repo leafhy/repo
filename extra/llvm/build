@@ -8,7 +8,7 @@ mv Modules/* cmake/modules/
 
 if [ -d ../cmake/Modules ]; then
    for f in "$(pwd)/cmake/modules"/*; do
-   ln -s "$f" ../cmake/Modules
+      ln -s "$f" ../cmake/Modules
    done
 else
    # Fix lifted from https://github.com/noirlinux/main/blob/master/extra/llvm/build
