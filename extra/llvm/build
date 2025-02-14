@@ -2,9 +2,18 @@
 
 mv Modules/* cmake/modules/
 
-# Fix lifted from https://github.com/noirlinux/main/blob/master/extra/llvm/build
-# Create a symbolic link to the expected folder
-mkdir -p ../cmake && ln -s "$(pwd)/cmake/modules" ../cmake/Modules
+# Using CFLAGS="-pipe" causes 'cmake' & 'llvm' to use the same build folder,
+# thus causing the resultant link to become '../cmake/Modules/modules'.
+# which intern causes 'llvm' to fail building due to missing files.
+
+if [ -d ../cmake/Modules ]; then
+   for f in "$(pwd)/cmake/modules"/*; do
+   ln -s "$f" ../cmake/Modules
+else
+   # Fix lifted from https://github.com/noirlinux/main/blob/master/extra/llvm/build
+   # Create a symbolic link to the expected folder
+   mkdir -p ../cmake && ln -s "$(pwd)/cmake/modules" ../cmake/Modules
+fi
 
 # Remove ncurses dependency.
 sed 's/\(LLVM_ENABLE_TERMINFO\) 1/\1 2/' \
