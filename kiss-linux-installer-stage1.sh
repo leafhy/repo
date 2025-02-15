@@ -174,6 +174,32 @@ if ! [[ -d /mnt/usr ]]; then
    echo '--------------------------------------------'
 fi
 
+if ! [[ -f /mnt/root/.profile ]]; then
+tee /mnt/root/.profile << EOF >/dev/null
+export KISS_DEBUG="0"
+export KISS_COMPRESS="gz"
+export KISS_GET="curl"
+export CFLAGS="-O2 -pipe -march=x86-64 -mtune=generic"
+#export CFLAGS="-O3 -pipe -march=native"
+export CXXFLAGS="\$CFLAGS"
+export MAKEFLAGS="-j\$(nproc)"
+export KISSREPO="$kissrepo"
+export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
+alias ls="ls --color=auto"
+EOF
+fi
+
+# Change cache location to one more apt for Single User.
+if [[ $kiss_cache && -f kiss-chroot-$chrootver.tar.xz ]]; then
+   sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
+   mv -f _ /mnt/usr/bin/kiss
+
+   sed "/Top-level cache/a\
+   cac_dir=$kiss_cache" /mnt/usr/bin/kiss > _
+   mv -f _ /mnt/usr/bin/kiss
+   chmod +x /mnt/usr/bin/kiss
+fi
+
 # Create 'src/' for tarballs, etc needed for installing 'KISS Linux'.
 if ! [[ -f /mnt/$kissrepo/src/$file ]]; then
    mkdir -p /mnt/$kissrepo/src
@@ -185,7 +211,9 @@ fi
 # Remove unneeded directories + broken symbolic link.
 [[ -d /mnt/usr/local ]] && rm -r /mnt/usr/local
 
-! [[ -f /mnt/etc/fstab.orig ]] && cp /mnt/etc/fstab /mnt/etc/fstab.orig
+if ! [[ -f /mnt/etc/fstab.orig ]]; then
+   cp /mnt/etc/fstab /mnt/etc/fstab.orig
+fi
 
 if [[ $opt = EFI ]]; then
 tee --append /mnt/etc/fstab << EOF >/dev/null
@@ -290,32 +318,6 @@ echo ''
 efibootmgr
 EOF
 chmod +x /mnt/efiboot.sh
-fi
-
-if ! [[ -f /mnt/root/.profile ]]; then
-tee /mnt/root/.profile << EOF >/dev/null
-export KISS_DEBUG="0"
-export KISS_COMPRESS="gz"
-export KISS_GET="curl"
-export CFLAGS="-O2 -pipe -march=x86-64 -mtune=generic"
-#export CFLAGS="-O3 -pipe -march=native"
-export CXXFLAGS="\$CFLAGS"
-export MAKEFLAGS="-j\$(nproc)"
-export KISSREPO="$kissrepo"
-export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
-alias ls="ls --color=auto"
-EOF
-fi
-
-# Change cache location to one more apt for Single User.
-if [[ $kiss_cache && -f kiss-chroot-$chrootver.tar.xz ]]; then
-   sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
-   mv -f _ /mnt/usr/bin/kiss
-
-   sed "/Top-level cache/a\
-   cac_dir=$kiss_cache" /mnt/usr/bin/kiss > _
-   mv -f _ /mnt/usr/bin/kiss
-   chmod +x /mnt/usr/bin/kiss
 fi
 
 echo "#####################"
