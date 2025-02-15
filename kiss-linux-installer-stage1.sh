@@ -36,26 +36,31 @@ kiss_cache="/var/db/kiss/cache"
 # kiss-chroot-2021.7-9.tar.xz
 checksum=3f4ebe1c6ade01fff1230638d37dea942c28ef85969b84d6787d90a9db6a5bf5
 
+if mountpoint -q /mnt; then
+   echo -e "\e[1;31m[ ERR: /mnt is already mounted. ]\e[0m"
+   exit 1
+fi
+
 if ! [[ -f $file ]]; then
-   echo -e "\e[1;92m [ INFO: Downloading fallback -> $file... ] \e[0m"
+   echo -e "\e[1;92m[ INFO: Downloading fallback -> $file... ]\e[0m"
    wget "$url/$file" || curl -fLO "$url/$file"
    echo '--------------------------------------------'
 fi
 
 if [[ -z $checksum ]]; then
-   echo -e "\e[1;92m [ INFO: Downloading checksum -> $file.sha256... ] \e[0m"
+   echo -e "\e[1;92m[ INFO: Downloading checksum -> $file.sha256... ]\e[0m"
    wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
    echo '--------------------------------------------'
 fi
 
 if [[ $file = kiss-chroot-$chrootver.tar.xz && $checksum ]]; then
-   echo -e "\e[1;92m [ INFO: Verifying $file checksum... ] \e[0m"
+   echo -e "\e[1;92m[ INFO: Verifying $file checksum... ]\e[0m"
    sha256sum -c <(echo "$checksum  $file") || exit 1
    echo '--------------------------------------------'
 fi
 
 if [[ -f $file.sha256 ]]; then
-   echo -e "\e[1;92m [ INFO: Verifying $file checksum... ] \e[0m"
+   echo -e "\e[1;92m[ INFO: Verifying $file checksum... ]\e[0m"
    sha256sum -c < "$file.sha256" || exit 1
    echo '--------------------------------------------'
 fi
@@ -83,15 +88,15 @@ fi
 break
 done
 
-echo -e "\e[1;92m [ INFO: $device has been selected. ] \e[0m"
+echo -e "\e[1;92m[ INFO: $device has been selected. ]\e[0m"
 
 # Detect if we're in UEFI or legacy mode.
 [[ -d /sys/firmware/efi ]] && UEFI=1
 
 if [[ $UEFI ]]; then
-   echo -e "\e[1;92m [ INFO: EFI has been found. ] \e[0m"
+   echo -e "\e[1;92m[ INFO: EFI has been found. ]\e[0m"
 else
-   echo -e "\e[1;31m [ INFO: EFI not found. ] \e[0m"
+   echo -e "\e[1;31m[ INFO: EFI not found. ]\e[0m"
 fi
 
 # Partition selection.
@@ -126,7 +131,7 @@ fi
 
 echo '--------------------------------------------'
 echo ''
-echo -e "\e[1;92m [ INFO: Listing \"$device\" filesystems. ] \e[0m"
+echo -e "\e[1;92m[ INFO: Listing \"$device\" filesystems. ]\e[0m"
 wipefs $device*
 echo ''
 echo "Note: Use \"wipefs --all $device\" if hardrive fails to format properly."
@@ -164,7 +169,7 @@ fi
 
 # Extract 'KISS Linux' to filesystem.
 if ! [[ -d /mnt/usr ]]; then
-   echo  -e "\e[1;92m [ INFO: Extracting $file... ] \e[0m"
+   echo  -e "\e[1;92m[ INFO: Extracting $file... ]\e[0m"
    tar xf "$file" -C /mnt --strip-components=1
    echo '--------------------------------------------'
 fi
@@ -172,7 +177,7 @@ fi
 # Create 'src/' for tarballs, etc needed for installing 'KISS Linux'.
 if ! [[ -f /mnt/$kissrepo/src/$file ]]; then
    mkdir -p /mnt/$kissrepo/src
-   echo  -e "\e[1;92m [ INFO: Transferring $file... ] \e[0m"
+   echo  -e "\e[1;92m[ INFO: Transferring $file... ]\e[0m"
    cp --verbose "$file" /mnt/$kissrepo/src
    echo '--------------------------------------------'
 fi
@@ -275,7 +280,7 @@ efibootmgr --create --disk /dev/sda --loader '\vmlinuz-$kver' --label '$efilabel
 
 echo '******************************************'
 echo ''
-echo -e "\x1B[1;31m [ ! ] Check \x1B[1;92m BootOrder: \x1B[1;31m is correct [ ! ]\x1B[1;0m"
+echo -e "\x1B[1;31m[ ! ] Check\x1B[1;92m BootOrder:\x1B[1;31m is correct [ ! ]\x1B[1;0m"
 echo ''
 echo '******************************************'
 echo ''
