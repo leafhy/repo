@@ -312,7 +312,7 @@ echo -e "\x1B[1;31m[ ! ] Check\x1B[1;92m BootOrder:\x1B[1;31m is correct [ ! ]\x
 echo ''
 echo '******************************************'
 echo ''
-echo 'NOTE: Boot entry needs to be towards the top of list'
+echo 'Note: Boot entry needs to be towards the top of list'
 echo '      otherwise it will not appear in the UEFI boot menu.'
 echo ''
 efibootmgr
