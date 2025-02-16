@@ -177,7 +177,7 @@ done
 
 if [ "$kver" ] && [ ! -f "$kissrepo/src/linux-$kver.tar.xz" ]; then
    echo "[ INFO: Downloading -> $kernel ]"
-   curl -fLO "$kissrepo/src/$kernel"
+   curl -fL $kernel -o "$kissrepo/src/linux-$kver.tar.xz"
 fi
 
 if ! [ -f "/boot/vmlinuz-$kver" ] && [ -f "$kissrepo/src/linux-$kver.tar.xz" ]; then
@@ -198,7 +198,7 @@ fi
 
 if [ "$lver" ] && [ ! -f "$kissrepo/src/$lver.tar.xz" ]; then
    echo "[ INFO: Downloading -> $linuxfirmware... ]"
-   curl -fLO "$kissrepo/src/$linuxfirmware"
+   curl -fL $linuxfirmware -o "$kissrepo/src/$lver.tar.xz"
    tar xf "$kissrepo/src/$lver.tar.xz"
    mkdir -p /usr/lib/firmware
    cp -R linux-firmware/intel /usr/lib/firmware
