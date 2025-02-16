@@ -20,7 +20,7 @@ if [ -z "$username" ]; then
    exit 1
 fi
 
-user="$(grep -w $username <(getent passwd | cut -d: -f1) || :)"
+user="$(getent passwd | cut -d: -f1 | grep $username || :)"
 #user="$(getent passwd 1000 | cut -d: -f1)"
 
 if [ -z "$user" ]; then
