@@ -201,12 +201,10 @@ if [[ $kiss_cache && -f kiss-chroot-$chrootver.tar.xz ]]; then
 fi
 
 # Create 'src/' for tarballs, etc needed for installing 'KISS Linux'.
-if ! [[ -f /mnt/$kissrepo/src/$file ]]; then
    mkdir -p /mnt/$kissrepo/src
    echo  -e "\e[1;92m[ INFO: Transferring $file... ]\e[0m"
-   cp --verbose "$file" /mnt/$kissrepo/src
+   cp --verbose --no-clobber "$file" /mnt/$kissrepo/src
    echo '--------------------------------------------'
-fi
 
 # Remove unneeded directories + broken symbolic link.
 [[ -d /mnt/usr/local ]] && rm -r /mnt/usr/local
