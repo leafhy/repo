@@ -190,7 +190,10 @@ EOF
 fi
 
 # Change cache location to one more apt for Single User.
-if [[ $kiss_cache && -f kiss-chroot-$chrootver.tar.xz ]]; then
+kisschecksumA=6ff56f886ca76d93b0c88ffae267432474fb38399b151ccbacf519869114e234 # 5.5.14.tar.gz -> kiss
+kisschecksumB=$(sha256sum /mnt/usr/bin/kiss | cut -d' ' -f1)
+
+if [[ $kiss_cache && $file = kiss-chroot-2021.7-9.tar.xz && $kisschecksumA = $kisschecksumB ]]; then
    sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
    mv -f _ /mnt/usr/bin/kiss
 

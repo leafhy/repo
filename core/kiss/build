@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 # Remove nonexistant compress option
-sed 's/lzip -z/lzip/' kiss > _
+sed 's/lzip -z/lzip   /' kiss > _
 mv -f _ kiss
 
 chmod +x kiss
