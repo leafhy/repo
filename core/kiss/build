@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-# Remove nonexistant compress option
+# Remove nonexistant compress option.
 sed 's/lzip -z/lzip   /' kiss > _
 mv -f _ kiss
 
