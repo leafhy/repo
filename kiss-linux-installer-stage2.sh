@@ -175,7 +175,7 @@ fi
 
 done
 
-[ -s "$tmpfile" ] && kiss build "$pkg"
+[ -s "$tmpfile" ] && kiss build $(cat $tmpfile)
 [ -f "$tmpfile" ] && rm "$tmpfile"
 
 [ -d "$kiss_cache" ] && chown -R 1000:1000 "$kiss_cache"
