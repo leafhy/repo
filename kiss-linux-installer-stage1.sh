@@ -306,7 +306,7 @@ tee --append /mnt/efiboot.sh << 'EOF' >/dev/null
 # kiss linux
 # Kernel panic will occur without unicode -> unable to find root
 # 'PARTUUID' is used as initramfs is required to use 'UUID'
-efibootmgr --create --disk /dev/sda --loader '\vmlinuz-$kver' --label '$efilabel' --unicode root=PARTUUID=$(blkid -s PARTUUID -o value ${device}2) loglevel=4 Page_Poison=1
+efibootmgr --create --disk $device --loader \vmlinuz-$kver --label $efilabel --unicode root=PARTUUID=$(blkid -s PARTUUID -o value ${device}2) loglevel=4 Page_Poison=1
 
 echo '******************************************'
 echo ''
