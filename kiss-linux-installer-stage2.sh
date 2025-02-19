@@ -162,16 +162,21 @@ fi
 kiss update
 
 # Install requisite packages.
+tmpfile="$(printf 'mkstemp(tmp.XXXXXX)' | m4)"
+
 for pkg in baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd lzip util-linux nasm popt f2fs-tools e2fsprogs xfsprogs dosfstools; do
    [ -d "$kissrepo/installed/$pkg" ] && installed="$(cat $kissrepo/installed/$pkg/version)"
    [ -d "$kissrepo/repo/core/$pkg" ] && repo="$(cat $kissrepo/repo/core/$pkg/version)"
    [ -d "$kissrepo/repo/extra/$pkg" ] && repo="$(cat $kissrepo/repo/extra/$pkg/version)"
 
-if ! [ "$installed" = "$repo" ]; then
-   kiss build "$pkg"
+if [ "$installed" != "$repo" ]; then
+   printf '%s\n' "$pkg" >> $tmpfile
 fi
 
 done
+
+[ -s "$tmpfile" ] && kiss build "$pkg"
+[ -f "$tmpfile" ] && rm "$tmpfile"
 
 [ -d "$kiss_cache" ] && chown -R 1000:1000 "$kiss_cache"
 
