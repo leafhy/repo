@@ -185,7 +185,7 @@ if [ "$kver" ] && [ ! -f "$kissrepo/src/linux-$kver.tar.xz" ]; then
    curl -fL $kernel -o "$kissrepo/src/linux-$kver.tar.xz"
 fi
 
-if ! [ -f "/boot/vmlinuz-$kver" ] && [ -f "$kissrepo/src/linux-$kver.tar.xz" ]; then
+if [ ! -f "/boot/vmlinuz-$kver" ] && [ -f "$kissrepo/src/linux-$kver.tar.xz" ]; then
    echo "[ INFO: Extracting -> linux-$kver... ]"
    tar xf "$kissrepo/src/linux-$kver.tar.xz"
    cd  "linux-$kver"
