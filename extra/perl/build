@@ -25,13 +25,15 @@ export CFLAGS="$CFLAGS -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE"
     -Dnm="$NM" \
     -Dranlib="$RANLIB" \
     -Dman1dir=/usr/share/man/man1 \
-    -Dman3dir=/usr/share/man/man3 \
     -Dinstallman1dir=/usr/share/man/man1 \
-    -Dinstallman3dir=/usr/share/man/man3 \
     -Dman1ext=1 \
-    -Dman3ext=3pm \
     -Dperl_static_inline="static __inline__" \
     -Dd_static_inline
+
+# Save 9MB
+#   -Dman3dir=/usr/share/man/man3 \
+#   -Dinstallman3dir=/usr/share/man/man3 \
+#   -Dman3ext=3pm \
 
 make
 make install
