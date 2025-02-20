@@ -30,3 +30,6 @@ ln -s libncurses.so "$1/usr/lib/libcurses.so"
 
 # Fix pkgconfig file.
 ln -s ncursesw.pc "$1/usr/lib/pkgconfig/ncurses.pc"
+
+# Remove man3.
+rm -rf "$1/usr/share/man/man3"
