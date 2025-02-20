@@ -17,9 +17,6 @@ make DESTDIR="$1" \
 
 # Note: 'install_man_docs' installs around 10MB of docs.
 
-# Remove man3 thats still installed.
-rm -rf "$1/usr/share"
-
 cp -f update-certdata.sh "$1/etc/ssl"
 
 # Libretls is LibreSSL's libtls library for OpenSSL.
@@ -33,3 +30,7 @@ cp -f update-certdata.sh "$1/etc/ssl"
     make
     make install
 )
+
+# Remove man3 thats still installed.
+rm -rf "$1/usr/share"
+
