@@ -30,7 +30,7 @@ export CFLAGS="$CFLAGS -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE"
     -Dperl_static_inline="static __inline__" \
     -Dd_static_inline
 
-# Save 9MB
+# Save 9MB.
 #   -Dman3dir=/usr/share/man/man3 \
 #   -Dinstallman3dir=/usr/share/man/man3 \
 #   -Dman3ext=3pm \
