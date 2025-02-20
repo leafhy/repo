@@ -13,8 +13,12 @@ make
 
 make DESTDIR="$1" \
     install_sw \
-    install_ssldirs \
-    install_man_docs
+    install_ssldirs
+
+# Note: 'install_man_docs' installs around 10MB of docs.
+
+# Remove man3 thats still installed.
+rm -rf "$1/usr/share"
 
 cp -f update-certdata.sh "$1/etc/ssl"
 
