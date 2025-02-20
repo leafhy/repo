@@ -246,8 +246,8 @@ mkdir -p /mnt/etc/rc.d
 
 if ! [[ -f /mnt/etc/rc.d/setup.boot ]]; then
 tee /mnt/etc/rc.d/setup.boot << EOF >/dev/null
-# Set font for tty1..tty6
-# Note: Enable ttys {3..6} in /etc/inittab.
+# Set font for tty{1..6}
+# Note: Enable tty{3..6} in /etc/inittab.
 log "Setting up tty..."
 for i in \`seq 1 6\`; do
   setfont /usr/share/consolefonts/Tamsyn8x16r.psf.gz -C /dev/tty\$i
