@@ -28,3 +28,6 @@ mv -f _ src/Makefile.in
 
 make
 make install
+
+# Remove docs.
+rm -rf "$1/usr/share/man/man3"
