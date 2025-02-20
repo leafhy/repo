@@ -318,7 +318,6 @@ echo ''
 echo 'Note: Boot entry needs to be towards the top of list'
 echo '      otherwise it will not appear in the UEFI boot menu.'
 echo ''
-efibootmgr
 EOF
 chmod +x /mnt/efiboot.sh
 fi
