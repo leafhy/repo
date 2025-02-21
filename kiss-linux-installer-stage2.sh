@@ -16,7 +16,7 @@ case "$ans" in
 [Yy][Ee][Ss] )
 
 if [ -z "$username" ]; then
-   echo "Missing username"
+   printf '\033[31;1m[ ERR: Missing username ]\033[m'
    exit 1
 fi
 
@@ -49,7 +49,7 @@ break;;
 
 [Nn][Oo] )
 
-   echo '[ INFO: No user added, continuing... ]'
+   printf '\033[92;1m[ INFO: No user added, continuing... ]\033[m'
 
 break;;
 
@@ -182,12 +182,12 @@ done
 [ -d "$kiss_cache" ] && chown -R 1000:1000 "$kiss_cache"
 
 if [ "$kver" ] && [ ! -f "$kissrepo/src/linux-$kver.tar.xz" ]; then
-   echo "[ INFO: Downloading -> $kernel ]"
+   printf '\033[92;1m[ INFO: Downloading -> $kernel ]\033[m'
    curl -fL $kernel -o "$kissrepo/src/linux-$kver.tar.xz"
 fi
 
 if [ ! -f "/boot/vmlinuz-$kver" ] && [ -f "$kissrepo/src/linux-$kver.tar.xz" ]; then
-   echo "[ INFO: Extracting -> linux-$kver... ]"
+   printf '\033[92;1m[ INFO: Extracting -> linux-$kver... ]\033[m'
    tar xf "$kissrepo/src/linux-$kver.tar.xz"
    cd  "linux-$kver"
    cp "$kissrepo/repo/linux-kernel-$kver.config" .config
@@ -203,7 +203,7 @@ if [ ! -f "/boot/vmlinuz-$kver" ] && [ -f "$kissrepo/src/linux-$kver.tar.xz" ]; 
 fi
 
 if [ "$lver" ] && [ ! -f "$kissrepo/src/$lver.tar.xz" ]; then
-   echo "[ INFO: Downloading -> $linuxfirmware... ]"
+   printf '\033[92;1m[ INFO: Downloading -> $linuxfirmware... ]\033[m'
    curl -fL $linuxfirmware -o "$kissrepo/src/$lver.tar.xz"
    tar xf "$kissrepo/src/$lver.tar.xz"
    mkdir -p /usr/lib/firmware
