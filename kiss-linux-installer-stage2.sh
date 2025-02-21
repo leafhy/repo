@@ -164,6 +164,7 @@ kiss update
 # Install requisite packages.
 tmpfile="$(printf 'mkstemp(tmp.XXXXXX)' | m4)"
 
+# https://unix.stackexchange.com/questions/520035/exit-trap-with-posix
 trap 'rm "$tmpfile"; trap - EXIT; exit' EXIT INT
 
 for pkg in baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd lzip util-linux nasm popt f2fs-tools e2fsprogs xfsprogs dosfstools; do
