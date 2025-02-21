@@ -183,7 +183,7 @@ done
 [ -d "$kiss_cache" ] && chown -R 1000:1000 "$kiss_cache"
 
 if [ "$kver" ] && [ ! -f "$kissrepo/src/linux-$kver.tar.xz" ]; then
-   printf "\033[92;1m[ INFO: Downloading -> $kernel ]\033[m"
+   printf "\033[92;1m[ INFO: Downloading -> $kernel... ]\033[m"
    curl -fL $kernel -o "$kissrepo/src/linux-$kver.tar.xz"
 fi
 
