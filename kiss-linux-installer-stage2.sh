@@ -51,6 +51,7 @@ break;;
 
    printf '\033[92;1m[ INFO: No user added, continuing... ]\033[m\n'
    sleep 1
+
 break;;
 
 *) echo retry;;
