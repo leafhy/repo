@@ -190,7 +190,7 @@ fi
 
 if [ ! -f "/boot/vmlinuz-$kver" ] && [ -f "$kissrepo/src/linux-$kver.tar.xz" ] && [ ! -d "$kissrepo/src/linux-$kver" ]; then
    printf "\033[92;1m[ INFO: Extracting -> linux-$kver... ]\033[m\n"
-   tar xf "$kissrepo/src/linux-$kver.tar.xz" -C "$kissrepo/src/"
+   tar xf "$kissrepo/src/linux-$kver.tar.xz" -C "$kissrepo/src"
    cp "$kissrepo/repo/linux-kernel-$kver.config" "$kissrepo/src/linux-$kver/.config"
    cd "$kissrepo/src/linux-$kver"
 
