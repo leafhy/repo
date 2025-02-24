@@ -3,7 +3,8 @@ bzip2
 curl
 ncurses
 openssh
-pcre
+pcre2
+libunistring
 readline
 sqlite
 zlib
