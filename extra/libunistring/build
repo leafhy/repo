@@ -6,3 +6,5 @@
 make
 make install
 
+# Remove html docs.
+rm -rf "$1/usr/share/doc"
