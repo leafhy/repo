@@ -14,7 +14,7 @@ cat <<EOF
 
 NOTE: Install 'Bitwarden CLI' with
 
--> kiss install nodejs
+-> kiss build nodejs
 -> npm install -g @bitwarden/cli
 
 NOTE: Useage
