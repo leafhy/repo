@@ -1,14 +1,17 @@
 #!/bin/sh -e
 
+./configure \
+    --prefix=/usr
+
+# Remove bash dependancy & lnav zip creation.
+sed -i '2021d' src/Makefile
+
 # Disable ssh dsa remote test.
 sed '2397,2399d' test/Makefile > _
 mv _ test/Makefile
 
 sed 's,remote/ssh_host_dsa_key,,' test/Makefile > _
 mv _ test/Makefile
-
-./configure \
-    --prefix=/usr
 
 make
 make install
