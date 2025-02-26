@@ -2,8 +2,8 @@
 
 if [ -L /var/service/minidlna ]; then
    sv down minidlna
-   unlink /var/service/minidlnad
+   unlink /var/service/minidlna
 fi
 
 deluser --remove-home minidlna
-rm -r /etc/sv/minidlnad
+rm -r /etc/sv/minidlna
