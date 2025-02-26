@@ -1,5 +1,12 @@
 #!/bin/sh -e
 
+# Disable ssh dsa remote test.
+sed '2397,2399d' test/Makefile > _
+mv _ test/Makefile
+
+sed 's,remote/ssh_host_dsa_key,,' test/Makefile > _
+mv _ test/Makefile
+
 ./configure \
     --prefix=/usr
 
