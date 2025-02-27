@@ -19,7 +19,7 @@ fi
 ./configure \
     --shared-zlib \
     --shared-openssl \
-    --with-intl=none \
+    --with-intl=small-icu \
     --without-etw \
     --without-dtrace \
     --without-report \
