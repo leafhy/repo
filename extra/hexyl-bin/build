@@ -1,0 +1,4 @@
+#!/bin/sh -e
+
+install -Dm755 hexyl "$1/usr/bin/hexyl-bin"
+install -Dm644 -t "$1/usr/share/man/man1" hexyl.1 

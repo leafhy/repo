@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+cargo build --release
+pandoc -s -f markdown -t man -o ./doc/hexyl.1 ./doc/hexyl.1.md
+
+install -Dm755 -t "$1/usr/bin" target/release/hexyl 
+install -Dm644 -t "$1/usr/share/man/man1" doc/hexyl.1
