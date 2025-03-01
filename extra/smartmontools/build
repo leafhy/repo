@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-sed '12, 15d' examplescripts/Example7 > _
+sed '12,15d' examplescripts/Example7 > _
 mv -f _ examplescripts/Example7
 
 sed '23s+DEVICESCAN+DEVICESCAN -m root -M exec /usr/share/doc/smartmontools/examplescripts/Example7+' smartd.conf > _
