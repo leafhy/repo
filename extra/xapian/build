@@ -7,3 +7,5 @@
 make
 make DESTDIR="$1" install
 
+# Remove 7MB of documentation.
+rm -rf "$1/usr/share/doc"
