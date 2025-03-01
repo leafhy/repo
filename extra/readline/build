@@ -7,6 +7,9 @@
 ./configure \
     --prefix=/usr \
     --enable-static=no
-    
+
 make SHLIB_LIBS=-lncurses
 make DESTDIR="$1" install
+
+# Remove documentation.
+rm -rf "$1/usr/share/doc"

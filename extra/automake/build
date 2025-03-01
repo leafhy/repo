@@ -6,3 +6,5 @@
 make
 make install
 
+# Remove amhello.
+rm -rf "$1/usr/share/doc"
