@@ -1,7 +1,10 @@
 #!/bin/sh -e
 
 patch -p1 < libtheora-1.1.1-libpng16.patch
-patch -p1 < fix-theoraenc.patch
+# patch -p1 < fix-theoraenc.patch
+
+# Note: libtheora-1.1.0 builds with 'fix-theoraenc.patch',
+#       however libtheora-1.1.1 fails to build.
 
 ./configure \
     --prefix=/usr
