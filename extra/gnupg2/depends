@@ -1,0 +1,6 @@
+libgpg-error
+libassuan
+libgcrypt
+libksba
+npth
+pinentry
