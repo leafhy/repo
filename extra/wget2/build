@@ -4,7 +4,15 @@
     --prefix=/usr \
     --with-openssl \
     --disable-doc \
-    --disable-static
+    --disable-static \
+    --without-lzma \
+    --without-brotlidec \
+    --without-zstd \
+    --without-lzip \
+    --without-libidn2 \
+    --without-libidn \
+    --without-libpcre2 \
+    --without-libpcre
 
 make
 make install
