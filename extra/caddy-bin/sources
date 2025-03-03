@@ -1,1 +1,3 @@
 https://github.com/caddyserver/caddy/releases/download/vVERSION/caddy_VERSION_linux_amd64.tar.gz
+files/Caddyfile-example
+files/caddy.run

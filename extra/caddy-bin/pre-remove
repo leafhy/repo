@@ -6,4 +6,5 @@ if [ -L /var/service/caddy ]; then
 fi
 
 deluser --remove-home caddy
-rm -r /etc/sv/caddy
+
+[ -d /etc/sv/caddy ] && rm -r /etc/sv/caddy
