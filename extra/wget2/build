@@ -3,7 +3,22 @@
 ./configure \
     --prefix=/usr \
     --with-openssl \
-    --disable-doc
+    --disable-doc \
+    --disable-static
 
 make
 make install
+
+mkdir -p "$1/usr/share/man/man1"
+
+# Re-purpose contents of 'docs/wget2_md2man.sh' to create manpage.
+(
+  echo "% WGET2(1) GNU Wget2 User Manual|GNU Wget2 2.0.0"
+  echo ""
+  cat docs/wget2.md
+) | \
+sed '/# Wget2/,/^#/{/^# </!d}' | \
+pandoc -s -f markdown -t man -o "$1/usr/share/man/man1/wget2.1"
+
+# Cleanup.
+rm -rf "$1/usr/bin/wget2_noinstall"
