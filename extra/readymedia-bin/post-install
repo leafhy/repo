@@ -2,3 +2,7 @@
 
 getent group minidlna || addgroup -S -g 985 minidlna
 getent passwd minidlna || adduser -H -h /var/lib/minidlna -D -S -G minidlna -u 985 -g "Unprivileged User" minidlna
+
+# Install runit service.
+[ ! -d /run/runit/supervise.minidlna ] && ln -sf /run/runit/supervise.minidlna /etc/sv/minidlna/supervise
+[ ! -L /var/service/minidlna ] && ln -sf /etc/sv/minidlna /var/service/

@@ -7,8 +7,3 @@ done
 install -Dm755 usr/sbin/minidlnad "$1/usr/bin/minidlnad-bin"
 install -Dm644 _ "$1/etc/minidlna.conf"
 install -Dm755 minidlnad.run "$1/etc/sv/minidlnad-bin/run"
-
-# Install runit service.
-install -dm755 "$1/var/service"
-ln -sf /etc/sv/minidlnad-bin "$1/var/service/"
-ln -sf /run/runit/supervise.minidlna-bin "$1/etc/sv/minidlna-bin/supervise"
