@@ -19,7 +19,8 @@ echo -n "yes/no: "
 read -r ans
 
 if [ "$ans" = yes ]; then
-   sv down vaultwarden
+   status=$(cat /etc/sv/vaultwarden/supervise/stat)
+   [ "$status" = "run" ] && sv down vaultwarden
    deluser --remove-home vaultwarden
    [ -L /var/service/vaultwarden ] && unlink /var/service/vaultwarden
    rm -r \
