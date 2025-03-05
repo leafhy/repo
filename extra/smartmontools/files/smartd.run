@@ -1,2 +1,3 @@
 #!/bin/sh
+
 exec smartd --no-fork
