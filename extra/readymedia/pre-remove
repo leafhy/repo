@@ -1,9 +1,12 @@
 #!/bin/sh -e
 
-if [ -L /var/service/minidlna ]; then
-   sv down minidlna
+if [ ! -d /var/db/kiss/installed/readymedia-bin ]; then
+   status=$(cat /etc/sv/minidlna/supervise/stat)
+   [ "$status" = "run" ] && sv down minidlna
    unlink /var/service/minidlna
-fi
+   deluser --remove-home minidlna
 
-deluser --remove-home minidlna
-rm -r /etc/sv/minidlna
+   rm -r \
+       "/etc/sv/minidlna" \
+       "/run/runit/supervise.minidlna"
+fi
