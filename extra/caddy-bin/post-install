@@ -5,5 +5,13 @@ getent passwd caddy || adduser -H -h /var/lib/caddy -s /bin/nologin -D -S -G cad
 
 setcap CAP_NET_BIND_SERVICE=+ep /usr/bin/caddy-bin
 chown -R caddy:caddy /etc/caddy
+
+mkdir -p /var/lib/caddy
+mkdir -p /var/log/caddy
+
 chown caddy:caddy /var/lib/caddy
 chown caddy:caddy /var/log/caddy
+
+# Install runit service.
+[ ! -d /run/runit/supervise.caddy ] && ln -sf /run/runit/supervise.caddy /etc/sv/caddy/supervise
+[ ! -L /var/service/caddy ] && ln -sf /etc/sv/caddy /var/service/

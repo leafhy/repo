@@ -1,10 +1,13 @@
 #!/bin/sh -e
 
-if [ -L /var/service/caddy ]; then
-   sv down caddy
+if [ ! -d /var/db/kiss/installed/caddy-bin ]; then
+   status=$(cat /etc/sv/caddy/supervise/stat)
+   [ "$status" = "run" ] && sv down caddy
    unlink /var/service/caddy
+   deluser --remove-home caddy
+
+   rm -r \
+       "/etc/sv/caddy" \
+       "/var/log/caddy" \
+       "/run/runit/supervise.caddy"
 fi
-
-deluser --remove-home caddy
-
-rm -r /etc/sv/caddy
