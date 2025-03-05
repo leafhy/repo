@@ -2,12 +2,15 @@
 
 cat <<EOF
 
-###########################################
-#   [ ! ] WARNING WARNING WARNING [ ! ]   #
-#                                         #
-#  Removing vaultwarden WILL remove vault #
-#                                         #
-###########################################
+###############################################
+#                                             #
+#    [ ! ]  WARNING WARNING WARNING  [ ! ]    #
+#                                             #
+#             REMOVING VAULTWARDEN            #
+#                     WILL                    #
+#                 REMOVE VAULT                #
+#                                             #
+###############################################
 
 EOF
 
