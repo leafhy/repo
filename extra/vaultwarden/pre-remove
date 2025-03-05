@@ -21,8 +21,10 @@ read -r ans
 if [ "$ans" = yes ]; then
    sv down vaultwarden
    deluser --remove-home vaultwarden
-   unlink /var/service/vaultwarden
-   rm -r /etc/sv/vaultwarden
+   [ -L /var/service/vaultwarden ] && unlink /var/service/vaultwarden
+   rm -r \
+       "/etc/sv/vaultwarden" \
+       "/run/runit/supervise.vaultwarden"
 else
    echo "Aborting Vaultwarden removal."
    exit 1
