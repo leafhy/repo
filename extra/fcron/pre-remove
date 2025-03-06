@@ -17,7 +17,10 @@ rm -r \
     "/etc/sv/fcron" \
     "/run/runit/supervise.fcron"
 
-rm  /etc/fcron.*
+rm \
+   "/etc/fcron.conf" \
+   "/etc/fcron.allow" \
+   "/etc/fcron.deny"
 
 cat <<EOF
 
