@@ -3,6 +3,6 @@
 ./configure \
     --enable-shared=yes \
     --enable-static=no
-    
+
 make
 make DESTDIR="$1" install

@@ -5,6 +5,6 @@
     --with-screen=ncurses \
     --disable-rpath \
     --disable-nls
-            
+
 make
 make install

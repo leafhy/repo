@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-CXXFLAGS="-std=gnu++98" 
+CXXFLAGS="-std=gnu++98"
 
 ./configure \
     --prefix=/usr
