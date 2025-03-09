@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-# NOTE: "GNU Make 4.3" can hang due to Makefile-"git shortlog -s -n | cut -f2 | sort > AUTHORS".
+# NOTE: "GNU Make 4.3" can hang due to Makefile -> "git shortlog -s -n | cut -f2 | sort > AUTHORS".
 #       Use one of these options to allow "make" to continue:
 #       "bash+starship"
 #       "make </dev/null"
