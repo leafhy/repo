@@ -4,11 +4,11 @@ cat <<EOF
 
 #################################################################################################
 
-Note: To use 'kiss-outdated', curl requires a user-agent.
+NOTE: To use 'kiss-outdated', curl requires a user-agent.
       -> curl --user-agent "Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101 Firefox/38.0"
 
 
-Note: Get list of user-agents.
+NOTE: Get list of user-agents.
       -> curl -O https://gist.githubusercontent.com/pzb/b4b6f57144aea7827ae4/raw/cf847b76a142955b1410c8bcef3aabe221a63db1/user-agents.txt
 
 #################################################################################################
