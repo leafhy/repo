@@ -170,7 +170,7 @@ fi
 # Extract 'KISS Linux' to filesystem.
 if ! [[ -d /mnt/usr ]]; then
    echo  -e "\e[1;92m[ INFO: Extracting $file... ]\e[0m"
-   tar xf "$file" -C /mnt --strip-components=1
+   tar xf "$file" -C /mnt --strip-components=1 --checkpoint=.100
    echo '--------------------------------------------'
 fi
 
