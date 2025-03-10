@@ -164,7 +164,7 @@ for d in core extra; do
    find "$kissrepo/repo/$d" -maxdepth 1 -type d -print0 | xargs -0 -n1 basename >> $tmpfileA
 done
 
-find "$kissrepo/repo/extra" -name depends -print0 | xargs -0 sed 's/[[:space:]]\{1,\}/\n/' >> $tmpfileA
+find "$kissrepo/repo/extra" -name depends -print0 | xargs -0 sed 's/[[:space:]]\{1,\}/\n/' | sed 's/ //g' >> $tmpfileA
 
 kiss download $(sort $tmpfileA | uniq)
 
