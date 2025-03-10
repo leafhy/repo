@@ -156,8 +156,19 @@ mv -f _ /usr/bin/kiss
 chmod +x /usr/bin/kiss
 fi
 
-# Make sure all 'repo' pkgs are downloaded.
-kiss download $(ls "$kissrepo/repo/core" ; ls "$kissrepo/repo/extra")
+# Make sure all 'repo' pkgs + dependancies are downloaded.
+tmpfileA="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
+trap 'rm "$tmpfileA"; trap - EXIT; exit' EXIT INT
+
+for d in core extra; do
+   find "$kissrepo/repo/$d" -maxdepth 1 -type d -print0 | xargs -0 -n1 basename >> $tmpfileA
+done
+
+find "$kissrepo/repo/extra" -name depends -print0 | xargs -0 sed 's/[[:space:]]\{1,\}/\n/' >> $tmpfileA
+
+kiss download $(sort $tmpfileA | uniq)
+
+#kiss download $(ls "$kissrepo/repo/core" ; ls "$kissrepo/repo/extra")
 
 if [ -z "$kiss_cache" ]; then
    cd "$kissrepo/installed" && kiss build *
@@ -167,10 +178,9 @@ fi
 kiss update
 
 # Install requisite packages.
-tmpfile="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
-
+tmpfileB="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
 # https://unix.stackexchange.com/questions/520035/exit-trap-with-posix
-trap 'rm "$tmpfile"; trap - EXIT; exit' EXIT INT
+trap 'rm "$tmpfileB"; trap - EXIT; exit' EXIT INT
 
 for pkg in baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd lzip util-linux nasm popt f2fs-tools e2fsprogs xfsprogs dosfstools; do
    [ -d "$kissrepo/installed/$pkg" ] && installed="$(cat $kissrepo/installed/$pkg/version)"
@@ -178,12 +188,12 @@ for pkg in baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit ipro
    [ -d "$kissrepo/repo/extra/$pkg" ] && repo="$(cat $kissrepo/repo/extra/$pkg/version)"
 
 if [ "$installed" != "$repo" ]; then
-   printf '%s\n' "$pkg" >> $tmpfile
+   printf '%s\n' "$pkg" >> $tmpfileB
 fi
 
 done
 
-[ -s "$tmpfile" ] && kiss build $(cat $tmpfile)
+[ -s "$tmpfileB" ] && kiss build $(cat $tmpfileB)
 
 [ -d "$kiss_cache" ] && chown -R 1000:1000 "$kiss_cache"
 
