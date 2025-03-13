@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+# Note: Install 'sdl2' to build 'ffplay'.
+
 ./configure \
     --cc="$CC" \
     --cxx="$CXX" \
