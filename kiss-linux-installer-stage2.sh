@@ -161,12 +161,14 @@ tmpfileA="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
 trap 'rm "$tmpfileA"; trap - EXIT; exit' EXIT INT
 
 for d in core extra; do
-   find "$kissrepo/repo/$d" -maxdepth 1 -type d -print0 | xargs -0 -n1 basename >> $tmpfileA
+   find "$kissrepo/repo/$d" -maxdepth 1 -type d -print0 | xargs -0 -n1 basename | sed "s/^$d$//" >> $tmpfileA
 done
 
 find "$kissrepo/repo/extra" -name depends -print0 | xargs -0 sed 's/[[:space:]]\{1,\}/\n/' | sed 's/ //g' >> $tmpfileA
 
-kiss download $(sort $tmpfileA | uniq)
+for pkg in $(sort $tmpfileA | uniq); do
+   kiss download "$pkg" || printf '%s\n' "$pkg" >> _PKG-DOWNLOAD_FAILURE.log
+done
 
 #kiss download $(ls "$kissrepo/repo/core" ; ls "$kissrepo/repo/extra")
 
