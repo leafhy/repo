@@ -156,10 +156,13 @@ mv -f _ /usr/bin/kiss
 chmod +x /usr/bin/kiss
 fi
 
-# Make sure all 'repo' pkgs + dependancies are downloaded.
 tmpfileA="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
-trap 'rm "$tmpfileA"; trap - EXIT; exit' EXIT INT
+tmpfileB="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
+tmpfileC="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
 
+trap 'rm "$tmpfileA" "$tmpfileB" "$tmpfileC"; trap - EXIT; exit' EXIT INT
+
+# Make sure all 'repo' pkgs + dependancies are downloaded.
 for d in core extra; do
    find "$kissrepo/repo/$d" -maxdepth 1 -type d -print0 | xargs -0 -n1 basename | sed "s/^$d$//" >> $tmpfileA
 done
@@ -180,10 +183,7 @@ fi
 kiss update
 
 # Install requisite packages.
-tmpfileB="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
 # https://unix.stackexchange.com/questions/520035/exit-trap-with-posix
-trap 'rm "$tmpfileB"; trap - EXIT; exit' EXIT INT
-
 for pkg in baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd lzip util-linux nasm popt f2fs-tools e2fsprogs xfsprogs dosfstools; do
    [ -d "$kissrepo/installed/$pkg" ] && installed="$(cat $kissrepo/installed/$pkg/version)"
    [ -d "$kissrepo/repo/core/$pkg" ] && repo="$(cat $kissrepo/repo/core/$pkg/version)"
@@ -191,13 +191,16 @@ for pkg in baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit ipro
 
 if [ "$installed" != "$repo" ]; then
    printf '%s\n' "$pkg" >> $tmpfileB
-fi
-   for d in core extra; do
    # Get list of required deps.
-   [ -f "$kissrepo/repo/$d/$pkg/depends" ] &&
-   cat "$kissrepo/repo/$d/$pkg/depends" | sed 's/[[:space:]]\{1,\}/\n/' | sed 's/ //g' >> $tmpfileB
+   for d in core extra; do
+   [ -f "$kissrepo/repo/$d/$pkg/depends" ] && cat "$kissrepo/repo/$d/$pkg/depends" | sed 's/[[:space:]]\{1,\}/\n/' | sed 's/ //g' >> $tmpfileC
+
    done
+fi
+
 done
+
+printf '%s\n' "------------------------------------"
 
 if [ -f _PKG-DOWNLOAD-FAILURE.log ]; then
    printf '\033[31;1m[ ERR: Failed to download package. ]\033[m\n'
@@ -206,13 +209,23 @@ if [ -f _PKG-DOWNLOAD-FAILURE.log ]; then
    done
 
       printf '%s\n' "------------------------------------"
+fi
 
-   for p in $(cat $tmpfileB | sort | uniq); do
+if [ -s "$tmpfileB" ]; then
+   for p in $(cat $tmpfileB $tmpfileC | sort | uniq); do
       grep -w "$p" _PKG-DOWNLOAD-FAILURE.log >/dev/null &&
-      printf '\033[31;1m[ ERR: Required installation package not found. ]\033[m\n' &&
-      printf '%s\n' "=> $p" && printf '%s\n' "$p" >> _REQ-PKG-NOT-FOUND.log &&
+      [ ! -d "$kissrepo/installed/$p" ] && printf '%s\n' "$p" >> _REQ-PKG-NOT-FOUND.log &&
       printf '%s\n' "-----------------------------------"
    done
+fi
+
+if [ -f _REQ-PKG-NOT-FOUND.log ]; then
+   printf '\033[31;1m[ FATAL: Aborting...Required package not found. ]\033[m\n'
+      for pk in $(cat _REQ-PKG-NOT-FOUND.log); do
+         printf '%s\n' "=> $pk"
+      done
+   printf '%s\n' "-----------------------------------"
+   exit 1
 fi
 
 [ -s "$tmpfileB" ] && kiss build $(cat $tmpfileB)
@@ -271,4 +284,7 @@ echo "mv syslinux-6.04-pre1.tar.xz $kissrepo/src"
 echo ''
 echo "### Rename resolv.conf.orig"
 echo "mv /etc/resolv.conf.orig /etc/resolv.conf"
-echo "Not
+echo "Note: Exit chroot before renaming 'resolv.conf.orig', else it will be 'rm'."
+echo "#####################"
+echo '++ EOF ++'
+
