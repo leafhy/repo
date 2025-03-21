@@ -167,7 +167,7 @@ done
 find "$kissrepo/repo/extra" -name depends -print0 | xargs -0 sed 's/[[:space:]]\{1,\}/\n/' | sed 's/ //g' >> $tmpfileA
 
 for pkg in $(sort $tmpfileA | uniq); do
-   kiss download "$pkg" || printf '%s\n' "$pkg" >> _PKG-DOWNLOAD_FAILURE.log
+   kiss download "$pkg" || printf '%s\n' "$pkg" >> _PKG-DOWNLOAD-FAILURE.log
 done
 
 #kiss download $(ls "$kissrepo/repo/core" ; ls "$kissrepo/repo/extra")
@@ -192,8 +192,28 @@ for pkg in baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit ipro
 if [ "$installed" != "$repo" ]; then
    printf '%s\n' "$pkg" >> $tmpfileB
 fi
-
+   for d in core extra; do
+   # Get list of required deps.
+   [ -f "$kissrepo/repo/$d/$pkg/depends" ] &&
+   cat "$kissrepo/repo/$d/$pkg/depends" | sed 's/[[:space:]]\{1,\}/\n/' | sed 's/ //g' >> $tmpfileB
+   done
 done
+
+if [ -f _PKG-DOWNLOAD-FAILURE.log ]; then
+   printf '\033[31;1m[ ERR: Failed to download package. ]\033[m\n'
+   for f in $(cat _PKG-DOWNLOAD-FAILURE.log); do
+      printf '%s\n' "=> $f"
+   done
+
+      printf '%s\n' "------------------------------------"
+
+   for p in $(cat $tmpfileB | sort | uniq); do
+      grep -w "$p" _PKG-DOWNLOAD-FAILURE.log >/dev/null &&
+      printf '\033[31;1m[ ERR: Required installation package not found. ]\033[m\n' &&
+      printf '%s\n' "=> $p" && printf '%s\n' "$p" >> _REQ-PKG-NOT-FOUND.log &&
+      printf '%s\n' "-----------------------------------"
+   done
+fi
 
 [ -s "$tmpfileB" ] && kiss build $(cat $tmpfileB)
 
@@ -251,7 +271,4 @@ echo "mv syslinux-6.04-pre1.tar.xz $kissrepo/src"
 echo ''
 echo "### Rename resolv.conf.orig"
 echo "mv /etc/resolv.conf.orig /etc/resolv.conf"
-echo "Note: Exit chroot before renaming 'resolv.conf.orig', else it will be 'rm'."
-echo "#####################"
-echo '++ EOF ++'
-
+echo "Not

@@ -5,7 +5,7 @@ mkdir -p \
     "$1/usr/share/doc/kiss/init"
 
 # Add tty6.
-sed -i '/ tty5/a\tty6::respawn:/bin/getty 38400 tty6'
+sed -i '/tty5/a\tty6::respawn:/bin/getty 38400 tty6' etc/inittab
 # Re-locate kernel log to tty6.
 sed -i '/iwlwifi/a\::once:/bin/setlogcons 6' etc/inittab
 
