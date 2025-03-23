@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 username=
-home="/home/$username"
+home="/home/${username:-unset}"
 kver="5.15.6"
 kernel="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$kver.tar.xz"
 #lver="linux-firmware-20211027"
@@ -32,7 +32,7 @@ done
 
 fi
 
-if [ ! -f "$home/.profile" ]; then
+if [ -d "$home" ] && [ ! -f "$home/.profile" ]; then
 tee $home/.profile << EOF >/dev/null
 export KISS_DEBUG="0"
 export KISS_SU="ssu"
