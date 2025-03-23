@@ -179,9 +179,6 @@ if [ -z "$kiss_cache" ]; then
    cd "$kissrepo/installed" && kiss build *
 fi
 
-# Update other pkgs.
-kiss update
-
 # Install requisite packages.
 for pkg in baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd lzip util-linux nasm popt f2fs-tools e2fsprogs xfsprogs dosfstools; do
    [ -d "$kissrepo/installed/$pkg" ] && installed="$(cat $kissrepo/installed/$pkg/version)"
@@ -192,8 +189,7 @@ if [ "$installed" != "$repo" ]; then
    printf '%s\n' "$pkg" >> $tmpfileB
    # Get list of required deps.
    for d in core extra; do
-   [ -f "$kissrepo/repo/$d/$pkg/depends" ] && cat "$kissrepo/repo/$d/$pkg/depends" | sed 's/[[:space:]]\{1,\}/\n/' | sed 's/ //g' >> $tmpfileC
-
+      [ -f "$kissrepo/repo/$d/$pkg/depends" ] && cat "$kissrepo/repo/$d/$pkg/depends" | sed 's/[[:space:]]\{1,\}/\n/' | sed 's/ //g' >> $tmpfileC
    done
 fi
 
@@ -208,6 +204,9 @@ if [ -f _PKG-DOWNLOAD-FAILURE.log ]; then
    done
 
       printf '%s\n' "------------------------------------"
+else
+   # Update other pkgs.
+   kiss update
 fi
 
 if [ -s "$tmpfileB" ]; then
