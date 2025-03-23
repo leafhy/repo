@@ -159,7 +159,7 @@ fi
 tmpfileA="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
 tmpfileB="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
 tmpfileC="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
-
+# https://unix.stackexchange.com/questions/520035/exit-trap-with-posix
 trap 'rm "$tmpfileA" "$tmpfileB" "$tmpfileC"; trap - EXIT; exit' EXIT INT
 
 # Make sure all 'repo' pkgs + dependancies are downloaded.
@@ -183,7 +183,6 @@ fi
 kiss update
 
 # Install requisite packages.
-# https://unix.stackexchange.com/questions/520035/exit-trap-with-posix
 for pkg in baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd lzip util-linux nasm popt f2fs-tools e2fsprogs xfsprogs dosfstools; do
    [ -d "$kissrepo/installed/$pkg" ] && installed="$(cat $kissrepo/installed/$pkg/version)"
    [ -d "$kissrepo/repo/core/$pkg" ] && repo="$(cat $kissrepo/repo/core/$pkg/version)"
