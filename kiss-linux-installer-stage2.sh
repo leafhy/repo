@@ -202,7 +202,7 @@ line
 
 if [ -f _PKG-DOWNLOAD-FAILURE.log ]; then
    printf '\033[31;1m[ ERR: Failed to download package. ]\033[m\n'
-   for f in $(cat ./_PKG-DOWNLOAD-FAILURE.log); do
+   for f in $(cat _PKG-DOWNLOAD-FAILURE.log); do
       printf '%s\n' "=> $f"
    done
 
