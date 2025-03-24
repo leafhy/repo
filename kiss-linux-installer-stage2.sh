@@ -71,30 +71,30 @@ source /root/.profile
 ###############################################
 #           Github & SSH Key Setup            #
 ###############################################
-### Create ssh key and add to github.com account
+### Create ssh key and add to github.com account.
 # ssh-keygen -t ed25519 -C 'comment'
 #
-### Test ssh key works
+### Test ssh key works.
 # ssh -T git@github.com
 #
-### Clone repo using ssh key
+### Clone repo using ssh key.
 # git clone git@github.com:leafhy/repo.git
 #
-### Create ~/.ssh/config
+### Create ~/.ssh/config.
 # ------ BEGIN ------ #
 # host github
 # hostname github.com
 # user git
 # identityfile ~/.ssh/github-id_ed25519
 # ------- END ------- #
-### Test ssh config works
+### Test ssh config works.
 # ssh -T github
 #
-### Clone repo using ssh config
+### Clone repo using ssh config.
 # git clone github:leafhy/repo.git
 #
-# NOTE: Re-clone repo if permission denied occurs
-#       i.e. repo out of sync
+# NOTE: Re-clone repo if permission denied occurs.
+#       i.e. repo out of sync.
 ###############################################
 
 [ ! -d "$kissrepo/repo" ] && git clone https://github.com/leafhy/repo.git $kissrepo/repo
@@ -202,7 +202,7 @@ line
 
 if [ -f _PKG-DOWNLOAD-FAILURE.log ]; then
    printf '\033[31;1m[ ERR: Failed to download package. ]\033[m\n'
-   for f in $(cat _PKG-DOWNLOAD-FAILURE.log); do
+   for f in $(cat ./_PKG-DOWNLOAD-FAILURE.log); do
       printf '%s\n' "=> $f"
    done
 
