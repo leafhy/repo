@@ -29,9 +29,9 @@ user="$(getent passwd | cut -d: -f1 | grep $username || :)"
 if [ -z "$user" ]; then
    adduser "$username"
 
-for g in wheel audio; do
-   addgroup "$username" "$g"
-done
+   for g in wheel audio; do
+      addgroup "$username" "$g"
+   done
 
 fi
 
