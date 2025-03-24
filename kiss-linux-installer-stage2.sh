@@ -9,6 +9,9 @@ linuxfirmware="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-fi
 kissrepo="/var/db/kiss"
 kiss_cache="$kissrepo/cache"
 
+line () { printf '%s\n' "-----------------------------------"; }
+
+
 while true; do
 read -p "Create user now? [yes/no]: "  ans
 case "$ans" in
@@ -195,7 +198,7 @@ fi
 
 done
 
-printf '%s\n' "------------------------------------"
+line
 
 if [ -f _PKG-DOWNLOAD-FAILURE.log ]; then
    printf '\033[31;1m[ ERR: Failed to download package. ]\033[m\n'
@@ -203,7 +206,7 @@ if [ -f _PKG-DOWNLOAD-FAILURE.log ]; then
       printf '%s\n' "=> $f"
    done
 
-      printf '%s\n' "------------------------------------"
+      line
 else
    # Update other pkgs.
    kiss update
@@ -213,7 +216,7 @@ if [ -s "$tmpfileB" ]; then
    for p in $(cat $tmpfileB $tmpfileC | sort | uniq); do
       grep -w "$p" _PKG-DOWNLOAD-FAILURE.log >/dev/null &&
       [ ! -d "$kissrepo/installed/$p" ] && printf '%s\n' "$p" >> _REQ-PKG-NOT-FOUND.log &&
-      printf '%s\n' "-----------------------------------"
+      line
    done
 fi
 
@@ -222,7 +225,7 @@ if [ -f _REQ-PKG-NOT-FOUND.log ]; then
       for pk in $(cat _REQ-PKG-NOT-FOUND.log); do
          printf '%s\n' "=> $pk"
       done
-   printf '%s\n' "-----------------------------------"
+   line
    exit 1
 fi
 
