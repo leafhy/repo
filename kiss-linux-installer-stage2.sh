@@ -213,7 +213,7 @@ else
 fi
 
 if [ -s "$tmpfileB" ]; then
-   for p in $(cat $tmpfileB $tmpfileC | sort | uniq); do
+   for p in $(sort $tmpfileB $tmpfileC | uniq); do
       grep -w "$p" _PKG-DOWNLOAD-FAILURE.log >/dev/null &&
       [ ! -d "$kissrepo/installed/$p" ] && printf '%s\n' "$p" >> _REQ-PKG-NOT-FOUND.log &&
       line
