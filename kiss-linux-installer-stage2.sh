@@ -19,7 +19,7 @@ case "$ans" in
 [Yy][Ee][Ss] )
 
 if [ -z "$username" ]; then
-   printf '\033[31;1m[ ERR: Missing username ]\033[m\n'
+   printf '\033[31;1m[ ERR: Missing username. ]\033[m\n'
    exit 1
 fi
 
