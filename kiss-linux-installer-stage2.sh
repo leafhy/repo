@@ -225,9 +225,10 @@ if [ -f _REQ-PKG-NOT-FOUND.log ]; then
       done
    line
    exit 1
-fi
 
-[ -s "$tmpfileB" ] && kiss build $(cat $tmpfileB)
+else
+   kiss build $(cat $tmpfileB)
+fi
 
 [ -d "$kiss_cache" ] && chown -R 1000:1000 "$kiss_cache"
 
