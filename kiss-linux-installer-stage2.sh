@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 username=
-home="/home/${username:-unset}"
+home="/home/${username:-empty}"
 kver="5.15.6"
 kernel="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$kver.tar.xz"
 #lver="linux-firmware-20211027"
