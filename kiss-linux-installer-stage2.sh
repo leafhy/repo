@@ -24,7 +24,7 @@ case "$ans" in
 [Yy][Ee][Ss] )
 
 if [ -z "$username" ]; then
-   printf '\033[31;1m[ ERR: Missing username. ]\033[m\n'
+   printf '\033[31;1m[  ERROR: Missing username.  ]\033[m\n'
    exit 1
 fi
 
@@ -61,7 +61,7 @@ break;;
 
 [Nn][Oo] )
 
-   printf '\033[92;1m[ INFO: No user added, continuing... ]\033[m\n'
+   printf '\033[92;1m[  INFO: No user added, continuing...  ]\033[m\n'
    sleep 1
 
 break;;
@@ -200,7 +200,7 @@ done
 line
 
 if [ -f _PKG-DOWNLOAD-FAILURE.log ]; then
-   printf '\033[31;1m[ ERR: Failed to download package. ]\033[m\n'
+   printf '\033[31;1m[  ERROR: Failed to download package.  ]\033[m\n'
    for f in $(cat _PKG-DOWNLOAD-FAILURE.log); do
       printf '%s\n' "=> $f"
    done
@@ -233,12 +233,12 @@ fi
 [ -d "$kiss_cache" ] && chown -R 1000:1000 "$kiss_cache"
 
 if [ "$kver" ] && [ ! -f "$kissrepo/src/linux-$kver.tar.xz" ]; then
-   printf "\033[92;1m[ INFO: Downloading -> $kernel... ]\033[m\n"
+   printf "\033[92;1m[  INFO: Downloading -> $kernel...  ]\033[m\n"
    curl -fL $kernel -o "$kissrepo/src/linux-$kver.tar.xz"
 fi
 
 if [ -f "$kissrepo/src/linux-$kver.tar.xz" ] && [ ! -d "$kissrepo/src/linux-$kver" ]; then
-   printf "\033[92;1m[ INFO: Extracting -> linux-$kver... ]\033[m\n"
+   printf "\033[92;1m[  INFO: Extracting -> linux-$kver...  ]\033[m\n"
    tar xf "$kissrepo/src/linux-$kver.tar.xz" -C "$kissrepo/src"
    cp "$kissrepo/repo/linux-kernel-$kver.config" "$kissrepo/src/linux-$kver/.config"
    cd "$kissrepo/src/linux-$kver"
@@ -254,7 +254,7 @@ if [ -f "$kissrepo/src/linux-$kver.tar.xz" ] && [ ! -d "$kissrepo/src/linux-$kve
 fi
 
 if [ "$lver" ] && [ ! -f "$kissrepo/src/$lver.tar.xz" ]; then
-   printf "\033[92;1m[ INFO: Downloading -> $linuxfirmware... ]\033[m\n"
+   printf "\033[92;1m[  INFO: Downloading -> $linuxfirmware...  ]\033[m\n"
    curl -fL $linuxfirmware -o "$kissrepo/src/$lver.tar.xz"
    tar xf "$kissrepo/src/$lver.tar.xz"
    mkdir -p /usr/lib/firmware
