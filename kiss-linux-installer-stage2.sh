@@ -219,7 +219,7 @@ if [ -s "$tmpfileB" ]; then
 fi
 
 if [ -f _REQ-PKG-NOT-FOUND.log ]; then
-   printf '\033[31;1m[ FATAL: Aborting...Required package not found. ]\033[m\n'
+   printf '\033[31;1m[  FATAL: Aborting...Required package not found.  ]\033[m\n'
       for pk in $(cat _REQ-PKG-NOT-FOUND.log); do
          printf '%s\n' "=> $pk"
       done
