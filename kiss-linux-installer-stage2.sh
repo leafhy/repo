@@ -11,6 +11,11 @@ kiss_cache="$kissrepo/cache"
 
 line () { printf '%s\n' "-----------------------------------"; }
 
+tmpfileA="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
+tmpfileB="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
+tmpfileC="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
+# https://unix.stackexchange.com/questions/520035/exit-trap-with-posix
+trap 'rm "$tmpfileA" "$tmpfileB" "$tmpfileC"; trap - EXIT; exit' EXIT INT
 
 while true; do
 read -p "Create user now? [yes/no]: "  ans
@@ -158,12 +163,6 @@ mv -f _ /usr/bin/kiss
 
 chmod +x /usr/bin/kiss
 fi
-
-tmpfileA="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
-tmpfileB="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
-tmpfileC="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
-# https://unix.stackexchange.com/questions/520035/exit-trap-with-posix
-trap 'rm "$tmpfileA" "$tmpfileB" "$tmpfileC"; trap - EXIT; exit' EXIT INT
 
 # Make sure all 'repo' pkgs + dependancies are downloaded.
 for d in core extra; do
