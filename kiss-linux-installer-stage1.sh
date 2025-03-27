@@ -213,8 +213,13 @@ fi
 # Remove unneeded directories + broken symbolic link.
 [[ -d /mnt/usr/local ]] && rm -r /mnt/usr/local
 
-if ! [[ -f /mnt/etc/fstab.orig ]]; then
+if ! [[ -f /mnt/etc/fstab && -f /mnt/etc/fstab.orig ]]; then
+   cp /mnt/etc/fstab.orig /mnt/etc/fstab
+fi
+
+if ! [[ -f /mnt/etc/fstab.orig && -f /mnt/etc/fstab ]]; then
    cp /mnt/etc/fstab /mnt/etc/fstab.orig
+fi
 
 if [[ $opt = EFI ]]; then
 tee --append /mnt/etc/fstab << EOF >/dev/null
@@ -230,7 +235,6 @@ tee --append /mnt/etc/fstab << EOF >/dev/null
 # UUID=$(blkid -s UUID -o value ${device}1)
 LABEL=$fsyslabel    $extfsys    defaults    0 0
 EOF
-fi
 fi
 
 if ! [[ -f /mnt/etc/hostname ]]; then
