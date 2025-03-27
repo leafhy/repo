@@ -137,12 +137,12 @@ kiss search \*
 # git config merge.verifySignatures true
 # ----------------- #
 
-# Update package manager.
-kiss update
-
-# Change cache location to one more apt for Single User
-# and fix log permissions so builds don't fail.
 if [ "$kiss_cache" ] && [ ! -f "/usr/bin/kiss.orig" ]; then
+   # Update package manager.
+   kiss update
+
+   # Change cache location to one more apt for Single User
+   # and fix log permissions so builds don't fail.
    cp /usr/bin/kiss /usr/bin/kiss.orig
 
 sed '/# SOFTWARE./a\
