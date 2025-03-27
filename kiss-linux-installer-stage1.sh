@@ -251,7 +251,7 @@ tee /mnt/etc/rc.d/setup.boot << EOF >/dev/null
 # Note: Enable tty{3..6} in /etc/inittab.
 log "Setting up tty..."
 for i in \`seq 1 6\`; do
-  setfont /usr/share/consolefonts/Tamsyn8x16r.psf.gz -C /dev/tty\$i
+   setfont /usr/share/consolefonts/Tamsyn8x16r.psf.gz -C /dev/tty\$i
 done
 
 # Setup network
@@ -270,20 +270,20 @@ tee --append /mnt/etc/rc.d/setup.boot << 'EOF' >/dev/null
 # Setup zram if totalmem is => 8GB
 # https://stackoverflow.com/questions/20348007/how-can-i-find-out-the-total-physical-memory-ram-of-my-linux-box-suitable-to-b/53186875#53186875
 if [ -b /dev/zram0 ]; then
-totmem=0
-for mem in /sys/devices/system/memory/memory*; do
-  [ "$(cat ${mem}/online)" = "1" ] && totalmem=$((totalmem+$((0x$(cat /sys/devices/system/memory/block_size_bytes)))))
-done
+   totmem=0
+   for mem in /sys/devices/system/memory/memory*; do
+      [ "$(cat ${mem}/online)" = "1" ] && totalmem=$((totalmem+$((0x$(cat /sys/devices/system/memory/block_size_bytes)))))
+   done
 
-if ! [ "$(( totalmem / 1024 ** 3 ))" -lt "8" ]; then
-   log "Setting up zram..."
-   zramsize=$(printf "$(awk '/MemTotal/ { print $2 }' /proc/meminfo) * 1.5 / 1024 / 1024" | bc) &&
-   echo "${zramsize}"G > /sys/block/zram0/disksize &&
-   [ -x /usr/bin/mkfs.xfs ] &&
-   mkfs.xfs -m finobt=0,reflink=0,rmapbt=0 /dev/zram0 >/dev/null &&
-   mount -t xfs -o discard /dev/zram0 /var/db/kiss/cache/proc &&
-   chown 1000:1000 /var/db/kiss/cache/proc
-fi
+   if ! [ "$(( totalmem / 1024 ** 3 ))" -lt "8" ]; then
+      log "Setting up zram..."
+      zramsize=$(printf "$(awk '/MemTotal/ { print $2 }' /proc/meminfo) * 1.5 / 1024 / 1024" | bc) &&
+      echo "${zramsize}"G > /sys/block/zram0/disksize &&
+      [ -x /usr/bin/mkfs.xfs ] &&
+      mkfs.xfs -m finobt=0,reflink=0,rmapbt=0 /dev/zram0 >/dev/null &&
+      mount -t xfs -o discard /dev/zram0 /var/db/kiss/cache/proc &&
+      chown 1000:1000 /var/db/kiss/cache/proc
+   fi
 fi
 
 dmesg >/var/log/dmesg.log
