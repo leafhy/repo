@@ -175,7 +175,7 @@ if ! [[ -d /mnt/usr ]]; then
    echo '--------------------------------------------'
 fi
 
-[[ -f $file = kiss-chroot-2021.7-9.tar.xz ]] && rm /mnt/etc/sv/{crond,syslogd}/run
+[[ $file = kiss-chroot-2021.7-9.tar.xz ]] && rm /mnt/etc/sv/{crond,syslogd}/run
 
 if ! [[ -f /mnt/root/.profile ]]; then
 tee /mnt/root/.profile << EOF >/dev/null
