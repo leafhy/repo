@@ -169,13 +169,13 @@ fi
 
 # Extract 'KISS Linux' to filesystem.
 if ! [[ -d /mnt/usr ]]; then
-   echo  -e "\e[1;92m[  INFO: Extracting $file...  ]\e[0m"
+   echo -e "\e[1;92m[  INFO: Extracting $file...  ]\e[0m"
    tar xf "$file" -C /mnt --strip-components=1 --checkpoint=.400
    echo ''
    echo '--------------------------------------------'
+   # Avoid the creation of 'run.new'.
+   [[ $file = kiss-chroot-2021.7-9.tar.xz ]] && rm --verbose /mnt/etc/sv/{crond,syslogd}/run
 fi
-
-[[ $file = kiss-chroot-2021.7-9.tar.xz ]] && rm /mnt/etc/sv/{crond,syslogd}/run
 
 if ! [[ -f /mnt/root/.profile ]]; then
 tee /mnt/root/.profile << EOF >/dev/null
