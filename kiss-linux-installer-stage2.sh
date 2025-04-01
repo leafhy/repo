@@ -38,6 +38,11 @@ if [ -z "$user" ]; then
       addgroup "$username" "$g"
    done
 
+   # Create needed directories.
+   # Note: 'siren' does not create '.config'.
+   mkdir \
+       "$home/.config" \
+       "$home/src"
 fi
 
 if [ -d "$home" ] && [ ! -f "$home/.profile" ]; then
