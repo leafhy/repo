@@ -169,7 +169,7 @@ mv -f _ /usr/bin/kiss
 chmod +x /usr/bin/kiss
 fi
 
-# Make sure all 'repo' pkgs + dependancies are downloaded.
+# Make sure all 'repo' pkgs + dependencies are downloaded.
 for d in core extra; do
    find "$kissrepo/repo/$d" -maxdepth 1 -type d -print0 | xargs -0 -n1 basename | sed "s/^$d$//" >> $tmpfileA
 done
