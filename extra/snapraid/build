@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+# Snapraid's SMART logging appears to be broken, so disable it.
+sed -i 's,SMART_LOG=1,SMART_LOG=0,' snapraid-diff-sync.sh
+
 ./configure \
     --prefix=/usr
 
