@@ -3,7 +3,7 @@
 # Fix building with clang or alternatively
 # use the configure option '--disable-arcamav'.
 if [ "$CC" = "clang" ]; then
-   sed -i '21 a #include <string.h> arcam-av/arcam_av.h
+   sed -i '21 a #include <string.h>' arcam-av/arcam_av.h
 fi
 
 ./configure \
