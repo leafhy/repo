@@ -15,7 +15,7 @@ tmpfileA="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
 tmpfileB="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
 tmpfileC="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
 # https://unix.stackexchange.com/questions/520035/exit-trap-with-posix
-trap 'rm "$tmpfileA" "$tmpfileB" "$tmpfileC"; trap - EXIT; exit' EXIT INT
+trap 'rm "$tmpfileA" "$tmpfileB" "$tmpfileC"; printf "\n"; trap - EXIT; exit' EXIT INT
 
 while true; do
 read -p "Create user now? [yes/no]: "  ans
