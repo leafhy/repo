@@ -215,12 +215,11 @@ fi
 # Remove unneeded directories + broken symbolic link.
 [[ -d /mnt/usr/local ]] && rm -r /mnt/usr/local
 
-if ! [[ -f /mnt/etc/fstab && -f /mnt/etc/fstab.orig ]]; then
-   cp /mnt/etc/fstab.orig /mnt/etc/fstab
-fi
-
 if ! [[ -f /mnt/etc/fstab.orig && -f /mnt/etc/fstab ]]; then
    cp /mnt/etc/fstab /mnt/etc/fstab.orig
+
+elif ! [[ -f /mnt/etc/fstab && -f /mnt/etc/fstab.orig ]]; then
+   cp /mnt/etc/fstab.orig /mnt/etc/fstab
 fi
 
 if [[ $opt = EFI ]]; then
