@@ -142,6 +142,11 @@ kiss search \*
 # git config merge.verifySignatures true
 # ----------------- #
 
+# Update kiss docs checksum -> 'f0525d4e00c5e07138ac2ceb53936d0b221608e7.tar.gz'.
+if grep -qw 'efca06d0a52037c732007f33f99cd368a836b5f9fec3ae314cfd73182f337c01' "$kissrepo/repo/core/kiss/checksum"; then
+    sed -i 's/efca06d0a52037c732007f33f99cd368a836b5f9fec3ae314cfd73182f337c01/e8549203a55bef2cf7c900814e7c9c694beebe0178e42d82a0a873bf8baea522/' "$kissrepo/repo/core/kiss/checksum"
+fi
+
 if [ "$kiss_cache" ] && [ ! -f "/usr/bin/kiss.orig" ]; then
    # Update package manager.
    kiss update
