@@ -307,6 +307,16 @@ kver=$kver
 EOF
 
 tee --append /mnt/efiboot.sh << 'EOF' >/dev/null
+echo '******************************************'
+echo ''
+echo -e "\x1B[1;31m[ ! ] Check\x1B[1;92m BootOrder:\x1B[1;31m is correct [ ! ]\x1B[1;0m"
+echo ''
+echo '******************************************'
+echo ''
+echo 'Note: Boot entry needs to be towards the top of list'
+echo '      otherwise it will not appear in the UEFI boot menu.'
+echo ''
+
 # void linux
 # initramfs uses 'UUID'
 #efibootmgr -c -d /dev/sda -p 1 -l '\vmlinuz-5.7.7_1' -L 'Void' initrd=\initramfs-5.7.7_1.img root=/dev/sda2
@@ -320,16 +330,6 @@ efibootmgr \
    --loader \vmlinuz-$kver \
    --label $efilabel \
    --unicode root=PARTUUID=$(blkid -s PARTUUID -o value ${device}2) loglevel=4 Page_Poison=1
-
-echo '******************************************'
-echo ''
-echo -e "\x1B[1;31m[ ! ] Check\x1B[1;92m BootOrder:\x1B[1;31m is correct [ ! ]\x1B[1;0m"
-echo ''
-echo '******************************************'
-echo ''
-echo 'Note: Boot entry needs to be towards the top of list'
-echo '      otherwise it will not appear in the UEFI boot menu.'
-echo ''
 EOF
 chmod +x /mnt/efiboot.sh
 fi
