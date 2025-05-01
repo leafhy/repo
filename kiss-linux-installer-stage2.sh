@@ -43,6 +43,8 @@ if [ -z "$user" ]; then
    mkdir \
        "$home/.config" \
        "$home/src"
+
+   chown -R 1000:1000 "$home"
 fi
 
 if [ -d "$home" ] && [ ! -f "$home/.profile" ]; then
