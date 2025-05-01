@@ -301,7 +301,7 @@ tee /mnt/efiboot.sh << EOF >/dev/null
 #!/bin/sh
 
 device=$device
-efilabel=$efilabel # WARNING: "$efilabel" has a (26) character limit. Exceeding this limit will truncate the UEFI entry.
+efilabel=$efilabel # WARNING: "efilabel" has a (26) character limit. Exceeding this limit will truncate the UEFI entry.
 kver=$kver
 
 EOF
