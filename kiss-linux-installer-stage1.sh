@@ -143,22 +143,22 @@ echo '--------------------------------------------'
 
 # Filesystem creation.
 read -p "Do you want to format $device? [yes/No]: "
-if [[ $REPLY =~ ^([Yy][Ee][Ss])$ ]]; then
-if [[ $opt = EFI ]]; then
-   sgdisk --zap-all $device
-   sgdisk -n 1:2048:96M -t 1:ef00 $device
-   sgdisk -n 2:0:0 -t 2:8300 $device
-   sgdisk --verify $device
+   if [[ $REPLY =~ ^([Yy][Ee][Ss])$ ]]; then
+      if [[ $opt = EFI ]]; then
+         sgdisk --zap-all $device
+         sgdisk -n 1:2048:96M -t 1:ef00 $device
+         sgdisk -n 2:0:0 -t 2:8300 $device
+         sgdisk --verify $device
 
-   mkfs.vfat -F 32 -n EFI ${device}1
-   mkfs.$efifsys $efifsysopts ${device}2
+         mkfs.vfat -F 32 -n EFI ${device}1
+         mkfs.$efifsys $efifsysopts ${device}2
 
-elif [[ $opt = MBR ]]; then
-     echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
-     fdisk $device
-     mkfs.$extfsys $extfsysopts ${device}1
-fi
-fi
+      elif [[ $opt = MBR ]]; then
+         echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
+         fdisk $device
+         mkfs.$extfsys $extfsysopts ${device}1
+      fi
+   fi
 
 # Mount the filesystems.
 if [[ $opt = EFI ]]; then
