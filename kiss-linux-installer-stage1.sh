@@ -42,18 +42,21 @@ if mountpoint -q /mnt; then
 fi
 
 if ! [[ -f $file ]]; then
-   echo -e "\e[1;92m[  INFO: Downloading fallback -> $file...  ]\e[0m"
-   wget "$url/$file" || curl -fLO "$url/$file"
-   echo '--------------------------------------------'
+   read -p "Do you want to download $file? [yes/No]: "
+      if [[ $REPLY =~ ^([Yy][Ee][Ss])$ ]]; then
+         echo -e "\e[1;92m[  INFO: Downloading fallback -> $file...  ]\e[0m"
+         wget "$url/$file" || curl -fLO "$url/$file"
+         echo '--------------------------------------------'
+      fi
 fi
 
-if [[ -z $checksum ]]; then
+if [[ $file = kiss-chroot-$chrootver.tar.xz && -z $checksum ]]; then
    echo -e "\e[1;92m[  INFO: Downloading checksum -> $file.sha256...  ]\e[0m"
    wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
    echo '--------------------------------------------'
 fi
 
-if [[ $file = kiss-chroot-$chrootver.tar.xz && $checksum ]]; then
+if [[ $file = kiss-chroot-$chrootver.tar.xz && -n $checksum ]]; then
    echo -e "\e[1;92m[  INFO: Verifying $file checksum...  ]\e[0m"
    sha256sum -c <(echo "$checksum  $file") || exit 1
    echo '--------------------------------------------'
