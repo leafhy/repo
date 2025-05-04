@@ -15,7 +15,7 @@ set -e
 #     : setcap(libcap) uses filesystem xattrs.
 
 kver=5.15.6
-efilabel=KISS_LINUX-$kver # WARNING: "$efilabel" has a (26) character limit. Exceeding this limit will truncate the UEFI entry.
+efilabel=KISS_LINUX-$kver # WARNING: "efilabel" has a (26) character limit. Exceeding this limit will truncate the UEFI entry.
 fsyslabel=KISS_LINUX
 chrootver=2021.7-9
 url=https://github.com/kisslinux/repo/releases/download/$chrootver
