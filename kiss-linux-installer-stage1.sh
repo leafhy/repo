@@ -295,7 +295,7 @@ if [ -b /dev/zram0 ]; then
       zramsize=$(printf "$(awk '/MemTotal/ { print $2 }' /proc/meminfo) * 1.4 / 1024 / 1024" | bc) &&
       echo "${zramsize}"G > /sys/block/zram0/disksize &&
       [ -x /usr/bin/mkfs.xfs ] &&
-      mkfs.xfs -m finobt=0,reflink=0,rmapbt=0 /dev/zram0 >/dev/null &&
+      mkfs.xfs -qm finobt=0,reflink=0,rmapbt=0 /dev/zram0 &&
       mount -t xfs -o discard /dev/zram0 /var/db/kiss/cache/proc &&
       chown 1000:1000 /var/db/kiss/cache/proc
    fi
