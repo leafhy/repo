@@ -171,7 +171,7 @@ if [[ $opt = EFI ]]; then
    mount ${device}1 /mnt/boot/efi
 
 elif [[ $opt = MBR ]]; then
-     mount ${device}1 /mnt
+   mount ${device}1 /mnt
 fi
 
 # Extract 'KISS Linux' to filesystem.
@@ -181,7 +181,7 @@ if ! [[ -d /mnt/usr ]]; then
    echo ''
    echo '--------------------------------------------'
    # Avoid the creation of 'run.new'.
-   [[ $file = kiss-chroot-2021.7-9.tar.xz ]] && rm --verbose /mnt/etc/sv/{crond,syslogd}/run
+   [[ -f kiss-chroot-$chrootver.tar.xz ]] && rm --verbose /mnt/etc/sv/{crond,syslogd}/run
 fi
 
 if ! [[ -f /mnt/root/.profile ]]; then
