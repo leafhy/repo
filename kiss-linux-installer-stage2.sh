@@ -144,13 +144,20 @@ kiss search \*
 # git config merge.verifySignatures true
 # ----------------- #
 
-# Update kiss docs checksum -> 'f0525d4e00c5e07138ac2ceb53936d0b221608e7.tar.gz'.
-if grep -qw 'efca06d0a52037c732007f33f99cd368a836b5f9fec3ae314cfd73182f337c01' "$kissrepo/repo/core/kiss/checksums"; then
-   sed -i 's/efca06d0a52037c732007f33f99cd368a836b5f9fec3ae314cfd73182f337c01/e8549203a55bef2cf7c900814e7c9c694beebe0178e42d82a0a873bf8baea522/' "$kissrepo/repo/core/kiss/checksums"
-fi
+# Note: There are (2) checksums for kiss docs -> 'f0525d4e00c5e07138ac2ceb53936d0b221608e7.tar.gz'.
+#       old checksum 'efca06d0a52037c732007f33f99cd368a836b5f9fec3ae314cfd73182f337c01'
+#       new checksum 'e8549203a55bef2cf7c900814e7c9c694beebe0178e42d82a0a873bf8baea522'
 
 if [ "$kiss_cache" ] && [ ! -f "/usr/bin/kiss.orig" ]; then
    # Update package manager.
+   kiss download kiss
+   docschksum="$(sha256sum $kissrepo/sources/kiss/docs/f0525d4e00c5e07138ac2ceb53936d0b221608e7.tar.gz | cut -d' ' -f1)"
+
+   if [ "$docschksum" != "e8549203a55bef2cf7c900814e7c9c694beebe0178e42d82a0a873bf8baea522" ] || [ "$docschksum" != "efca06d0a52037c732007f33f99cd368a836b5f9fec3ae314cfd73182f337c01" ]; then
+      printf '\033[31;1m[  FATAL: Aborting...kiss docs checksum mismatch.  ]\033[m\n'
+      exit 1
+   fi
+
    kiss update
 
    # Change cache location to one more apt for Single User
