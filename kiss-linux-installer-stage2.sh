@@ -193,6 +193,8 @@ if [ -z "$kiss_cache" ]; then
    cd "$kissrepo/installed" && kiss build *
 fi
 
+line
+
 # Install requisite packages.
 for pkg in baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd lzip util-linux nasm popt f2fs-tools e2fsprogs xfsprogs dosfstools; do
    [ -d "$kissrepo/installed/$pkg" ] && installed="$(cat $kissrepo/installed/$pkg/version)"
@@ -208,8 +210,6 @@ if [ "$installed" != "$repo" ]; then
 fi
 
 done
-
-line
 
 if [ -f _PKG-DOWNLOAD-FAILURE.log ]; then
    printf '\033[31;1m[  ERROR: Failed to download package.  ]\033[m\n'
