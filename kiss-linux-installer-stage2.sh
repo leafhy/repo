@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-username=
+username=$1
 home="/home/${username:-empty}"
 kver="5.15.6"
 kernel="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$kver.tar.xz"
