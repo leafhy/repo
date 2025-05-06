@@ -218,16 +218,17 @@ if [ -f _PKG-DOWNLOAD-FAILURE.log ]; then
    done
 
       line
+
+   if [ -s "$tmpfileB" ]; then
+      for p in $(sort $tmpfileB $tmpfileC | uniq); do
+         grep -qw "$p" _PKG-DOWNLOAD-FAILURE.log &&
+         [ ! -d "$kissrepo/installed/$p" ] && printf '%s\n' "$p" >> _REQ-PKG-NOT-FOUND.log
+      done
+   fi
+
 else
    # Update other pkgs.
    kiss update
-fi
-
-if [ -s "$tmpfileB" ]; then
-   for p in $(sort $tmpfileB $tmpfileC | uniq); do
-      grep -qw "$p" _PKG-DOWNLOAD-FAILURE.log &&
-      [ ! -d "$kissrepo/installed/$p" ] && printf '%s\n' "$p" >> _REQ-PKG-NOT-FOUND.log
-   done
 fi
 
 if [ -f _REQ-PKG-NOT-FOUND.log ]; then
