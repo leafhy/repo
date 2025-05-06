@@ -50,7 +50,7 @@ if ! [[ -f $file ]]; then
       fi
 fi
 
-if [[ $file = kiss-chroot-$chrootver.tar.xz ]]; then
+if [[ $(basename $file) = kiss-chroot-$chrootver.tar.xz ]]; then
    if [[ -f $file && -z $checksum ]]; then
       echo -e "\e[1;92m[  INFO: Downloading checksum -> $file.sha256...  ]\e[0m"
       wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
@@ -58,7 +58,7 @@ if [[ $file = kiss-chroot-$chrootver.tar.xz ]]; then
    fi
 fi
 
-if [[ $file = kiss-chroot-$chrootver.tar.xz ]]; then
+if [[ $(basename $file) = kiss-chroot-$chrootver.tar.xz ]]; then
    if [[ -f $file && -n $checksum ]]; then
       echo -e "\e[1;92m[  INFO: Verifying $file checksum...  ]\e[0m"
       sha256sum -c <(echo "$checksum  $file") || exit 1
