@@ -145,8 +145,8 @@ kiss search \*
 # ----------------- #
 
 # Note: There are (2) checksums for kiss docs -> 'f0525d4e00c5e07138ac2ceb53936d0b221608e7.tar.gz'.
-#       old checksum 'efca06d0a52037c732007f33f99cd368a836b5f9fec3ae314cfd73182f337c01'
-#       new checksum 'e8549203a55bef2cf7c900814e7c9c694beebe0178e42d82a0a873bf8baea522'
+#       kiss-5.5.14 -> old checksum 'efca06d0a52037c732007f33f99cd368a836b5f9fec3ae314cfd73182f337c01'
+#       kiss-5.5.28 -> new checksum 'e8549203a55bef2cf7c900814e7c9c694beebe0178e42d82a0a873bf8baea522'
 
 if [ "$kiss_cache" ] && [ ! -f "/usr/bin/kiss.orig" ]; then
    # Update package manager.
