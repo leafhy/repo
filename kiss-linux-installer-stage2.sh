@@ -151,7 +151,7 @@ kiss search \*
 if [ "$kiss_cache" ] && [ ! -f "/usr/bin/kiss.orig" ]; then
    # Update package manager.
    kiss download kiss
-   docschksum="$(sha256sum $kissrepo/sources/kiss/docs/f0525d4e00c5e07138ac2ceb53936d0b221608e7.tar.gz | cut -d' ' -f1)"
+   docschksum="$(sha256sum $kiss_cache/sources/kiss/docs/f0525d4e00c5e07138ac2ceb53936d0b221608e7.tar.gz | cut -d' ' -f1)"
 
    if [ "$docschksum" != "e8549203a55bef2cf7c900814e7c9c694beebe0178e42d82a0a873bf8baea522" ] || [ "$docschksum" != "efca06d0a52037c732007f33f99cd368a836b5f9fec3ae314cfd73182f337c01" ]; then
       printf '\033[31;1m[  FATAL: Aborting...kiss docs checksum mismatch.  ]\033[m\n'
