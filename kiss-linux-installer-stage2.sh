@@ -249,7 +249,7 @@ fi
 
 # NOTE: 'util-linux' -> 'blkid' supports PARTUUID which is required to use 'efibootmgr'.
 #       'busybox' -> 'blkid' does not support PARTUUID.
-bbver="$(cat $kissrepo/repo/core/busybox/version | cut -d' ' -f1)"
+bbver="$(cat $kissrepo/repo/core/busybox/version | cut -d' ' -f1 | sed 's/\./_/g')"
 bbsrc="$(basename $(head -n1 $kissrepo/repo/core/busybox/sources) | sed "s/MAJOR_MINOR_PATCH/$bbver/")"
 
 if [ -f "$kiss_cache/sources/busybox/$bbsrc" ] && [ ! -f "$kiss_cache/bin/busybox-$bbver.tar.gz" ]; then
