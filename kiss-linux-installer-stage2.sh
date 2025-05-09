@@ -247,6 +247,14 @@ if [ -f _REQ-PKG-NOT-FOUND.log ]; then
    exit 1
 fi
 
+# NOTE: 'util-linux' -> 'blkid' supports PARTUUID which is required to use 'efibootmgr'.
+#       'busybox' -> 'blkid' does not support PARTUUID.
+
+if [ -f "$kiss_cache/sources/busybox/busybox-*.tar.bz2" ] && [ ! -f "$kiss_cache/bin/busybox*" ]; then
+   # Re-build 'busybox' without 'blkid' so as to avoid swapping to 'util-linux'.
+   kiss build busybox
+fi
+
 [ -s "$tmpfileB" ] && kiss build $(cat $tmpfileB)
 
 [ -d "$kiss_cache" ] && chown -R 1000:1000 "$kiss_cache"
