@@ -14,8 +14,11 @@ set -e
 #     : f2fs is not compatable with extlinux.
 #     : setcap(libcap) uses filesystem xattrs.
 
+# WARNING: "efilabel" has a (26) character limit.
+#          Exceeding this limit will truncate the UEFI entry.
+
 kver=5.15.6
-efilabel=KISS_LINUX-$kver # WARNING: "efilabel" has a (26) character limit. Exceeding this limit will truncate the UEFI entry.
+efilabel=KISS_LINUX-$kver
 fsyslabel=KISS_LINUX
 chrootver=2021.7-9
 url=https://github.com/kisslinux/repo/releases/download/$chrootver
@@ -316,8 +319,11 @@ tee /mnt/efiboot.sh << EOF >/dev/null
 #       Removal of invalid entry can be achieved by resetting UEFI/BIOS to defaults or by using
 #       'efibootmgr' supplied with systemrescue.
 
+# WARNING: "efilabel" has a (26) character limit.
+#          Exceeding this limit will truncate the UEFI entry.
+
 device=$device
-efilabel=$efilabel # WARNING: "efilabel" has a (26) character limit. Exceeding this limit will truncate the UEFI entry.
+efilabel=$efilabel
 kver=$kver
 
 EOF
