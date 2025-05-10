@@ -14,7 +14,7 @@ set -e
 #     : f2fs is not compatable with extlinux.
 #     : setcap(libcap) uses filesystem xattrs.
 
-# WARNING: "efilabel" has a (26) character limit.
+# WARNING: 'efilabel' has a (26) character limit.
 #          Exceeding this limit will truncate the UEFI entry.
 
 kver=5.15.6
@@ -319,7 +319,7 @@ tee /mnt/efiboot.sh << EOF >/dev/null
 #       Removal of invalid entry can be achieved by resetting UEFI/BIOS to defaults or by using
 #       'efibootmgr' supplied with systemrescue.
 
-# WARNING: "efilabel" has a (26) character limit.
+# WARNING: 'efilabel' has a (26) character limit.
 #          Exceeding this limit will truncate the UEFI entry.
 
 device=$device
