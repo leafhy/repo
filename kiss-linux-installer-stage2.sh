@@ -247,7 +247,7 @@ if [ -f _REQ-PKG-NOT-FOUND.log ]; then
    exit 1
 fi
 
-# NOTE: 'util-linux' -> 'blkid' supports PARTUUID which is required to use 'efibootmgr'.
+# NOTE: 'util-linux' -> 'blkid' supports PARTUUID which is required to use 'efiboot.sh'.
 #       'busybox' -> 'blkid' does not support PARTUUID.
 bbver="$(cat $kissrepo/repo/core/busybox/version | cut -d' ' -f1 | sed 's/\./_/g')"
 bbsrc="$(basename $(head -n1 $kissrepo/repo/core/busybox/sources) | sed "s/MAJOR_MINOR_PATCH/$bbver/")"
