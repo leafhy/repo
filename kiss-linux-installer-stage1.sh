@@ -310,6 +310,12 @@ if [[ $opt = EFI && ! -f /mnt/efiboot.sh ]]; then
 tee /mnt/efiboot.sh << EOF >/dev/null
 #!/bin/sh
 
+# NOTE: This note is applicable to 'efibootmgr' -> 'b9fedd6b6f57055164bc361bc5cf16a602843c6e.tar.gz'.
+#       Using 'busybox' -> 'blkid' will create an invalid UEFI entry as 'PARTUUID' is unsupported.
+#       Deleting invalid UEFI entry will fail and an 'IO error' will be emitted.
+#       Removal of invalid entry can be achieved by resetting UEFI/BIOS to defaults or by using
+#       'efibootmgr' supplied with systemrescue.
+
 device=$device
 efilabel=$efilabel # WARNING: "efilabel" has a (26) character limit. Exceeding this limit will truncate the UEFI entry.
 kver=$kver
