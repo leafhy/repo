@@ -261,6 +261,29 @@ if ! [[ -f /mnt/etc/resolv.conf.orig ]]; then
    #       and apon exiting chroot, '/etc/resolv.conf' will be deleted.
 fi
 
+# Create backups of files needed for user account to
+# allow for system backups without user.
+if ! [[ -f /mnt/etc/group.orig ]]; then
+   cp /mnt/etc/group /mnt/etc/group.orig
+
+elif ! [[ -f /mnt/etc/group ]]; then
+   cp /mnt/etc/group.orig /mnt/etc/group
+fi
+
+if ! [[ -f /mnt/etc/passwd.orig ]]; then
+   cp /mnt/etc/passwd /mnt/etc/passwd.orig
+
+elif ! [[ -f /mnt/etc/passwd ]]; then
+   cp /mnt/etc/passwd.orig /mnt/etc/passwd
+fi
+
+if ! [[ -f /mnt/etc/shadow.orig ]]; then
+   cp /mnt/etc/shadow /mnt/etc/shadow.orig
+
+elif ! [[ -f /mnt/etc/shadow ]]; then
+   cp /mnt/etc/shadow.orig /mnt/etc/shadow
+fi
+
 mkdir -p /mnt/etc/rc.d
 
 if ! [[ -f /mnt/etc/rc.d/setup.boot ]]; then
