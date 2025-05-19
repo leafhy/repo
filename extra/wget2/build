@@ -1,14 +1,17 @@
 #!/bin/sh -e
 
+# NOTE: Unrecognized option --without-lzip.
+#     : --without-lz disables lzip.
+
 ./configure \
     --prefix=/usr \
     --with-openssl \
     --disable-doc \
     --disable-static \
     --without-lzma \
+    --without-lz \
     --without-brotlidec \
     --without-zstd \
-    --without-lzip \
     --without-libidn2 \
     --without-libidn \
     --without-libpcre2 \
