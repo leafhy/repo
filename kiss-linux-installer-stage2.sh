@@ -180,6 +180,26 @@ sed '/Top-level cache/a\
 \ \ \ \ cac_dir=\$kiss_cache' /usr/bin/kiss > _
 mv -f _ /usr/bin/kiss
 
+# Add extra tar command for when busybox tar
+# is inadequate.
+sed 's/tar cf/\$tar cf/' /usr/bin/kiss > _
+mv -f _ /usr/bin/kiss
+
+sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
+\
+    # Set the prefered tar command to use for creating lz, zst tarballs.\
+    # NOTE: busybox tar can create broken lz, zst tarballs.\
+    #     : schilytools & GNU tar created lz, zst tarballs\
+    #       are compatible with busybox tar.\
+    #     : schilytools tar created lz tarball is compatible with tarlz.\
+    if [ "$KISS_COMPRESS" = "lz" ] || [ "$KISS_COMPRESS" = "zst" ]; then\
+       ! [ -x "/opt/schily/bin/tar" ] && die "Install schilytools to use | lz | zst | compression"\
+       tar=/opt/schily/bin/tar\
+    fi\
+\
+    tar="${tar:-tar}"' /usr/bin/kiss > _
+mv -f _ /usr/bin/kiss
+
 chmod +x /usr/bin/kiss
 fi
 
