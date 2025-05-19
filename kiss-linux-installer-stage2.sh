@@ -159,11 +159,16 @@ if [ "$kiss_cache" ] && [ ! -f "/usr/bin/kiss.orig" ]; then
    fi
 
    kiss update
+   cp /usr/bin/kiss /usr/bin/kiss.orig
+fi
 
+if [ ! -f "/usr/bin/kiss" ] && [ -f "/usr/bin/kiss.orig" ]; then
+   cp /usr/bin/kiss.orig /usr/bin/kiss
+fi
+
+if [ -f "/usr/bin/kiss" ] && [ "$kiss_cache" ]; then
    # Change cache location to one more apt for Single User
    # and fix log permissions so builds don't fail.
-   cp /usr/bin/kiss /usr/bin/kiss.orig
-
 sed '/# SOFTWARE./a\
 \
 kiss_cache="/var/db/kiss/cache"\
