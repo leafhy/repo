@@ -166,7 +166,10 @@ if [ ! -f "/usr/bin/kiss" ] && [ -f "/usr/bin/kiss.orig" ]; then
    cp /usr/bin/kiss.orig /usr/bin/kiss
 fi
 
-if [ -f "/usr/bin/kiss" ] && [ "$kiss_cache" ]; then
+kisssumA=$(sha256sum /usr/bin/kiss)
+kisssumB=$(sha256sum /usr/bin/kiss.orig)
+
+if [ "${kisssumA% *}" = "${kisssumB% *}" ] && [ "$kiss_cache" ]; then
    # Change cache location to one more apt for Single User
    # and fix log permissions so builds don't fail.
 sed '/# SOFTWARE./a\
