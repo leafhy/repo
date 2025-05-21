@@ -170,8 +170,8 @@ kisssumA=$(sha256sum /usr/bin/kiss)
 kisssumB=$(sha256sum /usr/bin/kiss.orig)
 
 if [ "${kisssumA% *}" = "${kisssumB% *}" ] && [ "$kiss_cache" ]; then
-   # Change cache location to one more apt for Single User
-   # and fix log permissions so builds don't fail.
+# Change cache location to one more apt for Single User
+# and fix log permissions so builds don't fail.
 sed '/# SOFTWARE./a\
 \
 kiss_cache="/var/db/kiss/cache"\
@@ -201,7 +201,7 @@ sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
     #       are compatible with busybox tar.\
     #     : schilytools tar created lz tarball is compatible with tarlz.\
     if [ "$KISS_COMPRESS" = "lz" ] || [ "$KISS_COMPRESS" = "zst" ]; then\
-       ! [ -x "/opt/schily/bin/tar" ] && die "Install schilytools to use | lz | zst | compression"\
+       ! [ -x "/opt/schily/bin/tar" ] && die "Install schilytools to use | lz | zst | compression."\
        tar=/opt/schily/bin/tar\
     fi\
 \
