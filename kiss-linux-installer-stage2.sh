@@ -246,7 +246,7 @@ fi
 line
 
 # Install requisite packages.
-for pkg in baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd lzip util-linux nasm popt f2fs-tools e2fsprogs xfsprogs dosfstools; do
+for pkg in baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font runit iproute2 zstd lzip schilytools util-linux nasm popt f2fs-tools e2fsprogs xfsprogs dosfstools; do
    [ -d "$kissrepo/installed/$pkg" ] && installed="$(cat $kissrepo/installed/$pkg/version)"
    [ -d "$kissrepo/repo/core/$pkg" ] && repo="$(cat $kissrepo/repo/core/$pkg/version)"
    [ -d "$kissrepo/repo/extra/$pkg" ] && repo="$(cat $kissrepo/repo/extra/$pkg/version)"
