@@ -201,7 +201,22 @@ sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
     #       are compatible with busybox tar.\
     #     : schilytools tar created lz tarball is compatible with tarlz.\
     if [ "$KISS_COMPRESS" = "lz" ] || [ "$KISS_COMPRESS" = "zst" ]; then\
-       ! [ -x "/opt/schily/bin/tar" ] && die "Install schilytools to use | lz | zst | compression."\
+       msg() {\
+          c1='\033[1;33m'\
+          c2='\033[1;31'\
+          c3='\033[m'\
+          c4='\033[1;36m'\
+\
+          printf '%b%s%b %s %b%s %b%s%b %s\n' \
+              "$c1" "$1" "$c2" "$2" "$c3" "$3" "$c4" "$4" "$c3" "$2"\
+       }\
+\
+       end() {\
+          msg "$1" "$2" "$3" "$4" "$5"\
+          exit 1\
+       }\
+\
+       ! [ -x "/opt/schily/bin/tar" ] && end "->" "ERROR" "Install" "schilytools" "to use (lz, zst) compression."\
        tar=/opt/schily/bin/tar\
     fi\
 \
