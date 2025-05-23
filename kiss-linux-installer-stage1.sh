@@ -206,7 +206,7 @@ kisschecksumA=6ff56f886ca76d93b0c88ffae267432474fb38399b151ccbacf519869114e234 #
 kisschecksumB=$(sha256sum /mnt/usr/bin/kiss)
 
 if [[ $kiss_cache && $file = kiss-chroot-2021.7-9.tar.xz ]]; then
-   if [[ $kisschecksumA = ${kisschecksumB% *} ]]; then
+   if [[ $kisschecksumA = ${kisschecksumB%% *} ]]; then
       sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
       mv -f _ /mnt/usr/bin/kiss
 
