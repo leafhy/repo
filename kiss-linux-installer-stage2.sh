@@ -207,7 +207,7 @@ sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
           c3='\''\\'033[m\''\
           c4='\''\\'033[1\;36m\''\
 \
-          printf '\''%b%s%b %s %b%s %b%s%b %s\\n'\'' \
+          printf '\''%b%s%b %s %b%s %b%s%b %s\\n'\''\
               "$c1" "$1" "$c2" "$2" "$c3" "$3" "$c4" "$4" "$c3" "$2"\
        }\
 \
