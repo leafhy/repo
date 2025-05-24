@@ -200,14 +200,14 @@ sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
     #     : schilytools & GNU tar created lz, zst tarballs\
     #       are compatible with busybox tar.\
     #     : schilytools tar created lz tarball is compatible with tarlz.\
-    if [ "$KISS_COMPRESS" = "lz" ] || [ "$KISS_COMPRESS" = "zst" ]; then\
+    if [ "$KISS_COMPRESS" = "lz" ] || [ "$KISS_COMPRESS" = "zst" ]\; then\
        msg() {\
-          c1='\033[1;33m'\
-          c2='\033[1;31'\
-          c3='\033[m'\
-          c4='\033[1;36m'\
+          c1='\''\\'033[1\;33m\''\
+          c2='\''\\'033[1\;31\''\
+          c3='\''\\'033[m\''\
+          c4='\''\\'033[1\;36m\''\
 \
-          printf '%b%s%b %s %b%s %b%s%b %s\n' \
+          printf '\''%b%s%b %s %b%s %b%s%b %s\\n'\'' \
               "$c1" "$1" "$c2" "$2" "$c3" "$3" "$c4" "$4" "$c3" "$2"\
        }\
 \
@@ -216,8 +216,8 @@ sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
           exit 1\
        }\
 \
-       ! [ -x "/opt/schily/bin/tar" ] && end "->" "ERROR" "Install" "schilytools" "to use (lz, zst) compression."\
-       tar=/opt/schily/bin/tar\
+       ! [ -x "\/opt\/schily\/bin\/tar" ] && end "->" "ERROR" "Install" "schilytools" "to use (lz, zst) compression."\
+         tar=\/opt\/schily\/bin\/tar\
     fi\
 \
     tar="${tar:-tar}"' /usr/bin/kiss > _
