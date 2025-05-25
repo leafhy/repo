@@ -168,12 +168,12 @@ read -p "Do you want to format $device? [yes/No]: "
 
 # Mount the filesystems.
 if [[ $opt = EFI ]]; then
-   mount ${device}2 /mnt
+   mount -t $efifsys ${device}2 /mnt
    mkdir -p /mnt/boot/efi
-   mount ${device}1 /mnt/boot/efi
+   mount -t vfat ${device}1 /mnt/boot/efi
 
 elif [[ $opt = MBR ]]; then
-   mount ${device}1 /mnt
+   mount -t $efifsy ${device}1 /mnt
 fi
 
 # Extract 'KISS Linux' to filesystem.
