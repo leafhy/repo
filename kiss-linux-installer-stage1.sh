@@ -173,7 +173,7 @@ if [[ $opt = EFI ]]; then
    mount -t vfat ${device}1 /mnt/boot/efi
 
 elif [[ $opt = MBR ]]; then
-   mount -t $efifsy ${device}1 /mnt
+   mount -t $efifsys ${device}1 /mnt
 fi
 
 # Extract 'KISS Linux' to filesystem.
