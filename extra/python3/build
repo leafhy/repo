@@ -23,7 +23,8 @@ done
     --with-system-expat \
     --with-system-ffi \
     --with-ensurepip=yes \
-    --without-doc-strings
+    --without-doc-strings \
+    --with-ssl-default-suites=openssl
 
 make EXTRA_CFLAGS="$CFLAGS -DTHREAD_STACK_SIZE=0x100000"
 make install
