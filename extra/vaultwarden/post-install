@@ -22,8 +22,8 @@ NOTE: Useage
 -> NODE_EXTRA_CA_CERTS=root.crt bw login
 -> NODE_TLS_REJECT_UNAUTHORIZED=0 bw login
 
-NOTE: The 'root.crt' certificate is caddy
-      created.
+NOTE: The 'root.crt' certificate is created
+      by caddy.
 
 ###########################################
 
