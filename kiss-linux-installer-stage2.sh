@@ -205,11 +205,11 @@ sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
     if [ "$KISS_COMPRESS" = "lz" ] || [ "$KISS_COMPRESS" = "zst" ]\; then\
        msg() {\
           c1='\''\\'033[1\;33m\''\
-          c2='\''\\'033[1\;31\''\
+          c2='\''\\'033[1\;31m\''\
           c3='\''\\'033[m\''\
           c4='\''\\'033[1\;36m\''\
 \
-          printf '\''%b%s%b %s %b%s %b%s%b %s\\n'\''\
+          printf '\''%b%s%b %s %b%s %b%s%b %s\\n'\'' \\\
               "$c1" "$1" "$c2" "$2" "$c3" "$3" "$c4" "$4" "$c3" "$2"\
        }\
 \
