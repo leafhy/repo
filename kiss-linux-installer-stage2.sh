@@ -130,8 +130,6 @@ if [ -d "$home" ] && [ ! -f "$home/.gitconfig" ]; then
    chown 1000:1000 "$home/.gitconfig"
 fi
 
-kiss search \*
-
 # ----------------- #
 # Trusted Key Setup #
 # ----------------- #
@@ -227,6 +225,9 @@ mv -f _ /usr/bin/kiss
 
 chmod +x /usr/bin/kiss
 fi
+
+# List repository packages + those that are installed.
+kiss search \*
 
 # Make sure all 'repo' pkgs + dependencies are downloaded.
 for d in core extra; do
