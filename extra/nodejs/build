@@ -1,5 +1,11 @@
 #!/bin/sh -e
 
+# Rename file so its not skipped by schily tar due to "filename too long".
+mv deps/corepack/dist/vendors-_yarn_berry_cache_proxy-agent-npm-5_0_0-41772f4b01-9_zip_node_modules_proxy-agent_index_js.js _
+sed -i 's/vendors-_/vendors_/g' _
+sed -i 's/vendors-_/vendors_/g' deps/corepack/dist/corepack.js
+mv -f _ deps/corepack/dist/vendors_yarn_berry_cache_proxy-agent-npm-5_0_0-41772f4b01-9_zip_node_modules_proxy-agent_index_js.js
+
 # Fix build when libatomic.so does not exist in the system.
 # This may be provided by compiler-rt which requires no additional
 # linker flags to be used.
@@ -8,8 +14,8 @@
     mv -f _ node.gyp
 }
 
-# nodejs 18.4.2 LTS
-# -march=native fails to build with core2
+# NOTE: nodejs 18.4.2 LTS will fail to build
+#       with '-march=native' & 'core2'
 march=$(gcc -march=native -Q --help=target | grep -- -march | grep -o core2 || true)
 
 if [ "$march" ]; then
