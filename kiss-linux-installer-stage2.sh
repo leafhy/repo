@@ -198,7 +198,7 @@ sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
     # Set the prefered tar command to use for creating lz, zst tarballs.\
     # NOTE: busybox tar can create broken lz, zst tarballs.\
     #     : schilytools & GNU tar created lz, zst tarballs\
-    #       are compatible with busybox tar.\
+    #       are pipeable to busybox tar.\
     #     : schilytools tar created lz tarball is compatible with tarlz.\
     if [ "$KISS_COMPRESS" = "lz" ] || [ "$KISS_COMPRESS" = "zst" ]\; then\
        msg() {\
