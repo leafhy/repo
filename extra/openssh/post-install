@@ -8,12 +8,18 @@ cat <<EOF
 ###################################################################
 
 NOTE: To resolve "no hostkey alg"
-      add this to '/etc/ssh/sshd_config' and/or '~/.ssh/config'
-
-    : To resolve "Unable to negotiate with ... port 22: no matching host key type found. Their offer: ssh-rsa,ssh-dss"
-      add this to '/etc/ssh/ssh_config'
+      add this to '/etc/ssh/sshd_config'.
 
 -> 'HostKeyAlgorithms +ssh-rsa'
+
+    : To resolve "Unable to negotiate with ... port 22: no matching host key type found. Their offer: ssh-rsa,ssh-dss"
+      add this to '/etc/ssh/ssh_config' or '~/.ssh/config'.
+
+-> 'HostKeyAlgorithms +ssh-rsa'
+
+    : To allow public key login
+      add this to the relevant config.
+
 -> 'PubkeyAcceptedAlgorithms +ssh-rsa'
 
 NOTE: PubkeyAcceptedKeyTypes is aliased to PubkeyAcceptedAlgorithms
