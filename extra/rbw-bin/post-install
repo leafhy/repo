@@ -4,19 +4,39 @@ cat <<EOF
 
 #######################################
 
-NOTE: To use rbw with caddy add this to
-      '/etc/caddy/Caddyfile'
+NOTE: To use rbw with caddy add the 'http' or 'https'
+      entry to '/etc/caddy/Caddyfile'
 
 # ------ BEGIN ------ #
+# rbw Unofficial Bitwarden CLI
+vaultwarden.local:2014 {
+	tls internal
+	reverse_proxy 127.0.0.1:8000
+)
 
 # rbw Unofficial Bitwarden CLI
-   http://vaultwarden:2018 {
-	    reverse_proxy 127.0.0.1:8000
+http://vaultwarden.local:2018 {
+	reverse_proxy 127.0.0.1:8000
 }
 
 # ------- END ------- #
 
-NOTE: kiss linux lacks nss-tools
+NOTE: To use 'https' with caddy, add this to
+      '~/.profile'
+
+-> export SSL_CERT_FILE="/path/to/vaultwarden.local.crt"
+or
+-> export SSL_CERT_FILE="/path/to/root.crt"
+
+NOTE: Caddy creates its certificates at the following paths.
+-> "/var/lib/caddy/.local/share/caddy/pki/authorities/local/root.crt"
+-> "/var/lib/caddy/.local/share/caddy/certificates/local/vaultwarden.local/vaultwarden.local.crt"
+
+NOTE: The following error message requires updating rbw.
+      "WARN: failed to decrypt ...: failed to decrypt: failed to decrypt encrypted secret: invalid mac"
+
+    : The '~/.config/rbw/config.json' option "client_cert_path" causes the following error.
+      "rbw login: failed to log in to bitwarden instance: failed to create reqwest client: builder error: unexpected error: private key or certificate not found"
 
 #######################################
 
