@@ -12,10 +12,21 @@ cat <<EOF
 
 ###########################################
 
-NOTE: Install 'Bitwarden CLI' with
+NOTE: As there is no musl binary of 'Bitwarden CLI',
+      it needs to be installed with nodejs.
 
 -> kiss build nodejs
+
+NOTE: Install latest 'Bitwarden CLI'.
+
 -> npm install -g @bitwarden/cli
+
+NOTE: List 'Bitwarden CLI' versions.
+
+-> npm view @bitwarden/cli versions
+
+NOTE : Install specific 'Bitwarden CLI' version.
+-> npm install -g @bitwarden/cli@x.y.z
 
 NOTE: Useage
 
