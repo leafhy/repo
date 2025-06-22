@@ -305,7 +305,12 @@ if [ -f "$kiss_cache/sources/busybox/$bbsrc" ] && [ ! -f "$kiss_cache/bin/busybo
    kiss build busybox
 fi
 
-[ -s "$tmpfileB" ] && kiss build $(cat $tmpfileB)
+# Re-build pkgs due to updated files.
+for pk in flex xz m4 make bzip2 git; do
+   grep -q "$pk" _PKG-DOWNLOAD-FAILURE.log >/dev/null 2>&1 || pg="$pg $pk"
+done
+
+[ -s "$tmpfileB" ] && kiss build $pg $(cat $tmpfileB)
 
 [ -d "$kiss_cache" ] && chown -R 1000:1000 "$kiss_cache"
 
