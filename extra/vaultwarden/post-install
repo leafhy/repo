@@ -25,7 +25,7 @@ NOTE: List 'Bitwarden CLI' versions.
 
 -> npm view @bitwarden/cli versions
 
-NOTE : Install specific 'Bitwarden CLI' version.
+NOTE: Install specific 'Bitwarden CLI' version.
 
 -> npm install -g @bitwarden/cli@x.y.z
 
