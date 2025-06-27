@@ -12,7 +12,7 @@ NOTE: To use rbw with caddy add the 'http' or 'https'
 vaultwarden.local:2014 {
 	tls internal
 	reverse_proxy 127.0.0.1:8000
-)
+}
 
 # rbw Unofficial Bitwarden CLI
 http://vaultwarden.local:2018 {
