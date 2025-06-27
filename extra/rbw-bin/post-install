@@ -21,6 +21,7 @@ http://vaultwarden.local:2018 {
 
 # ------- END ------- #
 
+
 NOTE: To use 'https' with caddy, add this to
       '~/.profile'
 
@@ -28,9 +29,12 @@ NOTE: To use 'https' with caddy, add this to
 or
 -> export SSL_CERT_FILE="/path/to/root.crt"
 
+
 NOTE: Caddy creates its certificates at the following paths.
+
 -> "/var/lib/caddy/.local/share/caddy/pki/authorities/local/root.crt"
 -> "/var/lib/caddy/.local/share/caddy/certificates/local/vaultwarden.local/vaultwarden.local.crt"
+
 
 NOTE: The following error message requires updating rbw.
       "WARN: failed to decrypt ...: failed to decrypt: failed to decrypt encrypted secret: invalid mac"
