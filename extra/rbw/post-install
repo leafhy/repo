@@ -5,7 +5,7 @@ cat <<EOF
 #######################################
 
 NOTE: To use rbw with caddy add the 'http' or 'https'
-      entry to '/etc/caddy/Caddyfile'
+      entry to '/etc/caddy/Caddyfile'.
 
 # ------ BEGIN ------ #
 # rbw Unofficial Bitwarden CLI
@@ -23,7 +23,7 @@ http://vaultwarden.local:2018 {
 
 
 NOTE: To use 'https' with caddy, add this to
-      '~/.profile'
+      '.profile'.
 
 -> export SSL_CERT_FILE="/path/to/vaultwarden.local.crt"
 or
@@ -39,7 +39,7 @@ NOTE: Caddy creates its certificates at the following paths.
 NOTE: The following error message requires updating rbw.
       "WARN: failed to decrypt ...: failed to decrypt: failed to decrypt encrypted secret: invalid mac"
 
-    : The '~/.config/rbw/config.json' option "client_cert_path" causes the following error.
+    : Using the '.config/rbw/config.json' option "client_cert_path" causes the following error.
       "rbw login: failed to log in to bitwarden instance: failed to create reqwest client: builder error: unexpected error: private key or certificate not found"
 
 #######################################

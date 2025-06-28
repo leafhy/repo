@@ -5,7 +5,7 @@ cat <<EOF
 #########################################
 
 NOTE: To enable eternal bash history,
-      add this to ~/.profile.
+      add this to '.profile'.
 
 # ---------------------
 # Eternal Bash History.

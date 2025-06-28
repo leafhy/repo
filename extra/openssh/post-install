@@ -13,7 +13,7 @@ NOTE: To resolve "no hostkey alg"
 -> 'HostKeyAlgorithms +ssh-rsa'
 
     : To resolve "Unable to negotiate with ... port 22: no matching host key type found. Their offer: ssh-rsa,ssh-dss"
-      add this to '/etc/ssh/ssh_config' or '~/.ssh/config'.
+      add this to '/etc/ssh/ssh_config' or '.ssh/config'.
 
 -> 'HostKeyAlgorithms +ssh-rsa'
 
