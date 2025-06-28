@@ -4,13 +4,13 @@ cat <<EOF
 
 #########################################
 
-NOTE: To change shell using 'chsh' add this to
-      '/etc/shells'.
+NOTE: To change the login shell using 'chsh'
+      add this to '/etc/shells'.
 
 -> /bin/bash
 
-NOTE: To change shell with editor edit
-      '/etc/passwd'.
+NOTE: To change the login shell with text
+      editor, edit '/etc/passwd'.
 
 NOTE: To enable eternal bash history,
       add this to '.profile'.
