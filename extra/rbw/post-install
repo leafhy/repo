@@ -22,8 +22,8 @@ http://vaultwarden.local:2018 {
 # ------- END ------- #
 
 
-NOTE: To use 'https' with caddy, add this to
-      '.profile'.
+NOTE: To use 'https' with caddy
+      add this to '.profile'.
 
 -> export SSL_CERT_FILE="/path/to/vaultwarden.local.crt"
 or
