@@ -39,7 +39,7 @@ NOTE: Caddy creates its certificates at the following paths.
 NOTE: The following error message requires updating rbw.
       "WARN: failed to decrypt ...: failed to decrypt: failed to decrypt encrypted secret: invalid mac"
 
-    : Using the '.config/rbw/config.json' option "client_cert_path" causes the following error.
+NOTE: Using the '.config/rbw/config.json' option "client_cert_path" causes the following error.
       "rbw login: failed to log in to bitwarden instance: failed to create reqwest client: builder error: unexpected error: private key or certificate not found"
 
 #######################################
