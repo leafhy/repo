@@ -11,8 +11,8 @@
 make
 make install
 
-for opt in '#user=jmaggard+user=minidlna' '#log_dir=/var/log+log_dir=/var/log' '#db_dir=/var/cache/minidlna+db_dir=/var/lib/minidlna'; do
-   sed "s+$opt+" minidlna.conf > _
+for opt in 'user=jmaggard+user=minidlna' 'log_dir=/var/log+log_dir=/var/log' 'db_dir=/var/cache/minidlna+db_dir=/var/lib/minidlna'; do
+   sed "s+#$opt+" minidlna.conf > _
    mv -f _ minidlna.conf
 done
 

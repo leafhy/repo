@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
-for opt in '#user=jmaggard+user=minidlna' '#log_dir=/var/log+log_dir=/var/log' '#db_dir=/v ar/cache/minidlna+db_dir=/var/lib/minidlna'; do
-   sed -i "s+$opt+" etc/minidlna.conf
+for opt in 'user=jmaggard+user=minidlna' 'log_dir=/var/log+log_dir=/var/log' 'db_dir=/var/cache/minidlna+db_dir=/var/lib/minidlna'; do
+   sed -i "s+#$opt+" etc/minidlna.conf
 done
 
 install -Dm755 usr/sbin/minidlnad "$1/usr/bin/minidlnad-bin"
