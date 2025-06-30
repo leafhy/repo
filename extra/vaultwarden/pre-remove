@@ -24,6 +24,7 @@ if [ "$ans" = yes ]; then
    deluser --remove-home vaultwarden
    [ -L /var/service/vaultwarden ] && unlink /var/service/vaultwarden
    rm -r \
+       "/etc/vaultwarden.conf" \
        "/etc/sv/vaultwarden" \
        "/run/runit/supervise.vaultwarden"
 else
