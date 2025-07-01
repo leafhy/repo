@@ -22,11 +22,16 @@ http://vaultwarden.local:2018 {
 # ------- END ------- #
 
 NOTE: To use 'https' with caddy
-      add this to '.profile'.
+      add the requisite export to '.profile'
+      or append 'root.crt' to '/etc/ssl/cert.pem'.
 
+# To verify 'https' is working.
 -> export SSL_CERT_FILE="/path/to/vaultwarden.local.crt"
-or
 -> export SSL_CERT_FILE="/path/to/root.crt"
+
+# Add 'root.crt' to system certificates.
+-> cat /etc/ssl/cert.pem root.crt > certupd.pem
+-> export SSL_CERT_FILE="/path/to/certupd.pem"
 
 NOTE: Caddy creates its certificates at the following paths.
 
