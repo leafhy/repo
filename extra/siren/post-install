@@ -2,3 +2,23 @@
 
 find /usr/lib/siren -type f -exec chmod 444 '{}' +
 chmod 555 /usr/bin/siren
+
+cat <<EOF
+
+####################################
+
+NOTE: To be able to use an external (USB UAC2)
+      soundcard with 'siren' requires 'libudev-zero'
+      for Hotplugging and the enabling of the 'mdev'
+      or 'mdevd' service files.
+
+-> kiss build libudev-zero
+
+-> ln -s /etc/sv/mdev /var/service/
+
+-> kiss build mdevd
+-> ln -s /etc/sv/mdevd /var/service/
+
+####################################
+
+EOF
