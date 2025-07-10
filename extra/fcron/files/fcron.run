@@ -1,3 +1,6 @@
 #!/bin/sh
 
-exec fcron -f --logfilepath /var/log/fcron.log >/dev/null
+# NOTE: To suppress fcron console messages when using 'busybox init' use '>/dev/null'.
+#     : To suppress fcron console messages when using 'runit init' use '>/dev/null 2>&1'.
+
+exec fcron -f --logfilepath /var/log/fcron.log >/dev/null 2>&1
