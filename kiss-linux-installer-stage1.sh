@@ -325,7 +325,15 @@ if [ -b /dev/zram0 ]; then
       mkfs.xfs -qm finobt=0,reflink=0,rmapbt=0 /dev/zram0 &&
       mount -t xfs -o discard /dev/zram0 /var/db/kiss/cache/proc &&
       chown 1000:1000 /var/db/kiss/cache/proc
-   fi
+     # Create 2G swapfile.
+     # NOTE: 'fallocate' created swapfile will not work on xfs.
+     #     : 'busybox dd' bs=1024
+     #     : 'coreutils dd' bs=1MiB
+     # dd if=/dev/zero of=/var/db/kiss/cache/proc/swapfile bs=1024 count=$((2*1024*1024))
+     # chmod 600 /var/db/kiss/cache/proc/swapfile
+     # mkswap /var/db/kiss/cache/proc/swapfile
+     # swapon /var/db/kiss/cache/proc/swapfile
+fi
 fi
 
 dmesg >/var/log/dmesg.log
