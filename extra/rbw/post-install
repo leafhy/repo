@@ -38,6 +38,9 @@ NOTE: Caddy creates its certificates at the following paths.
 -> "/var/lib/caddy/.local/share/caddy/pki/authorities/local/root.crt"
 -> "/var/lib/caddy/.local/share/caddy/certificates/local/vaultwarden.local/vaultwarden.local.crt"
 
+NOTE: This pinentry error may occur after running 'rbw purge', 'rbw stop-agent' necessitating a 'reboot'.
+      "rbw list: failed to read password from pinentry: failed to parse pinentry output ("S ERROR curses.open_tty_for_read 83918849 \nERR 83918849 Permission denied <Pinentry>\n\0\0\0\0\0\0")"
+
 NOTE: The following error message can be resolved by updating rbw and or running 'rbw purge'.
       "WARN: failed to decrypt ...: failed to decrypt: failed to decrypt encrypted secret: invalid mac"
 
