@@ -333,7 +333,7 @@ if [ -b /dev/zram0 ]; then
      # chmod 600 /var/db/kiss/cache/proc/swapfile
      # mkswap /var/db/kiss/cache/proc/swapfile
      # swapon /var/db/kiss/cache/proc/swapfile
-fi
+   fi
 fi
 
 dmesg >/var/log/dmesg.log
