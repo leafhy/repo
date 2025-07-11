@@ -350,8 +350,26 @@ tee /mnt/efiboot.sh << EOF >/dev/null
 #       Removal of invalid entry can be achieved by resetting UEFI/BIOS to defaults or by using
 #       'efibootmgr' supplied with systemrescue.
 
-# WARNING: 'efilabel' has a (26) character limit.
-#          Exceeding this limit will truncate the UEFI entry.
+# IMPORTANT: 'efilabel' has a (26) character limit. Exceeding this limit will truncate the UEFI entry.
+#          : Options supplied to the kernel will be truncated if there not quoted.
+
+# NOTE: Kernel log levels.
+#       loglevel="0" -> penguins disabled
+#       loglevel="1" -> penguins disabled
+#       loglevel="2" -> penguins disabled
+#       loglevel="3" -> penguins disabled
+#       loglevel="4" -> penguins disabled
+#       loglevel="5" -> penguins enabled
+#       loglevel="6" -> penguins enabled
+#       loglevel="7" -> penguins enabled, 'setlogcons'
+#       loglevel=""  -> defaults to 7
+
+# NOTE: The use of 'setlogcons' for changing the TTY for kernel log
+#       output requires loglevel="7".
+#       setlogcons 6 # output log to TTY6.
+
+# NOTE: Show options passed to kernel.
+#       cat /proc/cmdline
 
 device=$device
 efilabel=$efilabel
@@ -382,7 +400,7 @@ efibootmgr \
    --disk $device \
    --loader \vmlinuz-$kver \
    --label $efilabel \
-   --unicode root=PARTUUID=$(blkid -s PARTUUID -o value ${device}2) loglevel=4 Page_Poison=1
+   --unicode "root=PARTUUID=$(blkid -s PARTUUID -o value ${device}2) loglevel=7 Page_Poison=1"
 EOF
 chmod +x /mnt/efiboot.sh
 fi
