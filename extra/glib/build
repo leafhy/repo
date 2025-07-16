@@ -8,7 +8,7 @@ mv -f _ gio/meson.build
 sed 's/libmount_dep.found()/false/' meson.build > _
 mv -f _ meson.build
 
-# The mispelt 'mesom.build' allows build to succeed
+# The file 'mesom.build' allows build to succeed.
 : > glib/tests/meson.build
 : > tests/meson.build
 : > gobject/tests/mesom.build
@@ -28,3 +28,4 @@ ninja -C build
 ninja -C build install
 
 rm -rf "$1/usr/bin/gdbus"
+rm -rf "$1/usr/share/gettext"
