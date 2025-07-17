@@ -4,7 +4,7 @@ ver=2.7.0-beta.2
 
 tar xf ../../../../sources/caddy-bin/caddy_"$ver"_linux_amd64.tar.gz
 
-install -Dm755 caddy "$1/usr/bin/caddy-bin"
+install -Dm755 caddy "$1/usr/bin/caddy"
 install -Dm644 Caddyfile-example "$1/etc/caddy/Caddyfile"
 install -Dm755 caddy.run "$1/etc/sv/caddy/run"
 install -dm700 "$1/var/lib/caddy/"

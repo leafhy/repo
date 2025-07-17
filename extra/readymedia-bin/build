@@ -4,6 +4,6 @@ for opt in 'user=jmaggard+user=minidlna' 'log_dir=/var/log+log_dir=/var/log' 'db
    sed -i "s+#$opt+" etc/minidlna.conf
 done
 
-install -Dm755 usr/sbin/minidlnad "$1/usr/bin/minidlnad-bin"
+install -Dm755 usr/sbin/minidlnad "$1/usr/bin/minidlnad"
 install -Dm644 etc/minidlna.conf "$1/etc/minidlna.conf"
 install -Dm755 minidlnad.run "$1/etc/sv/minidlna/run"

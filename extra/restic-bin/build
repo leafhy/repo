@@ -4,4 +4,4 @@ ver=0.14.0
 
 bzip2 -d restic_"$ver"_linux_amd64.bz2
 
-install -Dm755 restic_"$ver"_linux_amd64 "$1/usr/bin/restic-bin"
+install -Dm755 restic_"$ver"_linux_amd64 "$1/usr/bin/restic"
