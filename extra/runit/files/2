@@ -2,9 +2,15 @@
 
 PATH=/usr/bin:
 
-for getty in 1 2 3 4 5 6 ; do
-    while :; do /sbin/getty 38400 tty${getty} 2>&1 ; done &  # for busybox
-    # while :; do /sbin/getty /dev/tty${getty} linux 2>&1 ; done &  # for ubase
-done
+# NOTE: Use the busybox loop if no alternate getty is in use.
 
-exec /usr/bin/runsvdir -P /var/service
+# for getty in 1 2 3 4 5 6 ; do
+#   while :; do /sbin/getty 38400 tty${getty} 2>&1 ; done &  # for busybox
+# done
+
+# NOTE: If ngetty is installed and not running as a service uncomment the below line.
+
+# ngetty-argv .-D.-S.-e./sbin/%U.%U.1.2.3.4.5.6 ngetty
+
+exec env - PATH=$PATH \
+    runsvdir -P /var/service 'log: ................................................................................................................................................................................................................................................................'
