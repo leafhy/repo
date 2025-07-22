@@ -1,0 +1,7 @@
+# NOTE: The Debian archive ngetty_1.1.orig.tar.gz has the same
+#       checksum as the archive ngetty-1.1.tar.gz on archive.org. 
+#       http://deb.debian.org/debian/pool/main/n/ngetty/ngetty_1.1.orig.tar.gz
+#       https://web.archive.org/web/20120320160103if_/http://riemann.fmi.uni-sofia.bg/ngetty/ngetty-1.1.tar.gz
+
+https://web.archive.org/web/20110706144218/http://riemann.fmi.uni-sofia.bg/ngetty/ngetty-1.2-rc1.tar.gz
+files/ngetty.run
