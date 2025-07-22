@@ -10,7 +10,7 @@ sed -i '/NGETTY_HELPER/s/sbin/bin/' lib.h
 sed -i 's/07177/07022/' ngetty-helper.c
 
 # Delete umask so 'Conf' is created with permissions 644.
-sed -i /umask\s077/d contrib/setup
+sed -i '/umask\s077/d' contrib/setup
 
 make LDFLAGS="-static"
 
