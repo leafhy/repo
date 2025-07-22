@@ -326,8 +326,8 @@ if [ -b /dev/zram0 ]; then
       mount -t xfs -o discard /dev/zram0 /var/db/kiss/cache/proc &&
       chown 1000:1000 /var/db/kiss/cache/proc
      # Create 2G swapfile.
-     # NOTE: 'fallocate' created swapfile will not work on xfs.
-     #     : 'busybox dd' bs=1024
+     # NOTE: 'fallocate'    created swapfile will not work on xfs.
+     #     : 'busybox dd'   bs=1024
      #     : 'coreutils dd' bs=1MiB
      # dd if=/dev/zero of=/var/db/kiss/cache/proc/swapfile bs=1024 count=$((2*1024*1024))
      # chmod 600 /var/db/kiss/cache/proc/swapfile
@@ -335,6 +335,8 @@ if [ -b /dev/zram0 ]; then
      # swapon /var/db/kiss/cache/proc/swapfile
    fi
 fi
+
+log "Press <alt+F7> to view kernel messages..."
 
 dmesg >/var/log/dmesg.log
 EOF
