@@ -362,12 +362,11 @@ tee /mnt/efiboot.sh << EOF >/dev/null
 #       loglevel="4" -> penguins disabled
 #       loglevel="5" -> penguins enabled
 #       loglevel="6" -> penguins enabled
-#       loglevel="7" -> penguins enabled, 'setlogcons'
+#       loglevel="7" -> penguins enabled
 #       loglevel=""  -> defaults to 7
 
-# NOTE: The use of 'setlogcons' for changing the TTY for kernel log
-#       output requires loglevel="7".
-#       setlogcons 6 # output log to TTY6.
+# NOTE: Use 'setlogcons' to redirect kernel messages to console or tty.
+#     : 'setlogcons' can redirect loglevel=5,6,7.
 
 # NOTE: Show options passed to kernel.
 #       cat /proc/cmdline
