@@ -68,4 +68,7 @@ for s in acpid crond syslogd mdev ntpd; do
     ln -sf "/run/runit/supervise.$s" "$1/etc/sv/$s/supervise"
 done
 
+# Delete SUBSYSTEM as it conflicts with libudev-zero.
+sed -i '53d' mdev.conf
+
 cp -f mdev.conf "$1/etc/mdev.conf"
