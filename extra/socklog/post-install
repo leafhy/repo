@@ -1,0 +1,21 @@
+#!/bin/sh
+
+getent group socklog || addgroup -S -g 990 socklog
+
+socklog-conf unix nobody root
+
+chgrp -R socklog /var/log/socklog
+
+find "/var/log/socklog" -type d -exec chmod g=u-w+s,o= '{}' +
+
+sed -i 's/chpst -uroot svlogd/svlogd -tt/' /etc/sv/socklog-unix/log/run
+sed -i '4s/user/user \#2>\/dev\/tty10/' /etc/sv/socklog-unix/log/run
+
+chmod 755 /etc/sv/socklog-unix         # default 750
+chmod 755 /etc/sv/socklog-unix/run     # default 750
+chmod 755 /etc/sv/socklog-unix/log/run # default 750
+
+ln -sf /run/runit/supervise.socklog-unix /etc/sv/socklog-unix/supervise
+ln -sf /run/runit/supervise.socklog-unix-log /etc/sv/socklog-unix/log/supervise
+ln -sf /etc/sv/socklog-unix /var/service
+

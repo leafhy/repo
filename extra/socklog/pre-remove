@@ -1,0 +1,9 @@
+#!/bin/sh
+
+sv down socklog-unix
+delgroup socklog
+rm -rf "/var/log/socklog"
+rm -rf "/etc/sv/socklog-unix"
+rm -rf "/run/runit/supervise.socklog-unix"
+rm -rf "/run/runit/supervise.socklog-unix-log"
+unlink "/var/service/socklog-unix"
