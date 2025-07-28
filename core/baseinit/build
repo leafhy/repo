@@ -15,7 +15,7 @@ sed -i '/rc.lib/a\
 \
 setlogcons 7' "$1/usr/lib/init/rc.boot"
 
-# change mdevd default conf to mdevd.conf.
+# Change mdevd default conf to mdevd.conf.
 sed -i '/mdevd \& pid_mdevd=$!/d' "$1/usr/lib/init/rc.boot"
 
 sed -i '/ command -v mdevd >\/dev\/null; then/a\
