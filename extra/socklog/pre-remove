@@ -1,9 +1,13 @@
 #!/bin/sh
 
-sv down socklog-unix
+[ -f /etc/sv/socklog-unix/supervise/stat ] && status="$(cat /etc/sv/socklog-unix/supervise/stat)"
+[ "$status" = "run" ] && sv down socklog-unix
+
 delgroup socklog
-rm -rf "/var/log/socklog"
-rm -rf "/etc/sv/socklog-unix"
-rm -rf "/run/runit/supervise.socklog-unix"
-rm -rf "/run/runit/supervise.socklog-unix-log"
-unlink "/var/service/socklog-unix"
+
+rm -rf "/etc/sv/socklog-unix" \
+       "/var/log/socklog" \
+       "/var/service/socklog-unix" \
+       "/run/runit/supervise.socklog-unix" \
+       "/run/runit/supervise.socklog-unix-log"
+
