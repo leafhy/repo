@@ -10,8 +10,8 @@ getent passwd fcron || adduser -H -h /var/spool/fcron -s /bin/sh -D -S -G fcron 
 	chmod 4110 /usr/bin/fcronsighup
 	chmod 6111 /usr/bin/fcrontab /usr/bin/fcrondyn
 
-	chown root:fcron /etc/fcron.conf /etc/fcron.allow /etc/fcron.deny
-	chmod  640 /etc/fcron.conf /etc/fcron.allow /etc/fcron.deny
+	chown root:fcron /etc/fcron/fcron.conf /etc/fcron/fcron.allow /etc/fcron/fcron.deny
+	chmod  640 /etc/fcron/fcron.conf /etc/fcron/fcron.allow /etc/fcron/fcron.deny
 	chown fcron:fcron /var/spool/fcron
 
 fcrontab /var/spool/fcron/systab.orig
