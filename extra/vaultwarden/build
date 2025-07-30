@@ -12,14 +12,13 @@ mv -f _ .env.template
 sed "s/# WEBSOCKET_ENABLED=false/WEBSOCKET_ENABLED=true/" .env.template > _
 mv -f _ .env.template
 
-sed "s+# LOG_FILE=/path/to/log+LOG_FILE=/var/log/vaultwarden/vaultwarden.log+" .env.template > _
+sed "s+# LOG_FILE=/path/to/log+LOG_FILE=/var/log/vaultwarden.log+" .env.template > _
 mv -f _ .env.template
 
 cargo clean && cargo build --features sqlite --release
 
 install -Dm755 target/release/vaultwarden "$1/usr/bin/vaultwarden"
 install -Dm640 .env.template "$1/etc/vaultwarden.conf"
-install -dm755 "$1/var/log/vaultwarden"
 install -dm750 "$1/var/lib/vaultwarden/data"
 mv web-vault "$1/var/lib/vaultwarden"
 

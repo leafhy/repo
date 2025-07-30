@@ -18,16 +18,23 @@ echo "Do you wish to remove Vaultwarden?"
 echo -n "yes/no: "
 read -r ans
 
-if [ "$ans" = yes ]; then
-   status=$(cat /etc/sv/vaultwarden/supervise/stat)
+if [ "$ans" = "yes" ]; then
+   [ -f /etc/sv/vaultwarden/supervise/stat ] && status="$(cat /etc/sv/vaultwarden/supervise/stat)"
+
    [ "$status" = "run" ] && sv down vaultwarden
+
    deluser --remove-home vaultwarden
-   [ -L /var/service/vaultwarden ] && unlink /var/service/vaultwarden
-   rm -r \
-       "/etc/vaultwarden.conf" \
-       "/etc/sv/vaultwarden" \
-       "/run/runit/supervise.vaultwarden"
-else
-   echo "Aborting Vaultwarden removal."
-   exit 1
+
+   rm "/etc/vaultwarden.conf" \
+      "/var/log/vaultwarden.log"
+
+   rm -rf \
+        "/etc/sv/vaultwarden" \
+       "/run/runit/supervise.vaultwarden" \
+       "/var/service/vaultwarden"
+
+else [ "$ans" != "yes" ]
+     echo "Aborting Vaultwarden removal."
+     exit 1
+
 fi
