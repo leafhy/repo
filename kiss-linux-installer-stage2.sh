@@ -366,7 +366,7 @@ echo "mv syslinux-6.04-pre1.tar.xz $kissrepo/src"
 echo ''
 echo "### Rename resolv.conf.orig"
 echo "mv /etc/resolv.conf.orig /etc/resolv.conf"
-echo "Note: Exit chroot before renaming 'resolv.conf.orig', else it will be 'rm'."
+echo "Note: Exit chroot before renaming 'resolv.conf.orig', else it will be removed."
 echo "#####################"
 echo '++ EOF ++'
 
