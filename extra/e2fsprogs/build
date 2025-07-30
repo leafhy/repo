@@ -16,7 +16,7 @@ mv -f _ MCONFIG.in
 ./configure \
     --prefix=/usr \
     --sbindir=/usr/bin \
-    --sysconfdir=/etc \
+    --sysconfdir=/etc/e2fs \
     --enable-symlink-install \
     --enable-libuuid \
     --enable-libblkid \
