@@ -5,3 +5,6 @@
 
 make
 make install
+
+# Remove udev rule et.al.
+rm -rf "$1/usr/lib/udev"
