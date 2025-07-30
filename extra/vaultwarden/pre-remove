@@ -25,13 +25,14 @@ if [ "$ans" = "yes" ]; then
 
    deluser --remove-home vaultwarden
 
-   rm "/etc/vaultwarden.conf" \
-      "/var/log/vaultwarden.log"
+   rm  -f \
+        "/etc/vaultwarden.conf" \
+        "/var/log/vaultwarden.log"
 
    rm -rf \
         "/etc/sv/vaultwarden" \
-       "/run/runit/supervise.vaultwarden" \
-       "/var/service/vaultwarden"
+        "/run/runit/supervise.vaultwarden" \
+        "/var/service/vaultwarden"
 
 else [ "$ans" != "yes" ]
      echo "Aborting Vaultwarden removal."
