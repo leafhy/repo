@@ -34,7 +34,7 @@ mv -f _ Makefile.in
     --with-docdir=/usr/share/doc \
     --localstatedir=/var \
     --mandir=/usr/share/man \
-    --sysconfdir=/etc
+    --sysconfdir=/etc/fcron
 
 make
 make DESTDIR="$1" install
