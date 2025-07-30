@@ -2,11 +2,14 @@
 
 ./configure \
     --prefix=/usr \
-    --disable-nls
+    --sbindir=/usr/bin \
+    --disable-nls \
+    --disable-rpath
 
 make
 make install
 
-# Remove docs
-rm -r "$1/usr/share/man/fr"
-rm -r "$1/usr/share/man/man7"
+# Remove mans & udev rule.
+rm -rf "$1/usr/share/man/fr"
+rm -rf "$1/usr/share/man/man7"
+rm -rf "$1/lib"
