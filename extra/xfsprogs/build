@@ -8,7 +8,7 @@ chmod +x install-sh
 
 ./configure \
     --prefix=/usr \
-    --sbindir=/bin \
+    --sbindir=/usr/bin \
     --enable-lib64=no \
     --disable-gettext \
     --enable-lto \
@@ -17,10 +17,15 @@ chmod +x install-sh
 make DEBUG=-DNDEBUG
 
 make \
-DIST_ROOT="$1" \
-PKG_ROOT_SBIN_DIR=/usr/bin \
-PKG_ROOT_LIB_DIR=/lib \
+    DIST_ROOT="$1" \
+    PKG_ROOT_SBIN_DIR=/usr/bin \
+    PKG_ROOT_LIB_DIR=/usr/lib \
 install \
 install-dev
 
-rm -r "$1/usr/share/doc"
+# Remove docs.
+rm -f "$1/usr/share/man/man5/proj*.5"
+
+rm -rf "$1/usr/share/doc" \
+       "$1/usr/share/man/man2" \
+       "$1/usr/share/man/man3"
