@@ -24,7 +24,7 @@ install \
 install-dev
 
 # Remove docs.
-rm -f "$1/usr/share/man/man5/proj*.5"
+rm -f "$1/usr/share/man/man5/"proj*.5
 
 rm -rf "$1/usr/share/doc" \
        "$1/usr/share/man/man2" \
