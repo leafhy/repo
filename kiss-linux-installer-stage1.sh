@@ -366,10 +366,8 @@ tee /mnt/efiboot.sh << EOF >/dev/null
 #       loglevel=""  -> defaults to 7
 
 # NOTE: Use 'setlogcons' to redirect kernel messages to console or tty.
-#     : 'setlogcons' can redirect loglevel=5,6,7.
-
-# NOTE: Show options passed to kernel.
-#       cat /proc/cmdline
+#     : 'setlogcons' can redirect loglevel=[5-7].
+#     : Show options passed to kernel -> "cat /proc/cmdline"
 
 device=$device
 efilabel=$efilabel
