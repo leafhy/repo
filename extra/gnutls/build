@@ -12,5 +12,7 @@
 make
 make DESTDIR="$1" install
 
-# Remove png's.
-rm -rf "$1/usr/share/doc"
+# Remove man3 + png's.
+rm -rf \
+     "$1/usr/share/doc" \
+     "$1/usr/share/man/man3"
