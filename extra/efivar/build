@@ -11,3 +11,6 @@ mv -f _ src/Makefile
 
 make COMPILER="$CC"
 make libdir=/usr/lib/ install
+
+# Remove man3.
+rm -rf "$1/usr/share/man/man3"
