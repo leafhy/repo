@@ -24,7 +24,7 @@ make
 make DESTDIR="$1" install
 
 install -Dm755 contrib/ssh-copy-id "$1/usr/bin"
-install -Dm755 contrib/ssh-copy-id.1 "$1/usr/share/man/man1"
+install -Dm644 contrib/ssh-copy-id.1 "$1/usr/share/man/man1"
 
 # Install runit service.
 install -Dm755 sshd.run "$1/etc/sv/sshd/run"

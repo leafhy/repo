@@ -7,5 +7,5 @@ sed -i 's/-s/-static/' src/conf-ld
 package/compile
 
 install -Dm755 -t "$1/usr/bin" command/*
-install -Dm755 -t "$1/usr/share/man/man1" man/*.1
-install -Dm755 -t "$1/usr/share/man/man8" man/*.8
+install -Dm644 -t "$1/usr/share/man/man1" man/*.1
+install -Dm644 -t "$1/usr/share/man/man8" man/*.8
