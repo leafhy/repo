@@ -4,3 +4,7 @@
 
 make
 make install
+
+# Replace .gz man1 with non-compressed version.
+rm -f "$1/usr/share/man/man1/stress-ng.1.gz"
+install -m644 -t "$1/usr/share/man/man1" stress-ng.1
