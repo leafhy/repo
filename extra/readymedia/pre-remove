@@ -3,10 +3,10 @@
 if [ ! -d /var/db/kiss/installed/readymedia-bin ]; then
    status=$(cat /etc/sv/minidlna/supervise/stat)
    [ "$status" = "run" ] && sv down minidlna
-   unlink /var/service/minidlna
    deluser --remove-home minidlna
 
-   rm -r \
-       "/etc/sv/minidlna" \
-       "/run/runit/supervise.minidlna"
+   rm -rf \
+        "/etc/sv/minidlna" \
+        "/run/runit/supervise.minidlna" \
+        "/var/service/minidlna"
 fi
