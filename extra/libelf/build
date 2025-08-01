@@ -21,3 +21,6 @@ make -C doc    install-man3
 
 mkdir -p "$1/usr/lib/pkgconfig"
 cp -f config/libelf.pc "$1/usr/lib/pkgconfig/libelf.pc"
+
+# Remove man3.
+rm -rf "$1/usr/share/man/man3"
