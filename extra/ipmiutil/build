@@ -12,5 +12,5 @@ make
 make DESTDIR="$1" install
 
 # Replace .gz man8's with non-compressed versions.
-rm -f "$1/usr/share/man/man8/*.8"
+rm -f "$1/usr/share/man/man8/"*.8
 install -m644 -t "$1/usr/share/man/man8" doc/*.8
