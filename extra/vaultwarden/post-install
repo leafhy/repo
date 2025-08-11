@@ -6,6 +6,7 @@ getent passwd vaultwarden || adduser -H -h /var/lib/vaultwarden -s /usr/bin/fals
 chown root:vaultwarden /usr/bin/vaultwarden
 chown -R vaultwarden:vaultwarden /var/lib/vaultwarden
 chown vaultwarden:vaultwarden /etc/vaultwarden.conf
+touch /var/log/vaultwarden.log
 chown vaultwarden:vaultwarden /var/log/vaultwarden.log
 
 cat <<EOF
