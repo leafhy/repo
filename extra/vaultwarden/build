@@ -1,19 +1,10 @@
 #!/bin/sh -e
 
-sed "s+# DATA_FOLDER=data+DATA_FOLDER=/var/lib/vaultwarden/data+" .env.template > _
-mv -f _ .env.template
-
-sed "s/# ROCKET_ADDRESS=0\.0\.0\.0/ROCKET_ADDRESS=127.0.0.1/" .env.template > _
-mv -f _ .env.template
-
-sed "s+# WEB_VAULT_FOLDER=web-vault+WEB_VAULT_FOLDER=\/var\/lib\/vaultwarden\/web-vault+" .env.template > _
-mv -f _ .env.template
-
-sed "s/# WEBSOCKET_ENABLED=false/WEBSOCKET_ENABLED=true/" .env.template > _
-mv -f _ .env.template
-
-sed "s+# LOG_FILE=/path/to/log+LOG_FILE=/var/log/vaultwarden.log+" .env.template > _
-mv -f _ .env.template
+sed -e "s+# DATA_FOLDER=data+DATA_FOLDER=/var/lib/vaultwarden/data+" \
+    -e "s/# ROCKET_ADDRESS=0\.0\.0\.0/ROCKET_ADDRESS=127\.0\.0\.1/" \
+    -e "s+# WEB_VAULT_FOLDER=web-vault\/+WEB_VAULT_FOLDER=\/var\/lib\/vaultwarden\/web-vault+" \
+    -e "s/# WEBSOCKET_ENABLED=false/WEBSOCKET_ENABLED=true/" \
+    -e "s+# LOG_FILE=/path/to/log+LOG_FILE=/var/log/vaultwarden.log+" .env.template > _
 
 cargo clean && cargo build --features sqlite --release
 
