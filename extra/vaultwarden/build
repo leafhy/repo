@@ -9,7 +9,7 @@ sed -e "s+# DATA_FOLDER=data+DATA_FOLDER=/var/lib/vaultwarden/data+" \
 cargo clean && cargo build --features sqlite --release
 
 install -Dm755 target/release/vaultwarden "$1/usr/bin/vaultwarden"
-install -Dm640 .env.template "$1/etc/vaultwarden.conf"
+install -Dm640 _ "$1/etc/vaultwarden.conf"
 install -dm750 "$1/var/lib/vaultwarden/data"
 mv web-vault "$1/var/lib/vaultwarden"
 
