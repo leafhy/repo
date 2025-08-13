@@ -3,6 +3,12 @@
 sed -i "29s|.*|chmod u+s \"\${DESTDIR}\${bindir}/fusermount3\"|" \
     util/install_helper.sh
 
+# NOTE: 'autofs' will not mount via ssh if /etc/mtab is an
+#       link due to the error -> fuse: unknown option(s): `-n'
+#       This error is fixed by allowing '-n' to pass through.
+sed -i '/FUSE_OPT_KEY("user=",			KEY_MTAB_OPT),/a \
+	FUSE_OPT_KEY("-n",			KEY_MTAB_OPT),' lib/mount.c
+
 export DESTDIR="$1"
 
 meson \
