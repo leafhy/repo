@@ -14,3 +14,6 @@ mv -f _ docs/man/man8/Makefile.in
 
 make
 make install
+
+# Purge locale messages.
+rm -rf "$1/usr/share/locale"

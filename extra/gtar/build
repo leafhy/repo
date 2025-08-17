@@ -8,3 +8,6 @@ export CFLAGS="$CFLAGS -static"
 
 make
 make install
+
+# Purge locale messages.
+rm -rf "$1/usr/share/locale"

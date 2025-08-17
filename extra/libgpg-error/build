@@ -1,7 +1,12 @@
 #!/bin/sh -e
 
 ./configure \
-   --prefix=/usr
+    --prefix=/usr
+    --enable-static \
+    --enable-shared
 
 make
 make DESTDIR="$1" install
+
+# Purge locale messages.
+rm -rf "$1/usr/share/locale"
