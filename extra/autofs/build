@@ -1,15 +1,16 @@
 #!/bin/sh -e
 
-./configure --prefix=/usr \
-            --sbin=/usr/bin \
-            --with-mapdir=/etc/autofs \
-            --with-confdir=/etc/autofs \
-            --without-openldap \
-            --without-sasl \
-            --with-libtirpc \
-            --disable-fedfs \
-            --enable-ignore-busy \
-            --enable-force-shutdown
+./configure \
+    --prefix=/usr \
+    --sbin=/usr/bin \
+    --with-mapdir=/etc/autofs \
+    --with-confdir=/etc/autofs \
+    --without-openldap \
+    --without-sasl \
+    --with-libtirpc \
+    --disable-fedfs \
+    --enable-ignore-busy \
+    --enable-force-shutdown
 
 # Prevent libxml2 from being pulled in.
 sed -i '/#define LIBXML2_WORKAROUND/d' include/config.h

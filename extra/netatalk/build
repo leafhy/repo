@@ -1,14 +1,14 @@
 #!/bin/sh -e
 
 ./configure \
-   --prefix=/usr \
-   --sbindir=/usr/bin \
-   --sysconfdir=/etc \
-   --localstatedir=/var/lib/netatalk \
-   --with-ssl-dir=/usr/lib/ssl \
-   --with-bdb=/opt/BerkeleyDB.6.0 \
-   --without-cnid-tdb-backend \
-   --disable-quota
+    --prefix=/usr \
+    --sbindir=/usr/bin \
+    --sysconfdir=/etc \
+    --localstatedir=/var/lib/netatalk \
+    --with-ssl-dir=/usr/lib/ssl \
+    --with-bdb=/opt/BerkeleyDB.6.0 \
+    --without-cnid-tdb-backend \
+    --disable-quota
 
 make
 make install

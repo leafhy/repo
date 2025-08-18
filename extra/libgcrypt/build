@@ -1,12 +1,12 @@
 #!/bin/sh -e
 
 ./configure \
-   --prefix=/usr \
-   --sysconfdir=/etc \
-   --mandir=/usr/share/man \
-   --enable-static \
-   --without-capabilities \
-   --localstatedir=/var
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --mandir=/usr/share/man \
+    --enable-static \
+    --without-capabilities \
+    --localstatedir=/var
 
 make
 make DESTDIR="$1" install
