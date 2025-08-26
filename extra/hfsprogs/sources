@@ -1,0 +1,5 @@
+https://src.fedoraproject.org/repo/pkgs/hfsplus-tools/diskdev_cmds-540.1.linux3.tar.gz/0435afc389b919027b69616ad1b05709/diskdev_cmds-540.1.linux3.tar.gz
+patches/fix-potential-buffer-overflow.patch patch
+patches/fix-stdarg.patch patch
+patches/fix-binary-and.patch patch
+patches/musl-compat.patch patch

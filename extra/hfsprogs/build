@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+for patch in patch/*.patch; do
+    patch -p1 < "$patch"
+done
+
+# Remove execute bit.
+chmod -x \
+       fsck_hfs.tproj/dfalib/*.c \
+       fsck_hfs.tproj/dfalib/*.h
+
+make
+
+install -Dm755 newfs_hfs.tproj/newfs_hfs "$1/usr/bin/mkfs.hfs"
+install -Dm644 newfs_hfs.tproj/newfs_hfs.8 "$1/usr/share/man/man8/mkfs.hfs.8"
+install -Dm755 fsck_hfs.tproj/fsck_hfs "$1/usr/bin/fsck.hfs"
+install -Dm644 fsck_hfs.tproj/fsck_hfs.8 "$1/usr/share/man/man8/fsck.hfs.8"
