@@ -11,7 +11,7 @@
     --enable-fsck \
     --disable-makeinstall-chown \
     --disable-last \
-    --disable-lastlog2 \
+    --disable-liblastlog2 \
     --disable-rpath \
     --without-udev \
     --without-python \
