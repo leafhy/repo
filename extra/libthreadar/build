@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --enable-static \
+    --disable-shared
+
+make
+make install
+
+# Remove README
+rm -rf "$1/usr/share"
