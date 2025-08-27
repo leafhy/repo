@@ -1,0 +1,37 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --disable-shared \
+    --disable-libz-linking \
+    --disable-libbz2-linking \
+    --disable-liblzo2-linking \
+    --disable-libxz-linking \
+    --disable-liblz4-linking \
+    --enable-libzstd-linking \
+    --enable-libgcrypt-linking \
+    --disable-librsync-linking \
+    --disable-libcurl-linking \
+    --disable-gpgme-linking \
+    --enable-threadar \
+    --disable-libargon2-linking \
+    --disable-python-binding \
+    --disable-librhash-linking \
+    --enable-dar-static \
+    --enable-static \
+    --disable-nls \
+    --disable-dependency-tracking \
+    --disable-rpath \
+    --without-included-gettext
+
+make
+make install
+
+# Remove duplicate html etc.
+rm -f \
+    "$1/usr/share/dar"/dar-differential-backup-mini-howto.*.html \
+    "$1/usr/share/dar/dar-catalog.dtd" \
+    "$1/usr/share/dar/pybind11_libdar.cpp" \
+    "$1/usr/share/dar/mini-howto/dar-differential-backup-mini-howto.es.html" \
+    "$1/usr/share/dar/mini-howto/dar-differential-backup-mini-howto.it.html" \
+    "$1/usr/include/dar/gettext.h"
