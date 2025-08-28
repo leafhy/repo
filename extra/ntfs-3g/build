@@ -10,7 +10,7 @@ make
 make install
 
 # Move all bin's to singular dir.
-mv -f "$1/bin/*3g" "$1/usr/bin"
+mv -f "$1/bin/"*3g "$1/usr/bin"
 
 ln -sf ntfs-3g "$1/usr/bin/mount.ntfs-3g"
 ln -sf lowntfs-3g "$1/usr/bin/mount.lowntfs-3g"
