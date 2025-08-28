@@ -16,5 +16,5 @@ ninja
 ninja install
 
 # Properly create the symlinks that the above helper wanted to.
-ln -s /usr/bin/sshfs "$1/usr/bin/mount.sshfs"
-ln -s /usr/bin/sshfs "$1/usr/bin/mount.fuse.sshfs"
+ln -s sshfs "$1/usr/bin/mount.sshfs"
+ln -s sshfs "$1/usr/bin/mount.fuse.sshfs"
