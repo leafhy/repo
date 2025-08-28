@@ -94,8 +94,8 @@ esac
 ./x.py install
 
 rm -rf \
-    "$1/usr/lib/rustlib/src/" \
-    "$1/usr/share/doc" \
-    "$1/usr/share/zsh" \
-    "$1/usr/lib/rustlib/uninstall.sh"
+     "$1/usr/lib/rustlib/src/" \
+     "$1/usr/share/doc" \
+     "$1/usr/share/zsh" \
+     "$1/usr/lib/rustlib/uninstall.sh"
 

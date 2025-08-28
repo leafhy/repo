@@ -25,5 +25,6 @@ ninja -C output install
 ln -s fusermount3 "$1/usr/bin/fusermount"
 
 # Remove the unused.
-rm -rf "$1/usr/lib/udev" \
-       "$1/etc/init.d"
+rm -rf \
+     "$1/usr/lib/udev" \
+     "$1/etc/init.d"
