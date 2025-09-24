@@ -14,12 +14,11 @@ sed -i '/umask\s077/d' contrib/setup
 
 make LDFLAGS="-static"
 
-# NOTE: 'lsvt' is provided by ngetty-1.2-rc1.tar.gz
-for bin in ngetty ngetty-helper ngetty-argv lsvt ; do
+# NOTE: 'lsvt' is provided by ngetty-1.2-rc1.tar.gz.
+for bin in ngetty ngetty-helper ngetty-argv lsvt; do
    install -Dm755 "$bin" "$1/usr/bin/$bin"
 done
 
-install -dm755 "$1/etc/ngetty"
 install -Dm755 contrib/setup "$1/etc/ngetty/setup"
 install -Dm755 ngetty.run "$1/etc/sv/ngetty/run"
 install -Dm644 sample.Conf "$1/usr/share/ngetty/sample.Conf"
