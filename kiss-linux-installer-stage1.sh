@@ -317,7 +317,8 @@ if [ -b /dev/zram0 ]; then
 
    if ! [ "$(( totalmem / 1024 ** 3 ))" -lt "8" ]; then
       log "Setting up zram..."
-      # WARNING: Using 24GB RAM with "$zramsize" @1.5x will exhaust memory thus invoking OOM Kill.
+      # WARNING: Using a high zram value i.e. @1.5 * RAM can exhaust memory thus invoking OOM Kill.
+      #          If "$zramsize" is too high & file sizes are large it can result in severe slowdown.
       zramsize=$(printf "$(awk '/MemTotal/ { print $2 }' /proc/meminfo) * 1.4 / 1024 / 1024" | bc) &&
       echo "${zramsize}"G > /sys/block/zram0/disksize &&
       [ -x /usr/bin/mkfs.xfs ] &&
