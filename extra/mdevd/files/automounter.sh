@@ -10,7 +10,8 @@
 
 # NOTE: This *NOTE* may not be indicative of other devices but a quirk/fault of the tested device.
 #     : Mounting of a block device ( i.e. /dev/sdb ) which has no partition table will initially fail to mount.
-#     : Mounting can be achieved by restarting the 'mdev' service or by running 'mdevd-coldplug'.
+#     : Mounting can be achieved by restarting the 'mdev|mdevd' service.
+#     : Restarting 'mdevd' may fail to mount device whereas executing 'mdevd-coldplug' seems to always work.
 #     : Alternativly access can be acquired by the utilization of 'autofs'.
 
 destdir=/run/media
