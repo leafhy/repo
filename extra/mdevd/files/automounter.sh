@@ -6,7 +6,7 @@
 
 # To enable automounting add the following rules to '/etc/mdev.conf' or '/etc/mdevd.conf' & enable the corresponding service.
 # =>  sr[0-9]*    root:cdrom    660    */usr/lib/mdev/automounter.sh
-# =>  sd[a-z].*   root:disk     660    */usr/lib/mdev/automounter.sh
+# =>  sd[b-z].*   root:disk     660    */usr/lib/mdev/automounter.sh
 
 # NOTE: This *NOTE* may not be indicative of other devices but a quirk/fault of the tested device.
 #     : Mounting of a block device ( i.e. /dev/sdb ) which has no partition table will initially fail to mount.
