@@ -73,8 +73,8 @@ my_mount() {
                          mount -t exfat   -o async                "/dev/$1" "$destdir/$1" || rmdir "$destdir/$1" ;;
            ext2|ext3|ext4 )
                          mount -t $fstype -o async                "/dev/$1" "$destdir/$1" || rmdir "$destdir/$1" ;;
-           hfsplus        )
-                         mount -t hfsplus -o async                "/dev/$1" "$destdir/$1" || rmdir "$destdir/$1" ;;
+           hfs|hfsplus    )
+                         mount -t $fstype -o async                "/dev/$1" "$destdir/$1" || rmdir "$destdir/$1" ;;
            auto           )
                          mount -t auto    -o async                "/dev/$1" "$destdir/$1" || rmdir "$destdir/$1" ;;
         esac
