@@ -14,6 +14,7 @@
     --disable-xim \
     --disable-gui \
     --disable-nls \
+    --disable-acl \
     --without-x
 
 make
