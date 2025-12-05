@@ -3,7 +3,10 @@
 ./configure \
     --prefix=/usr \
     --bindir=/usr/bin \
-    --disable-static
+    --enable-static
 
 make
 make DESTDIR="$1" install
+
+# Purge docs.
+rm -rf "$1/usr/share"

@@ -2,7 +2,10 @@
 
 ./configure \
     --prefix=/usr \
-    --disable-static
+    --enable-static
 
 make
 make DESTDIR="$1" install
+
+# Purge html docs.
+rm -rf "$1/usr/share"
