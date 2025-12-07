@@ -328,13 +328,18 @@ if [ -b /dev/zram0 ]; then
       mount -t xfs -o discard /dev/zram0 /var/db/kiss/cache/proc &&
       chown 1000:1000 /var/db/kiss/cache/proc
      # Create 2G swapfile.
-     # NOTE: 'fallocate'    created swapfile is supported on xfs with linux kernel 4.18.
+     # NOTE: 'fallocate'    created swapfile is supported on xfs with linux kernel 4.18 (see swapon.8).
      #     : 'busybox dd'   bs=1024
      #     : 'coreutils dd' bs=1MiB
-     # dd if=/dev/zero of=/var/db/kiss/cache/proc/swapfile bs=1024 count=$((2*1024*1024))
-     # chmod 600 /var/db/kiss/cache/proc/swapfile
-     # mkswap /var/db/kiss/cache/proc/swapfile
-     # swapon /var/db/kiss/cache/proc/swapfile
+     #
+     # swap="/var/db/kiss/cache/proc/swapfile"
+     #
+     # fallocate -l 2G "$swap"
+     # dd if=/dev/zero of="$swap" bs=1024 count=$((2*1024*1024))
+     #
+     # mkswap "$swap"
+     # chmod 600 "$swap"
+     # swapon "$swap"
    fi
 fi
 
