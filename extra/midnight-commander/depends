@@ -3,3 +3,4 @@ autoconf
 glib
 ncurses
 libtool
+gpm

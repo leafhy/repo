@@ -1,15 +1,16 @@
 #!/bin/sh -e
+
 # https://www.linuxfromscratch.org/lfs/view/10.1/chapter08/e2fsprogs.html
 #
-# Error occurs as USER
-# strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libss.a'; reason: Permission denied
-# strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libext2fs.a'; reason: Permission denied
-# strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libe2p.a'; reason: Permission denied
-# strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libcom_err.a'; reason: Permission denied
+# NOTE: Building as USER fails.
+#       strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libss.a'; reason: Permission denied
+#       strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libext2fs.a'; reason: Permission denied
+#       strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libe2p.a'; reason: Permission denied
+#       strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libcom_err.a'; reason: Permission denied
 
 export LDFLAGS="$LDFLAGS -static"
 
-# Fix above errors
+# Fix above errors.
 sed 's/444/755/' MCONFIG.in > _
 mv -f _ MCONFIG.in
 
@@ -56,5 +57,5 @@ for f in \
     libext2fs.a \
     libss.a
 do
-chmod 444 "$DESTDIR/usr/lib/$f"
+    chmod 444 "$DESTDIR/usr/lib/$f"
 done
