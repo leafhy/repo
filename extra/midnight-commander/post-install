@@ -1,0 +1,28 @@
+#!/bin/sh
+
+cat <<EOF
+
+####################################
+
+NOTE: Mouse navigation.
+
+-> Open Menu => Single Left/Right button click.
+-> Enter Directory => Double click Left button.
+-> Scroll Downwards => Hold Middle button & drag mouse backwards.
+
+NOTE: There is no upwards scroll.
+
+NOTE: Keyboard navigation.
+
+-> Home => Return to top of list.
+-> End => Move to end of list.
+-> Page Up => Move up one page.
+-> Page Down => Move down one page.
+-> Enter/Return => Enter directory.
+-> Up/Down arrow => Select item.
+-> Tab => Select pane.
+
+####################################
+
+EOF
+
