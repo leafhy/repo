@@ -14,7 +14,9 @@ chmod +x install-sh
     --enable-lto \
     --enable-editline=yes
 
-make DEBUG=-DNDEBUG
+make \
+    DEBUG=-DNDEBUG \
+    LDFLAGS=-all-static
 
 make \
     DIST_ROOT="$1" \
@@ -25,8 +27,8 @@ install-dev
 
 # Remove docs.
 rm -rf \
-     "$1/usr/lib/xfsprogs" \
-     "$1/usr/share/doc" \
-     "$1/usr/share/man/man2" \
-     "$1/usr/share/man/man3" \
-     "$1/usr/share/man/man5/"proj*.5
+    "$1/usr/lib/xfsprogs" \
+    "$1/usr/share/doc" \
+    "$1/usr/share/man/man2" \
+    "$1/usr/share/man/man3" \
+    "$1/usr/share/man/man5/"proj*.5
