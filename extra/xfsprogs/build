@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
+# To avoid using the default OPTIMIZER
+# values an empty value is needed.
+export OPTIMIZER=" "
+
 # Remove incorrect bash dependency.
 sed 's/bash/sh/' install-sh > _
 mv -f _ install-sh
