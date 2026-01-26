@@ -1,13 +1,13 @@
 #!/bin/sh -e
 
 if [ "$(id -u)" != 0 ]; then
-   echo "#####################################"
-   echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
-   echo "#                                   #"
-   echo "#      ssu -p kiss b go-mtpfs       #"
-   echo "#####################################"
+    echo "#####################################"
+    echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
+    echo "#                                   #"
+    echo "#      ssu -p kiss b go-mtpfs       #"
+    echo "#####################################"
 
-   exit 1
+    exit 1
 fi
 
 go build ./

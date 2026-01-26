@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-# Build fails as "USER".
+# Build fails as USER.
 #    "chown: changing ownership of pkg/fcron/usr/sbin : Operation not permitted"
 
 if [ "$(id -u)" != 0 ]; then

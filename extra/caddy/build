@@ -3,13 +3,13 @@
 ver=2.7.6
 
 if [ "$(id -u)" != 0 ]; then
-   echo "#####################################"
-   echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
-   echo "#                                   #"
-   echo "#        ssu -p kiss b caddy        #"
-   echo "#####################################"
+    echo "#####################################"
+    echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
+    echo "#                                   #"
+    echo "#        ssu -p kiss b caddy        #"
+    echo "#####################################"
 
-   exit 1
+    exit 1
 fi
 
 TMPDIR="$(mktemp -d -p .)"
