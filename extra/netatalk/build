@@ -13,8 +13,9 @@
 make
 make install
 
-# Remove the unneeded
-rm -rf "$1/usr/include/atalk"
-rm -f "$1/usr/bin/afpldaptest"
-rm -f "$1/usr/bin/lp2pap.sh"
-rm -rf "$1/usr/lib"
+# Remove the unneeded.
+rm -rf \
+     "$1/usr/include/atalk" \
+     "$1/usr/bin/afpldaptest" \
+     "$1/usr/lib" \
+     "$1/usr/bin/lp2pap.sh"
