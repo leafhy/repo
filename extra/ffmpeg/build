@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-# Note: Install 'sdl2' to build 'ffplay'.
+# Install 'sdl2' to build 'ffplay'.
 
 ./configure \
     --cc="$CC" \
@@ -33,7 +33,6 @@
     --enable-openssl \
     --enable-shared \
     --enable-libass
-#   --enable-libdrm
 
 make
 make install

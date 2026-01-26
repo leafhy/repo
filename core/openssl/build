@@ -15,7 +15,7 @@ make DESTDIR="$1" \
      install_sw \
      install_ssldirs
 
-# Note: 'install_man_docs' installs around 10MB of docs.
+# The make option 'install_man_docs' installs around 10MB of docs.
 
 cp -f update-certdata.sh "$1/etc/ssl"
 

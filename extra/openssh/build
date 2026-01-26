@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
-# Note: Error appears to be harmless as sshd is installed.
-# make : .../pkg/openssh/usr/bin/sshd: No such file or directory
-# make: [Makefile:385: check-config] Error 127 (ignored)
+# Error appears to be harmless as sshd is installed.
+#     make : .../pkg/openssh/usr/bin/sshd: No such file or directory
+#     make: [Makefile:385: check-config] Error 127 (ignored)
 
 ./configure \
     --prefix=/usr \

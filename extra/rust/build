@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-# Note: Disable 'fix-curl.patch' to build 'rust 1.85.0'
+# Disable 'fix-curl.patch' to build 'rust 1.85.0'.
 patch -p1 < fix-curl.patch
 
 # Instruct the compiler to trim absolute paths in resulting binaries and instead

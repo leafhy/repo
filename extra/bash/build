@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-# NOTE: Build fails without "DESTDIR".
-
 export CFLAGS="$CFLAGS -static"
 
 ./configure \
@@ -11,6 +9,7 @@ export CFLAGS="$CFLAGS -static"
     --disable-nls
 
 make
+# Build fails without "DESTDIR".
 make DESTDIR="$1" install
 
 rm -r "$1/usr/share/doc"

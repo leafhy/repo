@@ -1,8 +1,5 @@
 #!/bin/sh -e
 
-# NOTE: The binaries nwho, cleanutmp & dumputmp are
-#       not installed as musl does not support utmp.
-
 # Set ngetty-helper path.
 sed -i '/NGETTY_HELPER/s/sbin/bin/' lib.h
 
@@ -14,7 +11,9 @@ sed -i '/umask\s077/d' contrib/setup
 
 make LDFLAGS="-static"
 
-# NOTE: 'lsvt' is provided by ngetty-1.2-rc1.tar.gz.
+# The binaries nwho, cleanutmp & dumputmp are
+# not installed as musl does not support utmp.
+# 'lsvt' is provided by ngetty-1.2-rc1.tar.gz.
 for bin in ngetty ngetty-helper ngetty-argv lsvt; do
    install -Dm755 "$bin" "$1/usr/bin/$bin"
 done
@@ -25,8 +24,8 @@ install -Dm644 sample.Conf "$1/usr/share/ngetty/sample.Conf"
 install -Dm644 lsvt.1 "$1/usr/share/man/man1/lsvt.1"
 install -Dm644 ngetty.8 "$1/usr/share/man/man8/ngetty.8"
 
-# NOTE: This sed file is not strictly necassary though
-#       maybe it helps to avoid copy & paste errors.
+# This sed file is not strictly necassary though
+# maybe it helps to avoid copy & paste errors.
 tee "$1/etc/ngetty/Conf.sed" << EOF
 =environ=,TERM=linux
 tty1=noclear-first=/run/.ngetty-noclear-tty1

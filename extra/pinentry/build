@@ -4,9 +4,9 @@
     --prefix=/usr \
     --disable-pinentry-tty
 
-# NOTE: Quitting 'pinentry-tty' will degrade keyboard response time.
-#       Quitting 'pinentry-cursses' can cause keyboard to become somewhat non-responsive.
-#       Pressing/Holding Ctrl-C will restore normal keyboard useage.
+# Quitting 'pinentry-tty' will degrade keyboard response time.
+# Quitting 'pinentry-cursses' can cause keyboard to become somewhat non-responsive.
+# Pressing/Holding Ctrl-C will restore normal keyboard useage.
 
 make
 make DESTDIR="$1" install

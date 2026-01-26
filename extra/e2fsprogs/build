@@ -2,11 +2,11 @@
 
 # https://www.linuxfromscratch.org/lfs/view/10.1/chapter08/e2fsprogs.html
 #
-# NOTE: Building as USER fails.
-#       strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libss.a'; reason: Permission denied
-#       strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libext2fs.a'; reason: Permission denied
-#       strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libe2p.a'; reason: Permission denied
-#       strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libcom_err.a'; reason: Permission denied
+# Building as "USER" fails.
+#     strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libss.a'; reason: Permission denied
+#     strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libext2fs.a'; reason: Permission denied
+#     strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libe2p.a'; reason: Permission denied
+#     strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libcom_err.a'; reason: Permission denied
 
 export LDFLAGS="$LDFLAGS -static"
 
@@ -57,5 +57,7 @@ for f in \
     libext2fs.a \
     libss.a
 do
+    # Restore original permissions.
     chmod 444 "$DESTDIR/usr/lib/$f"
 done
+

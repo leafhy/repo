@@ -1,7 +1,6 @@
 #!/bin/sh -e
 
-# NOTE: Unrecognized option --without-lzip.
-#     : --without-lz disables lzip.
+# Error: Unrecognized option --without-lzip.
 
 ./configure \
     --prefix=/usr \

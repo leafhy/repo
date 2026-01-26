@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
-# NOTE: Berkeley DB 6.0.19 is the last Sleepycat license version
-#       not 5.3.28 as per netatalk docs.
+# Berkeley DB 6.0.19 is the last Sleepycat license version
+# not 5.3.28 as per netatalk docs.
 
 ver=5.3
 
@@ -19,13 +19,13 @@ cd build_unix
 make
 make install
 
-# Fix permissions for stripping
+# Fix permissions for stripping.
 chmod 755 "$1/usr/bin/"*
 
-# Append "$ver" to binaries
+# Append "$ver" to binaries.
 for bin in "$1/usr/bin/"*; do
    mv "$bin" "$bin$ver"
 done
 
-# Remove 20Mb of docs
+# Remove 20Mb of docs.
 rm -r "$1/usr/docs"
