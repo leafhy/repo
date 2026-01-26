@@ -31,8 +31,8 @@ install-dev
 
 # Remove docs.
 rm -rf \
-    "$1/usr/lib/xfsprogs" \
-    "$1/usr/share/doc" \
-    "$1/usr/share/man/man2" \
-    "$1/usr/share/man/man3" \
-    "$1/usr/share/man/man5/"proj*.5
+     "$1/usr/lib/xfsprogs" \
+     "$1/usr/share/doc" \
+     "$1/usr/share/man/man2" \
+     "$1/usr/share/man/man3" \
+     "$1/usr/share/man/man5/"proj*.5
