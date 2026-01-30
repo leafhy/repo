@@ -6,3 +6,5 @@
 
 make
 make DESTDIR="$1" install
+
+install -Dm644 -t "$1/usr/share/man/man1" man/libsndfile*.1

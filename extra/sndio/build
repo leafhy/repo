@@ -6,3 +6,6 @@
 
 make
 make DESTDIR="$1" install
+
+# Purge man3.
+rm -rf "$1/usr/share/man/man3"

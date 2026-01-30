@@ -1,13 +1,13 @@
 #!/bin/sh -e
 
-# Fix permission errors
+# Fix permission errors.
 sed '42s/555/755/' GNUmakefile > _
 mv -f _ GNUmakefile
 
 sed '43s/444/755/' GNUmakefile > _
 mv -f _ GNUmakefile
 
-# Change metadata, library & config location
+# Change metadata, library & config location.
 sed 's+.siren+.config/siren+' siren.h > _
 mv -f _ siren.h
 
