@@ -1,8 +1,5 @@
 #!/bin/sh
 
-find /usr/lib/siren -type f -exec chmod 444 '{}' +
-chmod 555 /usr/bin/siren
-
 cat <<EOF
 
 ####################################

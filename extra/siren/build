@@ -36,3 +36,7 @@ mv -f _ siren.h
 
 make
 make install
+
+# Restore permissions.
+chmod 555 "$1/usr/bin/siren"
+find      "$1/usr/lib/siren" -type f -exec chmod 444 '{}' +
