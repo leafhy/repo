@@ -22,4 +22,5 @@ rm -f "$1/usr/share/man/man8/"*.8.gz
 install -m644 -t "$1/usr/share/man/man8" doc/*.8
 
 # Purge (mostly) systemd related files.
-rm -rf "$1/usr/share"
+rm -rf "$1/usr/share" \
+       "$1/etc"
