@@ -1,9 +1,11 @@
 #!/bin/sh -e
-#
-# ipmitool & freeipmi failed to build
+
+# ipmitool & freeipmi failed to build.
 
 ./beforeconf.sh
 ./configure \
+    --prefix=/usr \
+    --libdir=/usr/lib \
     --disable-dependency-tracking
 
 chmod +x install-sh
@@ -11,6 +13,13 @@ chmod +x install-sh
 make
 make DESTDIR="$1" install
 
+# Fix broken '--sbindir'.
+mv -f "$1/usr/sbin/"* "$1/usr/bin"
+rmdir "$1/usr/sbin"
+
 # Replace .gz man8's with non-compressed versions.
 rm -f "$1/usr/share/man/man8/"*.8.gz
 install -m644 -t "$1/usr/share/man/man8" doc/*.8
+
+# Purge (mostly) systemd related files.
+rm -rf "$1/usr/share"
