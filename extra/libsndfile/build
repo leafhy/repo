@@ -5,6 +5,9 @@
     --disable-static
 
 make
-make DESTDIR="$1" install
+make \
+    install \
+    install-man
 
-install -Dm644 -t "$1/usr/share/man/man1" man/libsndfile*.1
+# Purge html docs.
+rm -rf "$1/usr/share/doc"
