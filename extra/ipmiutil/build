@@ -2,6 +2,13 @@
 
 # ipmitool & freeipmi failed to build.
 
+# The shared library needs to be disabled
+# so ALL binaries can be made static.
+export LDFLAGS="$LDFLAGS -static"
+
+# Fix broken '--disable-shared'.
+sed -i '/SHR_LINK="libipmiutil.so.1"/d' configure.ac
+
 ./beforeconf.sh
 ./configure \
     --prefix=/usr \
@@ -22,5 +29,5 @@ rm -f "$1/usr/share/man/man8/"*.8.gz
 install -m644 -t "$1/usr/share/man/man8" doc/*.8
 
 # Purge (mostly) systemd related files.
-rm -rf "$1/usr/share" \
+rm -rf "$1/usr/share/ipmiutil" \
        "$1/etc"
