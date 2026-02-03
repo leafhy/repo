@@ -288,9 +288,9 @@ mkdir -p /mnt/etc/rc.d
 
 if ! [[ -f /mnt/etc/rc.d/setup.boot ]]; then
 tee /mnt/etc/rc.d/setup.boot << EOF >/dev/null
-# Set font for tty{1..6}
+# Set font for tty{1..7}
 log "Setting up tty..."
-for i in \`seq 1 6\`; do
+for i in \`seq 1 7\`; do
    setfont /usr/share/consolefonts/Tamsyn8x16r.psf.gz -C /dev/tty\$i
 done
 
@@ -307,40 +307,42 @@ sleep 4
 EOF
 
 tee --append /mnt/etc/rc.d/setup.boot << 'EOF' >/dev/null
-# Setup zram if totalmem is => 8GB
-# https://stackoverflow.com/questions/20348007/how-can-i-find-out-the-total-physical-memory-ram-of-my-linux-box-suitable-to-b/53186875#53186875
 if [ -b /dev/zram0 ]; then
-   totmem=0
-   for mem in /sys/devices/system/memory/memory*; do
-      [ "$(cat ${mem}/online)" = "1" ] && totalmem=$((totalmem+$((0x$(cat /sys/devices/system/memory/block_size_bytes)))))
-   done
+    # Setup zram if totalmem is => 8GB
+    # https://stackoverflow.com/questions/20348007/how-can-i-find-out-the-total-physical-memory-ram-of-my-linux-box-suitable-to-b/53186875#53186875
+    totmem=0
+    for mem in /sys/devices/system/memory/memory*; do
+        [ "$(cat ${mem}/online)" = "1" ] && totalmem=$((totalmem+$((0x$(cat /sys/devices/system/memory/block_size_bytes)))))
+    done
 
-   if ! [ "$(( totalmem / 1024 ** 3 ))" -lt "8" ]; then
-      log "Setting up zram..."
-      # WARNING: Using a high zram value i.e. '@1.5 * RAM' can negatively impact system performance e.g.:
-      #          Memory exhaustion thus which invokes OOM Kill.
-      #          Severe system slowdown necessitating a forced-poweroff.
-      #          Storing of (too many) large files in zram can potenially cause the system to become non-responsive.
-      zramsize=$(printf "$(awk '/MemTotal/ { print $2 }' /proc/meminfo) * 1.4 / 1024 / 1024" | bc) &&
-      echo "${zramsize}"G > /sys/block/zram0/disksize &&
-      [ -x /usr/bin/mkfs.xfs ] &&
-      mkfs.xfs -qm finobt=0,reflink=0,rmapbt=0 /dev/zram0 &&
-      mount -t xfs -o discard /dev/zram0 /var/db/kiss/cache/proc &&
-      chown 1000:1000 /var/db/kiss/cache/proc
-     # Create 2G swapfile.
-     # NOTE: 'fallocate'    created swapfile is supported on xfs with linux kernel 4.18 (see swapon.8).
-     #     : 'busybox dd'   bs=1024
-     #     : 'coreutils dd' bs=1MiB
-     #
-     # swap="/var/db/kiss/cache/proc/swapfile"
-     #
-     # fallocate -l 2G "$swap"
-     # dd if=/dev/zero of="$swap" bs=1024 count=$((2*1024*1024))
-     #
-     # mkswap "$swap"
-     # chmod 600 "$swap"
-     # swapon "$swap"
-   fi
+    if ! [ "$(( totalmem / 1024 ** 3 ))" -lt "8" ]; then
+        # NOTE: Using a high zram value i.e. '@1.5 * RAM' can negatively impact system performance.
+        # e.g. -> Memory exhaustion thus which invokes OOM Kill.
+        #      -> Severe system slowdown necessitating a forced-poweroff.
+        #      -> Storing of (too many) large files in zram can potenially cause the system to become non-responsive.
+        #       Therefore the use of a swapfile to help mitigate the aforementioned problems seems prudent.
+        log "Setting up zram..."
+        zramsize=$(printf "$(awk '/MemTotal/ { print $2 }' /proc/meminfo) * 1.4 / 1024 / 1024" | bc) &&
+        echo "${zramsize}"G > /sys/block/zram0/disksize &&
+        [ -x /usr/bin/mkfs.xfs ] &&
+        mkfs.xfs -qm finobt=0,reflink=0,rmapbt=0 /dev/zram0 &&
+        mount -t xfs -o discard /dev/zram0 /var/db/kiss/cache/proc &&
+        chown 1000:1000 /var/db/kiss/cache/proc
+
+        # NOTE: Do not use 'dd' to create swapfile on zram as doing so will increase boottime.
+        #       A swapfile that is not on zram device can be added to /etc/fstab.
+        #    -> 'fallocate'    created swapfile is supported on xfs with linux kernel 4.18 (see swapon.8).
+        #    -> 'busybox dd'   bs=1024
+        #    -> 'coreutils dd' bs=1MiB
+        log "Setting up swapfile..."
+        swap="/var/db/kiss/cache/proc/swapfile"
+        # Create 2G swapfile.
+        fallocate -l 2G "$swap"
+        # dd if=/dev/zero of="$swap" bs=1024 count=$((2*1024*1024))
+        mkswap "$swap"
+        chmod 600 "$swap"
+        swapon "$swap"
+    fi
 fi
 
 log "Press <alt+F7> to view kernel messages..."
