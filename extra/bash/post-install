@@ -4,17 +4,24 @@ cat <<EOF
 
 #########################################
 
-NOTE: To change the login shell using 'chsh'
-      add this to '/etc/shells'.
+NOTE: To change the login shell by using 'chsh'.
 
--> /bin/bash
+      # Install 'shadow'.
+      -> kiss build shadow
 
-NOTE: To change the login shell with text
-      editor, edit '/etc/passwd'.
+      # Add this to '/etc/shells'.
+      -> /bin/bash
+
+      # Change shell.
+      -> chsh --shell /bin/bash
+
+NOTE: To change the login shell manually
+      edit '/etc/passwd'.
 
 NOTE: To enable eternal bash history,
-      add this to '.profile'.
+      add this to '~/.profile'.
 
+# ------ BEGIN ------ #
 # ---------------------
 # Eternal Bash History.
 # ---------------------
@@ -29,7 +36,13 @@ export HISTFILE=~/.bash_eternal_history
 # Force prompt to write history after every command.
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+# ------- END ------- #
+
+NOTE: Changing the login shell can erase
+      HISTFILE=~/.bash_eternal_history.
 
 #########################################
 
 EOF
+
+
