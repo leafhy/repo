@@ -18,7 +18,7 @@ NOTE: To change the login shell by using 'chsh'.
 NOTE: To change the login shell manually
       edit '/etc/passwd'.
 
-NOTE: To enable eternal bash history,
+NOTE: To enable Eternal Bash History
       add this to '~/.profile'.
 
 # ------ BEGIN ------ #
