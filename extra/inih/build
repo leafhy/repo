@@ -1,10 +1,9 @@
 #!/bin/sh -e
 
-mkdir build
-
-meson \
-    --prefix=/usr \
-    build
+meson setup \
+    -Dprefix=/usr \
+    -Ddefault_library=static \
+    . build
 
 ninja -C build
 ninja -C build install
