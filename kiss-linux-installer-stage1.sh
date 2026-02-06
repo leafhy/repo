@@ -32,6 +32,7 @@ extfsys=xfs
 extfsysopts="-f -L $fsyslabel"
 kissrepo="/var/db/kiss"
 kiss_cache="/var/db/kiss/cache"
+swapfile="$kiss_cache/proc/__swapfile"
 
 # NOTE: Leave "kiss_cache" empty for default cache locations.
 #       '$HOME/.cache/kiss' '/root/.cache/kiss'
@@ -264,8 +265,8 @@ if ! [[ -f /mnt/etc/resolv.conf.orig ]]; then
    #       and apon exiting chroot, '/etc/resolv.conf' will be deleted.
 fi
 
-# Create backups of files needed for user account to
-# allow for system backups without user.
+# Create backups of files needed for user account
+# to allow for system backups without user.
 if ! [[ -f /mnt/etc/group.orig ]]; then
    cp /mnt/etc/group /mnt/etc/group.orig
 
@@ -329,7 +330,7 @@ if [ -b /dev/zram0 ]; then
         echo "${zramsize}"G > /sys/block/zram0/disksize &&
         [ -x /usr/bin/mkfs.xfs ] &&
         mkfs.xfs -qm finobt=0,reflink=0,rmapbt=0 /dev/zram0 &&
-        mount -t xfs -o discard /dev/zram0 /var/db/kiss/cache/proc &&
+        mount -t xfs -o discard /dev/zram0 "$kiss_cache/proc" &&
         chown 1000:1000 /var/db/kiss/cache/proc
 
         # NOTE: Do not use 'dd' to create swapfile on zram as doing so will increase boottime.
@@ -338,7 +339,7 @@ if [ -b /dev/zram0 ]; then
         #    -> 'busybox dd'   bs=1024
         #    -> 'coreutils dd' bs=1MiB
         log "Setting up swapfile..."
-        swap="$kiss_cache/proc/__swapfile"
+        swap="$swapfile"
         # Create 2G swapfile.
         fallocate -l 2G "$swap"
         # dd if=/dev/zero of="$swap" bs=1024 count=$((2*1024*1024))
