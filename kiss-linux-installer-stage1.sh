@@ -345,7 +345,7 @@ if [ -b /dev/zram0 ]; then
     fi
 fi
 
-log "Press <alt+F7> to view kernel messages..."
+log "Press <alt+F7> to view kernel messages."
 
 dmesg >/var/log/dmesg.log
 EOF
