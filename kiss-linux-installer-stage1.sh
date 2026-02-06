@@ -33,6 +33,7 @@ extfsysopts="-f -L $fsyslabel"
 kissrepo="/var/db/kiss"
 kiss_cache="/var/db/kiss/cache"
 swapfile="$kiss_cache/proc/__swapfile"
+zram="$kiss_cache/proc"
 
 # NOTE: Leave "kiss_cache" empty for default cache locations.
 #       '$HOME/.cache/kiss' '/root/.cache/kiss'
@@ -330,8 +331,8 @@ if [ -b /dev/zram0 ]; then
         echo "${zramsize}"G > /sys/block/zram0/disksize &&
         [ -x /usr/bin/mkfs.xfs ] &&
         mkfs.xfs -qm finobt=0,reflink=0,rmapbt=0 /dev/zram0 &&
-        mount -t xfs -o discard /dev/zram0 "$kiss_cache/proc" &&
-        chown 1000:1000 /var/db/kiss/cache/proc
+        mount -t xfs -o discard /dev/zram0 "$zram" &&
+        chown 1000:1000 "$zram"
 
         # NOTE: Do not use 'dd' to create swapfile on zram as doing so will increase boottime.
         #       A swapfile that is not on zram device can be added to /etc/fstab.
