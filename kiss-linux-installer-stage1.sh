@@ -212,7 +212,10 @@ if [[ $kiss_cache && $file = kiss-chroot-2021.7-9.tar.xz ]]; then
 
       sed "/Top-level cache/a\
       cac_dir=$kiss_cache" /mnt/usr/bin/kiss > _
-      mv -f _ /mnt/usr/bin/kiss
+
+      # Hide 'kiss' created directories.
+      sed "s,cac_dir=$kiss_cache\/proc,cac_dir=$kiss_cache\/proc\/__kiss-tmp," _ > __
+      mv -f __ /mnt/usr/bin/kiss
       chmod +x /mnt/usr/bin/kiss
    fi
 fi
@@ -335,7 +338,7 @@ if [ -b /dev/zram0 ]; then
         #    -> 'busybox dd'   bs=1024
         #    -> 'coreutils dd' bs=1MiB
         log "Setting up swapfile..."
-        swap="/var/db/kiss/cache/proc/swapfile"
+        swap="$kiss_cache/proc/__swapfile"
         # Create 2G swapfile.
         fallocate -l 2G "$swap"
         # dd if=/dev/zero of="$swap" bs=1024 count=$((2*1024*1024))
