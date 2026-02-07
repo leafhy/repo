@@ -333,7 +333,9 @@ if [ -b /dev/zram0 ]; then
         mkfs.xfs -qm finobt=0,reflink=0,rmapbt=0 /dev/zram0 &&
         mount -t xfs -o discard /dev/zram0 "$zram" &&
         chown 1000:1000 "$zram"
+    fi
 
+    if ! [ -f /swapfile ]; then
         # NOTE: Do not use 'dd' to create swapfile on zram as doing so will increase boottime.
         #       A swapfile that is not on zram device can be added to /etc/fstab.
         #    -> 'fallocate'    created swapfile is supported on xfs with linux kernel 4.18 (see swapon.8).
