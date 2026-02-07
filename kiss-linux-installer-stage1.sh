@@ -346,7 +346,7 @@ if [ -b /dev/zram0 ]; then
         # Create 2G swapfile.
         fallocate -l 2G "$swap"
         # dd if=/dev/zero of="$swap" bs=1024 count=$((2*1024*1024))
-        mkswap "$swap"
+        mkswap "$swap" >/dev/null
         chmod 600 "$swap"
         swapon "$swap"
     fi
