@@ -15,8 +15,7 @@ chmod +x install-sh
     --sbindir=/usr/bin \
     --enable-lib64=no \
     --disable-gettext \
-    --enable-lto \
-    --enable-editline=yes
+    --enable-lto
 
 make \
     DEBUG=-DNDEBUG \
