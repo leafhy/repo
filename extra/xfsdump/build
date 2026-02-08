@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-sed -i 's/ doc po debian//' Makefile
-
 make \
 DEBUG=-DNDEBUG \
 LOCAL_CONFIGURE_OPTIONS="--prefix=/usr \
@@ -9,12 +7,14 @@ LOCAL_CONFIGURE_OPTIONS="--prefix=/usr \
                          --enable-lib64=no \
                          --disable-gettext"
 
-sed -i 's,bin/bash,bin/sh,' install-sh
+# Remove 'bash' dependency.
+sed -i 's/bash/sh/' install-sh
 
 make DESTDIR="$1" install
 
+# Fix broken '--sbindir'.
 mv "$1/sbin/"* "$1/usr/bin"
 rmdir "$1/sbin"
 
-# Remove docs
+# Remove README.
 rm -r "$1/usr/share/doc"

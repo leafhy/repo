@@ -4,7 +4,7 @@
 # values an empty value is needed.
 export OPTIMIZER=" "
 
-# Remove incorrect bash dependency.
+# Remove 'bash' dependency.
 sed 's/bash/sh/' install-sh > _
 mv -f _ install-sh
 
