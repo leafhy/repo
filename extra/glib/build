@@ -27,10 +27,10 @@ meson \
 ninja -C build
 ninja -C build install
 
-rm -rf "$1/usr/bin/gdbus"
+rm -f "$1/usr/bin/gdbus"
 
 # Auto detection appears wonky as '/usr/share/bash-completion' is not
 # always included and the contents of '/usr/share/gettext' changes.
 rm -rf \
-     "$1/usr/share/gettext" \
-     "$1/usr/share/bash-completion"
+    "$1/usr/share/gettext" \
+    "$1/usr/share/bash-completion"

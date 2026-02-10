@@ -25,6 +25,6 @@ mv -f "$1/usr/sbin/"* "$1/usr/bin"
 rmdir "$1/usr/sbin"
 
 rm -rf \
-     "$1/usr/share/doc" \
-     "$1/usr/share/bash-completion"
+    "$1/usr/share/doc" \
+    "$1/usr/share/bash-completion"
 

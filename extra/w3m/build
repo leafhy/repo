@@ -18,7 +18,7 @@ make DESTDIR="$1" install
 
 # Remove docs.
 rm -rf \
-     "$1/usr/share/man/de" \
-     "$1/usr/share/man/ja" \
-     "$1/usr/share/w3m"/*.de.pl \
-     "$1/usr/share/w3m"/*.ja.pl
+    "$1/usr/share/man/de" \
+    "$1/usr/share/man/ja" \
+    "$1/usr/share/w3m"/*.de.pl \
+    "$1/usr/share/w3m"/*.ja.pl
