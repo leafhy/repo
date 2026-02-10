@@ -10,10 +10,14 @@ cp -R lib "$1/usr/lib"
 # Add tty6.
 sed -i '/tty5/a\# tty6::respawn:/bin/getty 38400 tty6' "$1/etc/inittab"
 
-# Re-locate kernel log to console 7.
+# Re-locate kernel log.
 sed -i '/rc.lib/a\
 \
+# Redirect kernel log to console 7.
 setlogcons 7' "$1/usr/lib/init/rc.boot"
+
+# Make sysctl quiet.
+sed -i '/sysctl -p/sysctl -q -p/' "$1/usr/lib/init/rc.boot"
 
 # Disable warning as CFLAGS must work this way.
 # shellcheck disable=2086
