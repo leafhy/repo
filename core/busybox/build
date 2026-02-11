@@ -4,7 +4,7 @@ for patch in patch/*.patch; do
     patch -p1 < "$patch"
 done
 
-# Disable busybox tools
+# Disable busybox tools in favor of alternatives that have needed functionality.
 for l in BLKID LSOF LSPCI SENDMAIL; do
    sed "s+CONFIG_$l=y+# CONFIG_$l is not set+" .config > _
    mv -f _ .config
