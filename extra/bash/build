@@ -12,6 +12,6 @@ make
 # Build fails without "DESTDIR".
 make DESTDIR="$1" install
 
-rm -r "$1/usr/share/doc"
+rm -rf "$1/usr/share/doc"
 
-ln -s bash "$1/usr/bin/sh"
+ln -sf bash "$1/usr/bin/sh"

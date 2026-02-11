@@ -22,7 +22,7 @@ meson \
 ninja -C output
 ninja -C output install
 
-ln -s fusermount3 "$1/usr/bin/fusermount"
+ln -sf fusermount3 "$1/usr/bin/fusermount"
 
 # Remove the unused.
 rm -rf \

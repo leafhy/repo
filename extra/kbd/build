@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-# Remove obsolete program
+# Remove obsolete program.
 sed '/RESIZECONS_PROGS=/s/yes/no/' configure > _
 mv -f _ configure
 chmod +x configure

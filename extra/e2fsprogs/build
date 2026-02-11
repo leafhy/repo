@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
 # https://www.linuxfromscratch.org/lfs/view/10.1/chapter08/e2fsprogs.html
-#
-# Building as "USER" fails.
+
+# Building as 'USER' fails.
 #     strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libss.a'; reason: Permission denied
 #     strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libext2fs.a'; reason: Permission denied
 #     strip: unable to copy file '.../pkg/e2fsprogs/usr/lib/libe2p.a'; reason: Permission denied

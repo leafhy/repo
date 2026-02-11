@@ -1,4 +1,4 @@
 #!/bin/sh -e
 
-install -Dm755 fd "$1/usr/bin/fd"
+install -Dm755 fd   "$1/usr/bin/fd"
 install -Dm644 fd.1 "$1/usr/share/man/man1/fd.1"

@@ -5,7 +5,7 @@ getent passwd fcron || adduser -H -h /var/spool/fcron -s /bin/sh -D -S -G fcron 
 
 # fix permissions and owners
 	chown fcron:fcron /usr/bin/fcrontab /usr/bin/fcrondyn
-	chown root:fcron /usr/bin/fcronsighup
+	chown root:fcron  /usr/bin/fcronsighup
 	chmod  110 /usr/bin/fcron
 	chmod 4110 /usr/bin/fcronsighup
 	chmod 6111 /usr/bin/fcrontab /usr/bin/fcrondyn
@@ -20,11 +20,11 @@ cat <<EOF
 
 ######################################################
 
-NOTE: If the system shell is "/usr/bin/sh -> busybox",
-      roots fcrontab entry may fail to run as "$USER".
+NOTE: If the system shell is '/usr/bin/sh -> busybox'
+      roots fcrontab entry may fail to run as 'USER'.
 
-      Set shell used by fcron in "/etc/fcron/fcron.conf"
-      or with "kiss a bash /usr/bin/sh".
+      Set shell used by fcron by editing '/etc/fcron/fcron.conf'
+      or with 'kiss a bash /usr/bin/sh'.
 
 ######################################################
 

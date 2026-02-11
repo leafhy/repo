@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
-stat=$(stat /usr/bin/stat | grep -o busybox)
+link=$(stat /usr/bin/stat | grep -o busybox | true)
 
-if [ "$stat" ]; then
-   kiss a coreutils /usr/bin/stat
+if [ "$link" ]; then
+    kiss a coreutils /usr/bin/stat
 fi
 

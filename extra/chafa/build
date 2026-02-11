@@ -6,5 +6,5 @@
 make
 make install
 
-# Remove documentation
+# Remove docs.
 rm -rf "$1/usr/share"

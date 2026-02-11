@@ -1,8 +1,8 @@
 #!/bin/sh -e
 
 if [ -L /var/service/fcron ]; then
-   sv down fcron
-   unlink /var/service/fcron
+    sv down fcron
+    unlink /var/service/fcron
 fi
 
 deluser --remove-home fcron
@@ -13,14 +13,14 @@ deluser --remove-home fcron
 # /etc/fcron.deny
 # /etc/sv/fcron/run
 
-rm -r \
+rm -rf \
     "/etc/sv/fcron" \
     "/run/runit/supervise.fcron"
 
-rm \
-   "/etc/fcron.conf" \
-   "/etc/fcron.allow" \
-   "/etc/fcron.deny"
+rm -f\
+    "/etc/fcron.conf" \
+    "/etc/fcron.allow" \
+    "/etc/fcron.deny"
 
 cat <<EOF
 

@@ -29,7 +29,7 @@ make install
 
 # Remove duplicate html etc.
 rm -f \
-    "$1/usr/share/dar"/dar-differential-backup-mini-howto.*.html \
+    "$1/usr/share/dar/dar-differential-backup-mini-howto."*.html \
     "$1/usr/share/dar/dar-catalog.dtd" \
     "$1/usr/share/dar/pybind11_libdar.cpp" \
     "$1/usr/share/dar/mini-howto/dar-differential-backup-mini-howto.es.html" \

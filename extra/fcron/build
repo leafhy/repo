@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-# Build fails as USER.
+# Build fails as 'USER'.
 #    "chown: changing ownership of pkg/fcron/usr/sbin : Operation not permitted"
 
 if [ "$(id -u)" != 0 ]; then
@@ -40,14 +40,15 @@ make
 make DESTDIR="$1" install
 
 for d in hourly daily weekly monthly; do
-   install -dm755 "$1/etc/cron.$d"
+    install -dm755 "$1/etc/cron.$d"
 done
 
 install -m640 systab.orig "$1/var/spool/fcron"
-install -m755 run-parts "$1/usr/bin"
+install -m755 run-parts   "$1/usr/bin"
 
 # Install runit service.
 install -Dm755 fcron.run "$1/etc/sv/fcron/run"
-install -dm755 "$1/var/service"
-ln -sf /etc/sv/fcron "$1/var/service/"
+install -dm755           "$1/var/service"
+
+ln -sf /etc/sv/fcron              "$1/var/service/"
 ln -sf /run/runit/supervise.fcron "$1/etc/sv/fcron/supervise"

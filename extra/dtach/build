@@ -5,5 +5,5 @@
 
 make
 
-install -Dm755 dtach "$1/usr/bin/dtach"
+install -Dm755 dtach   "$1/usr/bin/dtach"
 install -Dm644 dtach.1 "$1/usr/share/man/man1/dtach.1"

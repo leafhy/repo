@@ -1,10 +1,10 @@
 #!/bin/sh -e
 
-# bower uses ln -L (--logical) which busybox does not support
+# bower uses 'ln -L' (--logical) which busybox does not support.
 link=$(stat /usr/bin/ln | grep -o busybox || true)
 
-if [ "$link" = busybox ]; then
-   kiss a coreutils /usr/bin/ln
+if [ "$link" ]; then
+    kiss a coreutils /usr/bin/ln
 fi
 
 make
