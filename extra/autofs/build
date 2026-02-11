@@ -18,19 +18,20 @@ sed -i '/#define LIBXML2_WORKAROUND/d' include/config.h
 make
 make install
 
-install -Dm755 autofs.run "$1/etc/sv/autofs/run"
+install -Dm755 autofs.run                  "$1/etc/sv/autofs/run"
 install -Dm644 samples/autofs.conf.default "$1/etc/autofs/autofs.conf"
 
-install -dm755 "$1/usr/share/autofs/samples"
-install -m644 samples/auto.master \
-              samples/auto.misc \
-              samples/auto.net \
-              samples/auto.smb \
-              samples/autofs.conf.default \
-              samples/autofs.init.conf \
-              samples/rc.autofs "$1/usr/share/autofs/samples"
+install -Dm644 -t "$1/usr/share/autofs/samples" \
+                  samples/auto.master \
+                  samples/auto.misc \
+                  samples/auto.net \
+                  samples/auto.smb \
+                  samples/autofs.conf.default \
+                  samples/autofs.init.conf \
+                  samples/rc.autofs
 
 # Create link to satisfy startup check.
-ln -sf /etc/autofs/autofs.conf "$1/etc/autofs/autofs"
+ln -sf autofs.conf "$1/etc/autofs/autofs"
 
-rm "$1/usr/share/man/man5/autofs_ldap_auth.conf.5"
+# Purge unneeded conf.
+rm -f "$1/usr/share/man/man5/autofs_ldap_auth.conf.5"

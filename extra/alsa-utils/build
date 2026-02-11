@@ -9,7 +9,8 @@
 make
 make install
 
-# Remove mans & udev rule.
-rm -rf "$1/usr/share/man/fr"
-rm -rf "$1/usr/share/man/man7"
-rm -rf "$1/lib"
+# Remove manpages & udev rule.
+rm -rf \
+    "$1/usr/share/man/fr" \
+    "$1/usr/share/man/man7" \
+    "$1/lib"

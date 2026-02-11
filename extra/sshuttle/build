@@ -17,8 +17,6 @@ mv -f _ setup.cfg
 
 chmod -R go+rX .
 
-python3 setup.py install \
-   --root="$1"           \
-   --prefix=/usr
+python3 setup.py install --root="$1" --prefix=/usr
 
 install -Dm644 docs/manpage.rst "$1/usr/share/man/man1/sshuttle.1"

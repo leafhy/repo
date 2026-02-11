@@ -1,12 +1,12 @@
 #!/bin/sh -e
 
-./configure\
-    --prefix=/usr\
-    --sbindir=/usr/bin\
+./configure \
+    --prefix=/usr \
+    --sbindir=/usr/bin \
     --disable-rpath
 
 make
 make DESTDIR="$1" install
 
-# Remove documentation
-rm -r "$1/usr/share/doc"
+# Remove docs.
+rm -rf "$1/usr/share/doc"
