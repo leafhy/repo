@@ -1,0 +1,13 @@
+#!/bin/sh
+
+cat << EOF
+
+######################################
+
+NOTE: Quitting 'pinentry-tty' will degrade keyboard response time.
+      Quitting 'pinentry-curses' can cause keyboard to become somewhat non-responsive.
+      Pressing/Holding Ctrl-C will restore normal keyboard useage.
+
+######################################
+
+EOF
