@@ -2,6 +2,7 @@
 
 BINOWN="$(id -u)" \
 BINGRP="$(id -g)" \
+
 ./configure \
     --prefix=/usr \
     --enable-static \

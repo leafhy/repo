@@ -10,9 +10,7 @@ NOTE: To be able to use an external (USB UAC2)
       or 'mdevd' service files.
 
 -> kiss build libudev-zero
-
 -> ln -s /etc/sv/mdev /var/service/
-
 -> kiss build mdevd
 -> ln -s /etc/sv/mdevd /var/service/
 

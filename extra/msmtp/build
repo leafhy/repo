@@ -7,5 +7,6 @@
 make
 make install
 
-install -Dm644 -t "$1/usr/share/doc/msmtp" doc/msmtprc-system.example
-install -Dm644 -t "$1/usr/share/doc/msmtp" doc/msmtprc-user.example
+install -Dm644 -t "$1/usr/share/doc/msmtp" \
+                  doc/msmtprc-system.example \
+                  doc/msmtprc-user.example

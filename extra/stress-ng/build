@@ -1,6 +1,4 @@
 #!/bin/sh -e
-#
-# stress-ng is used by https://github.com/amanusk/s-tui
 
 make
 make install

@@ -4,7 +4,7 @@
 # for building rsync. See files/mkproto.awk.
 sed -i 's/perl/awk -f/;s/mkproto.pl/mkproto.awk/' Makefile.in
 
-export CFLAGS="-static $CFLAGS"
+export CFLAGS="$CFLAGS -static"
 
 ./configure \
     --prefix=/usr \

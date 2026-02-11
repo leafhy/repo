@@ -4,34 +4,39 @@
     --prefix=/usr
 
 make \
-   PARALLEL="-j$(nproc)" \
-   LIBGRADES="hlc.gc" \
-   DESTDIR="$PWD" \
-   install
+    PARALLEL="-j$(nproc)" \
+    LIBGRADES="hlc.gc" \
+    DESTDIR="$PWD" \
+    install
 
-for bin in c2init canonical_grade mdb mdemangle mercury_compile mercury_config mfiltercc mfilterjavac mgnuc mkinit ml mmake mmc mtags ; do
-   install -Dm755 "usr/bin/$bin" "$1/usr/bin/$bin"
+for bin in c2init canonical_grade mdb mdemangle mercury_compile mercury_config mfiltercc mfilterjavac mgnuc mkinit ml mmake mmc mtags; do
+    install -Dm755 "usr/bin/$bin" "$1/usr/bin/$bin"
 done
 
-for man in c2init.1 mdb.1 mercury_config.1 mgnuc.1 ml.1 mmake.1 mmc.1 mtags.1 ; do
-   install -Dm644 "usr/share/man/man1/$man" "$1/usr/share/man/man1/$man"
+for man in c2init.1 mdb.1 mercury_config.1 mgnuc.1 ml.1 mmake.1 mmc.1 mtags.1; do
+    install -Dm644 "usr/share/man/man1/$man" "$1/usr/share/man/man1/$man"
 done
 
 for grade in hlc.gc ; do
-   install -D -t "$1/usr/lib/mercury/lib/$grade" usr/lib/mercury/lib/$grade/lib*.so
-   install -D -t "$1/usr/lib/mercury/modules/$grade" usr/lib/mercury/modules/$grade/*.init
-   install -m 644 usr/lib/mercury/lib/$grade/lib*.a "$1/usr/lib/mercury/lib/$grade"
-   cp -R "usr/lib/mercury/lib/$grade/inc" "$1/usr/lib/mercury/lib/$grade"
+    install -D -t "$1/usr/lib/mercury/lib/$grade" usr/lib/mercury/lib/$grade/lib*.so
+    install -D -t "$1/usr/lib/mercury/modules/$grade" usr/lib/mercury/modules/$grade/*.init
+    install -m 644 usr/lib/mercury/lib/$grade/lib*.a "$1/usr/lib/mercury/lib/$grade"
+    cp -R "usr/lib/mercury/lib/$grade/inc" "$1/usr/lib/mercury/lib/$grade"
 done
 
 for dir in ints inc mdb mmake ; do
-   cp -R "usr/lib/mercury/$dir" "$1/usr/lib/mercury/$dir"
+    cp -R "usr/lib/mercury/$dir" "$1/usr/lib/mercury/$dir"
 done
 
-install -D -t "$1/usr/lib/mercury/conf" usr/lib/mercury/conf/Mercury.config
-install -m644 usr/lib/mercury/conf/mercury_conf.h "$1/usr/lib/mercury/conf"
-install -m644 usr/lib/mercury/lib/libgc.a "$1/usr/lib/mercury/lib"
-install -m644 usr/lib/mercury/lib/libgc.so "$1/usr/lib/mercury/lib"
+install -Dm644 -t "$1/usr/lib/mercury/conf" \
+                  usr/lib/mercury/conf/Mercury.config \
+                  usr/lib/mercury/conf/mercury_conf.h
 
-rm -rf "$1/usr/lib/mercury/ints/hlc.gc.pregen"
-rm -rf "$1/usr/lib/mercury/lib/hlc.gc.pregen"
+install -Dm644 -t "$1/usr/lib/mercury/lib" \
+                  usr/lib/mercury/lib/libgc.a
+                  usr/lib/mercury/lib/libgc.so
+
+
+rm -rf \
+    "$1/usr/lib/mercury/ints/hlc.gc.pregen" \
+    "$1/usr/lib/mercury/lib/hlc.gc.pregen"

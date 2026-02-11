@@ -1,15 +1,14 @@
 #!/bin/sh -e
 
-sh="$(stat /usr/bin/sh | grep -o busybox)"
+shell="$(stat /usr/bin/sh | grep -o busybox || true)"
 
-if [ "$sh" != busybox ];
-then
-echo "##################################################"
-echo "# [ ! ] Build requires busybox /usr/bin/sh [ ! ] #"
-echo "#                                                #"
-echo "#           kiss a busybox /usr/bin/sh           #"
-echo "##################################################"
-   exit 1
+if [ "$shell" ] then;
+    echo "##################################################"
+    echo "# [ ! ] Build requires busybox /usr/bin/sh [ ! ] #"
+    echo "#                                                #"
+    echo "#           kiss a busybox /usr/bin/sh           #"
+    echo "##################################################"
+    exit 1
 fi
 
 sed '/addopts/d' setup.cfg > _

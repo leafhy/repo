@@ -10,5 +10,5 @@
 make
 make DESTDIR="$1" install
 
-# Remove documentation
+# Remove documentation.
 rm -rf "$1/usr/share/doc"

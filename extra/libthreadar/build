@@ -8,5 +8,5 @@
 make
 make install
 
-# Remove README
+# Remove README.
 rm -rf "$1/usr/share"

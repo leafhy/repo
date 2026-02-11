@@ -1,12 +1,12 @@
 #!/bin/sh -e
 
-# NOTE: The single quotes 'EOF' prevent eval from expanding.
+# The single quotes 'EOF' prevent eval from expanding.
 
 cat <<'EOF'
 
 ############################################################################################
 
-NOTE: To start starship on login add this to '.profile'.
+NOTE: To start starship on login add this to '~/.profile'.
 
 -> eval "$(starship init bash)"
 -> export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"

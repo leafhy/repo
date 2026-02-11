@@ -12,5 +12,5 @@ fi
 
 make build
 
-install -Dm755 micro "$1/usr/bin/micro"
+install -Dm755 micro                    "$1/usr/bin/micro"
 install -Dm644 assets/packaging/micro.1 "$1/usr/share/man/man1/micro.1"

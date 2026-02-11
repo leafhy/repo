@@ -14,8 +14,7 @@ mv -f _ deps/corepack/dist/vendors_yarn_berry_cache_proxy-agent-npm-5_0_0-41772f
     mv -f _ node.gyp
 }
 
-# nodejs 18.4.2 LTS will fail to build
-# with '-march=native' & 'core2'.
+# nodejs 18.4.2 LTS will fail to build with '-march=native' & 'core2'.
 march=$(gcc -march=native -Q --help=target | grep -- -march | grep -o core2 || true)
 
 if [ "$march" ]; then

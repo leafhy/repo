@@ -6,5 +6,5 @@ unzip dnspython-$vers-py3-none-any.whl
 
 mkdir -p "$1/usr/lib/python3.11/site-packages"
 
-cp -R dns "$1/usr/lib/python3.11/site-packages"
+cp -R dns                       "$1/usr/lib/python3.11/site-packages"
 cp -R dnspython-$vers.dist-info "$1/usr/lib/python3.11/site-packages"

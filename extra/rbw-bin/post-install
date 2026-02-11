@@ -18,7 +18,6 @@ vaultwarden.local:2014 {
 http://vaultwarden.local:2018 {
 	reverse_proxy 127.0.0.1:8000
 }
-
 # ------- END ------- #
 
 NOTE: To use 'https' with caddy
@@ -28,6 +27,8 @@ NOTE: To use 'https' with caddy
 # To verify 'https' is working.
 -> export SSL_CERT_FILE="/path/to/vaultwarden.local.crt"
 -> export SSL_CERT_FILE="/path/to/root.crt"
+-> curl https://192.XXX.X.X:2018
+-> curl https://vaultwarden.local:2018
 
 # Add 'root.crt' to system certificates.
 -> cat /etc/ssl/cert.pem root.crt > certupd.pem

@@ -1,10 +1,10 @@
 #!/bin/sh -e
 
-# Change install prefix
+# Change install prefix.
 sed 's+/usr/local+/usr+' Makefile > _
 mv -f _ Makefile
 
-# Remove asciidoctor check
+# Remove asciidoctor check.
 sed '116d' config.sh > _
 mv -f _ config.sh
 

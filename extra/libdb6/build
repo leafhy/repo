@@ -24,8 +24,8 @@ chmod 755 "$1/usr/bin/"*
 
 # Append "$ver" to binaries.
 for bin in "$1/usr/bin/"*; do
-   mv "$bin" "$bin$ver"
+    mv "$bin" "$bin$ver"
 done
 
 # Remove 20Mb of docs.
-rm -r "$1/usr/docs"
+rm -rf "$1/usr/docs"

@@ -14,15 +14,13 @@ make LDFLAGS="-static"
 # The binaries nwho, cleanutmp & dumputmp are
 # not installed as musl does not support utmp.
 # 'lsvt' is provided by ngetty-1.2-rc1.tar.gz.
-for bin in ngetty ngetty-helper ngetty-argv lsvt; do
-   install -Dm755 "$bin" "$1/usr/bin/$bin"
-done
+install -Dm755 -t "$1/usr/bin" ngetty ngetty-helper ngetty-argv lsvt
 
 install -Dm755 contrib/setup "$1/etc/ngetty/setup"
-install -Dm755 ngetty.run "$1/etc/sv/ngetty/run"
-install -Dm644 sample.Conf "$1/usr/share/ngetty/sample.Conf"
-install -Dm644 lsvt.1 "$1/usr/share/man/man1/lsvt.1"
-install -Dm644 ngetty.8 "$1/usr/share/man/man8/ngetty.8"
+install -Dm755 ngetty.run    "$1/etc/sv/ngetty/run"
+install -Dm644 sample.Conf   "$1/usr/share/ngetty/sample.Conf"
+install -Dm644 lsvt.1        "$1/usr/share/man/man1/lsvt.1"
+install -Dm644 ngetty.8      "$1/usr/share/man/man8/ngetty.8"
 
 # This sed file is not strictly necassary though
 # maybe it helps to avoid copy & paste errors.

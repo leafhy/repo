@@ -7,13 +7,13 @@ mv Modules/* cmake/modules/
 # which intern causes 'llvm' to fail building due to missing files.
 
 if [ -d ../cmake/Modules ]; then
-   for f in "$(pwd)/cmake/modules"/*; do
-      ln -s "$f" ../cmake/Modules
-   done
+    for f in "$(pwd)/cmake/modules"/*; do
+        ln -s "$f" ../cmake/Modules
+    done
 else
-   # Fix lifted from https://github.com/noirlinux/main/blob/master/extra/llvm/build
-   # Create a symbolic link to the expected folder
-   mkdir -p ../cmake && ln -s "$(pwd)/cmake/modules" ../cmake/Modules
+    # Fix lifted from https://github.com/noirlinux/main/blob/master/extra/llvm/build
+    # Create a symbolic link to the expected folder
+    mkdir -p ../cmake && ln -s "$(pwd)/cmake/modules" ../cmake/Modules
 fi
 
 # Remove ncurses dependency.

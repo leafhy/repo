@@ -13,7 +13,7 @@ cat <<EOF
 
 ###########################################
 
-NOTE: As there is no musl binary of 'Bitwarden CLI',
+NOTE: As there is no musl binary of 'Bitwarden CLI'
       it needs to be installed with nodejs.
 
 -> kiss build nodejs

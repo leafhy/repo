@@ -8,5 +8,5 @@ CXXFLAGS="-std=gnu++98"
 make
 make install
 
-# Remove empty man pages
-rm -r "$1/usr/share"
+# Remove empty man pages.
+rm -rf "$1/usr/share"

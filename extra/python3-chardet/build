@@ -2,5 +2,5 @@
 
 mkdir -p "$1/usr/lib/python3.11/site-packages"
 
-cp -R chardet "$1/usr/lib/python3.11/site-packages"
+cp -R chardet          "$1/usr/lib/python3.11/site-packages"
 cp -R chardet.egg-info "$1/usr/lib/python3.11/site-packages/chardet-5.2.0-py3.egg-info"
