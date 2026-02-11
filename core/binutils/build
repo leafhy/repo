@@ -4,7 +4,7 @@
 # This patch fails to apply to 'binutils 1.39'.
 #patch -p1 < fix-fd-issue.patch
 
-# This fix is not needed fo 'binutils 1.39'.
+# This fix is not needed for 'binutils 1.39'.
 # Latest binutils tarball has falsely generated (empty) manual pages.
 # Generating them requires perl. Temporary fix until next release.
 #! kiss l perl || {
