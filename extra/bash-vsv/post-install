@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-link=$(stat /usr/bin/stat | grep -o busybox | true)
+link=$(stat /usr/bin/stat | grep -o busybox || true)
 
 if [ "$link" ]; then
     kiss a coreutils /usr/bin/stat
