@@ -1,8 +1,10 @@
 #!/bin/sh -e
 
-sed -i \
+sed \
     -e "s/-O3 -march=native/$CFLAGS/" \
-    -e 's+/usr/local+/usr+' Makefile
+    -e 's+/usr/local+/usr+' Makefile > _
+
+mv -f _ Makefile
 
 make
 make install
