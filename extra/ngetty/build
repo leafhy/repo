@@ -24,7 +24,7 @@ install -Dm644 ngetty.8      "$1/usr/share/man/man8/ngetty.8"
 
 # This sed file is not strictly necassary though
 # maybe it helps to avoid copy & paste errors.
-tee "$1/etc/ngetty/Conf.sed" << EOF
+tee "$1/etc/ngetty/Conf.sed" <<EOF
 =environ=,TERM=linux
 tty1=noclear-first=/run/.ngetty-noclear-tty1
 EOF

@@ -1,7 +1,6 @@
 #!/bin/sh -e
 
-# The single quotes 'EOF' prevent eval from expanding.
-
+# The single quoted 'EOF' prevents eval from expanding.
 cat <<'EOF'
 
 ############################################################################################
