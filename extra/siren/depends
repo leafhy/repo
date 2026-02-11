@@ -1,7 +1,7 @@
 sndio
 ncurses
 ffmpeg
-flac
+flac make
 libvorbis
 libsndfile
 wavpack

@@ -6,7 +6,8 @@ sed -e "s+# DATA_FOLDER=data+DATA_FOLDER=/var/lib/vaultwarden/data+" \
     -e "s/# WEBSOCKET_ENABLED=false/WEBSOCKET_ENABLED=true/" \
     -e "s+# LOG_FILE=/path/to/log+LOG_FILE=/var/log/vaultwarden.log+" .env.template > _
 
-cargo clean && cargo build --features sqlite --release
+cargo clean
+cargo build --features sqlite --release
 
 install -Dm755 target/release/vaultwarden "$1/usr/bin/vaultwarden"
 install -Dm640 _                          "$1/etc/vaultwarden.conf"
