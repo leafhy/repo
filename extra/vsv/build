@@ -3,4 +3,4 @@
 cargo build --release
 
 install -Dm755 target/release/vsv "$1/usr/bin/vsv"
-install -Dm644 man/vsv.8 "$1/usr/share/man/man8/vsv.8"
+install -Dm644 man/vsv.8          "$1/usr/share/man/man8/vsv.8"

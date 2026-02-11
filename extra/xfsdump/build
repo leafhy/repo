@@ -1,18 +1,18 @@
 #!/bin/sh -e
 
 make \
-DEBUG=-DNDEBUG \
-LOCAL_CONFIGURE_OPTIONS="--prefix=/usr \
-                         --sbindir=/usr/bin \
-                         --enable-lib64=no \
-                         --disable-gettext"
+    DEBUG=-DNDEBUG \
+    LOCAL_CONFIGURE_OPTIONS="--prefix=/usr \
+                             --sbindir=/usr/bin \
+                             --enable-lib64=no \
+                             --disable-gettext"
 
 # Remove 'bash' dependency.
 sed -i 's/bash/sh/' install-sh
 
 make DESTDIR="$1" install
 
-# Fix broken '--sbindir'.
+# Fix broken --sbindir.
 mv "$1/sbin/"* "$1/usr/bin"
 rmdir "$1/sbin"
 

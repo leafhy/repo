@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-# Error: Unrecognized option --without-lzip.
-
 ./configure \
     --prefix=/usr \
     --with-openssl \

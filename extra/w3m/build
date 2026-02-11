@@ -16,7 +16,7 @@
 make
 make DESTDIR="$1" install
 
-# Remove docs.
+# Remove non-english docs.
 rm -rf \
     "$1/usr/share/man/de" \
     "$1/usr/share/man/ja" \
