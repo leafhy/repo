@@ -1,7 +1,9 @@
 #!/bin/sh -e
 
 ./configure \
-    --prefix=/usr
+    --prefix=/usr \
+    --without-readline \
+    --without-editline
 
 make \
     PARALLEL="-j$(nproc)" \
