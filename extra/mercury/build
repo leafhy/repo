@@ -3,7 +3,8 @@
 ./configure \
     --prefix=/usr \
     --without-readline \
-    --without-editline
+    --without-editline \
+    --enable-lto
 
 make \
     PARALLEL="-j$(nproc)" \
