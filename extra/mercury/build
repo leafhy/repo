@@ -13,11 +13,11 @@ make \
     install
 
 for bin in c2init canonical_grade mdb mdemangle mercury_compile mercury_config mfiltercc mfilterjavac mgnuc mkinit ml mmake mmc mtags; do
-    install -Dm755 "usr/bin/$bin" "$1/usr/bin/$bin"
+    install -D "usr/bin/$bin" "$1/usr/bin/$bin"
 done
 
 for man in c2init.1 mdb.1 mercury_config.1 mgnuc.1 ml.1 mmake.1 mmc.1 mtags.1; do
-    install -Dm644 "usr/share/man/man1/$man" "$1/usr/share/man/man1/$man"
+    install -D "usr/share/man/man1/$man" "$1/usr/share/man/man1/$man"
 done
 
 for grade in hlc.gc; do
