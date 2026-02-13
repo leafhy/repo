@@ -3,13 +3,13 @@
 # bower uses 'ln -L' (--logical) which busybox does not support.
 link=$(stat /usr/bin/ln | grep -o busybox || true)
 
-if [ "$link" ]; then
+if [ -z "$link" ]; then
     kiss a coreutils /usr/bin/ln
 fi
 
 make
 make man
 
-install -Dm 644 bower.conf.sample "$1/usr/share/bower/bower.conf"
-install -Dm 644 bower.1 "$1/usr/share/man/man1/bower.1"
-install -Dm 755 bower "$1/usr/bin/bower"
+install -Dm644 bower.conf.sample "$1/usr/share/bower/bower.conf"
+install -Dm644 bower.1 "$1/usr/share/man/man1/bower.1"
+install -Dm755 bower "$1/usr/bin/bower"
