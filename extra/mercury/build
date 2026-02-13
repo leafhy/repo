@@ -31,13 +31,13 @@ for dir in ints inc mdb mmake; do
     cp -R "usr/lib/mercury/$dir" "$1/usr/lib/mercury/$dir"
 done
 
-install -Dm644 -t "$1/usr/lib/mercury/conf" \
-                  usr/lib/mercury/conf/Mercury.config \
-                  usr/lib/mercury/conf/mercury_conf.h
+install -D -t "$1/usr/lib/mercury/conf" \
+              usr/lib/mercury/conf/Mercury.config \
+              usr/lib/mercury/conf/mercury_conf.h
 
-install -Dm644 -t "$1/usr/lib/mercury/lib" \
-                  usr/lib/mercury/lib/libgc.a
-                  usr/lib/mercury/lib/libgc.so
+install -D -t "$1/usr/lib/mercury/lib" \
+              usr/lib/mercury/lib/libgc.a
+              usr/lib/mercury/lib/libgc.so
 
 rm -rf \
     "$1/usr/lib/mercury/ints/hlc.gc.pregen" \
