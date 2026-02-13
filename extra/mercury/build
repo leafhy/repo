@@ -24,7 +24,7 @@ for grade in hlc.gc; do
     install -D -t "$1/usr/lib/mercury/lib/$grade"     usr/lib/mercury/lib/$grade/lib*.so
     install -D -t "$1/usr/lib/mercury/lib/$grade"     usr/lib/mercury/lib/$grade/lib*.a
     install -D -t "$1/usr/lib/mercury/modules/$grade" usr/lib/mercury/modules/$grade/*.init
-    cp -R "usr/lib/mercury/lib/$grade/inc" "$1/usr/lib/mercury/lib/$grade"
+    cp      -R -t "$1/usr/lib/mercury/lib/$grade"     usr/lib/mercury/lib/$grade/inc
 done
 
 for dir in ints inc mdb mmake; do
