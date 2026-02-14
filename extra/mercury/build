@@ -1,10 +1,11 @@
 #!/bin/sh -e
 
+# bower does not build if mercury is built with --enable-lto.
+
 ./configure \
     --prefix=/usr \
     --without-readline \
-    --without-editline \
-    --enable-lto
+    --without-editline
 
 make \
     PARALLEL="-j$(nproc)" \
