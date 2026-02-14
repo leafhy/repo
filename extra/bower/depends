@@ -1,6 +1,6 @@
-pandoc-bin
-coreutils
+coreutils make
 gpgme
-mercury
+mercury make
 ncurses
 notmuch
+pandoc-bin make
