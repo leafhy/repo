@@ -3,7 +3,7 @@
 # bower uses 'ln -L' (--logical) which busybox does not support.
 link=$(stat /usr/bin/ln | grep -o busybox || true)
 
-if [ -z "$link" ]; then
+if [ -n "$link" ]; then
     kiss a coreutils /usr/bin/ln
 fi
 
