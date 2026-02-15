@@ -42,6 +42,5 @@ install -D -t "$1/usr/lib/mercury/lib" \
               #usr/lib/mercury/lib/libgc.so
 
 # Remove debugger et.al.
-find "$1/usr/lib/mercury" -type f -name mdb.\*        -delete
-find "$1/usr/lib/mercury" -type d -name hlc.gc.pregen -delete
-
+find "$1/usr/lib/mercury" -type f -name mdb.\*        -exec rm  -f '{}' +
+find "$1/usr/lib/mercury" -type d -name hlc.gc.pregen -exec rm -rf '{}' +
