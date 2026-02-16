@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+export CFLAGS="$CFLAGS -static"
+
+./configure \
+    --prefix=/usr \
+    --localstatedir=/var/lib/locate \
+    --disable-nls \
+    --disable-rpath
+
+make
+make install

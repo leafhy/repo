@@ -9,5 +9,8 @@ export CFLAGS="$CFLAGS -static"
 make
 make install
 
-# Purge locale messages.
-rm -rf "$1/usr/share/locale"
+# Purge locale messages + remote magnetic tape server (rmt).
+rm -rf "$1/usr/share/locale" \
+       "$1/usr/libexec" \
+       "$1/usr/share/man/man8"
+
