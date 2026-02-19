@@ -1,0 +1,24 @@
+#!/bin/sh
+
+cat <<EOF
+
+###########################################
+
+NOTE: For local IPMI use the form.
+
+-> ipmiutil <option>
+
+NOTE: For remote IPMI use the form.
+
+-> ipmiutil <option> -N IP_ADDRESS -U USER_NAME -P PASSWORD
+
+NOTE: Example useage.
+
+-> Power down              : ipmiutil power -d
+-> Power Up                : ipmiutil power -u
+-> Show health of IPMI BMC : ipmiutil health
+-> Show Sensor Data Records: ipmiutil sensor
+
+###########################################
+
+EOF
