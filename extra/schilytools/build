@@ -4,8 +4,8 @@ make
 make install
 
 # Remove documentation (READMEs, etc).
-find "$1/opt/schily" -type f -name \*sccs\* -delete
-find "$1/opt/schily" -type f -name \*rmt\*  -delete
+find "$1" -type f -name \*sccs\* -delete
+find "$1" -type f -name \*rmt\*  -delete
 
 for man in admin cdc comb delta get help mountcd prs prt rmdel sact smt mt unget val what; do
     rm -f "$1/opt/schily/share/man/man1/$man.1"
@@ -16,11 +16,9 @@ for bin in calltree mt smt; do
 done
 
 rm -rf \
+    "$1/etc/default/rscsi" \
     "$1/opt/schily/ccs" \
     "$1/opt/schily/sbin" \
-    "$1/opt/schily/share/man/de" \
-    "$1/opt/schily/share/man/man3" \
-    "$1/opt/schily/share/man/man5" \
     "$1/opt/schily/share/doc/rscsi" \
     "$1/opt/schily/share/doc/rmt" \
     "$1/opt/schily/share/doc/star" \
@@ -28,4 +26,6 @@ rm -rf \
     "$1/opt/schily/share/doc/bosh" \
     "$1/opt/schily/share/doc/cdda2wav" \
     "$1/opt/schily/share/doc/libparanoia" \
-    "$1/opt/schily/share/man/man5/changeset.5"
+    "$1/opt/schily/share/man/de" \
+    "$1/opt/schily/share/man/man3" \
+    "$1/opt/schily/share/man/man5"
