@@ -218,8 +218,8 @@ sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
 \
         tar="$(\
             command -v \/opt\/schily\/bin\/tar ||\
-            command -v gtar                    ||\
-            command -v bsdtar\
+            command -v bsdtar                  ||\
+            command -v gtar
         )" || end "->" "ERROR" "No suitable" "(lz, zst)" "tar program found (gtar, libarchive, schilytools)"\
     fi\
 \
