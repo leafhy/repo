@@ -200,7 +200,7 @@ sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
     #     : schilytools & GNU tar created lz, zst tarballs\
     #       are pipeable to busybox tar.\
     #     : schilytools tar created lz tarball is compatible with tarlz.\
-    if [ "$KISS_COMPRESS" = "lz" ] || [ "$KISS_COMPRESS" = "zst" ]\; then\
+    if [ "$KISS_COMPRESS" = lz ] || [ "$KISS_COMPRESS" = zst ]\; then\
        msg() {\
           c1='\''\\'033[1\;33m\''\
           c2='\''\\'033[1\;31m\''\
