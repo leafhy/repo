@@ -216,7 +216,7 @@ sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
           exit 1\
        }\
 \
-       ! [ -x "\/opt\/schily\/bin\/tar" ] && end "->" "ERROR" "Install" "schilytools" "to use (lz, zst) compression."\
+       ! [ -L "\/opt\/schily\/bin\/tar" ] && end "->" "ERROR" "Install" "schilytools" "to use (lz, zst) compression."\
          tar=\/opt\/schily\/bin\/tar\
     fi\
 \
