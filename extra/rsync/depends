@@ -1,5 +1,4 @@
 zlib make
 popt
 xxhash
-lz4
 zstd
