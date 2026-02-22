@@ -8,6 +8,7 @@ export CFLAGS="$CFLAGS -static"
 
 ./configure \
     --prefix=/usr \
+    --disable-lz4 \
     --without-included-popt \
     --without-included-zlib
 
