@@ -1,5 +1,4 @@
 cmake  make
-libedit
 python3 make
 zlib
 zstd
