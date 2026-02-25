@@ -1,8 +1,11 @@
 #!/bin/sh -e
 
-./configure      \
+./configure \
     --prefix=/usr \
-    --with-mini-gmp
+    --sbindir=/usr/bin \
+    --with-mini-gmp \
+    --with-cli=readline \
+    --disable-debug
 
 make
 make install
