@@ -1,6 +1,9 @@
 #!/bin/sh -e
 
+# Building xfsdump statically requires
+# the double hyphen --static.
 make \
+    LDFLAGS=--static \
     DEBUG=-DNDEBUG \
     LOCAL_CONFIGURE_OPTIONS="--prefix=/usr \
                              --sbindir=/usr/bin \

@@ -10,6 +10,9 @@ mv -f _ install-sh
 
 chmod +x install-sh
 
+# To build binaries statically the
+# shared libraries also need to be built.
+# --enable-static & --enable-shared (is the default).
 ./configure \
     --prefix=/usr \
     --sbindir=/usr/bin \
@@ -28,10 +31,15 @@ make \
 install \
 install-dev
 
-# Remove docs.
-rm -rf \
+# Remove documentation (README, crontab & such).
+echo rm -rf \
     "$1/usr/lib/xfsprogs" \
     "$1/usr/share/doc" \
     "$1/usr/share/man/man2" \
-    "$1/usr/share/man/man3" \
+    "$1/usr/share/man/man3"
+
+# Remove libhandle.so's as xfsdump will
+# be built statically with libhandle.a.
+rm -f \
+    "$1/usr/lib/"libhandle.so* \
     "$1/usr/share/man/man5/"proj*.5
