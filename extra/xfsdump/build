@@ -19,5 +19,5 @@ make DESTDIR="$1" install
 mv "$1/sbin/"* "$1/usr/bin"
 rmdir "$1/sbin"
 
-# Remove README.
-rm -r "$1/usr/share/doc"
+# Remove documentaion (README's & such).
+rm -rf "$1/usr/share/doc"
