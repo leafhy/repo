@@ -32,7 +32,7 @@ install \
 install-dev
 
 # Remove documentation (README, crontab & such).
-echo rm -rf \
+rm -rf \
     "$1/usr/lib/xfsprogs" \
     "$1/usr/share/doc" \
     "$1/usr/share/man/man2" \
