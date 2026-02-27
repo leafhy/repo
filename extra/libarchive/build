@@ -1,0 +1,23 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --enable-static \
+    --disable-shared \
+    --disable-rpath \
+    --enable-acl \
+    --enable-xattr \
+    --without-xml2 \
+    --without-expat \
+    --without-openssl \
+    --without-nettle \
+    --disable-dependency-tracking
+
+# To build bsdtar statically requires the use of --all-static
+# as the configure option --enable-bsdtar=static et.al is broken.
+make LDFLAGS=-all-static
+make install
+
+rm -rf \
+    "$1/usr/share/man/man3" \
+    "$1/usr/share/man/man5"
