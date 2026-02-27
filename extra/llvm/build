@@ -2,7 +2,7 @@
 
 mv Modules/* cmake/modules/
 
-# Using CFLAGS="-pipe" causes 'cmake' & 'llvm' to use the same build folder,
+# Using CFLAGS='-pipe' causes 'cmake' & 'llvm' to use the same build folder,
 # thus causing the resultant link to become '../cmake/Modules/modules'.
 # which intern causes 'llvm' to fail building due to missing files.
 
