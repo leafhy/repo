@@ -2,7 +2,7 @@
 
 ./configure \
     --prefix=/usr \
-    --libexecdir=/usr/lib/mc \
+    --libexecdir=/usr/lib \
     --with-screen=ncurses \
     --disable-rpath \
     --disable-nls
