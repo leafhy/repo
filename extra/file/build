@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --enable-static \
+    --enable-shared \
+    --datadir=/usr/share/file
+
+make
+make install
+
+# Remove documentation.
+rm -rf \
+    "$1/usr/share/man/man3" \
+    "$1/usr/share/man/man4" \
+    "$1/usr/share/man/man5"
+
