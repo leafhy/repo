@@ -231,7 +231,8 @@ if [[ -f $file ]]; then
 fi
 
 # Remove unneeded directories + broken symbolic link.
-[[ -d /mnt/usr/local ]] && rm -r /mnt/usr/local
+[[ -d /mnt/usr/local ]] && rm -rf /mnt/usr/local
+[[ -d /mnt/usr/share/licenses ]] && rm -rf /mnt/usr/share/licenses
 
 if [[ ! -f /mnt/etc/fstab.orig && -f /mnt/etc/fstab ]]; then
    cp /mnt/etc/fstab /mnt/etc/fstab.orig
