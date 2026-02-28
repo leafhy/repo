@@ -5,6 +5,7 @@ export CFLAGS="$CFLAGS -static"
 ./configure \
     --prefix=/usr \
     --localstatedir=/var/lib/locate \
+    --libexecdir=/usr/share/lib/find \
     --disable-nls \
     --disable-rpath
 

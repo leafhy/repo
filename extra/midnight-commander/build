@@ -2,9 +2,12 @@
 
 ./configure \
     --prefix=/usr \
+    --libexecdir=/usr/lib/mc \
     --with-screen=ncurses \
     --disable-rpath \
     --disable-nls
 
 make
 make install
+
+rm -f "$/usr/lib/mc/*.csh"
