@@ -1,0 +1,18 @@
+#!/bin/sh -e
+
+export CFLAGS="$CFLAGS -static"
+
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --libexec=/usr/lib/awk
+
+make
+make DESTDIR="$1" install
+
+# Remove documentation et.al.
+rm -rf \
+    "$1/usr/share/info" \
+    "$1/usr/share/locale" \
+    "$1/usr/share/man/man3" \
+    "$1/etc/profile.d/gawk.csh"
