@@ -9,7 +9,7 @@ sed -i 's/07177/07022/' ngetty-helper.c
 # Delete umask so 'Conf' is created with permissions 644.
 sed -i '/umask\s077/d' contrib/setup
 
-make LDFLAGS="-static"
+make LDFLAGS=-static
 
 # The binaries nwho, cleanutmp & dumputmp are
 # not installed as musl does not support utmp.
