@@ -14,7 +14,7 @@
     --disable-dependency-tracking
 
 # To build bsdtar statically requires the use of --all-static
-# as the configure option --enable-bsdtar=static et.al is broken.
+# as the configure option --enable-bsdtar=static is broken.
 make LDFLAGS=-all-static
 make install
 

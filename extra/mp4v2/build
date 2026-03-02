@@ -1,12 +1,12 @@
 #!/bin/sh -e
 
-CXXFLAGS="-std=gnu++98"
+CXXFLAGS=-std=gnu++98
 
 ./configure \
     --prefix=/usr
 
-make
+make LDFLAGS=-all-static
 make install
 
-# Remove empty man pages.
+# Remove empty man-pages.
 rm -rf "$1/usr/share"

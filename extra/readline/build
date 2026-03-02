@@ -12,8 +12,8 @@
 make SHLIB_LIBS=-lncursesw
 make DESTDIR="$1" install
 
-# Remove documentation.
+# Remove the empty bin folder & documentation.
 rm -rf \
+    "$1/usr/bin" \
     "$1/usr/share/doc" \
-    "$1/usr/share/info" \
-    "$1/usr/bin"
+    "$1/usr/share/info"
