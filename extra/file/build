@@ -4,7 +4,14 @@
     --prefix=/usr \
     --enable-static \
     --enable-shared \
-    --datadir=/usr/share/file
+    --disable-zlib \
+    --disable-bzlib \
+    --disable-xzlib \
+    --disable-zstdlib \
+    --disable-lzlib \
+    --disable-lrziplib \
+    --datadir=/usr/share/file \
+    --disable-dependency-tracking
 
 make
 make install
