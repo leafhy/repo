@@ -365,24 +365,24 @@ if [[ $opt = EFI && ! -f /mnt/efiboot.sh ]]; then
 #       Removal of invalid entry can be achieved by resetting UEFI/BIOS to defaults or by using
 #       'efibootmgr' supplied with systemrescue.
 
-# IMPORTANT: 'efilabel' has a (26) character limit. Exceeding this limit will truncate the UEFI entry.
-#          : Options supplied to the kernel will be truncated if there not quoted.
+# WARNING: 'efilabel' has a (26) character limit. Exceeding this limit will truncate the UEFI entry.
+#        : Options supplied to the kernel will be truncated if there not quoted.
 
-# NOTE: Kernel log levels.
-#       loglevel="0" -> penguins disabled
-#       loglevel="1" -> penguins disabled
-#       loglevel="2" -> penguins disabled
-#       loglevel="3" -> penguins disabled
-#       loglevel="4" -> penguins disabled
-#       loglevel="5" -> penguins enabled
-#       loglevel="6" -> penguins enabled
-#       loglevel="7" -> penguins enabled
-#       loglevel=""  -> defaults to 7
+# NOTE: Show options passed to kernel
+#       -> cat /proc/cmdline
 
-# NOTE: Use 'setlogcons' to redirect kernel messages to console or tty.
-#     : 'setlogcons' can redirect loglevel=[5-7].
-#        Show options passed to kernel
-#     -> cat /proc/cmdline
+# Kernel log levels.
+#    loglevel="0" -> penguins disabled
+#    loglevel="1" -> penguins disabled
+#    loglevel="2" -> penguins disabled
+#    loglevel="3" -> penguins disabled
+#    loglevel="4" -> penguins disabled
+#    loglevel="5" -> penguins enabled
+#    loglevel="6" -> penguins enabled
+#    loglevel="7" -> penguins enabled
+#    loglevel=""  -> defaults to 7
+
+# NOTE: Use 'setlogcons' to redirect loglevel=[5-7] to console or tty.
 
 device=$device
 efilabel=$efilabel
