@@ -12,14 +12,13 @@ NOTE: Useage examples.
 -> aplay -D plughw:CARD=2 file.wav
 -> speaker-test -D plughw:CARD=2 -c2
 
-NOTE: To negate the need for providing
-      sound card manually add this to
-      '~/.asoundrc'
+NOTE: To set a default sound card add
+      this to '~/.asoundrc'.
 
-# ------ BEGIN ------ #
-defaults.pcm.card 2
-defaults.ctl.card 2
-# ------- END ------- #
+    # ------ BEGIN ------ #
+      defaults.pcm.card 2
+      defaults.ctl.card 2
+    # ------- END ------- #
 
 ################################
 
