@@ -6,3 +6,6 @@
 
 make
 make DESTDIR="$1" install
+
+install -Dm644 doc/asoundrc.txt "$1/usr/share/doc/alsa-lib/asoundrc.txt"
+

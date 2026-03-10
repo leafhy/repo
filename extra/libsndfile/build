@@ -1,13 +1,22 @@
 #!/bin/sh -e
 
+#    --enable-mpeg          ( lame & mpg123 )
+#    --enable-external-libs ( flac, ogg, opus & vorbis )
+
 ./configure \
     --prefix=/usr \
-    --disable-static
+    --enable-shared \
+    --disable-static \
+    --disable-sqlite \
+    --enable-alsa \
+    --disable-mpeg \
+    --disable-external-libs \
+    --disable-dependency-tracking
 
 make
 make \
     install \
     install-man
 
-# Purge html docs.
+# Remove html documentation.
 rm -rf "$1/usr/share/doc"
