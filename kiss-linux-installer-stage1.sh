@@ -114,7 +114,6 @@ fi
 if [[ $UEFI ]]; then
   PS3="Select partition type or ABORT: "
   select opt in EFI MBR ABORT; do
-
     if [[ $opt = "" ]]; then
       echo "try again"
       continue
@@ -126,7 +125,6 @@ fi
 if [[ -z $UEFI ]]; then
   PS3="Select partition type or ABORT: "
   select opt in MBR ABORT; do
-
     if [[ $opt = "" ]]; then
       echo "try again"
       continue
@@ -383,7 +381,8 @@ if [[ $opt = EFI && ! -f /mnt/efiboot.sh ]]; then
 
 # NOTE: Use 'setlogcons' to redirect kernel messages to console or tty.
 #     : 'setlogcons' can redirect loglevel=[5-7].
-#     : Show options passed to kernel -> "cat /proc/cmdline"
+#        Show options passed to kernel
+#     -> cat /proc/cmdline
 
 device=$device
 efilabel=$efilabel
@@ -423,13 +422,13 @@ echo "#####################"
 echo "#### FINAL STEPS ####"
 echo "#####################"
 echo "### Copy stage2 installer to /mnt"
-echo "cp kiss-linux-installer-stage2.sh /mnt"
+echo "->  cp kiss-linux-installer-stage2.sh /mnt"
 echo ''
 echo "### Enter chroot"
-echo "/mnt/bin/kiss-chroot /mnt"
+echo "->  /mnt/bin/kiss-chroot /mnt"
 echo ''
 echo "### Run stage2 installer"
-echo "./kiss-linux-installer-stage2.sh"
+echo "->  ./kiss-linux-installer-stage2.sh"
 echo "#####################"
 echo '++ EOF ++'
 
