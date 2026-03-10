@@ -114,9 +114,13 @@ fi
 if [[ $UEFI ]]; then
   PS3="Select partition type or ABORT: "
   select opt in EFI MBR ABORT; do
-    if [[ $opt = "" ]]; then
-      echo "try again"
-      continue
+    if [[ $opt != EFI ]]; then
+      if [[ $opt != MBR ]]; then
+        if [[ $opt != ABORT ]]; then
+          echo "try again"
+          continue
+        fi
+      fi
     fi
     break
   done
@@ -125,9 +129,11 @@ fi
 if [[ -z $UEFI ]]; then
   PS3="Select partition type or ABORT: "
   select opt in MBR ABORT; do
-    if [[ $opt = "" ]]; then
-      echo "try again"
-      continue
+    if [[ $opt != MBR ]]; then
+      if [[ $opt != ABORT ]]; then
+        echo "try again"
+        continue
+      fi
     fi
     break
   done
