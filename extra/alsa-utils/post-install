@@ -4,7 +4,7 @@ cat <<EOF
 
 ################################
 
-NOTE: 'aplay' requires 'mdev{d}'
+NOTE: 'aplay' requires mdev/mdevd
       to list USB sound cards.
 
 NOTE: Useage examples.
