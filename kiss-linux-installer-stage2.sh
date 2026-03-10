@@ -18,37 +18,33 @@ tmpfileC="$(printf 'mkstemp(/tmp/tmp.XXXXXX)' | m4)"
 trap 'rm "$tmpfileA" "$tmpfileB" "$tmpfileC"; printf "\n"; trap - EXIT; exit' EXIT INT
 
 while true; do
-read -p "Create user now? [yes/no]: "  ans
-case "$ans" in
+  read -p "Create user now? [yes/no]: " ans
+    case "$ans" in
 
-[Yy][Ee][Ss] )
+      [Yy][Ee][Ss] )
+        if [ -z "$username" ]; then
+          printf '\033[31;1m[  ERROR: Missing username.  ]\033[m'
+          exit 1
+        fi
 
-if [ -z "$username" ]; then
-   printf '\033[31;1m[  ERROR: Missing username.  ]\033[m'
-   exit 1
-fi
+        user="$(getent passwd | cut -d: -f1 | grep $username || :)"
+        #user="$(getent passwd 1000 | cut -d: -f1)"
 
-user="$(getent passwd | cut -d: -f1 | grep $username || :)"
-#user="$(getent passwd 1000 | cut -d: -f1)"
+        if [ -z "$user" ]; then
+          adduser "$username"
 
-if [ -z "$user" ]; then
-   adduser "$username"
+          for g in wheel audio; do
+            addgroup "$username" "$g"
+          done
 
-   for g in wheel audio; do
-      addgroup "$username" "$g"
-   done
+          # Create needed directories.
+          # Note: 'siren' does not create '.config'.
+          mkdir "$home/.config" "$home/src"
+          chown -R 1000:1000 "$home"
+        fi
 
-   # Create needed directories.
-   # Note: 'siren' does not create '.config'.
-   mkdir \
-       "$home/.config" \
-       "$home/src"
-
-   chown -R 1000:1000 "$home"
-fi
-
-if [ -d "$home" ] && [ ! -f "$home/.profile" ]; then
-tee $home/.profile << EOF >/dev/null
+        if [ -d "$home" ] && [ ! -f "$home/.profile" ]; then
+          tee $home/.profile << EOF >/dev/null
 export KISS_DEBUG="0"
 export KISS_SU="ssu"
 export KISS_COMPRESS="zst"
@@ -61,21 +57,17 @@ export KISSREPO="$kissrepo"
 export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
 alias ls="ls --color=auto"
 EOF
-chown 1000:1000 "$home/.profile"
-fi
+          chown 1000:1000 "$home/.profile"
+        fi
+        break;;
 
-break;;
+      [Nn][Oo] )
+        printf '\033[92;1m[  INFO: No user added, continuing...  ]\033[m\n'
+        sleep 1
+        break;;
 
-[Nn][Oo] )
-
-   printf '\033[92;1m[  INFO: No user added, continuing...  ]\033[m\n'
-   sleep 1
-
-break;;
-
-*) echo retry;;
-
-esac
+      *) echo retry;;
+    esac
 done
 
 source /root/.profile
@@ -116,18 +108,18 @@ source /root/.profile
 
 # Fix git dubious permissions.
 if [ ! -f /root/.gitconfig ]; then
-   git config --global --add safe.directory "$kissrepo/repo"
+  git config --global --add safe.directory "$kissrepo/repo"
 
 for pkg in "$kissrepo/repo/extra/"*; do
-   url="$(grep git+ $pkg/sources | grep -v '#')" && url="$url"
-   [ "$url" ] && git config --global --add safe.directory $(echo $kiss_cache/sources/$(basename $pkg)/$(basename $url))
+  url="$(grep git+ $pkg/sources | grep -v '#')" && url="$url"
+  [ "$url" ] && git config --global --add safe.directory $(echo $kiss_cache/sources/$(basename $pkg)/$(basename $url))
 done
 
 fi
 
 if [ -d "$home" ] && [ ! -f "$home/.gitconfig" ]; then
-   cp /root/.gitconfig "$home"
-   chown 1000:1000 "$home/.gitconfig"
+  cp /root/.gitconfig "$home"
+  chown 1000:1000 "$home/.gitconfig"
 fi
 
 # ----------------- #
@@ -149,51 +141,51 @@ fi
 #                   -> new checksum 'e8549203a55bef2cf7c900814e7c9c694beebe0178e42d82a0a873bf8baea522'
 
 if [ "$kiss_cache" ] && [ ! -f "/usr/bin/kiss.orig" ]; then
-   # Update package manager.
-   kiss download kiss
-   docschksum="$(sha256sum $kiss_cache/sources/kiss/docs/f0525d4e00c5e07138ac2ceb53936d0b221608e7.tar.gz)"
+  # Update package manager.
+  kiss download kiss
+  docschksum="$(sha256sum $kiss_cache/sources/kiss/docs/f0525d4e00c5e07138ac2ceb53936d0b221608e7.tar.gz)"
 
-   if [ "${docschksum%% *}" != "e8549203a55bef2cf7c900814e7c9c694beebe0178e42d82a0a873bf8baea522" ] && [ "${docschksum%% *}" != "efca06d0a52037c732007f33f99cd368a836b5f9fec3ae314cfd73182f337c01" ]; then
-      printf '\033[31;1m[  FATAL: Aborting...kiss docs checksum mismatch.  ]\033[m\n'
-      exit 1
-   fi
+  if [ "${docschksum%% *}" != "e8549203a55bef2cf7c900814e7c9c694beebe0178e42d82a0a873bf8baea522" ] && [ "${docschksum%% *}" != "efca06d0a52037c732007f33f99cd368a836b5f9fec3ae314cfd73182f337c01" ]; then
+    printf '\033[31;1m[  FATAL: Aborting...kiss docs checksum mismatch.  ]\033[m\n'
+    exit 1
+  fi
 
-   kiss update
-   cp /usr/bin/kiss /usr/bin/kiss.orig
+  kiss update
+  cp /usr/bin/kiss /usr/bin/kiss.orig
 fi
 
 if [ ! -f "/usr/bin/kiss" ] && [ -f "/usr/bin/kiss.orig" ]; then
-   cp /usr/bin/kiss.orig /usr/bin/kiss
+  cp /usr/bin/kiss.orig /usr/bin/kiss
 fi
 
 kisssumA=$(sha256sum /usr/bin/kiss)
 kisssumB=$(sha256sum /usr/bin/kiss.orig)
 
 if [ "${kisssumA%% *}" = "${kisssumB%% *}" ] && [ "$kiss_cache" ]; then
-# Change cache location to one more apt for Single User
-# and fix log permissions so builds don't fail.
-sed '/# SOFTWARE./a\
+  # Change cache location to one more apt for Single User
+  # and fix log permissions so builds don't fail.
+  sed '/# SOFTWARE./a\
 \
 kiss_cache="/var/db/kiss/cache"\
 \
 if [ "$(id -u)" != 0 ]; then\
-   ssu chown -R 1000:1000 "$kiss_cache/logs"\
+    ssu chown -R 1000:1000 "$kiss_cache/logs"\
 fi' /usr/bin/kiss > _
-mv -f _ /usr/bin/kiss
+  mv -f _ /usr/bin/kiss
 
-sed 's/cac_dir=/#cac_dir=/g' /usr/bin/kiss > _
-mv -f _ /usr/bin/kiss
+  sed 's/cac_dir=/#cac_dir=/g' /usr/bin/kiss > _
+  mv -f _ /usr/bin/kiss
 
-sed '/Top-level cache/a\
+  sed '/Top-level cache/a\
 \ \ \ \ cac_dir=\$kiss_cache' /usr/bin/kiss > _
-mv -f _ /usr/bin/kiss
+  mv -f _ /usr/bin/kiss
 
-# Add extra tar command for when busybox tar
-# is inadequate.
-sed 's/tar cf/\$tar cf/' /usr/bin/kiss > _
-mv -f _ /usr/bin/kiss
+  # Add extra tar command for when busybox tar
+  # is inadequate.
+  sed 's/tar cf/\$tar cf/' /usr/bin/kiss > _
+  mv -f _ /usr/bin/kiss
 
-sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
+  sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
 \
     # Set the prefered tar command to use for creating lz, zst tarballs.\
     # NOTE: busybox tar can create broken lz, zst tarballs.\
@@ -224,9 +216,8 @@ sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
     fi\
 \
     tar="${tar:-tar}"' /usr/bin/kiss > _
-mv -f _ /usr/bin/kiss
-
-chmod +x /usr/bin/kiss
+  mv -f _ /usr/bin/kiss
+  chmod +x /usr/bin/kiss
 fi
 
 # List repository packages + those that are installed.
@@ -234,66 +225,65 @@ kiss search \*
 
 # Make sure all 'repo' pkgs + dependencies are downloaded.
 for d in core extra; do
-   find "$kissrepo/repo/$d" -maxdepth 1 -type d -print0 | xargs -0 -n1 basename | sed "s/^$d$//" >> $tmpfileA
+  find "$kissrepo/repo/$d" -maxdepth 1 -type d -print0 | xargs -0 -n1 basename | sed "s/^$d$//" >> $tmpfileA
 done
 
 find "$kissrepo/repo/extra" -name depends -print0 | xargs -0 sed 's/[[:space:]]\{1,\}/\n/' | sed 's/ //g' >> $tmpfileA
 
 for pkg in $(sort $tmpfileA | uniq); do
-   kiss download "$pkg" || printf '%s\n' "$pkg" >> _PKG-DOWNLOAD-FAILURE.log
+  kiss download "$pkg" || printf '%s\n' "$pkg" >> _PKG-DOWNLOAD-FAILURE.log
 done
 
 #kiss download $(ls "$kissrepo/repo/core" ; ls "$kissrepo/repo/extra")
 
 if [ -z "$kiss_cache" ]; then
-   cd "$kissrepo/installed" && kiss build *
+  cd "$kissrepo/installed" && kiss build *
 fi
 
 line
 
 # Install requisite packages.
 for pkg in baseinit baselayout ssu efibootmgr intel-ucode tamsyn-font iproute2 zstd util-linux nasm popt; do
-   [ -d "$kissrepo/installed/$pkg" ] && installed="$(cat $kissrepo/installed/$pkg/version)"
-   [ -d "$kissrepo/repo/core/$pkg" ] && repo="$(cat $kissrepo/repo/core/$pkg/version)"
-   [ -d "$kissrepo/repo/extra/$pkg" ] && repo="$(cat $kissrepo/repo/extra/$pkg/version)"
+  [ -d "$kissrepo/installed/$pkg" ] && installed="$(cat $kissrepo/installed/$pkg/version)"
+  [ -d "$kissrepo/repo/core/$pkg" ] && repo="$(cat $kissrepo/repo/core/$pkg/version)"
+  [ -d "$kissrepo/repo/extra/$pkg" ] && repo="$(cat $kissrepo/repo/extra/$pkg/version)"
 
-if [ "$installed" != "$repo" ]; then
-   printf '%s\n' "$pkg" >> $tmpfileB
-   # Get list of required deps.
-   for d in core extra; do
+  if [ "$installed" != "$repo" ]; then
+    printf '%s\n' "$pkg" >> $tmpfileB
+    # Get list of required deps.
+    for d in core extra; do
       [ -f "$kissrepo/repo/$d/$pkg/depends" ] && cat "$kissrepo/repo/$d/$pkg/depends" | sed 's/[[:space:]]\{1,\}/\n/' | sed 's/ //g' >> $tmpfileC
-   done
-fi
-
+    done
+  fi
 done
 
 if [ -f _PKG-DOWNLOAD-FAILURE.log ]; then
-   printf '\033[31;1m[  ERROR: Failed to download package.  ]\033[m\n'
-   for f in $(cat _PKG-DOWNLOAD-FAILURE.log); do
-      printf '%s\n' "=> $f"
-   done
+  printf '\033[31;1m[  ERROR: Failed to download package.  ]\033[m\n'
+  for f in $(cat _PKG-DOWNLOAD-FAILURE.log); do
+    printf '%s\n' "=> $f"
+  done
 
-      line
+  line
 
-   if [ -s "$tmpfileB" ]; then
-      for p in $(sort $tmpfileB $tmpfileC | uniq); do
-         grep -qw "$p" _PKG-DOWNLOAD-FAILURE.log &&
-         [ ! -d "$kissrepo/installed/$p" ] && printf '%s\n' "$p" >> _REQ-PKG-NOT-FOUND.log
-      done
-   fi
+  if [ -s "$tmpfileB" ]; then
+    for p in $(sort $tmpfileB $tmpfileC | uniq); do
+      grep -qw "$p" _PKG-DOWNLOAD-FAILURE.log &&
+      [ ! -d "$kissrepo/installed/$p" ] && printf '%s\n' "$p" >> _REQ-PKG-NOT-FOUND.log
+    done
+  fi
 
 else
-   # Update other pkgs.
-   kiss update
+  # Update other pkgs.
+  kiss update
 fi
 
 if [ -f _REQ-PKG-NOT-FOUND.log ]; then
-   printf '\033[31;1m[  FATAL: Aborting...Required package not found.  ]\033[m\n'
-      for pk in $(cat _REQ-PKG-NOT-FOUND.log); do
-         printf '%s\n' "=> $pk"
-      done
-   line
-   exit 1
+  printf '\033[31;1m[  FATAL: Aborting...Required package not found.  ]\033[m\n'
+  for pk in $(cat _REQ-PKG-NOT-FOUND.log); do
+    printf '%s\n' "=> $pk"
+  done
+  line
+  exit 1
 fi
 
 # NOTE: 'util-linux' -> 'blkid' supports PARTUUID which is required to use 'efiboot.sh'.
@@ -304,48 +294,47 @@ bbbin="$(printf '%s' "$bbver" | sed 's/\ /-/')"
 bbsrc="$(basename $(head -n1 $kissrepo/repo/core/busybox/sources) | sed "s/MAJOR_MINOR_PATCH/$bbfix/")"
 
 if [ -f "$kiss_cache/sources/busybox/$bbsrc" ] && [ ! -f "$kiss_cache/bin/busybox@$bbbin.tar.gz" ]; then
-   # Re-build 'busybox' without 'blkid' so as to avoid swapping to 'util-linux'.
-   kiss build busybox
+  # Re-build 'busybox' without 'blkid' so as to avoid swapping to 'util-linux'.
+  kiss build busybox
 fi
 
 # Re-build pkgs due to updated files.
 for pk in flex xz m4 make bzip2 git; do
-   grep -q "$pk" _PKG-DOWNLOAD-FAILURE.log >/dev/null 2>&1 || pg="$pg $pk"
+  grep -q "$pk" _PKG-DOWNLOAD-FAILURE.log >/dev/null 2>&1 || pg="$pg $pk"
 done
 
 [ -s "$tmpfileB" ] && kiss build $pg $(cat $tmpfileB)
-
 [ -d "$kiss_cache" ] && chown -R 1000:1000 "$kiss_cache"
 
 if [ "$kver" ] && [ ! -f "$kissrepo/src/linux-$kver.tar.xz" ]; then
-   printf "\033[92;1m[  INFO: Downloading -> $kernel...  ]\033[m\n"
-   curl -fL $kernel -o "$kissrepo/src/linux-$kver.tar.xz"
+  printf "\033[92;1m[  INFO: Downloading -> $kernel...  ]\033[m\n"
+  curl -fL $kernel -o "$kissrepo/src/linux-$kver.tar.xz"
 fi
 
 if [ -f "$kissrepo/src/linux-$kver.tar.xz" ] && [ ! -d "$kissrepo/src/linux-$kver" ]; then
-   printf "\033[92;1m[  INFO: Extracting -> linux-$kver...  ]\033[m\n"
-   tar xf "$kissrepo/src/linux-$kver.tar.xz" -C "$kissrepo/src"
-   cp "$kissrepo/repo/linux-kernel-$kver.config" "$kissrepo/src/linux-$kver/.config"
-   cd "$kissrepo/src/linux-$kver"
+  printf "\033[92;1m[  INFO: Extracting -> linux-$kver...  ]\033[m\n"
+  tar xf "$kissrepo/src/linux-$kver.tar.xz" -C "$kissrepo/src"
+  cp "$kissrepo/repo/linux-kernel-$kver.config" "$kissrepo/src/linux-$kver/.config"
+  cd "$kissrepo/src/linux-$kver"
 
-   sed '/<stdlib.h>/a #include <linux/stddef.h>' tools/objtool/arch/x86/decode.c > _
-   mv -f _ tools/objtool/arch/x86/decode.c
+  sed '/<stdlib.h>/a #include <linux/stddef.h>' tools/objtool/arch/x86/decode.c > _
+  mv -f _ tools/objtool/arch/x86/decode.c
 
-   [ -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ] && \
-   patch -p1 < /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch
+  [ -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ] && \
+  patch -p1 < /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch
 
-   [ -f /usr/share/doc/kiss/wiki/kernel/no-perl.patch ] && \
-   patch -p1 < /usr/share/doc/kiss/wiki/kernel/no-perl.patch
+  [ -f /usr/share/doc/kiss/wiki/kernel/no-perl.patch ] && \
+  patch -p1 < /usr/share/doc/kiss/wiki/kernel/no-perl.patch
 fi
 
 if [ "$lver" ] && [ ! -f "$kissrepo/src/$lver.tar.xz" ]; then
-   printf "\033[92;1m[  INFO: Downloading -> $linuxfirmware...  ]\033[m\n"
-   curl -fL $linuxfirmware -o "$kissrepo/src/$lver.tar.xz"
-   tar xf "$kissrepo/src/$lver.tar.xz"
-   mkdir -p /usr/lib/firmware
-   cp -R linux-firmware/intel /usr/lib/firmware
-   # git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
-   # cp -R linux-firmware.git/intel /usr/lib/firmware
+  printf "\033[92;1m[  INFO: Downloading -> $linuxfirmware...  ]\033[m\n"
+  curl -fL $linuxfirmware -o "$kissrepo/src/$lver.tar.xz"
+  tar xf "$kissrepo/src/$lver.tar.xz"
+  mkdir -p /usr/lib/firmware
+  cp -R linux-firmware/intel /usr/lib/firmware
+  # git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
+  # cp -R linux-firmware.git/intel /usr/lib/firmware
 fi
 
 echo "#####################"

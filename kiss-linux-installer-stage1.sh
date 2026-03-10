@@ -42,39 +42,39 @@ zram="$kiss_cache/proc"
 checksum=3f4ebe1c6ade01fff1230638d37dea942c28ef85969b84d6787d90a9db6a5bf5
 
 if mountpoint -q /mnt; then
-   echo -e "\e[1;31m[  ERROR: /mnt is already mounted.  ]\e[0m"
-   exit 1
+  echo -e "\e[1;31m[  ERROR: /mnt is already mounted.  ]\e[0m"
+  exit 1
 fi
 
 if ! [[ -f $file ]]; then
-   read -p "Do you want to download $file? [yes/No]: "
-      if [[ $REPLY =~ ^([Yy][Ee][Ss])$ ]]; then
-         echo -e "\e[1;92m[  INFO: Downloading fallback -> $file...  ]\e[0m"
-         wget "$url/$file" || curl -fLO "$url/$file"
-         echo '--------------------------------------------'
-      fi
+  read -p "Do you want to download $file? [yes/No]: "
+    if [[ $REPLY =~ ^([Yy][Ee][Ss])$ ]]; then
+      echo -e "\e[1;92m[  INFO: Downloading fallback -> $file...  ]\e[0m"
+      wget "$url/$file" || curl -fLO "$url/$file"
+      echo '--------------------------------------------'
+    fi
 fi
 
 if [[ $(basename $file) = kiss-chroot-$chrootver.tar.xz ]]; then
-   if [[ -f $file && -z $checksum ]]; then
-      echo -e "\e[1;92m[  INFO: Downloading checksum -> $file.sha256...  ]\e[0m"
-      wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
-      echo '--------------------------------------------'
-   fi
+  if [[ -f $file && -z $checksum ]]; then
+    echo -e "\e[1;92m[  INFO: Downloading checksum -> $file.sha256...  ]\e[0m"
+    wget "$url/$file.sha256" || curl -fLO "$url/$file.sha256"
+    echo '--------------------------------------------'
+  fi
 fi
 
 if [[ $(basename $file) = kiss-chroot-$chrootver.tar.xz ]]; then
-   if [[ -f $file && -n $checksum ]]; then
-      echo -e "\e[1;92m[  INFO: Verifying $file checksum...  ]\e[0m"
-      sha256sum -c <(echo "$checksum  $file") || exit 1
-      echo '--------------------------------------------'
-   fi
+  if [[ -f $file && -n $checksum ]]; then
+    echo -e "\e[1;92m[  INFO: Verifying $file checksum...  ]\e[0m"
+    sha256sum -c <(echo "$checksum  $file") || exit 1
+    echo '--------------------------------------------'
+  fi
 fi
 
 if [[ -f $file.sha256 ]]; then
-   echo -e "\e[1;92m[  INFO: Verifying $file checksum...  ]\e[0m"
-   sha256sum -c < "$file.sha256" || exit 1
-   echo '--------------------------------------------'
+  echo -e "\e[1;92m[  INFO: Verifying $file checksum...  ]\e[0m"
+  sha256sum -c < "$file.sha256" || exit 1
+  echo '--------------------------------------------'
 fi
 
 #curl -fLO "$url/$file.asc"
@@ -91,13 +91,12 @@ lsblk -f -l | grep sd
 # Generate drive options dynamically.
 PS3="Select drive for installing KISS Linux: "
 echo ''
-select device in $(blkid | grep -e sd | cut -d : -f 1 | sed -e 's/[1-9]\+$//' | uniq | sort)
-do
-if [[ $device = "" ]]; then
-echo "try again"
-continue
-fi
-break
+select device in $(blkid | grep -e sd | cut -d : -f 1 | sed -e 's/[1-9]\+$//' | uniq | sort); do
+  if [[ $device = "" ]]; then
+    echo "try again"
+    continue
+  fi
+  break
 done
 
 echo -e "\e[1;92m[  INFO: $device has been selected.  ]\e[0m"
@@ -106,36 +105,34 @@ echo -e "\e[1;92m[  INFO: $device has been selected.  ]\e[0m"
 [[ -d /sys/firmware/efi ]] && UEFI=1
 
 if [[ $UEFI ]]; then
-   echo -e "\e[1;92m[  INFO: EFI has been found.  ]\e[0m"
+  echo -e "\e[1;92m[  INFO: EFI has been found.  ]\e[0m"
 else
-   echo -e "\e[1;31m[  INFO: EFI not found.  ]\e[0m"
+  echo -e "\e[1;31m[  INFO: EFI not found.  ]\e[0m"
 fi
 
 # Partition selection.
 if [[ $UEFI ]]; then
-PS3="Select partition type or ABORT: "
-select opt in EFI MBR ABORT
-do
+  PS3="Select partition type or ABORT: "
+  select opt in EFI MBR ABORT; do
 
-if [[ $opt = "" ]]; then
-echo "try again"
-continue
-fi
-break
-done
+    if [[ $opt = "" ]]; then
+      echo "try again"
+      continue
+    fi
+    break
+  done
 fi
 
 if [[ -z $UEFI ]]; then
-PS3="Select partition type or ABORT: "
-select opt in MBR ABORT
-do
+  PS3="Select partition type or ABORT: "
+  select opt in MBR ABORT; do
 
-if [[ $opt = "" ]]; then
-echo "try again"
-continue
-fi
-break
-done
+    if [[ $opt = "" ]]; then
+      echo "try again"
+      continue
+    fi
+    break
+  done
 fi
 
 [[ $opt = ABORT ]] && exit 1
@@ -151,45 +148,45 @@ echo '--------------------------------------------'
 
 # Filesystem creation.
 read -p "Do you want to format $device? [yes/No]: "
-   if [[ $REPLY =~ ^([Yy][Ee][Ss])$ ]]; then
-      if [[ $opt = EFI ]]; then
-         sgdisk --zap-all $device
-         sgdisk -n 1:2048:96M -t 1:ef00 $device
-         sgdisk -n 2:0:0 -t 2:8300 $device
-         sgdisk --verify $device
+  if [[ $REPLY =~ ^([Yy][Ee][Ss])$ ]]; then
+    if [[ $opt = EFI ]]; then
+      sgdisk --zap-all $device
+      sgdisk -n 1:2048:96M -t 1:ef00 $device
+      sgdisk -n 2:0:0 -t 2:8300 $device
+      sgdisk --verify $device
 
-         mkfs.vfat -F 32 -n EFI ${device}1
-         mkfs.$efifsys $efifsysopts ${device}2
+      mkfs.vfat -F 32 -n EFI ${device}1
+      mkfs.$efifsys $efifsysopts ${device}2
 
-      elif [[ $opt = MBR ]]; then
-         echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
-         fdisk $device
-         mkfs.$extfsys $extfsysopts ${device}1
-      fi
-   fi
+    elif [[ $opt = MBR ]]; then
+      echo "[ ! ] CREATE 'DOS' PARTITION & MAKE BOOT ACTIVE [ ! ]"
+      fdisk $device
+      mkfs.$extfsys $extfsysopts ${device}1
+    fi
+  fi
 
 # Mount the filesystems.
 if [[ $opt = EFI ]]; then
-   mount -t $efifsys ${device}2 /mnt
-   mkdir -p /mnt/boot/efi
-   mount -t vfat ${device}1 /mnt/boot/efi
+  mount -t $efifsys ${device}2 /mnt
+  mkdir -p /mnt/boot/efi
+  mount -t vfat ${device}1 /mnt/boot/efi
 
 elif [[ $opt = MBR ]]; then
-   mount -t $efifsys ${device}1 /mnt
+  mount -t $efifsys ${device}1 /mnt
 fi
 
 # Extract 'KISS Linux' to filesystem.
 if ! [[ -d /mnt/usr ]]; then
-   echo -e "\e[1;92m[  INFO: Extracting $file...  ]\e[0m"
-   tar xf "$file" -C /mnt --strip-components=1 --checkpoint=.400
-   echo ''
-   echo '--------------------------------------------'
-   # Avoid the creation of 'run.new'.
-   [[ -f kiss-chroot-$chrootver.tar.xz ]] && rm --verbose /mnt/etc/sv/{crond,syslogd}/run
+  echo -e "\e[1;92m[  INFO: Extracting $file...  ]\e[0m"
+  tar xf "$file" -C /mnt --strip-components=1 --checkpoint=.400
+  echo ''
+  echo '--------------------------------------------'
+  # Avoid the creation of 'run.new'.
+  [[ -f kiss-chroot-$chrootver.tar.xz ]] && rm --verbose /mnt/etc/sv/{crond,syslogd}/run
 fi
 
 if ! [[ -f /mnt/root/.profile ]]; then
-tee /mnt/root/.profile << EOF >/dev/null
+  tee /mnt/root/.profile << EOF >/dev/null
 export KISS_DEBUG="0"
 export KISS_COMPRESS="gz"
 export KISS_GET="curl"
@@ -208,26 +205,26 @@ kisschecksumA=6ff56f886ca76d93b0c88ffae267432474fb38399b151ccbacf519869114e234 #
 kisschecksumB=$(sha256sum /mnt/usr/bin/kiss)
 
 if [[ $kiss_cache && $file = kiss-chroot-2021.7-9.tar.xz ]]; then
-   if [[ $kisschecksumA = ${kisschecksumB%% *} ]]; then
-      sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
-      mv -f _ /mnt/usr/bin/kiss
+  if [[ $kisschecksumA = ${kisschecksumB%% *} ]]; then
+    sed 's/cac_dir=/#cac_dir=/g' /mnt/usr/bin/kiss > _
+    mv -f _ /mnt/usr/bin/kiss
 
-      sed "/Top-level cache/a\
-      cac_dir=$kiss_cache" /mnt/usr/bin/kiss > _
+    sed "/Top-level cache/a\
+    cac_dir=$kiss_cache" /mnt/usr/bin/kiss > _
 
-      # Hide 'kiss' created directories.
-      sed "s,cac_dir=$kiss_cache\/proc,cac_dir=$kiss_cache\/proc\/__kiss-tmp," _ > __
-      mv -f __ /mnt/usr/bin/kiss
-      chmod +x /mnt/usr/bin/kiss
-   fi
+    # Hide 'kiss' created directories.
+    sed "s,cac_dir=$kiss_cache\/proc,cac_dir=$kiss_cache\/proc\/__kiss-tmp," _ > __
+    mv -f __ /mnt/usr/bin/kiss
+    chmod +x /mnt/usr/bin/kiss
+  fi
 fi
 
 # Create 'src/' for tarballs, etc needed for installing 'KISS Linux'.
 if [[ -f $file ]]; then
-   mkdir -p /mnt/$kissrepo/src
-   echo  -e "\e[1;92m[  INFO: Transferring $file...  ]\e[0m"
-   cp --verbose --no-clobber "$file" /mnt/$kissrepo/src
-   echo '--------------------------------------------'
+  mkdir -p /mnt/$kissrepo/src
+  echo  -e "\e[1;92m[  INFO: Transferring $file...  ]\e[0m"
+  cp --verbose --no-clobber "$file" /mnt/$kissrepo/src
+  echo '--------------------------------------------'
 fi
 
 # Remove unneeded directories + broken symbolic link.
@@ -235,22 +232,23 @@ fi
 [[ -d /mnt/usr/share/licenses ]] && rm -rf /mnt/usr/share/licenses
 
 if [[ ! -f /mnt/etc/fstab.orig && -f /mnt/etc/fstab ]]; then
-   cp /mnt/etc/fstab /mnt/etc/fstab.orig
+  cp /mnt/etc/fstab /mnt/etc/fstab.orig
 
 elif [[ ! -f /mnt/etc/fstab && -f /mnt/etc/fstab.orig ]]; then
-   cp /mnt/etc/fstab.orig /mnt/etc/fstab
+  cp /mnt/etc/fstab.orig /mnt/etc/fstab
 fi
 
 if [[ $opt = EFI ]]; then
-tee --append /mnt/etc/fstab << EOF >/dev/null
+  tee --append /mnt/etc/fstab << EOF >/dev/null
 
 LABEL=EFI        /boot/efi    vfat    defaults    0 0
 
 # UUID=$(blkid -s UUID -o value ${device}2)
 LABEL=$fsyslabel /           $efifsys    defaults    0 0
 EOF
+
 elif [[ $opt = MBR ]]; then
-tee --append /mnt/etc/fstab << EOF >/dev/null
+  tee --append /mnt/etc/fstab << EOF >/dev/null
 
 # UUID=$(blkid -s UUID -o value ${device}1)
 LABEL=$fsyslabel    $extfsys    defaults    0 0
@@ -258,46 +256,46 @@ EOF
 fi
 
 if ! [[ -f /mnt/etc/hostname ]]; then
-   printf '%s\n' $hostname > /mnt/etc/hostname
+  printf '%s\n' $hostname > /mnt/etc/hostname
 fi
 
 if ! [[ -f /mnt/etc/resolv.conf.orig ]]; then
-   printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf.orig
-   # NOTE: 'kiss-chroot' will overwrite '/etc/resolv.conf'
-   #       and apon exiting chroot, '/etc/resolv.conf' will be deleted.
+  printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf.orig
+  # NOTE: 'kiss-chroot' will overwrite '/etc/resolv.conf'
+  #       and apon exiting chroot, '/etc/resolv.conf' will be deleted.
 fi
 
 # Create backups of files needed for user account
 # to allow for system backups without user.
 if ! [[ -f /mnt/etc/group.orig ]]; then
-   cp /mnt/etc/group /mnt/etc/group.orig
+  cp /mnt/etc/group /mnt/etc/group.orig
 
 elif ! [[ -f /mnt/etc/group ]]; then
-   cp /mnt/etc/group.orig /mnt/etc/group
+  cp /mnt/etc/group.orig /mnt/etc/group
 fi
 
 if ! [[ -f /mnt/etc/passwd.orig ]]; then
-   cp /mnt/etc/passwd /mnt/etc/passwd.orig
+  cp /mnt/etc/passwd /mnt/etc/passwd.orig
 
 elif ! [[ -f /mnt/etc/passwd ]]; then
-   cp /mnt/etc/passwd.orig /mnt/etc/passwd
+  cp /mnt/etc/passwd.orig /mnt/etc/passwd
 fi
 
 if ! [[ -f /mnt/etc/shadow.orig ]]; then
-   cp /mnt/etc/shadow /mnt/etc/shadow.orig
+  cp /mnt/etc/shadow /mnt/etc/shadow.orig
 
 elif ! [[ -f /mnt/etc/shadow ]]; then
-   cp /mnt/etc/shadow.orig /mnt/etc/shadow
+  cp /mnt/etc/shadow.orig /mnt/etc/shadow
 fi
 
 mkdir -p /mnt/etc/rc.d
 
 if ! [[ -f /mnt/etc/rc.d/setup.boot ]]; then
-tee /mnt/etc/rc.d/setup.boot << EOF >/dev/null
+  tee /mnt/etc/rc.d/setup.boot << EOF >/dev/null
 # Set font for tty{1..7}
 log "Setting up tty..."
 for i in \`seq 1 7\`; do
-   setfont /usr/share/consolefonts/Tamsyn8x16r.psf.gz -C /dev/tty\$i
+    setfont /usr/share/consolefonts/Tamsyn8x16r.psf.gz -C /dev/tty\$i
 done
 
 # Setup network
@@ -360,7 +358,7 @@ EOF
 fi
 
 if [[ $opt = EFI && ! -f /mnt/efiboot.sh ]]; then
-tee /mnt/efiboot.sh << EOF >/dev/null
+  tee /mnt/efiboot.sh << EOF >/dev/null
 #!/bin/sh
 
 # NOTE: This note is applicable to 'efibootmgr' -> 'b9fedd6b6f57055164bc361bc5cf16a602843c6e.tar.gz'.
@@ -393,7 +391,7 @@ kver=$kver
 
 EOF
 
-tee --append /mnt/efiboot.sh << 'EOF' >/dev/null
+  tee --append /mnt/efiboot.sh << 'EOF' >/dev/null
 echo '******************************************'
 echo ''
 echo -e "\x1B[1;31m[ ! ] Check\x1B[1;92m BootOrder:\x1B[1;31m is correct [ ! ]\x1B[1;0m"
@@ -412,11 +410,11 @@ echo ''
 # Kernel panic will occur without unicode -> unable to find root
 # 'PARTUUID' is used as initramfs is required to use 'UUID'
 efibootmgr \
-   --create \
-   --disk $device \
-   --loader \vmlinuz-$kver \
-   --label $efilabel \
-   --unicode "root=PARTUUID=$(blkid -s PARTUUID -o value ${device}2) loglevel=7 Page_Poison=1"
+    --create \
+    --disk $device \
+    --loader \vmlinuz-$kver \
+    --label $efilabel \
+    --unicode "root=PARTUUID=$(blkid -s PARTUUID -o value ${device}2) loglevel=7 Page_Poison=1"
 EOF
 chmod +x /mnt/efiboot.sh
 fi
