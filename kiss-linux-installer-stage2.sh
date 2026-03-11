@@ -109,11 +109,10 @@ source /root/.profile
 if [ ! -f /root/.gitconfig ]; then
   git config --global --add safe.directory "$kissrepo/repo"
 
-for pkg in "$kissrepo/repo/extra/"*; do
-  url="$(grep git+ $pkg/sources | grep -v '#')" && url="$url"
-  [ "$url" ] && git config --global --add safe.directory $(echo $kiss_cache/sources/$(basename $pkg)/$(basename $url))
-done
-
+  for pkg in "$kissrepo/repo/extra/"*; do
+    url="$(grep git+ $pkg/sources | grep -v '#')" && url="$url"
+    [ "$url" ] && git config --global --add safe.directory $(echo $kiss_cache/sources/$(basename $pkg)/$(basename $url))
+  done
 fi
 
 if [ -d "$home" ] && [ ! -f "$home/.gitconfig" ]; then
@@ -259,6 +258,7 @@ done
 
 if [ -f _PKG-DOWNLOAD-FAILURE.log ]; then
   printf '\033[31;1m[  ERROR: Failed to download package.  ]\033[m\n'
+
   for f in $(cat _PKG-DOWNLOAD-FAILURE.log); do
     printf '%s\n' "=> $f"
   done
@@ -279,9 +279,11 @@ fi
 
 if [ -f _REQ-PKG-NOT-FOUND.log ]; then
   printf '\033[31;1m[  FATAL: Aborting...Required package not found.  ]\033[m\n'
+
   for pk in $(cat _REQ-PKG-NOT-FOUND.log); do
     printf '%s\n' "=> $pk"
   done
+
   line
   exit 1
 fi
