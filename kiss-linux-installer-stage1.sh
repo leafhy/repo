@@ -374,7 +374,7 @@ if [[ $opt = EFI && ! -f /mnt/efiboot.sh ]]; then
 # WARNING: 'efilabel' has a (26) character limit. Exceeding this limit will truncate the UEFI entry.
 #        : Options supplied to the kernel will be truncated if there not quoted.
 
-# NOTE: Show options passed to kernel
+# NOTE: Show options passed to kernel.
 #       -> cat /proc/cmdline
 
 # Kernel log levels.
