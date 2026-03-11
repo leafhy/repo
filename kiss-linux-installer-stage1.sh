@@ -259,6 +259,9 @@ LABEL=$fsyslabel    $extfsys    defaults    0 0
 EOF
 fi
 
+# NOTE: The fourth field for swafile is optional.
+printf '%s' "#/swapfile    none    swap        0 0" >> /mnt/etc/fstab
+
 if ! [[ -f /mnt/etc/hostname ]]; then
   printf '%s\n' $hostname > /mnt/etc/hostname
 fi
