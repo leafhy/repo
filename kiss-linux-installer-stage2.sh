@@ -188,9 +188,10 @@ fi' /usr/bin/kiss > _
 \
     # Set the prefered tar command to use for creating lz, zst tarballs.\
     # NOTE: busybox tar can create broken lz, zst tarballs.\
-    #     : schilytools & GNU tar created lz, zst tarballs\
+    #     : libarchive bsdtar, schilytools tar & GNU tar created lz, zst tarballs\
     #       are pipeable to busybox tar.\
-    #     : schilytools tar created lz tarball is compatible with tarlz.\
+    #     : schilytools tar & libarchive bsdtar created lz tarball is compatable with tarlz.\
+    #     : gnutar created lz tarball is not compatable with tarlz.\
     if [ "$KISS_COMPRESS" = lz ] || [ "$KISS_COMPRESS" = zst ]\; then\
         msg() {\
             c1='\''\\'033[1\;33m\''\
