@@ -81,11 +81,11 @@ fi
 #gpg --keyserver keyserver.ubuntu.com --recv-key 13295DAC2CF13B5C
 #gpg --verify "$file.asc"
 
-echo '********************************************'
-echo '                                            '
-echo '[ ! ] Verify listed drives are correct [ ! ]'
-echo '                                            '
-echo '********************************************'
+printf '%s\n' '***************************************************'
+printf '%s\n' '*                                                 *'
+printf "* \x1B[1;97m [ ! ] Verify listed drives are correct [ ! ]\x1B[1;0m   *\n"
+printf '%s\n' '*                                                 *'
+printf '%s\n' '***************************************************'
 lsblk -f -l | grep sd
 
 # Generate drive options dynamically.
@@ -141,14 +141,14 @@ fi
 
 [[ $opt = ABORT ]] && exit 1
 
-echo '--------------------------------------------'
-echo ''
-echo -e "\e[1;92m[  INFO: Listing \"$device\" filesystems.  ]\e[0m"
+printf '%s\n' '***************************************************'
+printf '%s\n' '*                                                 *'
+echo -e "*    \e[1;92m[  INFO: Listing \"$device\" filesystems.  ]\e[0m    *"
+echo "*  Note: Use \"wipefs --all $device\" if hardrive  *"
+echo "*        fails to format properly.                *"
+printf '%s\n' '*                                                 *'
+printf '%s\n' '***************************************************'
 wipefs $device*
-echo ''
-echo "Note: Use \"wipefs --all $device\" if hardrive fails to format properly."
-echo ''
-echo '--------------------------------------------'
 
 # Filesystem creation.
 read -p "Do you want to format $device? [yes/No]: "
@@ -404,11 +404,11 @@ kver=$kver
 EOF
 
   tee --append /mnt/efiboot.sh << 'EOF' >/dev/null
-echo '******************************************'
-echo ''
-echo -e "\x1B[1;31m[ ! ] Check\x1B[1;92m BootOrder:\x1B[1;31m is correct [ ! ]\x1B[1;0m"
-echo ''
-echo '******************************************'
+echo '***************************************************'
+echo '*                                                 *'
+echo -e "*    \x1B[1;31m[ ! ] Check\x1B[1;92m BootOrder:\x1B[1;31m is correct [ ! ]\x1B[1;0m      *"
+echo '*                                                 *'
+echo '***************************************************'
 echo ''
 echo 'Note: Boot entry needs to be towards the top of list'
 echo '      otherwise it will not appear in the UEFI boot menu.'
