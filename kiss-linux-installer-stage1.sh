@@ -391,7 +391,11 @@ if [[ $opt = EFI && ! -f /mnt/efiboot.sh ]]; then
 #    loglevel="7" -> penguins enabled
 #    loglevel=""  -> defaults to 7
 
-# NOTE: Use 'setlogcons' to redirect loglevel=[5-7] to console or tty.
+# NOTE: Use 'setlogcons' to redirect loglevel=[5-7]
+#       from the current VT (tty1) to another VT.
+#
+#       Redirect kernel log to tty7.
+#       -> setlogcons 7
 
 device=$device
 efilabel=$efilabel
