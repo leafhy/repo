@@ -255,7 +255,7 @@ elif [[ $opt = MBR ]]; then
   tee --append /mnt/etc/fstab << EOF >/dev/null
 
 # UUID=$(blkid -s UUID -o value ${device}1)
-LABEL=$fsyslabel    $extfsys    defaults  /  0 0
+LABEL=$fsyslabel    $extfsys    defaults    0 0
 EOF
 fi
 
