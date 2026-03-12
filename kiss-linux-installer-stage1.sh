@@ -83,7 +83,7 @@ fi
 
 printf '%s\n' '***************************************************'
 printf '%s\n' '*                                                 *'
-printf "* \x1B[1;97m [ ! ] Verify listed drives are correct [ ! ]\x1B[1;0m   *\n"
+printf        "* \x1B[1;97m [ ! ] Verify listed drives are correct [ ! ]\x1B[1;0m   *\n"
 printf '%s\n' '*                                                 *'
 printf '%s\n' '***************************************************'
 lsblk -f -l | grep sd
@@ -143,7 +143,7 @@ fi
 
 printf '%s\n' '***************************************************'
 printf '%s\n' '*                                                 *'
-printf "*    \e[1;92m[  INFO: Listing \"$device\" filesystems.  ]\e[0m    *\n"
+printf        "*    \e[1;92m[  INFO: Listing \"$device\" filesystems.  ]\e[0m    *\n"
 printf '%s\n' "*  Note: Use \"wipefs --all $device\" if hardrive  *"
 printf '%s\n' "*        fails to format properly.                *"
 printf '%s\n' '*                                                 *'
