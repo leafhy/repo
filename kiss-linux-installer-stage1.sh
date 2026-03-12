@@ -255,7 +255,7 @@ elif [[ $opt = MBR ]]; then
   tee --append /mnt/etc/fstab << EOF >/dev/null
 
 # UUID=$(blkid -s UUID -o value ${device}1)
-LABEL=$fsyslabel    $extfsys    defaults    0 0
+LABEL=$fsyslabel    $extfsys    defaults  /  0 0
 EOF
 fi
 
@@ -268,8 +268,8 @@ fi
 
 if ! [[ -f /mnt/etc/resolv.conf.orig ]]; then
   printf '%s\n' "nameserver $nameserver" > /mnt/etc/resolv.conf.orig
-  # NOTE: 'kiss-chroot' will overwrite '/etc/resolv.conf'
-  #       and apon exiting chroot, '/etc/resolv.conf' will be deleted.
+  # NOTE: 'kiss-chroot' will overwrite '/etc/resolv.conf' and
+  #       apon exiting chroot, '/etc/resolv.conf' will be deleted.
 fi
 
 # Create backups of files needed for user account
