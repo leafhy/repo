@@ -144,6 +144,7 @@ fi
 printf '%s\n' '***************************************************'
 printf '%s\n' '*                                                 *'
 printf        "*    \e[1;92m[  INFO: Listing \"$device\" filesystems.  ]\e[0m    *\n"
+printf '%s\n' '*                                                 *'
 printf '%s\n' "*  Note: Use \"wipefs --all $device\" if hardrive  *"
 printf '%s\n' "*        fails to format properly.                *"
 printf '%s\n' '*                                                 *'
