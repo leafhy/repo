@@ -21,7 +21,7 @@ for man in admin cdc comb delta get help mountcd prs prt rmdel sact smt mt unget
 done
 
 rm -f \
-    "$1/etc/sformat" \
+    "$1/etc/sformat.dat" \
     "$1/etc/default/rscsi" \
     "$1/opt/schily/share/man/man8/sformat.8"
 
