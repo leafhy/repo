@@ -208,9 +208,9 @@ fi' /usr/bin/kiss > _
         }\
 \
         tar="$(\
-            command -v \/opt\/schily\/bin\/tar ||\
-            command -v bsdtar                  ||\
-            command -v gtar
+            command -v suntar ||\
+            command -v bsdtar ||\
+            command -v gtar\
         )" || end "->" "ERROR" "No suitable" "(lz, zst)" "tar program found (gtar, libarchive, schilytools)"\
     fi\
 \
