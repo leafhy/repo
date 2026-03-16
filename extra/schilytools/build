@@ -3,6 +3,11 @@
 make
 make install
 
+# Create symlink so it can be used with
+# 'kiss' without needing to set PATH.
+install -dm755 "$1/usr/bin"
+ln -s "/opt/schily/bin/suntar" "$1/usr/bin"
+
 # Remove documentation (READMEs, etc).
 for bin in calltree mt smt sformat sccs; do
     rm -f "$1/opt/schily/bin/$bin"
