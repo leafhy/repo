@@ -4,7 +4,7 @@ make
 make install
 
 # Remove documentation (READMEs, etc).
-for bin in calltree mt smt sformat; do
+for bin in calltree mt smt sformat sccs; do
     rm -f "$1/opt/schily/bin/$bin"
 done
 
