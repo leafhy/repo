@@ -4,21 +4,27 @@ make
 make install
 
 # Remove documentation (READMEs, etc).
-find "$1" -type f -name \*sccs\* -delete
-find "$1" -type f -name \*rmt\*  -delete
+for bin in calltree mt smt sformat; do
+    rm -f "$1/opt/schily/bin/$bin"
+done
+
+find "$1" -type f -name \*sccs\*   -delete
+find "$1" -type f -name \*rmt\*    -delete
 
 for man in admin cdc comb delta get help mountcd prs prt rmdel sact smt mt unget val what; do
     rm -f "$1/opt/schily/share/man/man1/$man.1"
 done
 
-for bin in calltree mt smt; do
-    rm -f "$1/opt/schily/bin/$bin"
-done
+rm -f \
+    "$1/etc/sformat" \
+    "$1/etc/default/rscsi" \
+    "$1/opt/schily/man/man8/sformat.8"
 
 rm -rf \
     "$1/etc/default/rscsi" \
     "$1/opt/schily/ccs" \
     "$1/opt/schily/sbin" \
+    "$1/opt/schily/xpg4" \
     "$1/opt/schily/share/doc/rscsi" \
     "$1/opt/schily/share/doc/rmt" \
     "$1/opt/schily/share/doc/star" \
