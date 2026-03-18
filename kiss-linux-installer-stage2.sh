@@ -185,10 +185,23 @@ fi' /usr/bin/kiss > _
 
   sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
 \
+    # NOTE: If archive is not supported by busybox tar it\
+    #       will emit the error "tar: invalid tar magic".\
+    #\
+    #       These commands do not create tarlz compatable tarballs.\
+    #         (busybox) tar cf - . | lzip > file.lz\
+    #         (gnu) gtar --lzip -cf file.lz file\
+    #               gtar cf - . | lzip > file.lz\
+    #\
+    #       These commands do create tarlz compatable tarballs.\
+    #         (gnu) gtar --lzip --format=ustar -cf file.lz file\
+    #         (libarchive) bsdtar cf - . | lzip > file.lz\
+    #                      bsdtar --lzip -cf file.lz file\
+    #         (schilytools) star -lzip -c -f file.lz file\
+    #                       suntar cf - . | lzip > file.lz\
+    #                       suntar --lzip -c -f file.lz file\
+\
     # Set the prefered tar command to use for creating lz, zst tarballs.\
-    # NOTE: These commands do not create tarlz compatable tarballs.\
-    #       -> (busybox) tar cf - . | lzip > file.lz\
-    #       -> (gnu) tar --lzip -cf file.lz file\
     if [ "$KISS_COMPRESS" = lz ] || [ "$KISS_COMPRESS" = zst ]\; then\
         msg() {\
             c1='\''\\'033[1\;33m\''\
