@@ -221,13 +221,13 @@ fi' /usr/bin/kiss > _
 \
         cmd_tar=$(command -v $(printf '%s' $KISS_TAR) || :)\
 \
-       if [ -z "$cmd_tar" ]; then\
-           cmd_tar="$(\
-               command -v suntar ||\
-               command -v bsdtar ||\
-               command -v gtar\
-        )" || end "->" "ERROR" "No preferred" "(lz, zst)" "tar program found (gtar, libarchive, schilytools)"\
-       fi\
+        if [ -z "$cmd_tar" ]; then\
+            cmd_tar="$(\
+                command -v suntar ||\
+                command -v bsdtar ||\
+                command -v gtar\
+            )" || end "->" "ERROR" "No preferred" "(lz, zst)" "tar program found (gtar, libarchive, schilytools)"\
+        fi\
     fi\
 \
     tar="${tar:-tar}"' /usr/bin/kiss > _
