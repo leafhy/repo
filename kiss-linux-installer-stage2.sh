@@ -230,7 +230,7 @@ fi' /usr/bin/kiss > _
         fi\
     fi\
 \
-    tar="${tar:-tar}"' /usr/bin/kiss > _
+    cmd_tar="${cmd_tar:-tar}"' /usr/bin/kiss > _
   mv -f _ /usr/bin/kiss
   chmod +x /usr/bin/kiss
 fi
