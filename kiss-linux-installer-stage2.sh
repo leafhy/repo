@@ -168,7 +168,7 @@ if [ "${kisssumA%% *}" = "${kisssumB%% *}" ] && [ "$kiss_cache" ]; then
 kiss_cache="/var/db/kiss/cache"\
 \
 if [ "$(id -u)" != 0 ]; then\
-    ssu chown -R 1000:1000 "$kiss_cache/logs"\
+    $KISS_SU chown -R 1000:1000 "$kiss_cache/logs"\
 fi' /usr/bin/kiss > _
   mv -f _ /usr/bin/kiss
 
