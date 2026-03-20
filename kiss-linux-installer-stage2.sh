@@ -226,7 +226,7 @@ fi' /usr/bin/kiss > _
                 command -v suntar ||\
                 command -v bsdtar ||\
                 command -v gtar\
-            )" || end "->" "ERROR" "No preferred" "(lz, zst)" "tar program found (gtar, libarchive, schilytools)"\
+            )" || end "->" "ERROR" "No preferred" "(lzip, zstd)" "tar program found (gtar, libarchive, schilytools)"\
         fi\
     fi\
 \
