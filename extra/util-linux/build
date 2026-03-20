@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+export LDFLAGS=--static
+
 ./configure \
     --prefix=/usr \
     --localstatedir=/var \
@@ -15,7 +17,16 @@
     --disable-rpath \
     --without-udev \
     --without-python \
-    --without-systemd
+    --without-systemd \
+    --disable-shared \
+    --enable-static \
+    --disable-minix \
+    --disable-bfs \
+    --disable-cramfs \
+    --disable-uuidd \
+    --disable-nls \
+    --disable-kill \
+    --disable-utmpdump
 
 make
 make install

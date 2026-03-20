@@ -48,6 +48,7 @@ export KISS_DEBUG="0"
 export KISS_SU="ssu"
 export KISS_COMPRESS="zst"
 export KISS_GET="curl"
+export KISS_TAR="bsdtar"
 export CFLAGS="-O2 -pipe -march=x86-64 -mtune=generic"
 #export CFLAGS="-O3 -pipe -march=native"
 export CXXFLAGS="\$CFLAGS"
@@ -180,26 +181,26 @@ fi' /usr/bin/kiss > _
 
   # Add extra tar command for when busybox tar
   # is inadequate.
-  sed 's/tar cf/\$tar cf/' /usr/bin/kiss > _
+  sed 's/tar cf/\$cmd_tar cf/' /usr/bin/kiss > _
   mv -f _ /usr/bin/kiss
 
   sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
 \
-    # NOTE: If archive is not supported by busybox tar it\
-    #       will emit the error "tar: invalid tar magic".\
+    # NOTE: If archive is not directly supported by busybox tar\
+    #       it will emit the error "tar: invalid tar magic".\
     #\
     #       These commands do not create tarlz compatable tarballs.\
-    #         (busybox) tar cf - . | lzip > file.lz\
-    #         (gnu) gtar --lzip -cf file.lz file\
-    #               gtar cf - . | lzip > file.lz\
+    #       -> (busybox) tar cf - . | lzip > file.lz\
+    #       -> (gnu) tar --lzip -cf file.lz file\
+    #       -> (gnu) tar cf - . | lzip > file.lz\
     #\
     #       These commands do create tarlz compatable tarballs.\
-    #         (gnu) gtar --lzip --format=ustar -cf file.lz file\
-    #         (libarchive) bsdtar cf - . | lzip > file.lz\
-    #                      bsdtar --lzip -cf file.lz file\
-    #         (schilytools) star -lzip -c -f file.lz file\
-    #                       suntar cf - . | lzip > file.lz\
-    #                       suntar --lzip -c -f file.lz file\
+    #       -> (gnu) tar --lzip --format=ustar -cf file.lz file\
+    #       -> (libarchive) bsdtar cf - . | lzip > file.lz\
+    #       -> (libarchive) bsdtar --lzip -cf file.lz file\
+    #       -> (schilytools) star -lzip -c -f file.lz file\
+    #       -> (schilytools) suntar cf - . | lzip > file.lz\
+    #       -> (schilytools) suntar --lzip -c -f file.lz file\
 \
     # Set the prefered tar command to use for creating lz, zst tarballs.\
     if [ "$KISS_COMPRESS" = lz ] || [ "$KISS_COMPRESS" = zst ]\; then\
@@ -218,11 +219,15 @@ fi' /usr/bin/kiss > _
             exit 1\
         }\
 \
-        tar="$(\
-            command -v suntar ||\
-            command -v bsdtar ||\
-            command -v gtar\
-        )" || end "->" "ERROR" "No suitable" "(lz, zst)" "tar program found (gtar, libarchive, schilytools)"\
+        cmd_tar=$(command -v $(printf '%s' $KISS_TAR) || :)\
+\
+       if [ -z "$cmd_tar" ]; then\
+           cmd_tar="$(\
+               command -v suntar ||\
+               command -v bsdtar ||\
+               command -v gtar\
+        )" || end "->" "ERROR" "No preferred" "(lz, zst)" "tar program found (gtar, libarchive, schilytools)"\
+       fi\
     fi\
 \
     tar="${tar:-tar}"' /usr/bin/kiss > _
