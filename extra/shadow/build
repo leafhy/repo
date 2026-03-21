@@ -17,7 +17,7 @@
 make
 make DESTDIR="$1" install
 
-install -m755 -t "$1/usr/bin" id sulogin
+install -m755 -t "$1/usr/bin" src/id src/sulogin
 
 for f in 1 5 8; do
     install -Dm644 -t "$1/usr/share/man/man$f" "man/man$f/"*.$f
