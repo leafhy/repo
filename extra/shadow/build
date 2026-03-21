@@ -5,17 +5,21 @@
     --bindir=/usr/bin \
     --sbindir=/usr/bin \
     --libdir=/usr/lib \
-    --mandir=/usr/share/man \
     --sysconfdir=/etc \
-    --disable-man \
     --disable-account-tools-setuid \
     --with-group-name-max-length=32 \
     --without-audit \
     --without-selinux \
-    --without-libpam
+    --without-libpam \
+    --disable-shared \
+    --enable-static
 
 make
 make DESTDIR="$1" install
+
+for f in 1 5 8; do
+    install -Dm644 -t "$1/usr/share/man/man$f" "man/man$f/"*.$f
+done
 
 # Fix broken --sbindir.
 mv -f "$1/usr/sbin/"* "$1/usr/bin"
