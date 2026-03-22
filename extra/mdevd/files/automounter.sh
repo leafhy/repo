@@ -1,15 +1,17 @@
 #!/bin/sh
 
 # The basis for this script is available here.
-# => https://armadeus.org/wiki/index.php?title=Automatically_mount_removable_media
-
-# NOTE: This script is included with the 'mdevd' package as it's preferred over 'mdev'.
-
+# https://armadeus.org/wiki/index.php?title=Automatically_mount_removable_media
+#
+# NOTE: This script is included with the mdevd package as it's preferred over mdev.
+#
 # To enable automounting add the following rules to '/etc/mdev.conf' or '/etc/mdevd.conf'
 # and enable the corresponding service.
-# =>  sr[0-9]*    root:cdrom    660    */usr/lib/mdev/automounter.sh
-# =>  sd[b-z].*   root:disk     660    */usr/lib/mdev/automounter.sh
-
+# ----------------------------------------------------------------- #
+# -> sr[0-9]*    root:cdrom    660    */usr/lib/mdev/automounter.sh
+# -> sd[b-z].*   root:disk     660    */usr/lib/mdev/automounter.sh
+# ----------------------------------------------------------------- #
+#
 # NOTE: This *NOTE* may not be indicative of other devices but a quirk/fault of the tested device.
 #     : Mounting of a block device ( i.e. /dev/sdb ) which has no partition table will initially fail to mount.
 #     : Mounting can be achieved by restarting the 'mdev|mdevd' service.
@@ -19,10 +21,10 @@
 destdir=/run/media
 
 cleanup() {
-    # The removal of drives that have been accessed via 'autofs' can
-    # cause the non-removal of mountpoints due to I/O errors.
+    # NOTE: The removal of drives that have been accessed via autofs
+    #       can cause the non-removal of mountpoints due to I/O errors.
 
-    # This 'cleanup' function purges the empty mountpoints
+    # This *cleanup* function purges the empty mountpoints
     # of devices that are no longer attached.
     [ -x /usr/bin/automount ] && blkid > "$destdir/.blkid_chk"
 
@@ -83,4 +85,5 @@ case $ACTION in
         my_umount $MDEV
         cleanup         ;;
 esac
+
 
