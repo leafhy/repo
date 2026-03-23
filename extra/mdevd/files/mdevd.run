@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# To be able to nullify the hotplugger requires that the kernel be configured with
-# CONFIG_HOTPLUG=y or CONFIG_UEVENT_HELPER=y
+# NOTE: Uncomment the below command if the linux kernel has been configured with
+#       CONFIG_HOTPLUG=y or CONFIG_UEVENT_HELPER=y
 
 # Null the legacy hotplugger as the service will take over from here.
 # printf '\n' 2>/dev/null > /proc/sys/kernel/hotplug
