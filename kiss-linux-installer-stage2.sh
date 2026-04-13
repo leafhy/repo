@@ -170,7 +170,7 @@ kiss_cache="/var/db/kiss/cache"\
 if [ "$(id -u)" != 0 ]; then\
     if [ "$KISS_SU" = su ]; then\
         su -c "chown -R 1000:1000 $kiss_cache/logs"\
-    elif command -v "$KISS_SU"; then\
+    elif command -v "$KISS_SU" >/dev/null; then\
         "$KISS_SU" chown -R 1000:1000 "$kiss_cache/logs"\
     else\
         printf '%s\n' 'ERROR: KISS_SU is either empty or has an incorrect value'\
