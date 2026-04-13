@@ -168,7 +168,14 @@ if [ "${kisssumA%% *}" = "${kisssumB%% *}" ] && [ "$kiss_cache" ]; then
 kiss_cache="/var/db/kiss/cache"\
 \
 if [ "$(id -u)" != 0 ]; then\
-    $KISS_SU chown -R 1000:1000 "$kiss_cache/logs"\
+    if [ "$KISS_SU" = su ]; then\
+        su -c "chown -R 1000:1000 $kiss_cache/logs"\
+    elif command -v "$KISS_SU"; then\
+        "$KISS_SU" chown -R 1000:1000 "$kiss_cache/logs"\
+    else\
+        printf '%s\n' 'ERROR: KISS_SU is either empty or has an incorrect value'\
+        exit 1\
+    fi\
 fi' /usr/bin/kiss > _
   mv -f _ /usr/bin/kiss
 
@@ -179,11 +186,15 @@ fi' /usr/bin/kiss > _
 \ \ \ \ cac_dir=\$kiss_cache' /usr/bin/kiss > _
   mv -f _ /usr/bin/kiss
 
-  # Add extra tar command for when busybox tar
-  # is inadequate.
-  sed 's/tar cf/\$cmd_tar cf/' /usr/bin/kiss > _
+  # Allow for useage of an alternative tar implementation.
+  sed \
+    -e 's/tar xf/$cmd_tar xf/' \
+    -e 's/tar tf/$cmd_tar tf/' \
+    -e 's/tar cf/$cmd_tar cf/' /usr/bin/kiss > _
   mv -f _ /usr/bin/kiss
 
+  # Add extra tar command for when busybox tar
+  # is inadequate.
   sed '/: "${LOGNAME:?POSIX requires LOGNAME be set}"/a\
 \
     # NOTE: If archive is not directly supported by busybox tar\

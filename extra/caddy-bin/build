@@ -9,3 +9,7 @@ install -Dm644 Caddyfile-example "$1/etc/caddy/Caddyfile"
 install -Dm755 caddy.run "$1/etc/sv/caddy/run"
 install -dm700 "$1/var/lib/caddy/"
 install -dm755 "$1/var/log/caddy/"
+
+# Install runit service.
+ln -sf /run/runit/supervise.caddy /etc/sv/caddy/supervise
+ln -sf /etc/sv/caddy /var/service/

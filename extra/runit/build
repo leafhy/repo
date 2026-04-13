@@ -12,12 +12,14 @@ cd runit-2.2.0
 
     make
 
-    install -Dm755 -t "$1/usr/bin/" chpst runit runit-init runsv runsvchdir runsvdir sv svlogd utmpset
+    install -Dm755 -t "$1/usr/bin/" chpst runit runit-init runsv runsvchdir runsvdir sv svlogd
 )
 
-install -Dm644 -t "$1/usr/share/man/man8" man/*
+for m in chpst.8 runit-init.8 runit.8 runsv.8 runsvchdir.8 runsvdir.8 sv.8 svlogd.8; do
+    install -Dm644 -t "$1/usr/share/man/man8" "man/$m"
+done
 
-mkdir -p "$1/var/service" "$1/etc/runit"
+install -dm755 "$1/etc/runit"
 
 ln -sf runit-init                "$1/usr/bin/init"
 ln -sf /usr/lib/init/rc.boot     "$1/etc/runit/1"

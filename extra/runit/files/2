@@ -2,7 +2,7 @@
 
 PATH=/usr/bin:
 
-# NOTE: Use the busybox loop if no alternate getty is in use.
+# NOTE: Uncomment the busybox loop if no alternate getty is in use.
 
 # for getty in 1 2 3 4 5 6 ; do
 #   while :; do /sbin/getty 38400 tty${getty} 2>&1 ; done &  # for busybox

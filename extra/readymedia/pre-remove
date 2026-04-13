@@ -1,12 +1,14 @@
 #!/bin/sh -e
 
 if ! kiss l readymedia-bin ]; then
-    status=$(cat /etc/sv/minidlna/supervise/stat)
-    [ "$status" = run ] && sv down minidlna
+    if [ -L "/var/service/minidlna" ]; then
+        sv down minidlna
+        unlink "/var/service/minidlna"
+    fi
+
     deluser --remove-home minidlna
 
     rm -rf \
         "/etc/sv/minidlna" \
-        "/run/runit/supervise.minidlna" \
-        "/var/service/minidlna"
+        "/run/runit/supervise.minidlna"
 fi

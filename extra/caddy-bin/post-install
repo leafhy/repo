@@ -8,7 +8,3 @@ chown -R caddy:caddy /etc/caddy
 
 chown caddy:caddy /var/lib/caddy
 chown caddy:caddy /var/log/caddy
-
-# Install runit service.
-[ ! -d /run/runit/supervise.caddy ] && ln -sf /run/runit/supervise.caddy /etc/sv/caddy/supervise
-[ ! -L /var/service/caddy ] && ln -sf /etc/sv/caddy /var/service/

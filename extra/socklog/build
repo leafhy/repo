@@ -9,3 +9,12 @@ package/compile
 install -Dm755 -t "$1/usr/bin" command/*
 install -Dm644 -t "$1/usr/share/man/man1" man/*.1
 install -Dm644 -t "$1/usr/share/man/man8" man/*.8
+
+# Install runit service.
+install -dm755                "$1/etc/sv/socklog-unix/log"
+install -m755 socklog.check   "$1/etc/sv/socklog-unix/check"
+install -m755 socklog.run     "$1/etc/sv/socklog-unix/run"
+install -m755 socklog.log.run "$1/etc/sv/socklog-unix/log/run"
+
+ln -sf /run/runit/supervise.socklog-unix     "$1/etc/sv/socklog-unix/supervise"
+ln -sf /run/runit/supervise.socklog-unix-log "$1/etc/sv/socklog-unix/log/supervise"

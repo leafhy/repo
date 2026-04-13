@@ -1,1 +1,4 @@
 https://smarden.org/socklog/socklog-2.1.1.tar.gz
+files/socklog.check
+files/socklog.run
+files/socklog.log.run

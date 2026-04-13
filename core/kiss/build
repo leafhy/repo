@@ -2,7 +2,13 @@
 
 # Remove nonexistant compress option.
 sed 's/lzip -z/lzip   /' kiss > _
-mv -f _ kiss
+
+# https://www.nongnu.org/lzip/plzip.html
+# "Plzip can compress/decompress large files
+#  on multiprocessor machines much faster than lzip,
+#  at the cost of a slightly reduced compression ratio"
+sed 's/lzip/plzip/' _ > __
+mv -f __ kiss
 
 chmod +x kiss
 
