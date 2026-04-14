@@ -2,7 +2,7 @@
 
 ./configure \
     --prefix=/usr \
-    CXXFLAGS=-static
+    LDFLAGS=-static
 
 make
 make install

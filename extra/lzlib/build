@@ -2,7 +2,8 @@
 
 ./configure \
     --prefix=/usr \
-    --disable-static
+    --enable-static \
+    --disable-shared
 
 make
 make install
