@@ -11,7 +11,8 @@
 make
 make install
 
-sed -e 's+#user=jmaggard+user=minidlna+' \
+sed \
+    -e 's+#user=jmaggard+user=minidlna+' \
     -e 's+#log_dir=/var/log+log_dir=/var/log+' \
     -e 's+#db_dir=/var/cache/minidlna+db_dir=/var/lib/minidlna+' minidlna.conf > _
 
