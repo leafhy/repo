@@ -47,7 +47,7 @@ my_umount() {
     #       gnu grep supports the options (-q, --quiet).
     #       busybox grep supports the option (-q).
     if grep -q "/dev/$1" /proc/mounts; then
-        umount  "/dev/$1"
+        umount "/dev/$1"
     fi
 
     [ -d "$destdir/$1" ] && rmdir "$destdir/$1"
