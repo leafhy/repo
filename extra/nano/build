@@ -1,8 +1,12 @@
 #!/bin/sh -e
 
+# Change to more visible colour for URLs.
+sed -i 's/lightblue/green/' syntax/default.nanorc
+
 ./configure \
     --prefix=/usr \
     --sysconfdir=/etc
 
 make
 make DESTDIR="$1" install
+
