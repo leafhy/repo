@@ -242,7 +242,7 @@ fi' /usr/bin/kiss > _
     fi\
 \
     case ${cmd_tar##*/} in suntar)\
-        export tar_opts="--no-secure-links"\
+        tar_opts="--no-secure-links"\
     esac\
 \
     cmd_tar="${cmd_tar:-tar}"' /usr/bin/kiss > _
