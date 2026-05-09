@@ -1,10 +1,13 @@
 #!/bin/sh -e
 
 ./configure \
-    --prefix=/usr
+    --prefix=/usr \
+    --sysconfdir=/etc/detox
 
 make
 make DESTDIR="$1" install
 
-install -Dm644 safe.tbl           "$1/usr/share/detox"
-install -Dm644 etc/detoxrc.sample "$1/usr/etc/detoxrc"
+install -Dm644 safe.tbl "$1/usr/share/detox"
+
+# Remove README.md.
+rm -r "$1/usr/share/doc"
