@@ -188,7 +188,7 @@ fi' /usr/bin/kiss > _
 
   # Allow for useage of an alternative tar implementation.
   sed \
-    -e 's/tar xf/$cmd_tar xf/' \
+    -e 's/tar xf -/$cmd_tar xf - \"$tar_opts\"/' \
     -e 's/tar tf/$cmd_tar tf/' \
     -e 's/tar cf/$cmd_tar cf/' /usr/bin/kiss > _
   mv -f _ /usr/bin/kiss
@@ -240,6 +240,10 @@ fi' /usr/bin/kiss > _
             )" || end "->" "ERROR" "No preferred" "(lzip, zstd)" "tar program found (schilytools, libarchive, gtar)"\
         fi\
     fi\
+\
+    case ${cmd_tar##*/} in suntar)\
+        export tar_opts="--no-secure-links"\
+    esac\
 \
     cmd_tar="${cmd_tar:-tar}"' /usr/bin/kiss > _
   mv -f _ /usr/bin/kiss
