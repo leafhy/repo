@@ -21,3 +21,5 @@ make DESTDIR="$1" install
 ln -sf gpg2  "$1/usr/bin/gpg"
 ln -sf gpgv2 "$1/usr/bin/gpgv"
 
+# Remove README.
+rm -rf "$1/usr/share/doc"
