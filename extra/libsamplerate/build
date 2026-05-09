@@ -2,7 +2,6 @@
 
 ./configure \
     --prefix=/usr \
-    --bindir=/usr/bin \
     --enable-static
 
 make
