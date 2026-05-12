@@ -1,0 +1,30 @@
+#!/bin/sh -e
+
+sed -i "29s|.*|chmod u+s \"\${DESTDIR}\${bindir}/fusermount3\"|" \
+    util/install_helper.sh
+
+# 'autofs' will not mount via ssh if '/etc/mtab' is an
+# link due to the error -> fuse: unknown option(s): `-n'
+# This error is fixed by allowing '-n' to pass through.
+sed -i '/FUSE_OPT_KEY("user=",			KEY_MTAB_OPT),/a \
+	FUSE_OPT_KEY("-n",			KEY_MTAB_OPT),' lib/mount.c
+
+export DESTDIR="$1"
+
+meson \
+    --prefix=/usr \
+    -Dexamples=false \
+    -Dsbindir=bin \
+    -Dudevrulesdir=/usr/lib/udev \
+    -Duseroot=false \
+    . output
+
+ninja -C output
+ninja -C output install
+
+ln -sf fusermount3 "$1/usr/bin/fusermount"
+
+# Remove the unused.
+rm -rf \
+    "$1/usr/lib/udev" \
+    "$1/etc/init.d"
