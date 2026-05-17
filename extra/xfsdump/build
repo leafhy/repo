@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-# The use of CFLAGS='-pipe' can cause 'xfsdump' to fail
+# The use of 'CFLAGS=-pipe' can cause 'xfsdump' to fail
 # building due to sharing the same build folder as 'xfsprogs'.
 #
 # The -pipe failure can be fixed by
