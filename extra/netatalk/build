@@ -22,4 +22,6 @@ make install
 # Remove the unneeded.
 rm -f \
     "$1/usr/bin/afpldaptest" \
-    "$1/usr/bin/lp2pap.sh"
+    "$1/usr/bin/lp2pap.sh" \
+    "$1/usr/share/man/man1/afpldaptest.1" \
+    "$1/usr/share/man/man5/afp_ldap.conf.5"
