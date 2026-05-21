@@ -5,17 +5,21 @@
     --sbindir=/usr/bin \
     --sysconfdir=/etc \
     --localstatedir=/var/lib/netatalk \
+    --with-uams-path=/usr/lib/netatalk \
     --with-ssl-dir=/usr/lib/ssl \
     --with-bdb=/opt/BerkeleyDB.6.0 \
     --without-cnid-tdb-backend \
+    --with-shadow \
+    --disable-cups \
+    --with-gssapi=no \
+    --disable-shared \
+    --enable-static \
     --disable-quota
 
 make
 make install
 
 # Remove the unneeded.
-rm -rf \
-    "$1/usr/include/atalk" \
+rm -f \
     "$1/usr/bin/afpldaptest" \
-    "$1/usr/lib" \
     "$1/usr/bin/lp2pap.sh"
