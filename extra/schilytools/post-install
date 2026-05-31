@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Restore permissions.
+find "/opt/schily/lib" -name "*.a"   -exec chmod 444 '{}' \;
+find "/opt/schily/lib" -name "*.so*" -exec chmod 444 '{}' \;
