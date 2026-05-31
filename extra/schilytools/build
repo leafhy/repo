@@ -3,6 +3,10 @@
 make
 make install
 
+# Fix permissions for stripping.
+find "$1/opt/schily/lib" -name "*.a"   -exec chmod 644 '{}' \;
+find "$1/opt/schily/lib" -name "*.so*" -exec chmod 644 '{}' \;
+
 # Create symlink so it can be used with
 # 'kiss' without needing to set PATH.
 install -dm755 "$1/usr/bin"
