@@ -5,6 +5,25 @@
 # `clang` based systems with no `gcc` installed.
 sed -i 's/CC := gcc/CC ?= gcc/' Makefile
 
+# Remove unneeded utilities.
+sed -i \
+    -e '/ARPD/d' \
+    -e 's/ netem / /' \
+    -e 's/ tc / /' \
+    -e 's/ tipc / /' \
+    -e 's/ rdma / /' Makefile
+
+# Remove unneeded manpages.
+sed -i \
+    -e 's/ man3//' \
+    -e 's/ man7//' man/Makefile
+
+rm -f \
+    man/man8/arpd.8 \
+    man/man8/tc*.8 \
+    man/man8/tipc*.8 \
+    man/man8/rdma*.8
+
 ./configure \
     --prefix=/usr
 
