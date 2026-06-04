@@ -1,10 +1,10 @@
 #!/bin/sh -e
 
-# Switch to coreutils ln as busybox ln does not support
-# the option (-L, --logical) that is required by bower.
-link=$(stat /usr/bin/ln | grep -o busybox || true)
+# Switch to coreutils 'ln' due to busybox 'ln'
+# lacking the option (-L|--logical).
+kiss l coreutils || exit 1
 
-if [ -n "$link" ]; then
+if stat /usr/bin/ln | grep -qo busybox; then
     kiss a coreutils /usr/bin/ln
 fi
 
@@ -15,11 +15,8 @@ install -Dm644 bower.conf.sample "$1/usr/share/bower/bower.conf"
 install -Dm644 bower.1           "$1/usr/share/man/man1/bower.1"
 install -Dm755 bower             "$1/usr/bin/bower"
 
-
 # Restore busybox ln.
-link=$(stat /usr/bin/ln | grep -o busybox || true)
-
-if [ -z "$link" ]; then
+if ! stat /usr/bin/ln | grep -qo busybox; then
     kiss a busybox /usr/bin/ln
 fi
 
