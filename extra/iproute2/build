@@ -5,7 +5,7 @@
 # `clang` based systems with no `gcc` installed.
 sed -i 's/CC := gcc/CC ?= gcc/' Makefile
 
-# Remove unneeded utilities.
+# Remove unneeded utilities & manpages.
 sed -i \
     -e '/ARPD/d' \
     -e 's/ netem / /' \
@@ -13,7 +13,6 @@ sed -i \
     -e 's/ tipc / /' \
     -e 's/ rdma / /' Makefile
 
-# Remove unneeded manpages.
 sed -i \
     -e 's/ man3//' \
     -e 's/ man7//' man/Makefile
@@ -27,8 +26,19 @@ rm -f \
 ./configure \
     --prefix=/usr
 
+# Prevent libelf from being used.
+sed -i \
+    -e '/HAVE_ELF/d' \
+    -e '/elf/d' config.mk
+
 make
 make DESTDIR="$1" SBINDIR="/usr/bin" install
 
 install -Dm0644 include/libnetlink.h "$1/usr/include/libnetlink.h"
 install -Dm0644 lib/libnetlink.a     "$1/usr/lib/libnetlink.a"
+
+# Cleanup.
+rm -rf \
+    "$1/usr/include/iproute2" \
+    "$1/usr/share/bash-completion" \
+    "$1/usr/share/iproute2/bpf_pinning"
