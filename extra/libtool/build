@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --enable-shared \
+    --enable-static
+
+make
+make DESTDIR="$1" install
+
+# Remove docs.
+rm -rf \
+    "$1/usr/share/info" \
+    "$1/usr/share/libtool/COPYING.LIB" \
+    "$1/usr/share/libtool/README"
+
