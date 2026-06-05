@@ -12,7 +12,7 @@ find "$1/opt/schily/lib" -name "*.so*" -exec chmod 644 '{}' \;
 install -dm755 "$1/usr/bin"
 ln -s "/opt/schily/bin/suntar" "$1/usr/bin"
 
-# Remove documentation (READMEs, etc).
+# Remove documentation (READMEs, binaries, etc).
 for bin in calltree mt smt sformat sccs; do
     rm -f "$1/opt/schily/bin/$bin"
 done
