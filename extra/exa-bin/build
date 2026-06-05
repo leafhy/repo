@@ -1,8 +1,6 @@
 #!/bin/sh -e
 
-vers=0.10.1
-
-unzip exa-linux-x86_64-musl-v$vers.zip
+unzip ./*.zip
 
 install -Dm755 bin/exa          "$1/usr/bin/exa"
 install -Dm644 man/exa.1        "$1/usr/share/man/man1/exa.1"
