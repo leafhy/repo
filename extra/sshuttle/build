@@ -2,7 +2,7 @@
 
 shell="$(stat /usr/bin/sh | grep -o busybox || true)"
 
-if [ "$shell" ] then;
+if [ -z "$shell" ]; then
     echo "##################################################"
     echo "# [ ! ] Build requires busybox /usr/bin/sh [ ! ] #"
     echo "#                                                #"

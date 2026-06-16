@@ -1,7 +1,16 @@
 #!/bin/sh -e
 
 ./configure \
-    --prefix=/usr
+    --prefix=/usr \
+    --enable-shared \
+    --disable-dbus \
+    --disable-rdma \
+    --disable-bluetooth \
+    --disable-usb \
+    --disable-netmap
 
 make
 make DESTDIR="$1" install
+
+# Remove docs.
+rm -rf "$1/usr/share/man/man3"
