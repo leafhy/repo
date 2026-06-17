@@ -1,8 +1,6 @@
 #!/bin/sh -e
 
-shell="$(stat /usr/bin/sh | grep -o busybox || true)"
-
-if [ -z "$shell" ]; then
+if ! stat /usr/bin/sh | grep -qo busybox; then
     echo "##################################################"
     echo "# [ ! ] Build requires busybox /usr/bin/sh [ ! ] #"
     echo "#                                                #"
