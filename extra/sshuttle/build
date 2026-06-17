@@ -6,6 +6,7 @@ if ! stat /usr/bin/sh | grep -qo busybox; then
     echo "#                                                #"
     echo "#           kiss a busybox /usr/bin/sh           #"
     echo "##################################################"
+
     exit 1
 fi
 
