@@ -230,7 +230,7 @@ fi' /usr/bin/kiss > _
             exit 1\
         }\
 \
-        cmd_tar=$(command -v $KISS_TAR || :)\
+        cmd_tar=$(command -v $KISS_TAR || true)\
 \
         if [ -z "$cmd_tar" ]; then\
             cmd_tar="$(\
