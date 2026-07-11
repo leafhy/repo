@@ -161,7 +161,7 @@ kisssumA=$(sha256sum /usr/bin/kiss)
 kisssumB=$(sha256sum /usr/bin/kiss.orig)
 
 if [ "${kisssumA%% *}" = "${kisssumB%% *}" ] && [ "$kiss_cache" ]; then
-  # --------[ BEGIN ]--------
+  # --------{ BEGIN }--------
   # Change cache location to one more apt for Single User
   # and fix log permissions so builds don't fail.
   sed '/# SOFTWARE./a\
@@ -186,9 +186,9 @@ fi' /usr/bin/kiss > _
   sed '/Top-level cache/a\
 \ \ \ \ cac_dir=\$kiss_cache' /usr/bin/kiss > _
   mv -f _ /usr/bin/kiss
-  # --------{ END ]--------
+  # --------{ END }--------
 
-  # --------[ BEGIN ]--------
+  # --------{ BEGIN }--------
   # Workaround suntar returing exit code (254) on multi volume archives.
   sed \
     -e '/tar xf "$_tmp_file_pre" ||/d' \
@@ -278,7 +278,7 @@ fi' /usr/bin/kiss > _
     cmd_tar="${cmd_tar:-tar}"' /usr/bin/kiss > _
   mv -f _ /usr/bin/kiss
   chmod +x /usr/bin/kiss
-  # --------{ END ]--------
+  # --------{ END }--------
 fi
 
 # List repository packages + those that are installed.
