@@ -161,6 +161,7 @@ kisssumA=$(sha256sum /usr/bin/kiss)
 kisssumB=$(sha256sum /usr/bin/kiss.orig)
 
 if [ "${kisssumA%% *}" = "${kisssumB%% *}" ] && [ "$kiss_cache" ]; then
+  # --------[ BEGIN ]--------
   # Change cache location to one more apt for Single User
   # and fix log permissions so builds don't fail.
   sed '/# SOFTWARE./a\
@@ -185,7 +186,34 @@ fi' /usr/bin/kiss > _
   sed '/Top-level cache/a\
 \ \ \ \ cac_dir=\$kiss_cache' /usr/bin/kiss > _
   mv -f _ /usr/bin/kiss
+  # --------{ END ]--------
 
+  # --------[ BEGIN ]--------
+  # Workaround suntar returing exit code (254) on multi volume archives.
+  sed '482,484d' /usr/bin/kiss > _
+  mv -f _ /usr/bin/kiss
+
+  sed '/die "$repo_name" "Failed to decompress $1"/a\
+\
+        # Some SDL2 tarballs are part of a multi member (pax) archive.\
+        # Extracting these archives with suntar causes kiss to fail due to exit code (254).\
+        # The additional kludge allows kiss to not erroneously fail.\
+        if [ "${cmd_tar##*/}" = suntar ]; then\
+            if printf '%s' "$repo_name" | grep -qo "^sdl2"; then\
+                tar xf "$_tmp_file_pre"\
+                if [ "$?" != 0 ]; then\
+                    test -n "$(find . -type f -mindepth 2 -maxdepth 2)" ||\
+                        die "$repo_name" "Failed to extract $1"\
+                fi\
+            fi\
+        else\
+            tar xf "$_tmp_file_pre" ||\
+                die "$repo_name" "Failed to extract $1"\
+        fi' /usr/bin/kiss > _
+  mv -f _ /usr/bin/kiss
+  # --------{ END ]--------
+
+  # --------[ BEGIN ]--------
   # Allow for useage of an alternative tar implementation.
   sed \
     -e 's/tar xf -/$cmd_tar xf - \"$tar_opts\"/' \
@@ -248,6 +276,7 @@ fi' /usr/bin/kiss > _
     cmd_tar="${cmd_tar:-tar}"' /usr/bin/kiss > _
   mv -f _ /usr/bin/kiss
   chmod +x /usr/bin/kiss
+  # --------{ END ]--------
 fi
 
 # List repository packages + those that are installed.
