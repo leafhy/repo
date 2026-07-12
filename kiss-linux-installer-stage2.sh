@@ -240,8 +240,11 @@ fi' /usr/bin/kiss > _
     #       -> (libarchive) bsdtar cf - . | lzip > file.lz\
     #       -> (libarchive) bsdtar --lzip -cf file.lz file\
     #       -> (schilytools) star -lzip -c -f file.lz file\
+    #       -> (schilytools) star -c -f file.lz file --lzip\
     #       -> (schilytools) suntar cf - . | lzip > file.lz\
     #       -> (schilytools) suntar --lzip -c -f file.lz file\
+    #       -> (schilytools) suntar -cf file.tar.lz file --lzip\
+    #       -> (schilytools) suntar cf file.tar.lz file -lzip\
 \
     # Set the prefered tar command to use for creating lz, zst tarballs.\
     if [ "$KISS_COMPRESS" = lz ] || [ "$KISS_COMPRESS" = zst ]\; then\
