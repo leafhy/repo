@@ -44,6 +44,7 @@ while true; do
 
         if [ -d "$home" ] && [ ! -f "$home/.profile" ]; then
           tee $home/.profile << EOF >/dev/null
+export KISS_FORCE="0"
 export KISS_DEBUG="0"
 export KISS_SU="ssu"
 export KISS_COMPRESS="zst"
@@ -213,7 +214,7 @@ fi' /usr/bin/kiss > _
                 die "$repo_name" "Failed to extract $1"\
         fi' /usr/bin/kiss > _
   mv -f _ /usr/bin/kiss
-  # --------{ END ]--------
+  # --------{ END ]--------<>
 
   # --------[ BEGIN ]--------
   # Allow for useage of an alternative tar implementation.
