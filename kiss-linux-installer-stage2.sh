@@ -214,7 +214,7 @@ fi' /usr/bin/kiss > _
                 die "$repo_name" "Failed to extract $1"\
         fi' /usr/bin/kiss > _
   mv -f _ /usr/bin/kiss
-  # --------{ END ]--------<>
+  # --------{ END ]--------
 
   # --------[ BEGIN ]--------
   # Allow for useage of an alternative tar implementation.
