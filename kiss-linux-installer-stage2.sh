@@ -217,6 +217,12 @@ fi' /usr/bin/kiss > _
   # --------{ END ]--------
 
   # --------[ BEGIN ]--------
+  # Remove non-existant digest (cppcrypto) option.
+  sed 's/digest) set -- -a sha256/digest) set -- sha256/' /usr/bin/kiss > _
+  mv -f _ /usr/bin/kiss
+  # --------{ END ]--------
+
+  # --------[ BEGIN ]--------
   # Allow for useage of an alternative tar implementation.
   sed \
     -e 's/tar xf -/$cmd_tar xf - \"$tar_opts\"/' \

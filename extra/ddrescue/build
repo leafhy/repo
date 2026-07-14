@@ -6,7 +6,8 @@ mv -f _ configure
 chmod +x configure
 
 ./configure \
-    --prefix=/usr
+    --prefix=/usr \
+    LDFLAGS=-static
 
 make
 make install
