@@ -1,12 +1,18 @@
 #!/bin/sh -e
 
-# Remove nonexistant compress option.
-sed 's/lzip -z/lzip   /' kiss > _
+# Remove non-existant lzip compress option.
+# Remove non-existant digest (cppcrypto) option.
+sed \
+    -e 's/lzip -z/lzip   /' \
+    -e 's/digest) set -- -a sha256/digest) set -- sha256/' kiss > _
 
 # https://www.nongnu.org/lzip/plzip.html
 # "Plzip can compress/decompress large files
 #  on multiprocessor machines much faster than lzip,
 #  at the cost of a slightly reduced compression ratio"
+#
+# Compressing llvm with plzip is around 8mins faster
+# then lzip with just a slight increase in archive size.
 sed 's/lzip/plzip/' _ > __
 mv -f __ kiss
 
@@ -26,4 +32,3 @@ rm -f \
     "$1/usr/share/doc/kiss/tidbits.txt" \
     "$1/usr/share/doc/kiss/package-manager.txt" \
     "$1/usr/share/doc/kiss/package-system.txt"
-
