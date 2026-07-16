@@ -201,13 +201,11 @@ fi' /usr/bin/kiss > _
         # Some SDL2 tarballs are part of a multi member (pax) archive.\
         # Extracting these archives with suntar causes kiss to fail due to exit code (254).\
         # The additional kludge allows kiss to not erroneously fail.\
-        if [ "${cmd_tar##*/}" = suntar ]; then\
-            if printf '%s' "$repo_name" | grep -qo "^sdl2"; then\
-                tar xf "$_tmp_file_pre"\
-                if [ "$?" != 0 ]; then\
-                    test -n "$(find . -type f -mindepth 2 -maxdepth 2)" ||\
-                        die "$repo_name" "Failed to extract $1"\
-                fi\
+        if [ "${cmd_tar##*/}" = suntar ] && printf '%s' "$repo_name" | grep -qo "^sdl2"; then\
+            tar xf "$_tmp_file_pre"\
+            if [ "$?" != 0 ]; then\
+                test -n "$(find . -type f -mindepth 2 -maxdepth 2)" ||\
+                    die "$repo_name" "Failed to extract $1"\
             fi\
         else\
             tar xf "$_tmp_file_pre" ||\
