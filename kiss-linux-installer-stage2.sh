@@ -56,6 +56,8 @@ export CXXFLAGS="\$CFLAGS"
 export MAKEFLAGS="-j\$(nproc)"
 export KISSREPO="$kissrepo"
 export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
+#export MANPATH="/opt/schily/share/man"
+
 alias ls="ls --color=auto"
 EOF
           chown 1000:1000 "$home/.profile"
@@ -228,6 +230,14 @@ fi' /usr/bin/kiss > _
 \
     # NOTE: If archive is not directly supported by busybox tar\
     #       it will emit the error "tar: invalid tar magic".\
+    #\
+    #       If suntar fails due to path/filename being too long,\
+    #       the archive format pax/xustar can be used.\
+    #       -> suntar artype=xustar -c -f file.lz file -lzip\
+    #       -> suntar artype=pax -c -f - file | lzip > file.lz\
+    #       -> suntar cf - file artype=pax | lzip > file.lz\
+    #       -> suntar cf file.zst artype=pax -zstd file\
+    #       -> star cli=suntar artype=xustar -c -f file.xz -xz file\
     #\
     #       These commands do not create tarlz compatable tarballs.\
     #       -> (busybox) tar cf - . | lzip > file.lz\

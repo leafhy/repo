@@ -394,9 +394,39 @@ if [[ $opt = EFI && ! -f /mnt/efiboot.sh ]]; then
 
 # NOTE: Use 'setlogcons' to redirect loglevel=[5-7]
 #       from the current VT (tty1) to another VT.
-#
-#       Redirect kernel log to tty7.
 #       -> setlogcons 7
+
+# NOTE: Assorted tested gpus' video output.
+#       ATI ES1000
+#       [dGPU BIOS - extlinux]
+#       Working:
+#         -> console 80x25
+#         -> radeonfb
+#         -> radeondrm
+#       Not working:
+#         -> simplefb
+#         -> vesafb
+#         -> vga16fb
+#
+#       Matrox MGA G200E
+#       [dGPU UEFI - EFIstub]
+#       Working
+#         -> simplefb
+#         -> efifb
+#         -> matroxfb
+#         ->
+#
+#       ATI Radeon RV516 X1300/X1550
+#       [pcie-gpu BIOS - EFIstub]
+#       Working:
+#         ->
+#
+#       Nvidia GF119M Quadro NVS 4200M (discrete)
+#       [dGPU ? - EFIstub]
+#       Working:
+#         -> nouveau
+
+
 
 device=$device
 efilabel=$efilabel
