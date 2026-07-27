@@ -457,7 +457,7 @@ efibootmgr \
     --disk $device \
     --loader \vmlinuz-$kver \
     --label $efilabel \
-    --unicode "root=PARTUUID=$(blkid -s PARTUUID -o value ${device}2) loglevel=7 Page_Poison=1"
+    --unicode "root=PARTUUID=$(blkid -s PARTUUID -o value ${device}2) loglevel=7 page_poison=1"
 EOF
 chmod +x /mnt/efiboot.sh
 fi
