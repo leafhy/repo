@@ -19,7 +19,7 @@ printf '%s' "yes/no: "
 read -r ans
 
 if [ "$ans" = no ]; then
-    printf '%s\n' "Aborted Vaultwarden removal."
+    printf '%s\n' "Aborted Vaultwarden removal"
     exit 1
 
 elif [ "$ans" = yes ]; then
