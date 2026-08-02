@@ -2,7 +2,7 @@
 
 getent group socklog || addgroup -S -g 990 socklog
 
-# Create service files.
+# Create runit services.
 socklog-conf unix nobody root
 # socklog-conf ucspi-tcp nobody root
 # socklog-conf inet nobody root
