@@ -14,14 +14,18 @@ cat <<EOF
 
 EOF
 
-echo "Do you wish to remove Vaultwarden?"
-echo -n "yes/no: "
+printf '%s\n' "Do you wish to remove Vaultwarden?"
+printf '%s' "yes/no: "
 read -r ans
 
-if [ "$ans" = yes ]; then
+if [ "$ans" = no ]; then
+    printf '%s\n' "Aborted Vaultwarden removal."
+    exit 1
+
+elif [ "$ans" = yes ]; then
     if [ -L /var/service/vaultwarden ]; then
-       sv down vaultwarden
-       unlink "/var/service/vaultwarden"
+        sv down vaultwarden
+        unlink "/var/service/vaultwarden"
     fi
 
     deluser --remove-home vaultwarden
@@ -34,7 +38,4 @@ if [ "$ans" = yes ]; then
         "/etc/sv/vaultwarden" \
         "/run/runit/supervise.vaultwarden"
 
-elif [ "$ans" != yes ]
-    echo "Aborting Vaultwarden removal."
-    exit 1
 fi
