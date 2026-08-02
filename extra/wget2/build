@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+# NOTE: The configure option --without-lzip emits "Unrecognized option"
+#       whereas --without-lz disables lzip.
+
 ./configure \
     --prefix=/usr \
     --with-openssl \
