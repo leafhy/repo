@@ -12,10 +12,12 @@ cd runit-2.2.0
 
     make
 
-    install -Dm755 -t "$1/usr/bin/" chpst runit runit-init runsv runsvchdir runsvdir sv svlogd
+    install -Dm755 -t "$1/usr/bin/" chpst runit runit-init runsv \
+                                    runsvchdir runsvdir sv svlogd
 )
 
-for m in chpst.8 runit-init.8 runit.8 runsv.8 runsvchdir.8 runsvdir.8 sv.8 svlogd.8; do
+for m in chpst.8 runit-init.8 runit.8 runsv.8 \
+         runsvchdir.8 runsvdir.8 sv.8 svlogd.8; do
     install -Dm644 -t "$1/usr/share/man/man8" "man/$m"
 done
 
