@@ -5,18 +5,19 @@
 #
 # Fix -pipe failure by removing
 # the 'xfsprogs' build folder.
-if [ -d ../xfsprogs ]; then
-    rm -rf ../xfsprogs
-fi
+[ -d ../xfsprogs ] && rm -rf ../xfsprogs
+
+sed -i 's/ doc po debian//' Makefile
 
 # Building xfsdump statically requires
 # the double hyphen --static.
 make \
+    V=1 \
     LDFLAGS=--static \
     DEBUG=-DNDEBUG \
-    LOCAL_CONFIGURE_OPTIONS="--prefix=/usr \
-                             --sbindir=/usr/bin \
-                             --enable-lib64=no \
+    LOCAL_CONFIGURE_OPTIONS="--prefix=/usr
+                             --sbindir=/usr/bin
+                             --enable-lib64=no
                              --disable-gettext"
 
 # Remove 'bash' dependency.
