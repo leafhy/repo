@@ -17,6 +17,11 @@ chmod +x install-sh
     --prefix=/usr \
     --sbindir=/usr/bin \
     --enable-lib64=no \
+    --enable-editline=no \
+    --enable-termcap=no \
+    --enable-librt \
+    --enable-scrub \
+    --enable-libicu \
     --disable-gettext \
     --enable-lto
 
