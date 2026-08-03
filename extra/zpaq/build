@@ -6,11 +6,9 @@
 
 export LDFLAGS=-Wl,-z,stack-size=1048576
 
-sed \
+sed -i \
     -e "s/-O3 -march=native/$CFLAGS/" \
-    -e 's+/usr/local+/usr+' Makefile > _
-
-mv -f _ Makefile
+    -e 's+/usr/local+/usr+' Makefile
 
 make
 make install
