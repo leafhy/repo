@@ -7,7 +7,7 @@ cat <<EOF
 NOTE: To be able to use an external (USB UAC2)
       soundcard with 'siren' requires 'libudev-zero'
       for Hotplugging and the enabling of the 'mdev'
-      or 'mdevd' service files.
+      or 'mdevd' service.
 
 -> kiss build libudev-zero
 -> ln -s /etc/sv/mdev /var/service/
