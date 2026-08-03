@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-# Fix permission errors.
+# Fix 'strip' permission errors.
 sed '42s/555/755/' GNUmakefile > _
 mv -f _ GNUmakefile
 
@@ -37,6 +37,3 @@ mv -f _ siren.h
 make
 make install
 
-# Restore permissions.
-chmod 555 "$1/usr/bin/siren"
-find      "$1/usr/lib/siren" -type f -exec chmod 444 '{}' +

@@ -17,10 +17,11 @@ for bin in calltree mt smt sformat sccs; do
     rm -f "$1/opt/schily/bin/$bin"
 done
 
-find "$1" -type f -name \*sccs\*   -delete
-find "$1" -type f -name \*rmt\*    -delete
+find "$1" -type f -name \*sccs\* -delete
+find "$1" -type f -name \*rmt\*  -delete
 
-for man in admin cdc comb delta get help mountcd prs prt rmdel sact smt mt unget val what; do
+for man in admin cdc comb delta get help mountcd \
+           prs prt rmdel sact smt mt unget val what; do
     rm -f "$1/opt/schily/share/man/man1/$man.1"
 done
 

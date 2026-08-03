@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Restore permissions.
+chmod 555 "/usr/bin/siren"
+find      "/usr/lib/siren" -type f -exec chmod 444 '{}' +
+
 cat <<EOF
 
 ####################################
