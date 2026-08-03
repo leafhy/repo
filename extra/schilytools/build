@@ -3,7 +3,7 @@
 make
 make install
 
-# Fix permissions for stripping.
+# Fix 'strip' permission errors.
 find "$1/opt/schily/lib" -name "*.a"   -exec chmod 644 '{}' \;
 find "$1/opt/schily/lib" -name "*.so*" -exec chmod 644 '{}' \;
 
@@ -20,9 +20,9 @@ done
 find "$1" -type f -name \*sccs\* -delete
 find "$1" -type f -name \*rmt\*  -delete
 
-for man in admin cdc comb delta get help mountcd \
-           prs prt rmdel sact smt mt unget val what; do
-    rm -f "$1/opt/schily/share/man/man1/$man.1"
+for man in admin.1 cdc.1 comb.1 delta.1 get.1 help.1 mountcd.1 \
+           prs.1 prt.1 rmdel.1 sact.1 smt.1 mt.1 unget.1 val.1 what.1; do
+    rm -f "$1/opt/schily/share/man/man1/$man"
 done
 
 rm -f \
