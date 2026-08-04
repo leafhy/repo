@@ -5,7 +5,8 @@ export CFLAGS="$CFLAGS -flto --static"
 ./autogen.sh
 ./configure \
     --prefix=/usr \
-    --sbindir=/usr/bin
+    --sbindir=/usr/bin \
+    --disable-shared
 
 make
 make install
