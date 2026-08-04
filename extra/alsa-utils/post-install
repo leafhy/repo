@@ -15,10 +15,10 @@ NOTE: Useage examples.
 NOTE: To set a default sound card add
       this to '~/.asoundrc'.
 
-    # ------ BEGIN ------ #
-      defaults.pcm.card 2
-      defaults.ctl.card 2
-    # ------- END ------- #
+# ------ BEGIN ------ #
+  defaults.pcm.card 2
+  defaults.ctl.card 2
+# ------- END ------- #
 
 ################################
 
