@@ -22,7 +22,7 @@ make install
 # Fix permissions for stripping.
 chmod 755 "$1/usr/bin/"*
 
-# Append "$ver" to binaries.
+# Append version to binaries.
 for bin in "$1/usr/bin/"*; do
     mv "$bin" "$bin$ver"
 done
