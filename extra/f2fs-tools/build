@@ -6,7 +6,9 @@ export CFLAGS="$CFLAGS -flto --static"
 ./configure \
     --prefix=/usr \
     --sbindir=/usr/bin \
-    --disable-shared
+    --disable-shared \
+    --enable-static \
+    --without-lz4
 
 make
 make install
