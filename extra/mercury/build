@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
-# bower does not build if mercury is built with --enable-lto.
-
+# 'bower' does not build if 'mercury'
+# is built with --enable-lto.
 ./configure \
     --prefix=/usr \
     --without-readline \
@@ -14,7 +14,8 @@ make \
     DESTDIR="$PWD" \
     install
 
-for bin in c2init canonical_grade mdemangle mercury_compile mercury_config mfiltercc mfilterjavac mgnuc mkinit ml mmake mmc mtags; do
+for bin in c2init canonical_grade mdemangle mercury_compile mercury_config \
+           mfiltercc mfilterjavac mgnuc mkinit ml mmake mmc mtags; do
     install -D "usr/bin/$bin" "$1/usr/bin/$bin"
 done
 

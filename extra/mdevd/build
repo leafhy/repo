@@ -30,5 +30,6 @@ install -Dm755 automounter.sh "$1/usr/lib/mdev/automounter.sh"
 
 # Install runit service.
 ln -sf /run/runit/supervise.mdevd "$1/etc/sv/mdevd/supervise"
+
 # Purge config.h.
 rm -rf "$1/usr/include"
