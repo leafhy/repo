@@ -9,7 +9,6 @@
     --enable-static \
     --disable-shared
 
-
 make
 make DESTDIR="$1" install
 
