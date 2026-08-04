@@ -1,10 +1,11 @@
 #!/bin/sh -e
 
-./autogen.sh
+export CFLAGS="$CFLAGS -flto --static"
 
+./autogen.sh
 ./configure \
     --prefix=/usr \
-    --sbindir=/bin
+    --sbindir=/usr/bin
 
 make
 make install

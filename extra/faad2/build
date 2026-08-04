@@ -1,7 +1,6 @@
 #!/bin/sh -e
 
 ./bootstrap
-
 ./configure \
     --prefix=/usr
 
