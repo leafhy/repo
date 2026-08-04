@@ -2,7 +2,9 @@
 
 ./configure \
     --prefix=/usr \
-    --disable-gpg-test
+    --disable-gpg-test \
+    --enable-static \
+    --enable-shared
 
 make
 make install

@@ -10,6 +10,8 @@ if [ "$(id -u)" != 0 ]; then
     exit 1
 fi
 
+export CFLAGS="$CFLAGS -static"
+
 [ -L /usr/bin/sendmail ] && unlink /usr/bin/sendmail
 
 # Change install location from /usr/sbin to /usr/bin

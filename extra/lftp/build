@@ -7,3 +7,10 @@
 
 make
 make install
+
+# Purge excess locale messages bar 'uk'
+# TODO: Remove uk?.
+for l in cs de es fr it ja ko pl \
+         pt_BR ru zh_CN zh_HK zh_TW; do
+    rm -rf "$1/usr/share/locale/$l"
+done
