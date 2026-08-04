@@ -2,6 +2,6 @@
 
 ver=0.1.0
 
-unzip "sponge-v$ver-linux-amd64.zip"
+unzip sponge-v$ver-linux-amd64.zip
 
 install -Dm755 sponge "$1/usr/bin/sponge"
