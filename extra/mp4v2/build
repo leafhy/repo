@@ -1,11 +1,11 @@
 #!/bin/sh -e
 
-CXXFLAGS=-std=gnu++98
+CXXFLAGS="$CXXFLAGS -std=gnu++98"
 
 ./configure \
     --prefix=/usr
 
-make LDFLAGS=-all-static
+make LDFLAGS="$LDFLAGS -all-static"
 make install
 
 # Remove empty man-pages.
