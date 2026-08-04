@@ -4,7 +4,8 @@
     --prefix=/usr \
     --bindir=/usr/bin \
     --libdir=/usr/lib \
-    --includedir=/usr/include
+    --includedir=/usr/include \
+    --disable-shared
 
 make
 make DESTDIR="$1" install

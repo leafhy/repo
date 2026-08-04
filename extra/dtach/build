@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+export LDFLAGS="$LDPLAGS -static"
+
 ./configure \
     --prefix=/usr
 
