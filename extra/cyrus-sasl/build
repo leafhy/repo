@@ -5,7 +5,10 @@
     --sysconfdir=/etc \
     --sbindir=/usr/bin \
     --disable-otp \
-    --enable-login
+    --enable-login \
+    --enable-static \
+    --disable-shared
+
 
 make
 make DESTDIR="$1" install
