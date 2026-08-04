@@ -4,7 +4,9 @@
     --prefix=/usr \
     --sbindir=/usr/bin \
     --disable-nls \
-    --disable-rpath
+    --disable-rpath \
+    --enable-static \
+    --disable-shared
 
 make
 make install
