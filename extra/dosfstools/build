@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+export CFLAGS="$CFLAGS -static"
+
 # Disable documentation (READMEs and such).
 sed 's/^\(dist_doc_DATA\)/\1_null/' Makefile.in > _
 mv -f _ Makefile.in
