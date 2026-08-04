@@ -7,6 +7,6 @@ install -Dm4755 libfuse/build/mergerfs-fusermount "$1/usr/bin/mergerfs-fusermoun
 install -Dm644 man/mergerfs.1                     "$1/usr/share/man/man1/mergerfs.1"
 
 # Busybox 'mount' fails with "unknown parameter".
-# fix: use util-linux 'mount' or sym link 'mount.mergerfs'.
+# fix: use util-linux 'mount' or create symbolic link to 'mount.mergerfs'.
 ln -sf mergerfs "$1/usr/bin/mount.mergerfs"
 ln -sf mount.fuse3 "$1/usr/bin/mount.fuse"
