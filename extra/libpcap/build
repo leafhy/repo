@@ -2,7 +2,7 @@
 
 ./configure \
     --prefix=/usr \
-    --enable-shared \
+    --disable-shared \
     --disable-dbus \
     --disable-rdma \
     --disable-bluetooth \

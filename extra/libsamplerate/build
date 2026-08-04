@@ -2,6 +2,7 @@
 
 ./configure \
     --prefix=/usr \
+    --enable-shared \
     --enable-static
 
 make
