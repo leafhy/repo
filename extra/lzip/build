@@ -2,7 +2,7 @@
 
 ./configure \
     --prefix=/usr \
-    LDFLAGS=-static
+    LDFLAGS="$LDFLAGS -static"
 
 make
 make install
