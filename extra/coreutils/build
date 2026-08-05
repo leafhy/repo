@@ -11,6 +11,6 @@ export CFLAGS="$CFLAGS -static"
 make
 make DESTDIR="$1" install
 
-# Rename 'cp' to coexist with 'cp' from busybox.
+# coreutils 'cp' has more options then
+# busybox 'cp',rename so they can coexist.
 mv -f "$1/usr/bin/cp" "$1/usr/bin/gcp"
-
