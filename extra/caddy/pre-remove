@@ -1,15 +1,15 @@
 #!/bin/sh -e
 
 if ! kiss list caddy-bin; then
-     if [ -L /var/service/caddy ]; then
-         sv down caddy
-         unlink /var/service/caddy
-     fi
+    if [ -L /var/service/caddy ]; then
+        sv down caddy
+        unlink /var/service/caddy
+    fi
 
-     deluser --remove-home caddy
+    deluser --remove-home caddy
 
-     rm -rf \
-         "/etc/sv/caddy" \
-         "/var/log/caddy" \
-         "/run/runit/supervise.caddy"
+    rm -rf \
+        "/etc/sv/caddy" \
+        "/var/log/caddy" \
+        "/run/runit/supervise.caddy"
 fi

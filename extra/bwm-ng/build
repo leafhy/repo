@@ -1,7 +1,8 @@
 #!/bin/sh -e
 
-./autogen.sh
+export CFLAGS="$CFLAGS -static"
 
+./autogen.sh
 ./configure \
     --prefix=/usr
 

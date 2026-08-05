@@ -12,4 +12,3 @@ install -dm755 "$1/var/log/caddy/"
 
 # Install runit service.
 ln -sf /run/runit/supervise.caddy /etc/sv/caddy/supervise
-ln -sf /etc/sv/caddy /var/service/

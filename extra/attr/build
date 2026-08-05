@@ -3,10 +3,14 @@
 ./configure \
     --prefix=/usr \
     --sbindir=/usr/bin \
-    --disable-rpath
+    --disable-rpath \
+    --disable-shared \
+    --enable-static
 
 make
 make DESTDIR="$1" install
 
 # Remove docs.
-rm -rf "$1/usr/share/doc"
+rm -rf \
+    "$1/usr/share/doc" \
+    "$1/usr/share/man/man3"

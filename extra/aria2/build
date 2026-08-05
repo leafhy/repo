@@ -9,7 +9,9 @@
     --without-libexpat \
     --without-sqlite3 \
     --without-gnutls \
-    --with-openssl
+    --with-openssl \
+    --enable-static \
+    --disable-shared
 
 make
 make DESTDIR="$1" install
