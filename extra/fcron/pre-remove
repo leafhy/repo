@@ -7,12 +7,12 @@ fi
 
 deluser --remove-home fcron
 
-# NOTE: These files are (modified) & not removed
-#       despite contents being unchanged.
-# /etc/fcron.conf
-# /etc/fcron.allow
-# /etc/fcron.deny
-# /etc/sv/fcron/run
+# These files are (modified) & not removed
+# despite contents being unchanged.
+#    /etc/fcron.conf
+#    /etc/fcron.allow
+#    /etc/fcron.deny
+#    /etc/sv/fcron/run
 
 rm -rf \
     "/etc/sv/fcron" \
@@ -29,9 +29,9 @@ cat <<EOF
 
 NOTE: Reboot to resolve the following errors.
 
-runsv: can't move 'supervise/stat.new' to 'supervise/stat': No such file or directory runsv
-fcron: warning: cannot open supervise/status.new: No such file or directory runsv
-fcron: warning: cannot open supervise/pid.new: No such file or directory
+-> runsv: can't move 'supervise/stat.new' to 'supervise/stat': No such file or directory runsv
+-> fcron: warning: cannot open supervise/status.new: No such file or directory runsv
+-> fcron: warning: cannot open supervise/pid.new: No such file or directory
 
 ######################################
 

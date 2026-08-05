@@ -25,10 +25,10 @@ make
 make install
 
 install -Dm644 mdevd.conf     "$1/etc/mdevd.conf"
-install -Dm755 mdevd.run      "$1/etc/sv/mdevd/run"
 install -Dm755 automounter.sh "$1/usr/lib/mdev/automounter.sh"
 
 # Install runit service.
+install -Dm755 mdevd.run "$1/etc/sv/mdevd/run"
 ln -sf /run/runit/supervise.mdevd "$1/etc/sv/mdevd/supervise"
 
 # Purge config.h.
