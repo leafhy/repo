@@ -4,9 +4,7 @@ cat <<EOF
 
 ##########################################
 
-NOTE: Busybox & Coreutils 'cp' options differ.
-
-      Coreutils 'cp' has been renamed to 'gcp'.
+NOTE: coreutils 'cp' has been renamed to 'gcp'.
 
 ##########################################
 

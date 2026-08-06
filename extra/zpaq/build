@@ -1,9 +1,9 @@
 #!/bin/sh -e
 
-# Fix segmentation fault on musl by increasing stack-size.
-# ZPAQ compiles but segfaults at pthread() with musl
+# ZPAQ compiles but segfaults at pthread() with musl.
 # https://lists.alpinelinux.org/~alpine/users/%20%3CCAD4qdYDSYcp_mzBJXM6PFQsGA9xkR8_s+aWpgRTGkXwoPcx2-Q%40mail.gmail.com%3E
 
+# Fix segmentation fault on musl by increasing stack-size.
 export LDFLAGS=-Wl,-z,stack-size=1048576
 
 sed -i \
