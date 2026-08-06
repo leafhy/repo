@@ -8,7 +8,7 @@ touch /var/log/lastlog
 
 cat <<EOF
 
-###################################################################
+################################
 
 NOTE: To resolve "no hostkey alg"
       add this to '/etc/ssh/sshd_config'.
@@ -28,6 +28,6 @@ NOTE: To allow (RSA) public key login
 
 NOTE: PubkeyAcceptedKeyTypes is aliased to PubkeyAcceptedAlgorithms
 
-###################################################################
+################################
 
 EOF

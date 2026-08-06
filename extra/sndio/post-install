@@ -4,7 +4,7 @@ getent passwd sndiod || adduser -H -h "/run/sndiod" -D -S -u 994 -g "sndio daemo
 
 cat <<EOF
 
-#################################
+################################
 
 NOTE: Applicable to *this* Kiss Linux.
 
@@ -12,6 +12,6 @@ NOTE: Applicable to *this* Kiss Linux.
 -> Sndio does not work with USB UAC1.
 -> Sndio does work with USB UAC2.
 
-#################################
+################################
 
 EOF

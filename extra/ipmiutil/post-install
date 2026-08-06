@@ -2,7 +2,7 @@
 
 cat <<EOF
 
-###########################################
+################################
 
 NOTE: For local IPMI use the form.
 
@@ -19,6 +19,6 @@ NOTE: Example useage.
 -> Show health of IPMI BMC : ipmiutil health
 -> Show Sensor Data Records: ipmiutil sensor
 
-###########################################
+################################
 
 EOF

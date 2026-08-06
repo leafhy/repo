@@ -2,10 +2,10 @@
 
 cat <<EOF
 
-######################################
+################################
 
-NOTE: Quitting 'pinentry-tty' will degrade
-      keyboard response time.
+NOTE: Quitting 'pinentry-tty' will
+      degrade keyboard response time.
 
       Quitting 'pinentry-curses' can
       cause keyboard to become somewhat
@@ -14,6 +14,6 @@ NOTE: Quitting 'pinentry-tty' will degrade
       Pressing/Holding Ctrl-C will
       restore normal keyboard useage.
 
-######################################
+################################
 
 EOF

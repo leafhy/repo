@@ -2,11 +2,12 @@
 
 cat <<EOF
 
-###################################################
+################################
 
-NOTE: Set BIOS clock to 'UTC' to ensure correct localtime.
+NOTE: Set BIOS clock to 'UTC'
+      to ensure correct localtime.
 
-###################################################
+################################
 
 EOF
 

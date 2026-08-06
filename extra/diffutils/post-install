@@ -2,13 +2,15 @@
 
 cat <<EOF
 
-################################################
+################################
 
-NOTE: 'Busybox diff' conflicts with 'Diffutils sdiff'.
+NOTE: 'Busybox diff' conflicts
+      with 'Diffutils sdiff'.
 
-      To use sdiff, swap 'Busybox diff' with 'Diffutils diff'.
+      To use sdiff, swap 'Busybox diff'
+      with 'Diffutils diff'.
       -> kiss a diffutils /usr/bin/diff
 
-################################################
+################################
 
 EOF

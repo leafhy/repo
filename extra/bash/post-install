@@ -2,9 +2,10 @@
 
 cat <<EOF
 
-#########################################
+################################
 
-NOTE: To change the login shell by using 'chsh'.
+NOTE: To change the login shell
+      by using 'chsh'.
 
       # Install 'shadow'.
       -> kiss build shadow
@@ -41,7 +42,7 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 NOTE: Changing the login shell can erase
       HISTFILE=~/.bash_eternal_history.
 
-#########################################
+################################
 
 EOF
 

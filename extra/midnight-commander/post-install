@@ -2,7 +2,7 @@
 
 cat <<EOF
 
-####################################
+################################
 
 NOTE: Mouse navigation.
 
@@ -22,7 +22,7 @@ NOTE: Keyboard navigation.
 -> Up/Down Arrow => Select item.
 -> Tab => Select pane.
 
-####################################
+################################
 
 EOF
 

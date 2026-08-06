@@ -2,10 +2,10 @@
 
 cat <<EOF
 
-######################################
+################################
 
-NOTE: To configure ngetty refer to the
-      manpage 'ngetty.8' and
+NOTE: To configure ngetty refer
+      to the manpage 'ngetty.8' and
       '/usr/share/ngetty/sample.Conf'.
 
 NOTE: To list unused virtual terminals
@@ -13,6 +13,6 @@ NOTE: To list unused virtual terminals
       Refer to the manpage 'lsvt.1'
       for useage.
 
-######################################
+################################
 
 EOF
