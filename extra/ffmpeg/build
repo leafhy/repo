@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
-# Install 'sdl2' to build 'ffplay'.
-
+# To build 'ffplay' requires 'sdl2' to be installed
+# and the configure option --enable-ffplay be used.
 ./configure \
     --cc="$CC" \
     --cxx="$CXX" \
@@ -14,6 +14,7 @@
     --disable-libxcb-xfixes \
     --disable-libxcb-shape \
     --disable-xlib \
+    --disable-ffplay \
     --disable-alsa \
     --disable-static \
     --disable-indev=oss \

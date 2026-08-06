@@ -1,0 +1,12 @@
+#!/bin/sh
+
+cat <<EOF
+
+###########################################
+
+NOTE: To build 'ffplay' requires 'sdl2' to be installed
+      and the configure option --enable-ffplay be used.
+
+###########################################
+
+EOF
