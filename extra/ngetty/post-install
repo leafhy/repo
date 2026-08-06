@@ -4,12 +4,13 @@ cat <<EOF
 
 ################################
 
-NOTE: To configure ngetty refer
+NOTE: To configure 'ngetty' refer
       to the manpage 'ngetty.8' and
       '/usr/share/ngetty/sample.Conf'.
 
 NOTE: To list unused virtual terminals
       run the command 'lsvt' as root.
+
       Refer to the manpage 'lsvt.1'
       for useage.
 

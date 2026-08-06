@@ -4,9 +4,8 @@ cat <<EOF
 
 ################################
 
-NOTE: To enable 'nano' syntax
-      highlighting add the requisite
-      'include' line to 'nanorc'.
+NOTE: To enable 'nano' syntax highlighting
+      add the requisite 'include' line to 'nanorc'.
 
 # System settings.
 -> '/etc/nanorc'
