@@ -30,11 +30,9 @@ elif [ "$ans" = yes ]; then
 
     deluser --remove-home vaultwarden
 
-    rm -f \
-        "/etc/vaultwarden.conf" \
-        "/var/log/vaultwarden.log"
-
     rm -rf \
+        "/etc/vaultwarden.conf" \
+        "/var/log/vaultwarden.log" \
         "/etc/sv/vaultwarden" \
         "/run/runit/supervise.vaultwarden"
 
