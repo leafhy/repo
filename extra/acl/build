@@ -3,7 +3,7 @@
 ./configure \
     --prefix=/usr \
     --enable-static \
-    --disable-share
+    --disable-shared
 
 make
 make install
