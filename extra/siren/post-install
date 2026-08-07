@@ -14,11 +14,6 @@ NOTE: To be able to use an external
       Hotplugging and the enabling
       of the 'mdev' or 'mdevd' service.
 
--> kiss build libudev-zero
--> ln -s /etc/sv/mdev /var/service/
--> kiss build mdevd
--> ln -s /etc/sv/mdevd /var/service/
-
 ################################
 
 EOF
