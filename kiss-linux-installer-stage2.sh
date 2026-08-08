@@ -193,10 +193,9 @@ fi' /usr/bin/kiss > _
 
   # --------{ BEGIN }--------
   # Workaround suntar returning exit code (254) on multi volume archives.
-  sed \
-    -e '/tar xf "$_tmp_file_pre" ||/d' \
-    -e '/die "$repo_name" "Failed to extract $1"/d' /usr/bin/kiss > _
-  mv -f _ /usr/bin/kiss
+  sed -e '/tar xf "$_tmp_file_pre" ||/d' \
+      -e '/die "$repo_name" "Failed to extract $1"/d' /usr/bin/kiss > _
+  mv  -f _ /usr/bin/kiss
 
   sed '/die "$repo_name" "Failed to decompress $1"/a\
 \
@@ -218,11 +217,10 @@ fi' /usr/bin/kiss > _
 
   # --------[ BEGIN ]--------
   # Allow for useage of an alternative tar implementation.
-  sed \
-    -e 's/tar xf -/$cmd_tar xf - \"$tar_opts\"/' \
-    -e 's/tar tf/$cmd_tar tf/' \
-    -e 's/tar cf/$cmd_tar cf/' /usr/bin/kiss > _
-  mv -f _ /usr/bin/kiss
+  sed -e 's/tar xf -/$cmd_tar xf - \"$tar_opts\"/' \
+      -e 's/tar tf/$cmd_tar tf/' \
+      -e 's/tar cf/$cmd_tar cf/' /usr/bin/kiss > _
+  mv  -f _ /usr/bin/kiss
 
   # Add extra tar command for when busybox tar
   # is inadequate.
@@ -418,7 +416,11 @@ echo "#### FINAL STEPS ####"
 echo "#####################"
 echo "### Build & install kernel"
 echo "cd $kissrepo/src/linux-$kver"
+echo "# GCC"
 echo "make && make install"
+echo "# Clang"
+echo "make LLVM=1 && make install"
+echo "Note: Building kernel with clang full lto uses >4GB RAM"
 echo ''
 echo "### Create boot entry for UEFI"
 echo "mv /boot/vmlinuz /boot/vmlinuz-$kver"
@@ -434,7 +436,8 @@ echo "mv syslinux-6.04-pre1.tar.xz $kissrepo/src"
 echo ''
 echo "### Rename resolv.conf.orig"
 echo "mv /etc/resolv.conf.orig /etc/resolv.conf"
-echo "Note: Exit chroot before renaming 'resolv.conf.orig', else it will be removed."
+echo "Note: Exit chroot before renaming 'resolv.conf.orig',"
+echo "else it will be removed."
 echo "#####################"
 echo '++ EOF ++'
 
