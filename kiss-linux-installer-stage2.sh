@@ -89,12 +89,12 @@ source /root/.profile
 # git clone git@github.com:leafhy/repo.git
 #
 ### Create ~/.ssh/config.
-# ------ BEGIN ------ #
+# ------{ BEGIN }------ #
 # host github
 # hostname github.com
 # user git
 # identityfile ~/.ssh/github-id_ed25519
-# ------- END ------- #
+# -------{ END }------- #
 ### Test ssh config works.
 # ssh -T github
 #
@@ -214,9 +214,9 @@ fi' /usr/bin/kiss > _
                 die "$repo_name" "Failed to extract $1"\
         fi' /usr/bin/kiss > _
   mv -f _ /usr/bin/kiss
-  # --------{ END ]--------
+  # --------{ END }--------
 
-  # --------[ BEGIN ]--------
+  # --------{ BEGIN }--------
   # Allow for useage of an alternative tar implementation.
   sed -e 's/tar xf -/$cmd_tar xf - \"$tar_opts\"/' \
       -e 's/tar tf/$cmd_tar tf/' \
