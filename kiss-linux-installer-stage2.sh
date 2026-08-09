@@ -3,6 +3,7 @@
 username="$1"
 home="/home/${username:-empty}"
 kver="5.15.6"
+#kver="7.0.12"
 kernel="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$kver.tar.xz"
 #lver="linux-firmware-20211027"
 linuxfirmware="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/$lver.tar.gz"
@@ -394,11 +395,16 @@ if [ -f "$kissrepo/src/linux-$kver.tar.xz" ] && [ ! -d "$kissrepo/src/linux-$kve
   sed '/<stdlib.h>/a #include <linux/stddef.h>' tools/objtool/arch/x86/decode.c > _
   mv -f _ tools/objtool/arch/x86/decode.c
 
+# Patch doesn't apply to 7 series kernel.
+# Patch does apply to 5 series kernel.
+if printf '%s' "$kver" | grep -q '^5'; then
   [ -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ] && \
   patch -p1 < /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch
 
   [ -f /usr/share/doc/kiss/wiki/kernel/no-perl.patch ] && \
   patch -p1 < /usr/share/doc/kiss/wiki/kernel/no-perl.patch
+fi
+
 fi
 
 if [ "$lver" ] && [ ! -f "$kissrepo/src/$lver.tar.xz" ]; then
