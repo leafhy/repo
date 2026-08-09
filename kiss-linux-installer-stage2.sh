@@ -397,7 +397,7 @@ if [ -f "$kissrepo/src/linux-$kver.tar.xz" ] && [ ! -d "$kissrepo/src/linux-$kve
 
 # Patch doesn't apply to 7 series kernel.
 # Patch does apply to 5 series kernel.
-if printf '%s' "$kver" | grep -q '^5'; then
+if printf '%s' "$kver" | grep -qo '^5'; then
   [ -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ] && \
   patch -p1 < /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch
 
