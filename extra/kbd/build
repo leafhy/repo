@@ -35,5 +35,5 @@ rm -rf \
     README.drdos \
     README.eurlatgr \
     README.eurlatgr.mappings \
-    Agafari* koi8* Goha* *Cyr* *cyr* gr*
+    Agafari* koi8* Goha* *Cyr* *cyr* gr* ruscii*
 )
