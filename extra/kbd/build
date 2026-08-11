@@ -10,10 +10,30 @@ mv -f _ docs/man/man8/Makefile.in
 
 ./configure \
     --prefix=/usr \
-    --disable-vlock
+    --datadir=/usr/share/kbd \
+    --disable-vlock \
+    --disable-tests
 
 make
 make install
 
-# Purge locale messages.
-rm -rf "$1/usr/share/locale"
+(
+# Purge unused languages, fonts etc.
+cd "$1/usr/share/kbd/consolefonts"
+
+rm -rf \
+    "$1/usr/share/locale" \
+    "$1/usr/share/kbd/keymaps" \
+    "$1/usr/share/kbd/consoletrans/koi8"* \
+    ERRORS \
+    README.Arabic \
+    README.Cyrillic \
+    README.Ethiopic\
+    README.Greek \
+    README.Hebrew \
+    README.LatGrkCyr \
+    README.drdos \
+    README.eurlatgr \
+    README.eurlatgr.mappings \
+    Agafari* koi8* Goha* *Cyr* *cyr* gr*
+)
