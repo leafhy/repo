@@ -4,10 +4,13 @@ cat <<EOF
 
 ################################
 
-NOTE: To use rbw with caddy add the 'http' or 'https'
-      entry to '/etc/caddy/Caddyfile'.
+NOTE: To use rbw with caddy add
+      the required entries to the
+      requisite files.
 
-# ------ BEGIN ------ #
+NOTE: Add the 'http' or 'https' entry
+      to '/etc/caddy/Caddyfile'.
+------{ BEGIN }------
 # rbw Unofficial Bitwarden CLI
 vaultwarden.local:2014 {
 	tls internal
@@ -18,35 +21,37 @@ vaultwarden.local:2014 {
 http://vaultwarden.local:2018 {
 	reverse_proxy 127.0.0.1:8000
 }
-# ------- END ------- #
+-------{ END }-------
 
-NOTE: To use 'https' with caddy
-      add the requisite export to '.profile'
-      or append 'root.crt' to '/etc/ssl/cert.pem'.
+NOTE: Add the 'root.crt' certificate
+      to the system store.
 
-# To verify 'https' is working.
--> export SSL_CERT_FILE="/path/to/vaultwarden.local.crt"
--> export SSL_CERT_FILE="/path/to/root.crt"
--> curl https://192.XXX.X.X:2018
--> curl https://vaultwarden.local:2018
-
-# Add 'root.crt' to system certificates.
 -> cat /etc/ssl/cert.pem root.crt > certupd.pem
--> export SSL_CERT_FILE="/path/to/certupd.pem"
 
-NOTE: Caddy creates its certificates at the following paths.
+NOTE: Add the requisite export to '.profile'.
 
--> "/var/lib/caddy/.local/share/caddy/pki/authorities/local/root.crt"
--> "/var/lib/caddy/.local/share/caddy/certificates/local/vaultwarden.local/vaultwarden.local.crt"
+-> export SSL_CERT_FILE="/etc/ssl/certupd.pem"
+-> export SSL_CERT_FILE="/var/lib/caddy/.local/share/caddy/certificates/local/vaultwarden.local/vaultwarden.local.crt"
+-> export SSL_CERT_FILE="/var/lib/caddy/.local/share/caddy/pki/authorities/local/root.crt"
+
+NOTE: Verify 'http' or 'https' is working.
+
+-> curl http://192.XXX.X.X:2018
+-> curl http://vaultwarden.local:2018
+-> curl https://192.XXX.X.X:2014
+-> curl https://vaultwarden.local:2014
 
 NOTE: This pinentry error may occur after running 'rbw purge', 'rbw stop-agent' necessitating a 'reboot'.
-      "rbw list: failed to read password from pinentry: failed to parse pinentry output ("S ERROR curses.open_tty_for_read 83918849 \nERR 83918849 Permission denied <Pinentry>\n\0\0\0\0\0\0")"
+
+-> "rbw list: failed to read password from pinentry: failed to parse pinentry output ("S ERROR curses.open_tty_for_read 83918849 \nERR 83918849 Permission denied <Pinentry>\n\0\0\0\0\0\0")"
 
 NOTE: The following error message can be resolved by updating rbw and or running 'rbw purge'.
-      "WARN: failed to decrypt ...: failed to decrypt: failed to decrypt encrypted secret: invalid mac"
+
+-> "WARN: failed to decrypt ...: failed to decrypt: failed to decrypt encrypted secret: invalid mac"
 
 NOTE: Using the '.config/rbw/config.json' option "client_cert_path" causes the following error.
-      "rbw login: failed to log in to bitwarden instance: failed to create reqwest client: builder error: unexpected error: private key or certificate not found"
+
+-> "rbw login: failed to log in to bitwarden instance: failed to create reqwest client: builder error: unexpected error: private key or certificate not found"
 
 ################################
 
