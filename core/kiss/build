@@ -10,10 +10,7 @@ sed \
 # "Plzip can compress/decompress large files
 #  on multiprocessor machines much faster than lzip,
 #  at the cost of a slightly reduced compression ratio"
-#
-# Compressing llvm with plzip is around 8mins faster
-# then lzip with just a slight increase in archive size.
-sed 's/lzip/plzip/' _ > __
+sed 's/lzip/plzip -n4/' _ > __
 mv -f __ kiss
 
 chmod +x kiss

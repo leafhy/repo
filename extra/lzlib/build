@@ -2,8 +2,9 @@
 
 ./configure \
     --prefix=/usr \
-    --enable-static \
-    --disable-shared
+# Uncomment to build only shared libraries.
+#   --disable-static \
+#   --enable-shared
 
 make
 make install
