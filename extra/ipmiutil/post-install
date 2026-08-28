@@ -14,10 +14,17 @@ NOTE: For remote IPMI use the form.
 
 NOTE: Example useage.
 
--> Power down              : ipmiutil power -d
--> Power Up                : ipmiutil power -u
--> Show health of IPMI BMC : ipmiutil health
--> Show Sensor Data Records: ipmiutil sensor
+# Power down.
+-> ipmiutil power -d
+
+# Power up.
+->  ipmiutil power -u
+
+# Show health of IPMI BMC.
+-> ipmiutil health
+
+# Show Sensor Data Records.
+-> ipmiutil sensor
 
 ################################
 
