@@ -1,0 +1,22 @@
+#!/bin/sh
+
+cat <<EOF
+
+################################
+
+NOTE: To start netatalk at boot
+      add this to '/etc/rc.d/setup.boot'.
+
+# ------ BEGIN ------ #
+
+cnid_metad
+afpd
+
+# ------- END ------- #
+
+NOTE: 'cnid_metad' needs to
+      start before 'afpd'.
+
+################################
+
+EOF
