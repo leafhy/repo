@@ -1,6 +1,8 @@
 #!/bin/sh
 
-# Use separate files for varibles /etc/vaultwarden/varname
+# As an alternative to the .conf file separate files can be used for varibles.
+#    /etc/vaultwarden/DATA_FOLDER -> /var/lib/vaultwarden/data
+#    /etc/vaultwarden/WEB_VAULT_FOLDER -> /var/lib/vaultwarden/web-vault
 # export envdir=/etc/vaultwarden
 # exec chpst -u vaultwarden:vaultwarden -e "$envdir" /usr/bin/vaultwarden
 
