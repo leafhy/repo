@@ -19,7 +19,7 @@ Reason: use snprintf to avoid potential buffer overruns and fix mis-typed != com
  #endif
 -	(void)strncat(rawbuf, &dp[1], sizeof(rawbuf));
 +	*dp = '/';
- 
+
  	return (rawbuf);
  }
 --- a/fsck_hfs.tproj/dfalib/SControl.c
@@ -32,6 +32,6 @@ Reason: use snprintf to avoid potential buffer overruns and fix mis-typed != com
 -		dataArea.deviceNode[0] = '\0';
 -	}
 +    	snprintf(dataArea.deviceNode, sizeof(dataArea.deviceNode), "%s", rdevnode);
-     	
+
      /* there are cases where we cannot get the name of the volume so we */
      /* set our default name to one blank */

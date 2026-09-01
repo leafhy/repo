@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 # ipmitool & freeipmi failed to build.
-#
+
 # The shared library needs to be disabled
 # so ALL binaries can be made static.
 export LDFLAGS="$LDFLAGS -static"
