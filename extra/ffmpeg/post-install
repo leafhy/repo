@@ -4,8 +4,8 @@ cat <<EOF
 
 ################################
 
-NOTE: To build 'ffplay' requires 'sdl2' to be installed and
-      the configure option --enable-ffplay be used.
+NOTE: See the 'build' script
+      for building 'ffplay'.
 
 ################################
 
