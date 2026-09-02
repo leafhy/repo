@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
-# 'bower' does not build if 'mercury'
-# is built with --enable-lto.
+# bower will fail to build if mercury
+# is compiled with '--enable-lto'.
 ./configure \
     --prefix=/usr \
     --without-readline \
@@ -24,23 +24,23 @@ for man in c2init.1 mercury_config.1 mgnuc.1 ml.1 mmake.1 mmc.1 mtags.1; do
 done
 
 for grade in hlc.gc; do
-    #install -D -t "$1/usr/lib/mercury/lib/$grade"     usr/lib/mercury/lib/$grade/lib*.so
-    install -D -t "$1/usr/lib/mercury/lib/$grade"     usr/lib/mercury/lib/$grade/lib*.a
-    install -D -t "$1/usr/lib/mercury/modules/$grade" usr/lib/mercury/modules/$grade/*.init
-    cp      -R -t "$1/usr/lib/mercury/lib/$grade"     usr/lib/mercury/lib/$grade/inc
+   #install -Dm644 -t "$1/usr/lib/mercury/lib/$grade"     usr/lib/mercury/lib/$grade/lib*.so
+    install -Dm644 -t "$1/usr/lib/mercury/lib/$grade"     usr/lib/mercury/lib/$grade/lib*.a
+    install -Dm644 -t "$1/usr/lib/mercury/modules/$grade" usr/lib/mercury/modules/$grade/*.init
+    cp      -R     -t "$1/usr/lib/mercury/lib/$grade"     usr/lib/mercury/lib/$grade/inc
 done
 
 for dir in ints inc mmake; do
     cp -R "usr/lib/mercury/$dir" "$1/usr/lib/mercury"
 done
 
-install -D -t "$1/usr/lib/mercury/conf" \
-              usr/lib/mercury/conf/Mercury.config \
-              usr/lib/mercury/conf/mercury_conf.h
+install -Dm644 -t "$1/usr/lib/mercury/conf" \
+                  usr/lib/mercury/conf/Mercury.config \
+                  usr/lib/mercury/conf/mercury_conf.h
 
-install -D -t "$1/usr/lib/mercury/lib" \
-              usr/lib/mercury/lib/libgc.a
-              #usr/lib/mercury/lib/libgc.so
+install -Dm644 -t "$1/usr/lib/mercury/lib" \
+                  usr/lib/mercury/lib/libgc.a \
+                  #usr/lib/mercury/lib/libgc.so
 
 # Remove debugger et.al.
 find "$1/usr/lib/mercury" -type f -name mdb.\*        -exec rm  -f '{}' +
