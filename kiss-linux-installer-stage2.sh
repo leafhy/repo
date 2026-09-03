@@ -39,7 +39,7 @@ while true; do
 
           # Create needed directories.
           # Note: lnav will create '.lnav' if there is no '.config'.
-          #       siren does  not create '.config'.
+          #       siren does not create '.config'.
           mkdir "$home/.config" "$home/src"
           chown -R 1000:1000 "$home"
         fi
