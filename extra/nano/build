@@ -10,3 +10,5 @@ sed -i 's/lightblue/green/' syntax/default.nanorc
 make
 make DESTDIR="$1" install
 
+sed '/# set tabsize 8/a\set tabsize 4' doc/sample.nanorc > _
+install -Dm644 _ "$1/etc/nanorc"
