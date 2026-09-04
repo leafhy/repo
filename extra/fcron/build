@@ -4,12 +4,15 @@
 #    "chown: changing ownership of pkg/fcron/usr/sbin : Operation not permitted"
 
 if [ "$(id -u)" != 0 ]; then
-    echo "#####################################"
-    echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
-    echo "#                                   #"
-    echo "#        ssu -p kiss b fcron        #"
-    echo "#####################################"
-
+    printf '%s' '
+#####################################
+#                                   #
+# [ ! ] NEED TO BUILD AS ROOT [ ! ] #
+#                                   #
+#        ssu -p kiss b fcron        #
+#                                   #
+#####################################
+'
     exit 1
 fi
 

@@ -1,12 +1,15 @@
 #!/bin/sh -e
 
 if [ "$(id -u)" != 0 ]; then
-    echo "#####################################"
-    echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
-    echo "#                                   #"
-    echo "#      ssu -p kiss b go-mtpfs       #"
-    echo "#####################################"
-
+    printf '%s' '
+#####################################
+#                                   #
+# [ ! ] NEED TO BUILD AS ROOT [ ! ] #
+#                                   #
+#      ssu -p kiss b go-mtpfs       #
+#                                   #
+#####################################
+'
     exit 1
 fi
 

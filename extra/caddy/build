@@ -3,12 +3,15 @@
 ver=2.7.6
 
 if [ "$(id -u)" != 0 ]; then
-    echo "#####################################"
-    echo "# [ ! ] NEED TO BUILD AS ROOT [ ! ] #"
-    echo "#                                   #"
-    echo "#        ssu -p kiss b caddy        #"
-    echo "#####################################"
-
+    printf '%s' '
+#####################################
+#                                   #
+# [ ! ] NEED TO BUILD AS ROOT [ ! ] #
+#                                   #
+#        ssu -p kiss b caddy        #
+#                                   #
+#####################################
+'
     exit 1
 fi
 
