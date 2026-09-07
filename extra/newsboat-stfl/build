@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+unzip newsboat-stfl/master.zip
+cd stfl-master
+
 sed -i 's+<ncursesw/ncurses.h>+<ncurses.h>+' stfl_internals.h
 sed -i 's+/usr/local+/usr+' Makefile.cfg
 

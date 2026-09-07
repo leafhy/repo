@@ -1,7 +1,9 @@
 #!/bin/sh -e
 
+unzip snapraid-diff-sync/master.zip
+
 # Snapraid's SMART logging appears to be broken, so disable it.
-sed -i 's,SMART_LOG=1,SMART_LOG=0,' snapraid-diff-sync.sh
+sed 's,SMART_LOG=1,SMART_LOG=0,' snapraid-diff-sync-main/snapraid-diff-sync.sh > _
 
 ./configure \
     --prefix=/usr
@@ -10,4 +12,4 @@ make
 make install
 
 install -Dm644 snapraid.conf.example "$1/etc/snapraid.conf"
-install -Dm755 snapraid-diff-sync.sh "$1/usr/share/snapraid/snapraid-diff-sync.sh"
+install -Dm755 _ "$1/usr/share/snapraid/snapraid-diff-sync.sh"
