@@ -1,8 +1,5 @@
 #!/bin/sh -e
 
-unzip master.zip
-cd stfl-master
-
 sed -i 's+<ncursesw/ncurses.h>+<ncurses.h>+' stfl_internals.h
 sed -i 's+/usr/local+/usr+' Makefile.cfg
 
