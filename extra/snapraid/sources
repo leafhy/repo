@@ -1,3 +1,4 @@
 https://github.com/amadvance/snapraid/releases/download/vVERSION/snapraid-VERSION.tar.gz
 # http://beta.snapraid.it/snapraid-VERSION.tar.gz
-git+https://github.com/leafhy/snapraid-diff-sync
+https://github.com/leafhy/snapraid-diff-sync/archive/master.zip snapraid-diff-sync
+#git+https://github.com/leafhy/snapraid-diff-sync

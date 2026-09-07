@@ -1,10 +1,10 @@
 #!/bin/sh -e
 
-sed 's+<ncursesw/ncurses.h>+<ncurses.h>+' stfl_internals.h > _
-mv -f _ stfl_internals.h
+unzip master.zip
+cd stfl-master
 
-sed 's+/usr/local+/usr+' Makefile.cfg > _
-mv -f _ Makefile.cfg
+sed -i 's+<ncursesw/ncurses.h>+<ncurses.h>+' stfl_internals.h
+sed -i 's+/usr/local+/usr+' Makefile.cfg
 
 make
 make DESTDIR="$1" install
