@@ -1,12 +1,15 @@
 #!/bin/sh -e
 
 if ! stat /usr/bin/sh | grep -qo busybox; then
-    echo "##################################################"
-    echo "# [ ! ] Build requires busybox /usr/bin/sh [ ! ] #"
-    echo "#                                                #"
-    echo "#           kiss a busybox /usr/bin/sh           #"
-    echo "##################################################"
-
+    printf '%s' '
+##################################################
+#                                                #
+# [ ! ] Build requires busybox /usr/bin/sh [ ! ] #
+#                                                #
+#           kiss a busybox /usr/bin/sh           #
+#                                                #
+##################################################
+'
     exit 1
 fi
 

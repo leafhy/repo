@@ -4,9 +4,9 @@
 #    -> git shortlog -s -n | cut -f2 | sort > AUTHORS
 #
 # Use one of these options to allow 'make' to continue.
-#    -> bash + starship
-#    -> make < /dev/null
-#    -> sed -i '/> AUTHORS/d' Makefile
+#  -> bash + starship
+#  -> make < /dev/null
+#  -> sed -i '/> AUTHORS/d' Makefile
 
 make < /dev/null
 
