@@ -1,0 +1,7 @@
+#!/bin/sh
+
+exec svlogd -tt \
+     main/main main/auth main/cron main/daemon main/debug main/ftp \
+     main/kern main/local main/mail main/news main/syslog main/user #2>/dev/tty10
+
+exec svlogd -ttt /var/log/socklog/* #2>/dev/tty12

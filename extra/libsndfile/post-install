@@ -1,0 +1,21 @@
+#!/bin/sh -e
+
+cat <<EOF
+
+################################
+
+NOTE: Useage examples.
+
+-> sndfile-play file.wav
+
+NOTE: To use 'sndfile-play' with alsa
+      add this to '.asoundrc'.
+
+    # ------ BEGIN ------ #
+      defaults.pcm.card 2
+      defaults.ctl.card 2
+    # ------- END ------- #
+
+################################
+
+EOF
