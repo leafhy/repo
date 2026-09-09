@@ -427,7 +427,7 @@ if [ -f "$kissrepo/src/$lver.tar.xz" ] && [ "$(sha256sum $kissrepo/src/$lver.tar
   # git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
   # cp -R linux-firmware.git/intel /usr/lib/firmware
 else
-  printf '%s\n' 'ERROR: linux firmware mismatch'
+  printf '%s\n' 'ERROR: linux firmware checksum mismatch'
   exit 1
 fi
 
