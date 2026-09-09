@@ -9,6 +9,7 @@ ksum="b3e9ba06a299a3e2ead4a15753bc46a3e0c90d3b92ffeed1034ccc9f13a717f0  linux-5.
 kernel="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$kver.tar.xz"
 #lver="linux-firmware-20211027"
 linuxfirmware="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/$lver.tar.gz"
+fwsum="bc2657dd8eb82386a9a7ec6df9ccf31c32c7e9073c05d37786c1edc273f9440a  linux-firmware-20211027.tar.xz"
 kissrepo="/var/db/kiss"
 kiss_cache="$kissrepo/cache"
 
@@ -390,7 +391,7 @@ if [ "$kver" ] && [ ! -f "$kissrepo/src/linux-$kver.tar.xz" ]; then
 fi
 
 if [ "$(sha256sum $kissrepo/src/linux-$kver.tar.xz | cut -d' ' -f1)" != "$(printf ${ksum%% *})" ]; then
-  printf '%s\n' 'ERROR kernel checksum mismatch'
+  printf '%s\n' 'ERROR: linux kernel checksum mismatch'
   exit 1
 fi
 
@@ -417,11 +418,17 @@ fi
 if [ "$lver" ] && [ ! -f "$kissrepo/src/$lver.tar.xz" ]; then
   printf "\033[92;1m[  INFO: Downloading -> $linuxfirmware...  ]\033[m\n"
   curl -fL $linuxfirmware -o "$kissrepo/src/$lver.tar.xz"
+fi
+
+if [ -f "$kissrepo/src/$lver.tar.xz" ] && [ "$(sha256sum $kissrepo/src/$lver.tar.xz | cut -d' ' -f1)" = "$(printf ${fwsum%% *})" ]; then
   tar xf "$kissrepo/src/$lver.tar.xz"
   mkdir -p /usr/lib/firmware
   cp -R linux-firmware/intel /usr/lib/firmware
   # git clone https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git
   # cp -R linux-firmware.git/intel /usr/lib/firmware
+else
+  printf '%s\n' 'ERROR: linux firmware mismatch'
+  exit 1
 fi
 
 echo "#####################"
