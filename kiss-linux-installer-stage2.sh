@@ -62,7 +62,7 @@ export CXXFLAGS="\$CFLAGS"
 export MAKEFLAGS="-j\$(nproc)"
 export KISSREPO="$kissrepo"
 export KISS_PATH="\$KISSREPO/repo/core:\$KISSREPO/repo/extra:\$KISSREPO/community/community"
-#export MANPATH="/opt/schily/share/man"
+#export MANPATH="$MANPATH:/opt/schily/share/man"
 
 alias ls="ls --color=auto"
 EOF
