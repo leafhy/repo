@@ -368,7 +368,7 @@ if [ -f _REQ-PKG-NOT-FOUND.log ]; then
 fi
 
 # NOTE: 'util-linux' -> 'blkid' supports PARTUUID which is required to use 'efiboot.sh'.
-#       'busybox' -> 'blkid' does not support PARTUUID.
+#       'busybox'    -> 'blkid' does not support PARTUUID.
 bbver="$(cat $kissrepo/repo/core/busybox/version)"
 bbfix="$(printf '%s' "$bbver" | cut -d' ' -f1 | sed 's/\./_/g')"
 bbbin="$(printf '%s' "$bbver" | sed 's/\ /-/')"
