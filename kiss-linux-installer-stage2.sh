@@ -3,7 +3,9 @@
 username="$1"
 home="/home/${username:-empty}"
 kver="5.15.6"
+ksum="b3e9ba06a299a3e2ead4a15753bc46a3e0c90d3b92ffeed1034ccc9f13a717f0  linux-5.15.6.tar.xz"
 #kver="7.0.12"
+#ksum="57edc9a41efc1ca6b797afa8f4a587a30da2af6bca7356eb56e1e1a4ada265da  linux-7.0.12.tar.xz"
 kernel="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$kver.tar.xz"
 #lver="linux-firmware-20211027"
 linuxfirmware="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/$lver.tar.gz"
@@ -385,6 +387,11 @@ done
 if [ "$kver" ] && [ ! -f "$kissrepo/src/linux-$kver.tar.xz" ]; then
   printf "\033[92;1m[  INFO: Downloading -> $kernel...  ]\033[m\n"
   curl -fL $kernel -o "$kissrepo/src/linux-$kver.tar.xz"
+fi
+
+if [ "$(sha256sum $kissrepo/src/linux-$kver.tar.xz | cut -d' ' -f1)" != "$(printf ${ksum%% *})" ]; then
+  printf '%s\n' 'ERROR kernel checksum mismatch'
+  exit 1
 fi
 
 if [ -f "$kissrepo/src/linux-$kver.tar.xz" ] && [ ! -d "$kissrepo/src/linux-$kver" ]; then
