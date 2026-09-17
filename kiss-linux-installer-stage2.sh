@@ -203,7 +203,7 @@ fi' /usr/bin/kiss > _
   # Set aria2 to NOT prepend download path.
   # Account for some downloads/downloader requiring a user agent.
   sed '/cmd_get##/,+9d' /usr/bin/kiss > _
-  mv  -f _ /usr/bin/kiss
+  mv -f _ /usr/bin/kiss
 
   sed '/# Set the arguments based on found download utility./a\
     case ${cmd_get##*/} in\
@@ -231,7 +231,7 @@ fi' /usr/bin/kiss > _
             die "$repo_name" "Failed to download $3"\
         }\
     fi' /usr/bin/kiss > _
-  mv  -f _ /usr/bin/kiss
+  mv -f _ /usr/bin/kiss
   # --------{ END }--------
 
   # --------{ BEGIN }--------
