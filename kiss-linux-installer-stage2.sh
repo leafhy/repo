@@ -177,6 +177,7 @@ if [ "${kisssumA%% *}" = "${kisssumB%% *}" ] && [ "$kiss_cache" ]; then
   sed '/# SOFTWARE./a\
 \
 kiss_cache="/var/db/kiss/cache"\
+curl_user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"\
 \
 if [ "$(id -u)" != 0 ]; then\
     if [ "$KISS_SU" = su ]; then\
@@ -196,6 +197,41 @@ fi' /usr/bin/kiss > _
   sed '/Top-level cache/a\
 \ \ \ \ cac_dir=\$kiss_cache' /usr/bin/kiss > _
   mv -f _ /usr/bin/kiss
+  # --------{ END }--------
+
+  # --------{ BEGIN }--------
+  # Set aria2 to NOT prepend download path.
+  # Acoount for some downloads/downloader requiring a user agent.
+  sed '/cmd_get##/,+9d' /usr/bin/kiss > _
+  mv  -f _ /usr/bin/kiss
+
+  sed '/# Set the arguments based on found download utility./a\
+    case ${cmd_get##*/} in\
+              axel) set -- -o   "$@" ;;\
+            aria2c) set -- -d / "$@" ;;\
+              curl) set -- -fLo "$@" ;;\
+        wget|wget2) set -- -O   "$@" ;;\
+    esac\
+\
+    if [ "$cmd_get" = curl ]; then\
+        "$cmd_get" "$@" ||\
+        "$cmd_get" "$@" --user-agent "$curl_user_agent" || {\
+            rm -f "$2"\
+            die "$repo_name" "Failed to download $3"\
+        }\
+    elif [ "$cmd_get" = wget ]; then\
+        "$cmd_get" "$@" ||\
+        "$cmd_get" "$@" --user-agent="" || {\
+            rm -f "$2"\
+            die "$repo_name" "Failed to download $3"\
+        }\
+    else\
+        "$cmd_get" "$@" || {\
+            rm -f "$2"\
+            die "$repo_name" "Failed to download $3"\
+        }\
+    fi' /usr/bin/kiss > _
+  mv  -f _ /usr/bin/kiss
   # --------{ END }--------
 
   # --------{ BEGIN }--------
