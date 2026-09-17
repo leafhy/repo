@@ -201,7 +201,7 @@ fi' /usr/bin/kiss > _
 
   # --------{ BEGIN }--------
   # Set aria2 to NOT prepend download path.
-  # Acoount for some downloads/downloader requiring a user agent.
+  # Account for some downloads/downloader requiring a user agent.
   sed '/cmd_get##/,+9d' /usr/bin/kiss > _
   mv  -f _ /usr/bin/kiss
 
