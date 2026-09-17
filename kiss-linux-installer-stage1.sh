@@ -419,7 +419,7 @@ if [[ $opt = EFI && ! -f /mnt/efiboot.sh ]]; then
 #       ATI Radeon RV516 X1300/X1550
 #       [pcie-gpu BIOS - EFIstub]
 #       Working:
-#         ->
+#         -> radeondrm
 #
 #       Nvidia GF119M Quadro NVS 4200M (discrete)
 #       [dGPU ? - EFIstub]
