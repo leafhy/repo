@@ -442,14 +442,14 @@ if [ -f "$kissrepo/src/linux-$kver.tar.xz" ] && [ ! -d "$kissrepo/src/linux-$kve
   sed '/<stdlib.h>/a #include <linux/stddef.h>' tools/objtool/arch/x86/decode.c > _
   mv -f _ tools/objtool/arch/x86/decode.c
 
-# The kernel-no-perl.patch fails to apply to 7.0.12 kernel.
-if printf '%s' "$kver" | grep -qo '^5'; then
-  [ -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ] && \
-  patch -p1 < /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch
+  # The kernel-no-perl.patch fails to apply to 7.0.12 kernel.
+  if printf '%s' "$kver" | grep -qo '^5'; then
+    [ -f /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch ] && \
+    patch -p1 < /usr/share/doc/kiss/wiki/kernel/patches/kernel-no-perl.patch
 
-  [ -f /usr/share/doc/kiss/wiki/kernel/no-perl.patch ] && \
-  patch -p1 < /usr/share/doc/kiss/wiki/kernel/no-perl.patch
-fi
+    [ -f /usr/share/doc/kiss/wiki/kernel/no-perl.patch ] && \
+    patch -p1 < /usr/share/doc/kiss/wiki/kernel/no-perl.patch
+  fi
 
 fi
 
