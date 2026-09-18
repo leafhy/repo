@@ -9,7 +9,7 @@
     --disable-shared-libs
 
 make \
-    PARALLEL="-j$(nproc)" \
+    PARALLEL="-j$(getconf _NPROCESSORS_ONLN)" \
     LIBGRADES="hlc.gc" \
     DESTDIR="$PWD" \
     install
