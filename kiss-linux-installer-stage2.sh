@@ -236,8 +236,7 @@ fi' /usr/bin/kiss > _
 
   # --------{ BEGIN }--------
   # Workaround suntar returning exit code (254) on multi volume archives.
-  sed -e '/tar xf "$_tmp_file_pre" ||/d' \
-      -e '/die "$repo_name" "Failed to extract $1"/d' /usr/bin/kiss > _
+  sed '/tar xf "$_tmp_file_pre" ||/,+1d' /usr/bin/kiss > _
   mv  -f _ /usr/bin/kiss
 
   sed '/die "$repo_name" "Failed to decompress $1"/a\
