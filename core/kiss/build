@@ -1,10 +1,6 @@
 #!/bin/sh -e
 
-# Remove non-existant lzip compress option.
-# Remove non-existant digest (cppcrypto) option.
-sed \
-    -e 's/lzip -z/lzip   /' \
-    -e 's/digest) set -- -a sha256/digest) set -- sha256/' kiss > _
+patch -p1 < kiss-fixes.patch
 
 # https://www.nongnu.org/lzip/plzip.html
 # "Plzip can compress/decompress large files
