@@ -207,8 +207,8 @@ fi' /usr/bin/kiss > _
 
   sed '/# Set the arguments based on found download utility./a\
     case ${cmd_get##*/} in\
-              axel) set -- -o   "$@" ;;\
             aria2c) set -- -d / "$@" ;;\
+              axel) set -- -o   "$@" ;;\
               curl) set -- -fLo "$@" ;;\
         wget|wget2) set -- -O   "$@" ;;\
     esac\
