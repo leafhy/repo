@@ -1,5 +1,5 @@
 Without the (-d) option aria2c will download to '/var/db/kiss/cache/sources/pkg/var/db/kiss/cache/sources/pkg/'.
-Remove non-existant options for lzip & digest (cppcrypto). 
+Remove non-existant options for lzip & digest (cppcrypto).
 --- kiss	2021-08-30 23:38:57.000000000 +0930
 +++ kiss	2026-09-23 10:25:36.324127806 +0930
 @@ -227,7 +227,7 @@
@@ -9,10 +9,10 @@ Remove non-existant options for lzip & digest (cppcrypto).
 -         digest) set -- -a sha256 "$@" ;;
 +         digest) set -- sha256 "$@" ;;
      esac
- 
+
      IFS=$newline
 @@ -432,9 +432,10 @@
- 
+
      # Set the arguments based on found download utility.
      case ${cmd_get##*/} in
 -        aria2c|axel) set -- -o   "$@" ;;
@@ -23,7 +23,7 @@ Remove non-existant options for lzip & digest (cppcrypto).
 +               curl) set -- -fLo    "$@" ;;
 +         wget|wget2) set -- -O      "$@" ;;
      esac
- 
+
      "$cmd_get" "$@" || {
 @@ -850,7 +851,7 @@
          bz2)  bzip2 -z ;;
