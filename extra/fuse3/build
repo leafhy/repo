@@ -17,6 +17,7 @@ meson \
     -Dudevrulesdir=/usr/lib/udev \
     -Dexamples=false \
     -Duseroot=false \
+    -Ddefault_library=both \
     . output
 
 ninja -C output
