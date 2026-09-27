@@ -1,1 +1,2 @@
 https://github.com/libfuse/libfuse/releases/download/fuse-VERSION/fuse-VERSION.tar.xz
+patches/fix_unknown_option_n.patch 

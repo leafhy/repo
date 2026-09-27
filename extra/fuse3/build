@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+patch -p1 < fix_unknown_option_n.patch
+
 sed -i "29s|.*|chmod u+s \"\${DESTDIR}\${bindir}/fusermount3\"|" \
     util/install_helper.sh
 
