@@ -1,11 +1,28 @@
 #!/bin/sh -e
 
 ./configure \
+    --enable-shared=no \
+    --enable-static=yes
+
+make LDFLAGS="--static"
+make install
+make clean
+
+./configure \
     --enable-shared=yes \
     --enable-static=no
 
 make
-make DESTDIR="$1" install
+make DESTDIR="$PWD/junk" install
 
 install -Dm644 doc/asoundrc.txt "$1/usr/share/doc/alsa-lib/asoundrc.txt"
+
+install -m644 -t "$1/usr/lib" \
+                 "$PWD/junk/usr/lib/libatopology.so.2.0.0" \
+                 "$PWD/junk/usr/lib/libasound.so.2.0.0"
+
+ln -s libasound.so.2.0.0 "$1/usr/lib/libasound.so"
+ln -s libasound.so.2.0.0 "$1/usr/lib/libasound.so.2"
+ln -s libatopology.so.2.0.0 "$1/usr/lib/libatopology.so"
+ln -s libatopology.so.2.0.0 "$1/usr/lib/libatopology.so.2"
 
