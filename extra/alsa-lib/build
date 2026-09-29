@@ -18,8 +18,8 @@ make DESTDIR="$PWD/junk" install
 install -Dm644 doc/asoundrc.txt "$1/usr/share/doc/alsa-lib/asoundrc.txt"
 
 install -m644 -t "$1/usr/lib" \
-                 "$PWD/junk/usr/lib/libatopology.so.2.0.0" \
-                 "$PWD/junk/usr/lib/libasound.so.2.0.0"
+                 "$PWD/junk/usr/lib/libasound.so.2.0.0" \
+                 "$PWD/junk/usr/lib/libatopology.so.2.0.0"
 
 ln -s libasound.so.2.0.0 "$1/usr/lib/libasound.so"
 ln -s libasound.so.2.0.0 "$1/usr/lib/libasound.so.2"
