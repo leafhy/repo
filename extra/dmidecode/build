@@ -1,0 +1,10 @@
+#!/bin/sh -e
+
+make \
+    LDFLAGS=-static \
+    prefix=/usr \
+    sbindir=/usr/bin
+
+install -Dm755 -t "$1/usr/bin" dmidecode biosdecode ownership vpddecode
+install -Dm644 -t "$1/usr/share/man/man8" man/*.8
+
