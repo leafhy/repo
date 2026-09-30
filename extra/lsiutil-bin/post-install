@@ -1,0 +1,16 @@
+#!/bin/sh
+
+cat <<'EOF'
+
+#################################
+
+NOTE: Useage examples.
+
+# Show temperature in celcius.
+
+-> printf %s "ibase=16; $(ssu lsiutil -p1 -a 25,2,0,0 2>/dev/null | grep IOCTemperature: | cut -dx -f2)" | bc
+-> printf %s "$((16#$(ssu lsiutil -p1 -a 25,2,0,0 2>/dev/null | grep IOCTemperature: | cut -dx -f2)))"
+
+#################################
+
+EOF

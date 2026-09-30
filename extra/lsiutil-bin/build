@@ -1,0 +1,3 @@
+#!/bin/sh -e
+
+install -Dm755 lsiutil "$1/usr/bin/lsiutil"
