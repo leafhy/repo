@@ -49,7 +49,6 @@ EOF
 
 # Use the '--frozen' flag to tell cargo to skip the network and use whatever
 # dependencies are in the Cargo.[toml|lock] files.
-cargo clean
 cargo build --features sqlite --release --frozen
 
 install -Dm755 target/release/vaultwarden "$1/usr/bin/vaultwarden"
