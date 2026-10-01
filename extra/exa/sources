@@ -7,7 +7,6 @@ https://static.crates.io/crates/byteorder/byteorder-1.4.3.crate vendor
 https://static.crates.io/crates/cc/cc-1.0.67.crate vendor
 https://static.crates.io/crates/cfg-if/cfg-if-1.0.0.crate vendor
 https://static.crates.io/crates/datetime/datetime-0.5.2.crate vendor
-https://static.crates.io/crates/exa/exa-0.11.0-pre.crate vendor
 https://static.crates.io/crates/form_urlencoded/form_urlencoded-1.0.1.crate vendor
 https://static.crates.io/crates/git2/git2-0.13.17.crate vendor
 https://static.crates.io/crates/glob/glob-0.3.0.crate vendor
