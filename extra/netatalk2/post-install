@@ -23,9 +23,9 @@ NOTE: To access an netatalk share
 
      -> afp://user@ipaddress
 
-    or if avahi & dbus are installed
-    the netatalk share will appear
-    in Finder's sidebar.
+NOTE: If avahi & dbus are installed
+      the netatalk share will appear
+      in Finder's sidebar.
 
 ################################
 
