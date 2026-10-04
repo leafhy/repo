@@ -1,0 +1,15 @@
+#!/bin/sh -e
+
+export LDFLAGS="$LDFLAGS --static"
+
+mv lzfse/* 3rdparty/lzfse
+
+cmake -B build -G Ninja \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=Release
+
+cmake --build build
+
+for bin in apfs-dump apfs-dump-quick apfs-fuse apfsutil; do
+    install -Dm755 "build/$bin" "$1/usr/bin/$bin"
+done

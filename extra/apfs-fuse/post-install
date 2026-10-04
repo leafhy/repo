@@ -1,0 +1,14 @@
+#!/bin/sh
+
+cat <<EOF
+
+################################
+
+NOTE: Example useage.
+
+-> apfs-fuse -o uid=1000,gid=1000,allow_other /dev/sdX1 /mnt
+-> apfsutil /dev/sdX
+
+################################
+
+EOF

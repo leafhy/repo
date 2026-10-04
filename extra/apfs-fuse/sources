@@ -1,0 +1,2 @@
+git+https://github.com/sgan81/apfs-fuse
+https://github.com/lzfse/lzfse/archive/refs/tags/lzfse-1.0.tar.gz lzfse
