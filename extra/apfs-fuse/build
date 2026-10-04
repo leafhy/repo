@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+# The apfs-fuse tarball is acquired from the
+# latest commit due to there being no release.
+
 export LDFLAGS="$LDFLAGS --static"
 
 mv lzfse/* 3rdparty/lzfse
