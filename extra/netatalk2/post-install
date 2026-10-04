@@ -17,6 +17,16 @@ afpd
 NOTE: 'cnid_metad' needs to
       start before 'afpd'.
 
+NOTE: To access an netatalk share
+      from OSX/MacOS use Finder's
+     'Go' menu -> Connect to Server.
+
+     -> afp://user@ipaddress
+
+    or if avahi & dbus are installed
+    the netatalk share will appear
+    in Finder's sidebar.
+
 ################################
 
 EOF
