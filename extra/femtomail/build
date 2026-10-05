@@ -16,6 +16,7 @@ fi
 export CFLAGS="$CFLAGS -static"
 
 [ -L /usr/bin/sendmail ] && unlink /usr/bin/sendmail
+cd femtomail
 
 # Change install location from /usr/sbin to /usr/bin
 sed 's+/usr/sbin+/usr/bin+g' Makefile > _
