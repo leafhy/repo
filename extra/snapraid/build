@@ -1,9 +1,7 @@
 #!/bin/sh -e
 
-unzip snapraid-diff-sync/master.zip
-
 # Snapraid's SMART logging appears to be broken, so disable it.
-sed 's,SMART_LOG=1,SMART_LOG=0,' snapraid-diff-sync-main/snapraid-diff-sync.sh > _
+sed 's,SMART_LOG=1,SMART_LOG=0,' snapraid-diff-sync/snapraid-diff-sync.sh > _
 
 ./configure \
     --prefix=/usr
