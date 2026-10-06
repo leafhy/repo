@@ -1,16 +1,7 @@
 #!/bin/sh -e
 
 if ! stat /usr/bin/sh | grep -qo busybox; then
-    printf '%s' '
-##################################################
-#                                                #
-# [ ! ] Build requires busybox /usr/bin/sh [ ! ] #
-#                                                #
-#           kiss a busybox /usr/bin/sh           #
-#                                                #
-##################################################
-'
-    exit 1
+    kiss a busybox /usr/bin/sh
 fi
 
 sed '/addopts/d' setup.cfg > _
