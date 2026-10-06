@@ -18,3 +18,8 @@ make install
 install -Dm755 smartd.run    "$1/etc/sv/smartd/run"
 install -Dm755 smartd.finish "$1/etc/sv/smartd/finish"
 ln -sf /run/runit/supervise.smartd "$1/etc/sv/smartd/supervise"
+
+for f in AUTHORS ChangeLog* COPYING \
+         INSTALL README TODO NEWS; do
+    rm -f "$1/usr/share/doc/$f"
+done
