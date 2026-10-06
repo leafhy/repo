@@ -1,0 +1,51 @@
+#!/bin/sh -e
+
+./configure \
+    --prefix=/usr \
+    --sbindir=/usr/bin \
+    --sysconfdir=/etc \
+    --mandir=/usr/share/man \
+    --localstatedir=/var \
+    --disable-dsa \
+    --enable-ed25519 \
+    --disable-ed448 \
+    --disable-gost \
+    --disable-rpath \
+    --enable-static \
+    --disable-shared \
+    --disable-systemd \
+    --enable-cachedb \
+    --disable-dnscrypt \
+    --disable-dnstap \
+    --disable-event-api \
+    --enable-pie \
+    --enable-relro-now \
+    --enable-subnet \
+    --enable-tfo-client \
+    --enable-tfo-server \
+    --without-libevent \
+    --with-libexpat=/usr \
+    --without-libhiredis \
+    --without-libnghttp2 \
+    --without-libngtcp2 \
+    --with-conf-file=/etc/unbound/unbound.conf \
+    --with-pidfile=/run/unbound.pid \
+    --with-rootkey-file=/etc/dns/root.key \
+    --with-pthreads \
+    --without-pyunbound \
+    --with-ssl \
+    --with-username=unbound \
+    --without-pythonmodule \
+    --enable-fully-static
+
+make
+make install
+
+install -Dm644 doc/example.conf "$1/usr/share/doc/unbound/unbound.conf.example"
+
+# Install runit service.
+install -Dm755 unbound.run "$1/etc/sv/unbound/run"
+ln -sf /run/runit/supervise.unbound "$1/etc/sv/unbound/supervise"
+
+# Remove docs.
+rm -rf "$1/usr/share/man/man3"
