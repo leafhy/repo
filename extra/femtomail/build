@@ -17,7 +17,10 @@ fi
 
 export CFLAGS="$CFLAGS -static"
 
-[ -L /usr/bin/sendmail ] && unlink /usr/bin/sendmail
+if ! stat /usr/bin/sendmail | grep -qo femtomail; then
+    unlink /usr/bin/sendmail
+fi
+
 cd femtomail
 
 # Change install location from /usr/sbin to /usr/bin
