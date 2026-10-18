@@ -1,7 +1,68 @@
 #!/bin/sh
 
-exec svlogd -tt \
-     main/main main/auth main/cron main/daemon main/debug main/ftp \
-     main/kern main/local main/mail main/news main/syslog main/user #2>/dev/tty10
+basedir="/var/log/socklog"
+facilities="main auth ftp cron daemon errors kern lpr mail messages user tty8"
+faclogdirs="$(for facility in $facilities; do printf '%s\n' "$basedir/$facility"; done)"
 
-exec svlogd -ttt /var/log/socklog/* #2>/dev/tty12
+for facility in $facilities; do
+    logdir="$basedir/$facility"
+    [ -d "$logdir" ] || mkdir -p "$logdir"
+    [ -e "$logdir/config" ] ||
+        case "$logdir" in
+            */main)
+            ;;
+            *)
+                if [ "$facility" = auth ]; then
+                    cat <<-EOF
+			-*
+			+auth.*
+			+authpriv.*
+			EOF
+                elif [ "$facility" = debug ]; then
+                    cat <<-EOF
+			-*
+			+*$facility*
+			EOF
+                elif [ "$facility" = errors ]; then
+                    cat <<-EOF
+			-*
+			+*err:*
+			+*errors:*
+			+*emerg:*
+			+*alert:*
+			+*crit:*
+			EOF
+                elif [ "$facility" = messages ]; then
+                    cat <<-EOF
+			-*
+			+*info:*
+			+*notice:*
+			+*warn:*
+			-authpriv:*
+			-mail:*
+			-news:*
+			-cron:*
+			EOF
+                elif [ "$facility" = tty8 ]; then
+                    cat <<-EOF
+			# Uncomment to output logs to tty8.
+			# (enable in /etc/sv/socklog-unix/log/run)
+			#e*
+			#Eauth.*
+			#Eauthpriv.*
+			EOF
+                else
+                    cat <<-EOF
+			-*
+			+$facility.*
+			EOF
+                fi
+            ;;
+            esac > "$logdir/config"
+done
+
+chown -R root:socklog "$basedir"
+# Set permissions to 2750.
+chmod g=u-w+s,o= "$basedir" $faclogdirs
+
+exec svlogd -ttt $faclogdirs #2>/dev/tty8

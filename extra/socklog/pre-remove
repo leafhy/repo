@@ -1,5 +1,10 @@
 #!/bin/sh
 
+if [ -L /var/service/nanoklogd ]; then
+    sv down nanoklogd
+    unlink /var/service/nanoklogd
+fi
+
 if [ -L /var/service/socklog-unix ]; then
     sv down socklog-unix
     unlink /var/service/socklog-unix
@@ -8,8 +13,10 @@ fi
 delgroup socklog
 
 rm -rf \
+    "/etc/sv/nanoklogd" \
     "/etc/sv/socklog-unix" \
     "/var/log/socklog" \
+    "/run/runit/supervise.nanoklogd" \
     "/run/runit/supervise.socklog-unix" \
     "/run/runit/supervise.socklog-unix-log"
 
