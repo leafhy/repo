@@ -2,6 +2,9 @@ https://github.com/dani-garcia/vaultwarden/archive/refs/tags/VERSION.tar.gz
 https://github.com/dani-garcia/bw_web_builds/releases/download/v2024.1.2b/bw_web_v2024.1.2b.tar.gz web-vault
 files/vaultwarden.run
 
+# This is a pre-generated list of crate dependencies. This list may
+# change between releases. This allows us to pre-cache each of the
+# required dependencies and avoid the network requirement during build.
 https://static.crates.io/crates/addr2line/addr2line-0.21.0.crate vendor
 https://static.crates.io/crates/adler/adler-1.0.2.crate vendor
 https://static.crates.io/crates/ahash/ahash-0.8.7.crate vendor

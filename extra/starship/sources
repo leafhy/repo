@@ -1,6 +1,9 @@
 https://github.com/starship/starship/archive/refs/tags/vVERSION.tar.gz
 files/starship.toml.plain-text
 
+# This is a pre-generated list of crate dependencies. This list may
+# change between releases. This allows us to pre-cache each of the
+# required dependencies and avoid the network requirement during build.
 https://static.crates.io/crates/ahash/ahash-0.7.6.crate vendor
 https://static.crates.io/crates/aho-corasick/aho-corasick-0.7.18.crate vendor
 https://static.crates.io/crates/ansi_term/ansi_term-0.12.1.crate vendor

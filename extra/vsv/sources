@@ -1,5 +1,8 @@
 https://github.com/bahamas10/vsv/archive/vVERSION.tar.gz
 
+# This is a pre-generated list of crate dependencies. This list may
+# change between releases. This allows us to pre-cache each of the
+# required dependencies and avoid the network requirement during build.
 https://static.crates.io/crates/anyhow/anyhow-1.0.58.crate vendor
 https://static.crates.io/crates/atty/atty-0.2.14.crate vendor
 https://static.crates.io/crates/autocfg/autocfg-1.1.0.crate vendor

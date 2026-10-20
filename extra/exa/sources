@@ -1,5 +1,8 @@
 https://github.com/ogham/exa/archive/vVERSION.tar.gz
 
+# This is a pre-generated list of crate dependencies. This list may
+# change between releases. This allows us to pre-cache each of the
+# required dependencies and avoid the network requirement during build.
 https://static.crates.io/crates/ansi_term/ansi_term-0.12.1.crate vendor
 https://static.crates.io/crates/autocfg/autocfg-1.0.1.crate vendor
 https://static.crates.io/crates/bitflags/bitflags-1.2.1.crate vendor
