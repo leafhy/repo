@@ -1,0 +1,6 @@
+#!/bin/sh
+
+if [ -x "/usr/lib/vlc/vlc-cache-gen" ]; then
+    printf '%s\n' "-> Rebuilding VLC plugins cache file..."
+    /usr/lib/vlc/vlc-cache-gen /usr/lib/vlc/plugins
+fi

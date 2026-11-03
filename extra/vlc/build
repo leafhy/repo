@@ -1,0 +1,85 @@
+#!/bin/sh -e
+
+# This file allows building to succeed.
+touch share/org.videolan.vlc.appdata.xml
+
+./configure \
+    --prefix=/usr \
+    --enable-optimizations \
+    --enable-optimize-memory \
+    --without-pic \
+    --disable-lua \
+    --disable-xcb \
+    --disable-libxml2 \
+    --disable-nls \
+    --disable-zvbi \
+    --disable-telx \
+    --disable-rpath \
+    --disable-wayland \
+    --disable-pulse \
+    --disable-jack \
+    --disable-alsa \
+    --enable-sndio \
+    --disable-dbus \
+    --disable-avahi \
+    --enable-run-as-root \
+    --disable-fontconfig \
+    --enable-shared \
+    --disable-static \
+    --without-kde-solid \
+    --disable-gnutls \
+    --disable-projectm \
+    --disable-soxr \
+    --disable-notify \
+    --disable-mod \
+    --disable-mpc \
+    --disable-librist \
+    --enable-ncurses \
+    --disable-kwallet \
+    --disable-secret \
+    --disable-libgcrypt \
+    --disable-microdns \
+    --disable-goom \
+    --disable-fribidi \
+    --disable-upnp \
+    --disable-qt \
+    --disable-smbclient \
+    --disable-smb2 \
+    --disable-skins2 \
+    --disable-chromecast \
+    --disable-chromaprint \
+    --disable-wasapi \
+    --disable-dsm \
+    --disable-freerdp \
+    --disable-sdl-image \
+    --disable-taglib \
+    --disable-coverage \
+    --disable-libplacebo \
+    --disable-fluidsynth \
+    --disable-sout \
+    --disable-tiger \
+    --disable-vlm \
+    --disable-live555 \
+    --disable-v4l2 \
+    --disable-mad \
+    --enable-mpg123 \
+    --enable-merge-ffmpeg \
+# Uncomment to build without ffmpeg.
+#   --disable-avcodec \
+#   --disable-swscale \
+#   --disable-merge-ffmpeg
+
+make
+make install
+
+# Save 42MB.
+rm -rf \
+    "$1/usr/lib/vlc/"libcompat.*a \
+    "$1/usr/lib/vlc/plugins/plugins.dat" \
+    "$1/usr/share/applications" \
+    "$1/usr/share/doc" \
+    "$1/usr/share/icons" \
+    "$1/usr/share/locale" \
+    "$1/usr/share/metainfo" \
+    "$1/usr/share/vlc"
+
