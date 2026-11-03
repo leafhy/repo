@@ -1,5 +1,9 @@
 #!/bin/sh -e
 
+# If VLC is installed as a pre-built binary
+# run this command to run as root.
+# sed -i 's/geteuid/getppid/' /usr/bin/vlc
+
 # This file allows building to succeed.
 touch share/org.videolan.vlc.appdata.xml
 
