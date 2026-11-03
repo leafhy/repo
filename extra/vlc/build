@@ -78,6 +78,7 @@ make install
 
 # Save 42MB.
 rm -rf \
+    "$1/usr/bin/vlc-wrapper" \
     "$1/usr/lib/vlc/"libcompat.*a \
     "$1/usr/lib/vlc/plugins/plugins.dat" \
     "$1/usr/share/applications" \
@@ -86,4 +87,3 @@ rm -rf \
     "$1/usr/share/locale" \
     "$1/usr/share/metainfo" \
     "$1/usr/share/vlc"
-
