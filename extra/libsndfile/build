@@ -6,7 +6,7 @@
 ./configure \
     --prefix=/usr \
     --enable-shared \
-    --disable-static \
+    --enable-static \
     --disable-sqlite \
     --enable-alsa \
     --disable-mpeg \

@@ -11,6 +11,8 @@ mv -f _ configure
 sh ./configure \
     FRIBIDI_LIBS="  " \
     --prefix=/usr \
+    --enable-shared \
+    --enable-static \
     --disable-require-system-font-provider
 
 make

@@ -2,7 +2,9 @@
 
 ./configure \
     --prefix=/usr \
-    --disable-debugging
+    --disable-debugging \
+    --enable-shared \
+    --enable-static
 
 make
 make install

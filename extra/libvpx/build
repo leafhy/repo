@@ -13,6 +13,7 @@ sh ./configure \
     --enable-experimental \
     --enable-runtime-cpu-detect \
     --enable-shared \
+    --enable-static \
     --enable-postproc \
     --enable-pic \
     --disable-tools \

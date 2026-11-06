@@ -1,9 +1,11 @@
 #!/bin/sh -e
 
-CXXFLAGS="$CXXFLAGS -std=gnu++98"
+export CXXFLAGS="$CXXFLAGS -std=gnu++98"
 
 ./configure \
-    --prefix=/usr
+    --prefix=/usr \
+    --enable-shared \
+    --enable-static
 
 make LDFLAGS="$LDFLAGS -all-static"
 make install
