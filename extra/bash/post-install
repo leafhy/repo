@@ -20,7 +20,7 @@ NOTE: To change the login shell manually
       edit '/etc/passwd'.
 
 NOTE: To enable Eternal Bash History
-      add this to '~/.profile'.
+      add this to '.profile'.
 
 # ------ BEGIN ------ #
 # ---------------------
@@ -40,7 +40,7 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 # ------- END ------- #
 
 NOTE: Changing the login shell can erase
-      HISTFILE=~/.bash_eternal_history.
+      '.bash_eternal_history'.
 
 ################################
 

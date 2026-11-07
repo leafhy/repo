@@ -5,14 +5,15 @@ cat <<EOF
 ################################
 
 NOTE: To enable 'nano' syntax highlighting
-      add the requisite 'include' line to 'nanorc'.
+      add the requisite 'include' line to
+      the requisite 'nanorc'.
 
 # System settings.
 -> '/etc/nanorc'
 
 # User settings.
--> '~/.nanorc'
--> '~/.config/nano/nanorc'
+-> '.nanorc'
+-> '.config/nano/nanorc'
 
 # Enable specific highlighting.
 -> 'include /usr/share/nano/sh.nanorc'

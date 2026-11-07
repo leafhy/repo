@@ -9,8 +9,8 @@
     --enable-static \
     --disable-sqlite \
     --enable-alsa \
-    --disable-mpeg \
-    --disable-external-libs \
+    --enable-mpeg \
+    --enable-external-libs \
     --disable-dependency-tracking
 
 make

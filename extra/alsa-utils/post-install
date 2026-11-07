@@ -13,7 +13,7 @@ NOTE: Useage examples.
 -> speaker-test -D plughw:CARD=2 -c2
 
 NOTE: To set a default sound card add
-      this to '~/.asoundrc'.
+      this to '.asoundrc'.
 
 # ------ BEGIN ------ #
   defaults.pcm.card 2
