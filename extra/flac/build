@@ -1,0 +1,21 @@
+#!/bin/sh -e
+
+export CFLAGS="$CFLAGS --static -Wl,-static"
+export CXXFLAGS="$CFLAGS"
+export LDFLAGS="$LDFLAGS -static"
+
+./configure \
+    --prefix=/usr \
+    --disable-rpath \
+    --disable-doxygen-docs \
+    --disable-xmms-plugin \
+    --disable-thorough-tests \
+    --enable-shared \
+    --enable-static \
+    --with-pic
+
+make
+make install
+
+# Purge docs.
+rm -rf "$1/usr/share/doc"
