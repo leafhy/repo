@@ -1,0 +1,15 @@
+#!/bin/sh
+
+cat <<EOF
+
+################################
+
+NOTE: Run this command to fix '/dev/fuse'
+      permissions if sshfs emits the error
+      "fuse: failed to open /dev/fuse: Permission denied".
+
+-> chmod a+rw /dev/fuse
+
+################################
+
+EOF
