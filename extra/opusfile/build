@@ -1,7 +1,13 @@
 #!/bin/sh -e
 
 ./configure \
-    --prefix=/usr
+    --prefix=/usr \
+    --enable-shared \
+    --enable-static \
+    --disable-doc \
+    --disable-examples \
+    --disable-http \
+    --disable-dependency-tracking
 
 make
 make install
