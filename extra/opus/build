@@ -3,7 +3,12 @@
 ./configure \
     --prefix=/usr \
     --enable-custom-modes \
-    --enable-float-approx
+    --enable-float-approx \
+    --enable-shared \
+    --enable-static \
+    --disable-dependancy-tracking \
+    --disable-extra-programs \
+    --disable-doc
 
 make
 make install
