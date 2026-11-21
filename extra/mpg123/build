@@ -1,7 +1,17 @@
 #!/bin/sh -e
 
 ./configure \
-    --prefix=/usr
+    --prefix=/usr \
+    --enable-shared \
+    --enable-static \
+    --with-optimization=0 \
+    --with-audio=sndio,alsa \
+    --with-default-audio=sndio,alsa,dummy \
+    --disable-ipv6 \
+    --disable-network \
+    --disable-dependency-tracking \
+    --disable-equalizer \
+    --enable-id3v2
 
 make
 make install

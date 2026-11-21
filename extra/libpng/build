@@ -3,7 +3,9 @@
 patch -p1 < libpng-1.6.37-apng.patch
 
 ./configure \
-    --prefix=/usr
+    --prefix=/usr \
+    --enable-shared \
+    --enable-static
 
 make
 make install
