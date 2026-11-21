@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+# --disable-examples appears to be broken.
+sed -i 's/noinst_PROGRAMS =/#noinst_PROGRAMS =/' Makefile
+
 ./configure \
     --prefix=/usr \
     --enable-shared \
@@ -13,4 +16,4 @@ make
 make install
 
 # Remove documentation.
-rm -rf "$1/usr/share/doc"
+rm -rf "$1/usr/share"
