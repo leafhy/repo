@@ -11,6 +11,8 @@
     --without-audit \
     --without-selinux \
     --without-libpam \
+    --without-acl \
+    --without-attr \
     --disable-shared \
     --enable-static
 
