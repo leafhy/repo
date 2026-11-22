@@ -2,7 +2,8 @@
 
 ./configure \
     --prefix=/usr \
-    --precision=24
+    --precision=24 \
+    --with-libbsd
 
 make
 make DESTDIR="$1" install
