@@ -1,0 +1,12 @@
+#!/bin/sh -e
+
+./configure \
+     --prefix=/usr \
+     --enable-static \
+     --enable-shared \
+     --disable-dependency-tracking
+
+make
+make install
+
+rm -rf "$1/usr/share/man/man3"
