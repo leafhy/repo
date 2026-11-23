@@ -19,6 +19,7 @@ touch share/org.videolan.vlc.appdata.xml
     --disable-zvbi \
     --disable-telx \
     --disable-rpath \
+    --disable-samplerate \
     --disable-wayland \
     --disable-pulse \
     --disable-jack \
