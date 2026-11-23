@@ -3,7 +3,9 @@
 ./configure \
     --prefix=/usr \
     --enable-shared \
-    --enable-static
+    --enable-static \
+    --disable-alsa \
+    --disable-sndfile
 
 make
 make DESTDIR="$1" install
